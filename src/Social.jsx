@@ -8,6 +8,8 @@ import Home from './components/Home';
 import Profile from './components/Profile';
 import Protectedroutes from './components/Protectedroutes';
 import Header from './components/Header';
+import Createpost from './components/Createpost';
+import Post from './components/Post';
 
 function Social() {
     const [currentlyLoggedinUser] = useAuthState(auth);
@@ -15,7 +17,7 @@ function Social() {
     return (
         <div className='SOCIAL'>
 
-            <Header/>
+            <Header />
 
             <Routes>
                 <Route path='/'
@@ -36,10 +38,21 @@ function Social() {
                     }
                 />
 
+                <Route path='/posts'
+                    element={
+                        <Post />
+                    }
+                />
+
                 <Route element={<Protectedroutes />}>
                     <Route path='/profile'
                         element={
                             <Profile />
+                        }
+                    />
+                    <Route path='/createpost'
+                        element={
+                            <Createpost />
                         }
                     />
                 </Route>

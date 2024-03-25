@@ -122,3 +122,17 @@
     align-items: center;
     padding-bottom: 10px;
 }
+
+@media ( width < 350px){
+    .register {
+        width: 300px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border);
+        margin-top: 80px;
+        transform: scale(0.85);
+    }
+}

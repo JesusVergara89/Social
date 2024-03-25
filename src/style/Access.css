@@ -43,3 +43,19 @@
     color: var(--btns);
     font-weight: 800;
 }
+
+@media (width < 350px){
+    .access {
+        width: 280px;
+        height: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid var(--border);
+        margin-top: 50px;
+        padding: 15px;
+        transform: scale(0.85);
+    }
+}
