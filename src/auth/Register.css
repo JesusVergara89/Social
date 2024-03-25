@@ -5,11 +5,12 @@
     --Gris-perla: #D3D3D3;
     --Blanco-hueso: #F5F5DC;
     --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
 }
 
 .register {
     width: 350px;
-    height: 450px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,7 +25,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--Blanco-hueso);
 }
 
 .register-container1 img {
@@ -81,7 +81,7 @@
 }
 
 .register-container2-img:focus {
-    border-color: var(--Azul-claro);
+    border-color: var(--border);
 }
 
 .register-container2-img:valid {
@@ -89,14 +89,30 @@
 }
 
 .register-container2-img:hover {
-    background-color: var(--Azul-claro);
+    background-color: var(--border);
 }
 
 
 
 /* bis hier ist form*/
 
+.register-container2-btn {
+    width: 70px;
+    height: auto;
+    padding-bottom: 0.2rem;
+    border: none;
+    background-color: var(--btns);
+    color: #000000;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-top: 10px;
+}
 
+.register-container2-btn:hover {
+    cursor: pointer;
+    background-color: var(--Azul-claro);
+    color: #000000;
+  }
 
 .register-container3 {
     width: 100%;
@@ -104,4 +120,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 10px;
 }

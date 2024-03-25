@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebaseConfig'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import Access from '../components/Access'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -24,7 +25,7 @@ const Login = () => {
     const handleLogin = async () => {
         try {
             await signInWithEmailAndPassword(auth, email, password)
-            navigate('/verification')
+            navigate('/profile')
         } catch (error) {
             toast(error.code, { type: "error" })
         }
@@ -33,26 +34,27 @@ const Login = () => {
     const showPassword = () => setShow(!show)
 
     return (
-        <article className="form-register-main">
-            <div className="form-register-form">
-                <h2 className="form-register-register">Login</h2>
+        <article className="Login-container">
+            <article className="Login">
+                <h2 className="Login-heading">Login</h2>
                 <input
                     type="text"
-                    className='form-register-email'
+                    className='Login-email'
                     placeholder='Enter your email'
                     onChange={(e) => { setEmail(e.target.value) }}
                 />
                 <input
                     type={show ? "text" : "password"}
-                    className='form-register-password'
+                    className='Login-password'
                     placeholder='Password'
                     onChange={(e) => { setPassword(e.target.value) }}
                 />
-                <div onClick={showPassword} className="login-hiden">
+                <div onClick={showPassword} className="Login-toggle-password">
                     {show ? <i className='bx bx-hide'></i> : <i className='bx bx-show'></i>}
                 </div>
-                <button onClick={handleLogin} className="form-register-btn">Login</button>
-            </div>
+                <button onClick={handleLogin} className="Login-button">Login</button>
+            </article>
+            <Access/>
         </article>
     )
 }

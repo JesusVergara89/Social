@@ -1,0 +1,58 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: var(--color3);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+header .logo {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--Rosa-suave);
+}
+
+header .logo:hover {
+    cursor: pointer;
+}
+
+header .logo img {
+    width: calc(400px / 3);
+}
+
+header .menu {
+    width: 80%;
+    height: 100%;
+    background-color: var(--Verde-menta);
+}
+
+
+
+@media (345px <= width < 450px){
+    header .logo img {
+        width: calc(400px / 4);
+    }
+}
+
+@media (width < 345px){
+    header .logo img {
+        width: calc(400px / 5);
+    }
+}

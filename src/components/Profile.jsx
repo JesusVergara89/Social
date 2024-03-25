@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import '../style/Profile.css'
 
-const Verification = () => {
+const Profile = () => {
     const [currentlyLoggedinUser] = useAuthState(auth);
     const [users, setUsers] = useState([]);
     const [currentUserData, setCurrentUserData] = useState(null);
@@ -34,22 +35,35 @@ const Verification = () => {
         }
     }, [currentlyLoggedinUser, users]);
 
-    console.log(currentUserData);
+    {/**
 
-    return (
-        <div>
-            {currentUserData && (
-                <div>
-                    <img src={currentlyLoggedinUser.photoURL} alt="" />
+<img src={currentlyLoggedinUser.photoURL} alt="" />
                     <p>Name: {currentlyLoggedinUser.displayName}</p>
                     <p>Email: {currentlyLoggedinUser.email}</p>
                     <p>Age: {currentUserData.age}</p>
                     <p>Bio: {currentUserData.bio}</p>
                     <button onClick={() => { signOut(auth); navigate('/'); }}>Salir</button>
+
+*/}
+
+    return (
+        <div className='profile'>
+            {currentUserData && currentlyLoggedinUser && (
+                <div className='profile-information'>
+                    <div className="profile-information-image">
+                        <img src={currentlyLoggedinUser.photoURL} alt="" />
+                    </div>
+                    <div className="profile-information-data">
+                        <h2 className="profile-information-userid">{`@${currentUserData.userName}`}</h2>
+                        <h3 className="profile-information-name">{currentlyLoggedinUser.displayName}</h3>
+                        <p className="profile-information-bio">{currentUserData.bio}</p>
+                    </div>
+                    <button onClick={() => { signOut(auth); navigate('/'); }}>Salir</button>
                 </div>
             )}
+            <div className="other">this is other dic</div>
         </div>
     );
 };
 
-export default Verification;
+export default Profile

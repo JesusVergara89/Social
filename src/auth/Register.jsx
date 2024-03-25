@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { addDoc, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import Access from '../components/Access';
 
 const Register = () => {
     const [currentlyLoggedinUser] = useAuthState(auth);
@@ -17,6 +18,7 @@ const Register = () => {
     const [photo, setPhoto] = useState(null);
     const [age, setAge] = useState('');
     const [bio, setBio] = useState('');
+    const [userName, setUserName] = useState('')
 
     function scrollToTop() {
         window.scrollTo({
@@ -37,6 +39,7 @@ const Register = () => {
                         age: age,
                         bio: bio,
                         idUser: currentlyLoggedinUser.uid,
+                        userName: userName
                     });
                     toast('Bio added successfully', { type: 'success' });
                     await signOut(auth);
@@ -87,6 +90,7 @@ const Register = () => {
         setPhoto(null);
         setAge('');
         setBio('');
+        setUserName('');
     };
 
     return (
@@ -132,6 +136,13 @@ const Register = () => {
                         value={bio}
                         onChange={(e) => { setBio(e.target.value); }}
                     />
+                    <input
+                        type="text"
+                        className='register-container2-password'
+                        placeholder='User: @user'
+                        value={userName}
+                        onChange={(e) => { setUserName(e.target.value); }}
+                    />
                     <div className='warning-photo'>Upload your profile photo here</div>
                     <input
                         className='register-container2-img'
@@ -145,6 +156,7 @@ const Register = () => {
             </div>
 
             <div className="register-container3">
+                <Access/>
             </div>
         </article>
     );
