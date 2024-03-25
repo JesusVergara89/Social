@@ -5,6 +5,7 @@ import { auth } from '../firebaseConfig'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import Access from '../components/Access'
+import social from '../images/Social.svg'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -36,7 +37,7 @@ const Login = () => {
     return (
         <article className="Login-container">
             <article className="Login">
-                <h2 className="Login-heading">Login</h2>
+                <img src={social} alt="" />
                 <input
                     type="text"
                     className='Login-email'
@@ -54,7 +55,7 @@ const Login = () => {
                 </div>
                 <button onClick={handleLogin} className="Login-button">Login</button>
             </article>
-            <Access/>
+            <Access />
         </article>
     )
 }

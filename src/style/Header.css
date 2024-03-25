@@ -26,7 +26,6 @@ header .logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--Rosa-suave);
 }
 
 header .logo:hover {
@@ -40,7 +39,6 @@ header .logo img {
 header .menu {
     width: 80%;
     height: 100%;
-    background-color: var(--Verde-menta);
 }
 
 

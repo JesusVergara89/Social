@@ -35,17 +35,6 @@ const Profile = () => {
         }
     }, [currentlyLoggedinUser, users]);
 
-    {/**
-
-<img src={currentlyLoggedinUser.photoURL} alt="" />
-                    <p>Name: {currentlyLoggedinUser.displayName}</p>
-                    <p>Email: {currentlyLoggedinUser.email}</p>
-                    <p>Age: {currentUserData.age}</p>
-                    <p>Bio: {currentUserData.bio}</p>
-                    <button onClick={() => { signOut(auth); navigate('/'); }}>Salir</button>
-
-*/}
-
     return (
         <div className='profile'>
             {currentUserData && currentlyLoggedinUser && (

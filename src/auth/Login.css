@@ -30,11 +30,8 @@
   padding: 15px;
 }
 
-.Login h2 {
-  all: unset;
-  font: 1rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+.Login img {
+  width: calc(400px / 5);
 }
 
 .Login input {
