@@ -1,0 +1,107 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+}
+
+.register {
+    width: 350px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    margin-top: 100px;
+}
+
+.register-container1 {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--Blanco-hueso);
+}
+
+.register-container1 img {
+    width: calc(400px / 2);
+    height: calc(177px / 2);
+    object-fit: cover;
+}
+
+/* von hier ist form*/
+.register-container2 {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container2-form {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.register-container2-name,
+.register-container2-email,
+.register-container2-password {
+    width: 100%;
+    height: 25px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    text-align: center;
+}
+
+.warning-photo {
+    all: unset;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.register-container2-img {
+    appearance: none;
+    border: 2px solid var(--border);
+    border-radius: 2px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+}
+
+.register-container2-img:focus {
+    border-color: var(--Azul-claro);
+}
+
+.register-container2-img:valid {
+    border-color: var(--border);
+}
+
+.register-container2-img:hover {
+    background-color: var(--Azul-claro);
+}
+
+
+
+/* bis hier ist form*/
+
+
+
+.register-container3 {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
