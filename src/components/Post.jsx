@@ -3,6 +3,7 @@ import '../style/Post.css'
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import Comment from './Comment';
+import Displaycomments from './Displaycomments';
 
 const Post = () => {
 
@@ -22,8 +23,7 @@ const Post = () => {
         getUsers();
     }, []);
 
-    console.log('')
-
+    
     return (
         <article className="post">
             {post && (
@@ -32,6 +32,7 @@ const Post = () => {
                         <img src={p.image} alt="" />
                         <p>{p.description}</p>
                         <Comment postId={p.id} />
+                        <Displaycomments post={post}/>
                     </div>
                 ))
             )}

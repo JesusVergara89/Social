@@ -24,13 +24,15 @@
     height: auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 20px;
     padding: 10px;
 }
 
-.post-image img {
+.post-card img {
     width: 100%;
     height: auto;
     object-fit: cover;

@@ -1,0 +1,55 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.display-comments {
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--border);
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.display-comment-card {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.comment-content {
+    all: unset;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.comment-date {
+    all: unset;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: gray;
+}
+
+.comment-btn {
+    background-color: transparent;
+    border: none;
+    color: #3897f0;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.comment-btn:hover {
+    text-decoration: underline;
+}
