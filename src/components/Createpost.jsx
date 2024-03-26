@@ -4,6 +4,7 @@ import { addDoc, collection, Timestamp } from 'firebase/firestore';
 import { auth, db, storage } from '../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import '../style/Createpost.css'
 
 const Createpost = () => {
     const [description, setDescription] = useState('');

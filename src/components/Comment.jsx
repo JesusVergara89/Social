@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { Timestamp, doc, getDoc, setDoc } from "firebase/firestore";
 import '../style/Comment.css';
 
-const Comment = ({ postId }) => {
+const Comment = ({ postId, reloadPage }) => {
     const [mainComment, setMainComment] = useState('');
     const [post, setPost] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +22,7 @@ const Comment = ({ postId }) => {
                         setPost(null);
                     }
                 }
+                
             } catch (error) {
                 toast.error(error.message);
             }
@@ -71,8 +72,8 @@ const Comment = ({ postId }) => {
                 ...post,
                 comments: updatedComments
             });
-
             toast.success('Comment added successfully');
+            reloadPage()
             setMainComment('');
         } catch (error) {
             console.error('Error adding comment:', error);

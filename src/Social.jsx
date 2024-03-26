@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Register from './auth/Register'
 import { auth } from './firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Login from './auth/Login';
 import { Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
 import Profile from './components/Profile';
 import Protectedroutes from './components/Protectedroutes';
 import Header from './components/Header';
@@ -12,7 +11,15 @@ import Createpost from './components/Createpost';
 import Post from './components/Post';
 
 function Social() {
+
     const [currentlyLoggedinUser] = useAuthState(auth);
+
+    const reloadPageSmoothly = () => {
+        // Agregar clase para desvanecer la página
+        console.log('hello')
+
+        // Esperar un breve período de tiempo antes de re // Tiempo que coincide con la duración de la transición CSS
+    };
 
     return (
         <div className='SOCIAL'>
@@ -20,11 +27,13 @@ function Social() {
             <Header />
 
             <Routes>
+
                 <Route path='/'
                     element={
-                        <Home />
+                        <Post reloadPage={reloadPageSmoothly} />
                     }
                 />
+
 
                 <Route path='/register'
                     element={
@@ -35,12 +44,6 @@ function Social() {
                 <Route path='/login'
                     element={
                         <Login />
-                    }
-                />
-
-                <Route path='/posts'
-                    element={
-                        <Post />
                     }
                 />
 

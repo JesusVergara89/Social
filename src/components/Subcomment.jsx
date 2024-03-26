@@ -4,7 +4,7 @@ import { Timestamp, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import '../style/Subcomment.css';
 
-const Subcomment = ({ postId, post, handleSubcommentSubmit, index }) => {
+const Subcomment = ({ postId, post, handleSubcommentSubmit, index}) => {
     const [othersComment, setOthersComment] = useState('');
 
     const handleSubmitOthers = async (e) => {

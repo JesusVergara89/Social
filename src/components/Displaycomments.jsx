@@ -33,7 +33,7 @@ const Displaycomments = ({ post }) => {
                 comments.map((comment, i) => (
                     <div key={i} className="display-comment-card">
                         <p className="comment-content">{comment.main}</p>
-                        <p className="comment-date">{comment.createdAt.toDate().toDateString()}</p>
+                        <p className="comment-date">{comment.createdAt && comment.createdAt.toDate().toDateString()}</p>
                         <Subcomment
                             postId={post[0].id}
                             post={updatedPost}

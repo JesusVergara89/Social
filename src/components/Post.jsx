@@ -5,7 +5,7 @@ import { db } from '../firebaseConfig';
 import Comment from './Comment';
 import Displaycomments from './Displaycomments';
 
-const Post = () => {
+const Post = ({reloadPage}) => {
 
     const [post, setPost] = useState([]);
 
@@ -22,7 +22,6 @@ const Post = () => {
         };
         getUsers();
     }, []);
-
     
     return (
         <article className="post">
@@ -31,8 +30,11 @@ const Post = () => {
                     <div key={i} className="post-card">
                         <img src={p.image} alt="" />
                         <p>{p.description}</p>
-                        <Comment postId={p.id} />
-                        <Displaycomments post={post}/>
+                        <Comment
+                        postId={p.id}
+                        reloadPage={reloadPage}
+                        />
+                        <Displaycomments  post={post}/>
                     </div>
                 ))
             )}
