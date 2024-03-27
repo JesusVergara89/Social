@@ -55,11 +55,11 @@ const Subcomment = ({ post, handleSubcommentSubmit, index }) => {
     };
 
     return (
-        <form onSubmit={handleSubmitOthers}>
+        <form className='form-others' onSubmit={handleSubmitOthers}>
             <input
                 type="text"
                 className='others-comment'
-                placeholder="Others Comment"
+                placeholder="Add Comment"
                 value={othersComment}
                 onChange={(e) => setOthersComment(e.target.value)}
             />

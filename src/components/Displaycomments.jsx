@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../style/Displaycomments.css'
 import Subcomment from "./Subcomment";
+import Displaysubcomment from "./Displaysubcomment";
 
 const Displaycomments = ({ post }) => {
     const [comments, setComments] = useState([]);
@@ -29,6 +30,7 @@ const Displaycomments = ({ post }) => {
                             handleSubcommentSubmit={handleSubcommentSubmit}
                             index={i}
                         />
+                        <Displaysubcomment comment={comment} index={i} post={post}/>
                     </div>
                 ))
             )}

@@ -8,15 +8,52 @@
     --btns: #0095f6;
 }
 
-.comment-btn {
-    background-color: transparent;
+
+.form-others {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.others-comment {
+    width: 80%;
+    flex: 1;
+    padding: 5px;
     border: none;
-    color: #3897f0;
-    font-size: 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+    outline: none;
+    background-color: var(--border);
+}
+
+.others-comment::placeholder {
+    color: #111;
+}
+
+.others-comment:focus {
+    border-color: #333;
+}
+
+.comment-btn {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 0.8rem;
     cursor: pointer;
+    color: var(--btns);
+    font-weight: bold;
 }
 
 .comment-btn:hover {
-    text-decoration: underline;
+    color: #2680d4;
 }
 
