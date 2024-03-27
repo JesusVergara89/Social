@@ -14,7 +14,7 @@ const Post = () => {
 
     useEffect(() => {
         const usersCollectionRef = collection(db, 'Post');
-        const q = query(usersCollectionRef, orderBy("createdAt", "asc"))
+        const q = query(usersCollectionRef, orderBy("createdAt", "desc"))
         onSnapshot(q, (snapshot) => {
             const allpost = snapshot.docs.map((doc) => ({
                 id: doc.id,

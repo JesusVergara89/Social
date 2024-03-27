@@ -5,6 +5,7 @@ import { auth, db, storage } from '../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import '../style/Createpost.css';
+import social from '../images/Social.svg'
 
 const Createpost = () => {
     const [description, setDescription] = useState('');
@@ -69,6 +70,12 @@ const Createpost = () => {
     return (
         <article className="create-post">
             <div className="create-post-card">
+                <img src={social} alt="" />
+                <div class="brand-announcement">
+                    <h2>Crea una publicación</h2>
+                    <h2>¡Compártela!</h2>
+                    <h2>Observa cómo se vuelve viral...</h2>
+                </div>
                 <form onSubmit={handleSubmit}>
                     <input
                         type="file"
