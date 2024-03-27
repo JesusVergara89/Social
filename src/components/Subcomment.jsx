@@ -4,45 +4,40 @@ import { Timestamp, doc, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import '../style/Subcomment.css';
 
-const Subcomment = ({ postId, post, handleSubcommentSubmit, index}) => {
+const Subcomment = ({ post, handleSubcommentSubmit, index }) => {
     const [othersComment, setOthersComment] = useState('');
 
     const handleSubmitOthers = async (e) => {
         e.preventDefault();
         try {
-            const postRef = doc(db, 'Post', postId);
+            const postRef = doc(db, 'Post', post.id);
+            const updatedComments = [...post.comments];
+            const mainComment = updatedComments[index];
 
-            if (post[0].comments[index].main) {
-                const others = { ...post[0].comments[index].others };
-                const availableCommentIndex = getAvailableCommentIndex(others);
-
-                if (availableCommentIndex === null) {
-                    toast.error('Subcomments full');
-                    return;
-                }
-
-                others[availableCommentIndex] = {
-                    content: othersComment,
-                    createdAt: Timestamp.now().toDate()
-                };
-
-                const updatedComments = [...post[0].comments];
-                updatedComments[index] = {
-                    ...updatedComments[index],
-                    others: others
-                };
-
-                await setDoc(postRef, {
-                    ...post[0],
-                    comments: updatedComments
-                });
-
-                toast.success('Additional comment added successfully');
-                setOthersComment('');
-                handleSubcommentSubmit(postId, updatedComments);
-            } else {
+            if (!mainComment.main) {
                 toast.error('Main comment does not exist');
+                return;
             }
+
+            const availableIndex = getAvailableCommentIndex(mainComment.others);
+            if (availableIndex === null) {
+                toast.error('Subcomments full');
+                return;
+            }
+
+            mainComment.others[availableIndex] = {
+                content: othersComment,
+                createdAt: Timestamp.now().toDate()
+            };
+
+            await setDoc(postRef, {
+                ...post,
+                comments: updatedComments
+            });
+
+            toast.success('Additional comment added successfully');
+            setOthersComment('');
+            handleSubcommentSubmit(updatedComments);
         } catch (error) {
             console.error('Error adding additional comment:', error);
             toast.error('Failed to add additional comment');

@@ -4,7 +4,7 @@ import { addDoc, collection, Timestamp } from 'firebase/firestore';
 import { auth, db, storage } from '../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import '../style/Createpost.css'
+import '../style/Createpost.css';
 
 const Createpost = () => {
     const [description, setDescription] = useState('');
@@ -25,6 +25,19 @@ const Createpost = () => {
         return Timestamp.now().toDate();
     };
 
+    const createEmptyComments = () => {
+        return {
+            createdAt: null,
+            main: '',
+            others: {
+                one: { content: '', createdAt: null },
+                two: { content: '', createdAt: null },
+                three: { content: '', createdAt: null },
+                four: { content: '', createdAt: null },
+            }
+        };
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -41,18 +54,7 @@ const Createpost = () => {
                 description: description,
                 image: imageURL,
                 createdAt: createTimestamp(),
-                comments: [
-                    {
-                        createdAt: null,
-                        main: '',
-                        others: {
-                            one: {content: '', createdAt: null},
-                            two: {content: '', createdAt: null},
-                            three: {content: '', createdAt: null},
-                            four: {content: '', createdAt: null},
-                        }
-                    }
-                ]
+                comments: [createEmptyComments()] // Inicializar con comentarios vacíos
             };
             await addDoc(postRef, newPost);
 

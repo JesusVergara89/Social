@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import '../style/Post.css'
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import Comment from './Comment';
 import Displaycomments from './Displaycomments';
 
-const Post = ({reloadPage}) => {
+const Post = () => {
 
     const [post, setPost] = useState([]);
+    const [returncomments, setReturncomments] = useState(false)
+
+    const reload = () => setReturncomments(!returncomments)
 
     useEffect(() => {
-        const getUsers = async () => {
-            try {
-                const usersCollectionRef = collection(db, 'Post');
-                const usersSnapshot = await getDocs(usersCollectionRef);
-                const usersData = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setPost(usersData);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-        getUsers();
-    }, []);
-    
+        const usersCollectionRef = collection(db, 'Post');
+        const q = query(usersCollectionRef, orderBy("createdAt", "asc"))
+        onSnapshot(q, (snapshot) => {
+            const allpost = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }))
+            setPost(allpost)
+        })
+    }, [returncomments]);
+
     return (
         <article className="post">
             {post && (
@@ -31,10 +32,11 @@ const Post = ({reloadPage}) => {
                         <img src={p.image} alt="" />
                         <p>{p.description}</p>
                         <Comment
-                        postId={p.id}
-                        reloadPage={reloadPage}
+                            thispost={p}
+                            postId={p.id}
+                            reload={reload}
                         />
-                        <Displaycomments  post={post}/>
+                        <Displaycomments AllPost={post}  post={p} />
                     </div>
                 ))
             )}

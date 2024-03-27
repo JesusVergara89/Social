@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Register from './auth/Register'
 import { auth } from './firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -14,12 +14,7 @@ function Social() {
 
     const [currentlyLoggedinUser] = useAuthState(auth);
 
-    const reloadPageSmoothly = () => {
-        // Agregar clase para desvanecer la página
-        console.log('hello')
-
-        // Esperar un breve período de tiempo antes de re // Tiempo que coincide con la duración de la transición CSS
-    };
+    const [repost, setRepost] = useState(false)
 
     return (
         <div className='SOCIAL'>
@@ -30,7 +25,7 @@ function Social() {
 
                 <Route path='/'
                     element={
-                        <Post reloadPage={reloadPageSmoothly} />
+                        <Post  />
                     }
                 />
 

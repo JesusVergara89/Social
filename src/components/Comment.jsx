@@ -1,45 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { db } from "../firebaseConfig";
 import { toast } from 'react-toastify';
-import { Timestamp, doc, getDoc, setDoc } from "firebase/firestore";
+import { Timestamp, doc, setDoc } from "firebase/firestore";
 import '../style/Comment.css';
 
-const Comment = ({ postId, reloadPage }) => {
+const Comment = ({ postId, thispost, reload }) => {
     const [mainComment, setMainComment] = useState('');
-    const [post, setPost] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                if (postId) {
-                    const docRef = doc(db, 'Post', postId);
-                    const docSnap = await getDoc(docRef);
-                    if (docSnap.exists()) {
-                        setPost({ ...docSnap.data(), id: docSnap.id });
-                        setIsLoading(false);
-                    } else {
-                        setPost(null);
-                    }
-                }
-                
-            } catch (error) {
-                toast.error(error.message);
-            }
-        };
-
-        if (postId && isLoading) {
-            fetchData();
-        }
-    }, [postId, isLoading]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const postRef = doc(db, 'Post', post.id);
+            const postRef = doc(db, 'Post', postId);
             let updatedComments = [];
 
-            if (post.comments[0].main) {
+            if (thispost.comments[0].main) {
                 const emptyOthers = {
                     one: { content: '', createdAt: null },
                     two: { content: '', createdAt: null },
@@ -53,7 +27,7 @@ const Comment = ({ postId, reloadPage }) => {
                         main: mainComment,
                         others: { ...emptyOthers }
                     },
-                    ...post.comments,
+                    ...thispost.comments,
                 ];
             } else {
                 updatedComments = [{
@@ -65,15 +39,15 @@ const Comment = ({ postId, reloadPage }) => {
                         three: { content: '', createdAt: null },
                         four: { content: '', createdAt: null },
                     }
-                }, ...post.comments];
+                }, ...thispost.comments];
             }
 
             await setDoc(postRef, {
-                ...post,
+                ...thispost,
                 comments: updatedComments
             });
             toast.success('Comment added successfully');
-            reloadPage()
+            reload()
             setMainComment('');
         } catch (error) {
             console.error('Error adding comment:', error);
