@@ -29,11 +29,12 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 0 20px 20px 20px;
+    overflow: hidden;
 }
 
 .post-card img {
-    width: 100%;
+    width: 115%;
     height: auto;
     object-fit: cover;
 }
