@@ -20,8 +20,8 @@ const Displaycomments = ({ post }) => {
 
     return (
         <div className="display-comments">
-            {comments.length > 0 && (
-                comments.map((comment, i) => (
+            {comments.map((comment, i) => (
+                comment.main && (
                     <div key={i} className="display-comment-card">
                         <p className="comment-content">{comment.main}</p>
                         <p className="comment-date">{comment.createdAt && comment.createdAt.toDate().toDateString()}</p>
@@ -32,7 +32,10 @@ const Displaycomments = ({ post }) => {
                         />
                         <Displaysubcomment comment={comment} index={i} post={post}/>
                     </div>
-                ))
+                )
+            ))}
+            {comments.length === 0 && (
+                <p>No hay comentarios disponibles.</p>
             )}
         </div>
     );

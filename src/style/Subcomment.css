@@ -47,10 +47,11 @@
     outline: none;
     border: none;
     background: none;
-    font-size: 0.8rem;
+    font-size: 1.7rem;
     cursor: pointer;
     color: var(--btns);
     font-weight: bold;
+    margin-top: 5px;
 }
 
 .comment-btn:hover {

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Timestamp, doc, setDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import '../style/Subcomment.css';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Subcomment = ({ post, handleSubcommentSubmit, index }) => {
     const [othersComment, setOthersComment] = useState('');
+    const [user] = useAuthState(auth);
 
     const handleSubmitOthers = async (e) => {
         e.preventDefault();
@@ -26,6 +28,7 @@ const Subcomment = ({ post, handleSubcommentSubmit, index }) => {
             }
 
             mainComment.others[availableIndex] = {
+                userID: user.uid, // Aquí se usa solo el ID del usuario
                 content: othersComment,
                 createdAt: Timestamp.now().toDate()
             };
@@ -59,13 +62,15 @@ const Subcomment = ({ post, handleSubcommentSubmit, index }) => {
             <input
                 type="text"
                 className='others-comment'
-                placeholder="Add Comment"
+                placeholder="Add Subcomment"
                 value={othersComment}
                 onChange={(e) => setOthersComment(e.target.value)}
             />
-            <button className='comment-btn' type="submit">Add Comment</button>
+            <button className='comment-btn' type="submit"><i className='bx bx-paper-plane'></i></button>
         </form>
     )
 }
 
 export default Subcomment;
+
+

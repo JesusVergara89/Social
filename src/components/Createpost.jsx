@@ -31,10 +31,10 @@ const Createpost = () => {
             createdAt: null,
             main: '',
             others: {
-                one: { content: '', createdAt: null },
-                two: { content: '', createdAt: null },
-                three: { content: '', createdAt: null },
-                four: { content: '', createdAt: null },
+                one: { content: '', createdAt: null, userID: '' },
+                two: { content: '', createdAt: null, userID: ''  },
+                three: { content: '', createdAt: null, userID: ''  },
+                four: { content: '', createdAt: null, userID: ''  },
             }
         };
     };
@@ -55,7 +55,7 @@ const Createpost = () => {
                 description: description,
                 image: imageURL,
                 createdAt: createTimestamp(),
-                comments: [createEmptyComments()] // Inicializar con comentarios vacíos
+                comments: [createEmptyComments()] 
             };
             await addDoc(postRef, newPost);
 
@@ -71,7 +71,7 @@ const Createpost = () => {
         <article className="create-post">
             <div className="create-post-card">
                 <img src={social} alt="" />
-                <div class="brand-announcement">
+                <div className="brand-announcement">
                     <h2>Crea una publicación</h2>
                     <h2>¡Compártela!</h2>
                     <h2>Observa cómo se vuelve viral...</h2>

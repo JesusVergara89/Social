@@ -7,3 +7,44 @@
     --Rosa-suave: #FFB6C1;
     --btns: #0095f6;
 }
+
+.display-subcomment {
+    width: 95%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    border: 0.01rem solid #111;
+    padding-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    padding-bottom: 20px;
+}
+
+.display-subcomment-container {
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 15px;
+}
+
+.subcomment-comment {
+    all: unset;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border-bottom: 0.01rem solid #111;
+}
+
+.subcomment-date {
+    all: unset;
+    font-size: 0.6rem;
+    margin-bottom: 5px; 
+    color: rgb(108, 108, 108);
+}

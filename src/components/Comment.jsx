@@ -34,10 +34,10 @@ const Comment = ({ postId, thispost, reload }) => {
                     createdAt: Timestamp.now().toDate(),
                     main: mainComment,
                     others: {
-                        one: { content: '', createdAt: null },
-                        two: { content: '', createdAt: null },
-                        three: { content: '', createdAt: null },
-                        four: { content: '', createdAt: null },
+                        one: { content: '', createdAt: null, userID: '' },
+                        two: { content: '', createdAt: null, userID: '' },
+                        three: { content: '', createdAt: null, userID: '' },
+                        four: { content: '', createdAt: null, userID: '' },
                     }
                 }, ...thispost.comments];
             }
