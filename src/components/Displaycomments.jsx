@@ -2,11 +2,33 @@ import React, { useState, useEffect } from "react";
 import '../style/Displaycomments.css'
 import Subcomment from "./Subcomment";
 import Displaysubcomment from "./Displaysubcomment";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 
 const Displaycomments = ({ post }) => {
+
     const [comments, setComments] = useState([]);
 
     const [setshowcomments, setSetshowcomments] = useState(false)
+
+    
+    const [users, setUsers] = useState([]);  
+
+    useEffect(() => {
+        const fetchDocuments = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'Users'));
+                const documentsData = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setUsers(documentsData);
+            } catch (error) {
+                console.error('Error fetching documents: ', error);
+            }
+        };
+        fetchDocuments();
+    }, [comments]);
 
     const showComments = () => setSetshowcomments(!setshowcomments)
 
@@ -36,7 +58,7 @@ const Displaycomments = ({ post }) => {
                                 handleSubcommentSubmit={handleSubcommentSubmit}
                                 index={i}
                             />
-                            <Displaysubcomment comment={comment} index={i} post={post} />
+                            <Displaysubcomment users={users} comment={comment} index={i} post={post} />
                         </div>
                     )
                 ))

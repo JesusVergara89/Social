@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Register from './auth/Register'
-import { auth } from './firebaseConfig';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import Login from './auth/Login';
 import { Route, Routes } from 'react-router-dom';
 import Profile from './components/Profile';
@@ -12,9 +10,7 @@ import Post from './components/Post';
 
 function Social() {
 
-    const [currentlyLoggedinUser] = useAuthState(auth);
 
-    const [repost, setRepost] = useState(false)
 
     return (
         <div className='SOCIAL'>
@@ -25,7 +21,7 @@ function Social() {
 
                 <Route path='/'
                     element={
-                        <Post  />
+                        <Post />
                     }
                 />
 

@@ -8,7 +8,7 @@ import Displaycomments from './Displaycomments';
 const Post = () => {
 
     const [post, setPost] = useState([]);
-    const [returncomments, setReturncomments] = useState(false)    
+    const [returncomments, setReturncomments] = useState(false)
 
     const reload = () => setReturncomments(!returncomments)
 
@@ -23,6 +23,8 @@ const Post = () => {
             setPost(allpost)
         })
     }, [returncomments]);
+
+   
 
     return (
         <article className="post">
