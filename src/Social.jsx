@@ -7,6 +7,7 @@ import Protectedroutes from './components/Protectedroutes';
 import Header from './components/Header';
 import Createpost from './components/Createpost';
 import Post from './components/Post';
+import Sendmessage from './components/messages/Sendmessage';
 
 function Social() {
 
@@ -42,6 +43,11 @@ function Social() {
                     <Route path='/profile'
                         element={
                             <Profile />
+                        }
+                    />
+                    <Route path='/send'
+                        element={
+                            <Sendmessage />
                         }
                     />
                     <Route path='/createpost'
