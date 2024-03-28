@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebaseConfig'
@@ -20,8 +20,6 @@ const Login = () => {
     }
 
     const navigate = useNavigate()
-
-    useEffect(() => { scrollToTop() }, [])
 
     const handleLogin = async () => {
         try {

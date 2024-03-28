@@ -3,14 +3,13 @@ import './Register.css';
 import social from '../images/Social.svg';
 import { createUserWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { auth, db, storage } from '../firebaseConfig';
+import { auth, storage } from '../firebaseConfig';
 import { toast } from 'react-toastify';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { addDoc, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import Access from '../components/Access';
 
-const Register = () => {
+const Register = ({ setNewuser }) => {
     const [currentlyLoggedinUser] = useAuthState(auth);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,32 +24,26 @@ const Register = () => {
             top: 0,
             behavior: 'smooth'
         });
-    }    
+    }
 
     const navigate = useNavigate()
 
     useEffect(() => {
         scrollToTop();
         if (currentlyLoggedinUser) {
-            const addUserToDatabase = async () => {
-                try {
-                    const articleRef = collection(db, 'Users');
-                    await addDoc(articleRef, {
-                        age: age,
-                        bio: bio,
-                        idUser: currentlyLoggedinUser.uid,
-                        userName: userName
-                    });
-                    toast('Bio added successfully', { type: 'success' });
-                    await signOut(auth);
-                    navigate('/login')
-                } catch (error) {
-                    toast('Error adding bio', { type: 'error' });
-                }
+            const newUser = {
+                age: age,
+                bio: bio,
+                idUser: '',
+                userName: userName,
+                photo: '',
+                name: name
             };
-            addUserToDatabase();
+            setNewuser(newUser);
         }
     }, [currentlyLoggedinUser]);
+
+
 
     const handleSingUp = async () => {
         if (!name || !email || !photo) {
@@ -71,6 +64,8 @@ const Register = () => {
                     await updateProfile(user, { photoURL: downloadURL });
                 }
                 toast('User registered successfully', { type: 'success' });
+                signOut(auth)
+                navigate('/login');
                 clearForm();
             }
         } catch (error) {
@@ -156,7 +151,7 @@ const Register = () => {
             </div>
 
             <div className="register-container3">
-                <Access/>
+                <Access />
             </div>
         </article>
     );

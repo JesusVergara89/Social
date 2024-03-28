@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Register from './auth/Register'
 import Login from './auth/Login';
 import { Route, Routes } from 'react-router-dom';
@@ -8,10 +8,12 @@ import Header from './components/Header';
 import Createpost from './components/Createpost';
 import Post from './components/Post';
 import Sendmessage from './components/messages/Sendmessage';
+import Friendrequest from './components/messages/Friendrequest';
+import Allusers from './components/messages/Allusers';
 
 function Social() {
 
-
+    const [newuser, setNewuser] = useState({})
 
     return (
         <div className='SOCIAL'>
@@ -29,7 +31,7 @@ function Social() {
 
                 <Route path='/register'
                     element={
-                        <Register />
+                        <Register setNewuser={setNewuser} />
                     }
                 />
 
@@ -39,15 +41,26 @@ function Social() {
                     }
                 />
 
+                <Route path='/allusers'
+                    element={
+                        <Allusers />
+                    }
+                />
+
                 <Route element={<Protectedroutes />}>
                     <Route path='/profile'
                         element={
-                            <Profile />
+                            <Profile setNewuser={setNewuser} newuser={newuser} />
                         }
                     />
-                    <Route path='/send'
+                    <Route path='/sendfriend'
                         element={
                             <Sendmessage />
+                        }
+                    />
+                    <Route path='/friendrequest/:id'
+                        element={
+                            <Friendrequest />
                         }
                     />
                     <Route path='/createpost'

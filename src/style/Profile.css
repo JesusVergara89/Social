@@ -16,6 +16,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 100px;
+    gap: 10px;
 }
 
 .profile-information {
@@ -98,4 +99,38 @@
     cursor: pointer;
     background-color: #111;
     color: var(--Azul-claro);
+}
+
+.profile-utilyties {
+    width: 380px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 0.01rem solid var(--border);
+}
+
+.profile-message {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-message .bx {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--btns);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-message .bx:hover {
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgb(6, 87, 209);
+    font-weight: bold;
+    cursor: pointer;
 }

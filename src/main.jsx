@@ -8,10 +8,8 @@ import { HashRouter } from 'react-router-dom'
 import 'font-awesome/css/font-awesome.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <HashRouter>
       <ToastContainer />
       <Social />
     </HashRouter>
-  </React.StrictMode>,
 )

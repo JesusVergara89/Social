@@ -1,17 +1,51 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebaseConfig';
-import { useNavigate } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
+import { Link, useNavigate } from 'react-router-dom';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import '../style/Profile.css'
+///import { toast } from 'react-toastify';
 
-const Profile = () => {
+const Profile = ({ newuser, setNewuser }) => {
     const [currentlyLoggedinUser] = useAuthState(auth);
     const [users, setUsers] = useState([]);
     const [currentUserData, setCurrentUserData] = useState(null);
+    const [executedOnce, setExecutedOnce] = useState(false);
 
     const navigate = useNavigate()
+
+    const addUserToDatabase = async () => {
+        try {
+            const articleRef = collection(db, 'Users');
+            await addDoc(articleRef, {
+                age: newuser.age,
+                bio: newuser.bio,
+                idUser: currentlyLoggedinUser.uid,
+                userName: newuser.userName,
+                photo: currentlyLoggedinUser.photoURL,
+                name: newuser.name
+            });
+            //toast('Bio added successfully', { type: 'success' });
+            setNewuser({})
+        } catch (error) {
+            console.log(error)
+            //toast('Error adding bio', { type: 'error' });
+        }
+    };
+
+    useEffect(() => {
+        if (!executedOnce) {
+            const timer = setTimeout(() => {
+
+                addUserToDatabase();
+                console.log('La función se ejecutó después de un segundo del primer renderizado.');
+                setExecutedOnce(true);
+            }, 1000);
+
+            return () => clearTimeout(timer); 
+        }
+    }, [executedOnce]);
 
     useEffect(() => {
         const getUsers = async () => {
@@ -24,9 +58,8 @@ const Profile = () => {
                 console.error('Error fetching users:', error);
             }
         };
-
         getUsers();
-    }, []);
+    }, [currentlyLoggedinUser,users]);
 
     useEffect(() => {
         if (currentlyLoggedinUser) {
@@ -34,6 +67,7 @@ const Profile = () => {
             setCurrentUserData(currentUser);
         }
     }, [currentlyLoggedinUser, users]);
+
 
     return (
         <div className='profile'>
@@ -50,7 +84,17 @@ const Profile = () => {
                     <button onClick={() => { signOut(auth); navigate('/'); }}>Salir</button>
                 </div>
             )}
-            <div className="other">this is other dic</div>
+            <div className="profile-utilyties">
+                <div className="profile-message">
+                    <i className='bx bx-message-detail'></i>
+                </div>
+                <div className="profile-message">
+                    <Link to={`/friendrequest/${currentlyLoggedinUser.uid}`}>
+                        <i className='bx bxs-user-plus'></i>
+                    </Link>
+                </div>
+
+            </div>
         </div>
     );
 };
