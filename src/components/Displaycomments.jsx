@@ -10,8 +10,7 @@ const Displaycomments = ({ post }) => {
     const [comments, setComments] = useState([]);
 
     const [setshowcomments, setSetshowcomments] = useState(false)
-
-    
+ 
     const [users, setUsers] = useState([]);  
 
     useEffect(() => {

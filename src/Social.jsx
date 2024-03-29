@@ -10,6 +10,7 @@ import Post from './components/Post';
 import Sendmessage from './components/messages/Sendmessage';
 import Friendrequest from './components/messages/Friendrequest';
 import Allusers from './components/messages/Allusers';
+import Pendingfriendrequests from './components/messages/Pendingfriendrequests';
 
 function Social() {
 
@@ -27,7 +28,6 @@ function Social() {
                         <Post />
                     }
                 />
-
 
                 <Route path='/register'
                     element={
@@ -53,9 +53,14 @@ function Social() {
                             <Profile setNewuser={setNewuser} newuser={newuser} />
                         }
                     />
-                    <Route path='/sendfriend'
+                    <Route path='/Sendmessage'
                         element={
                             <Sendmessage />
+                        }
+                    />
+                    <Route path='/pendingrequest'
+                        element={
+                            <Pendingfriendrequests />
                         }
                     />
                     <Route path='/friendrequest/:id'

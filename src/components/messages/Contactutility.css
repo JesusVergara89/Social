@@ -1,0 +1,43 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.profile-utilyties {
+    width: 380px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 0.01rem solid var(--border);
+}
+
+.profile-message {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-message .bx {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--btns);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-message .bx:hover {
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgb(6, 87, 209);
+    font-weight: bold;
+    cursor: pointer;
+}

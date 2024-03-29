@@ -4,11 +4,14 @@ import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import Comment from './Comment';
 import Displaycomments from './Displaycomments';
+import { useNavigate } from 'react-router-dom';
 
 const Post = () => {
 
     const [post, setPost] = useState([]);
     const [returncomments, setReturncomments] = useState(false)
+
+    const createPost = useNavigate()
 
     const reload = () => setReturncomments(!returncomments)
 
@@ -25,9 +28,9 @@ const Post = () => {
     }, [returncomments]);
 
    
-
     return (
         <article className="post">
+            <button onClick={()=> createPost('/createpost')} className="post-create-btn">New post</button>
             {post && (
                 post.map((p, i) => (
                     <div key={i} className="post-card">

@@ -29,15 +29,15 @@ const Profile = ({ newuser, setNewuser }) => {
             //toast('Bio added successfully', { type: 'success' });
             setNewuser({})
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             //toast('Error adding bio', { type: 'error' });
+            setNewuser({})
         }
     };
 
     useEffect(() => {
         if (!executedOnce) {
             const timer = setTimeout(() => {
-
                 addUserToDatabase();
                 console.log('La función se ejecutó después de un segundo del primer renderizado.');
                 setExecutedOnce(true);
@@ -59,7 +59,7 @@ const Profile = ({ newuser, setNewuser }) => {
             }
         };
         getUsers();
-    }, [currentlyLoggedinUser,users]);
+    }, [currentlyLoggedinUser]);
 
     useEffect(() => {
         if (currentlyLoggedinUser) {
@@ -68,7 +68,7 @@ const Profile = ({ newuser, setNewuser }) => {
         }
     }, [currentlyLoggedinUser, users]);
 
-
+    //console.log(currentUserData)
     return (
         <div className='profile'>
             {currentUserData && currentlyLoggedinUser && (
@@ -84,17 +84,9 @@ const Profile = ({ newuser, setNewuser }) => {
                     <button onClick={() => { signOut(auth); navigate('/'); }}>Salir</button>
                 </div>
             )}
-            <div className="profile-utilyties">
-                <div className="profile-message">
-                    <i className='bx bx-message-detail'></i>
-                </div>
-                <div className="profile-message">
-                    <Link to={`/friendrequest/${currentlyLoggedinUser.uid}`}>
-                        <i className='bx bxs-user-plus'></i>
-                    </Link>
-                </div>
-
-            </div>
+            <Link to={'/pendingrequest'}>
+            <a href="">Pending request</a>
+            </Link>
         </div>
     );
 };

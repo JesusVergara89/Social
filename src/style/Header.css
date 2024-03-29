@@ -14,10 +14,15 @@ header {
     left: 0;
     width: 100%;
     height: 70px;
-    background-color: var(--color3);
+    background-color: var(--Azul-claro);
     display: flex;
     align-items: center;
     z-index: 1000;
+    backdrop-filter: blur(1000px);
+}
+
+header a {
+    all: unset;
 }
 
 header .logo {
@@ -41,8 +46,6 @@ header .menu {
     height: 100%;
 }
 
-
-
 @media (345px <= width < 450px){
     header .logo img {
         width: calc(400px / 4);
@@ -52,5 +55,74 @@ header .menu {
 @media (width < 345px){
     header .logo img {
         width: calc(400px / 5);
+    }
+}
+
+.menu {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+
+.menu h5 {
+    all: unset;
+    font-size: 0.65rem;
+    text-align: center;
+}
+
+.menu i {
+    all: unset;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.menu-alluser {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 10px 0 10px;
+}
+
+.menu-menu {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 10px 0 10px;
+}
+
+.menu-profile {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    gap: 2px;
+    padding: 0 10px 0 10px;
+}
+
+.menu-profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+}
+
+@media (width < 345px) {
+    .menu h5 {
+        display: none;
     }
 }
