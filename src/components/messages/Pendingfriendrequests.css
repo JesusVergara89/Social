@@ -18,6 +18,14 @@
     margin-top: 150px;
 }
 
+.no-request {
+    all: unset;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 180px;
+}
+
 .Pendingfriendrequests h2 {
     all: unset;
     text-align: center;
