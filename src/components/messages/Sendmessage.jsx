@@ -23,7 +23,7 @@ const Sendmessage = () => {
     fetchDocuments();
   }, []);
 
-  console.log(message)
+  //console.log(message)
 
   return (
     <div>Sendmessage</div>

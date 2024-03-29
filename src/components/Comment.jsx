@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { db } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import { toast } from 'react-toastify';
 import { Timestamp, doc, setDoc } from "firebase/firestore";
 import '../style/Comment.css';
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Comment = ({ postId, thispost, reload }) => {
+
     const [mainComment, setMainComment] = useState('');
+    const [userInfo] = useAuthState(auth)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,6 +28,7 @@ const Comment = ({ postId, thispost, reload }) => {
                     {
                         createdAt: Timestamp.now().toDate(),
                         main: mainComment,
+                        idUser: userInfo.uid,
                         others: { ...emptyOthers }
                     },
                     ...thispost.comments,
@@ -33,6 +37,7 @@ const Comment = ({ postId, thispost, reload }) => {
                 updatedComments = [{
                     createdAt: Timestamp.now().toDate(),
                     main: mainComment,
+                    idUser: userInfo.uid,
                     others: {
                         one: { content: '', createdAt: null, userID: '' },
                         two: { content: '', createdAt: null, userID: '' },

@@ -43,7 +43,7 @@ const Profile = ({ newuser, setNewuser }) => {
                 setExecutedOnce(true);
             }, 1000);
 
-            return () => clearTimeout(timer); 
+            return () => clearTimeout(timer);
         }
     }, [executedOnce]);
 
@@ -84,8 +84,8 @@ const Profile = ({ newuser, setNewuser }) => {
                     <button onClick={() => { signOut(auth); navigate('/'); }}>Salir</button>
                 </div>
             )}
-            <Link to={'/pendingrequest'}>
-            <a href="">Pending request</a>
+            <Link className='pending-request-btn' to={'/pendingrequest'}>
+                <h3>Pending requests</h3>
             </Link>
         </div>
     );

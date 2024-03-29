@@ -5,13 +5,15 @@ import Displaysubcomment from "./Displaysubcomment";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
-const Displaycomments = ({ post }) => {
+const Displaycomments = ({ post, infousers }) => {
 
     const [comments, setComments] = useState([]);
 
     const [setshowcomments, setSetshowcomments] = useState(false)
- 
-    const [users, setUsers] = useState([]);  
+
+    const [users, setUsers] = useState([]);
+
+    const [updateSubcomments, setUpdateSubcomments] = useState(false)
 
     useEffect(() => {
         const fetchDocuments = async () => {
@@ -27,7 +29,7 @@ const Displaycomments = ({ post }) => {
             }
         };
         fetchDocuments();
-    }, [comments]);
+    }, [comments, updateSubcomments]);
 
     const showComments = () => setSetshowcomments(!setshowcomments)
 
@@ -37,11 +39,16 @@ const Displaycomments = ({ post }) => {
         } else {
             setComments([]);
         }
-    }, [post]);
+    }, [post, updateSubcomments]);
 
     const handleSubcommentSubmit = (updatedComments) => {
         setComments(updatedComments);
     };
+
+    const userNameIdArray = infousers.map(user => ({
+        userName: user.userName,
+        idUser: user.idUser
+    }));
 
     return (
         <div className="display-comments">
@@ -51,11 +58,16 @@ const Displaycomments = ({ post }) => {
                         <div key={i} className="display-comment-card">
                             <button onClick={showComments} className="hide-subcomments">Ocultar comentarios</button>
                             <p className="comment-content">{comment.main}</p>
+                            <p className="comment-date">
+                                {`@${userNameIdArray.find(match => match.idUser === comment.idUser)?.userName || ''}`}
+                            </p>
                             <p className="comment-date">{comment.createdAt && comment.createdAt.toDate().toDateString()}</p>
                             <Subcomment
                                 post={post}
                                 handleSubcommentSubmit={handleSubcommentSubmit}
                                 index={i}
+                                setUpdateSubcomments={setUpdateSubcomments}
+                                updateSubcomments={updateSubcomments}
                             />
                             <Displaysubcomment users={users} comment={comment} index={i} post={post} />
                         </div>

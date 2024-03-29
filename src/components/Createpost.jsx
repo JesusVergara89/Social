@@ -30,11 +30,12 @@ const Createpost = () => {
         return {
             createdAt: null,
             main: '',
+            idUser: '',
             others: {
                 one: { content: '', createdAt: null, userID: '' },
-                two: { content: '', createdAt: null, userID: ''  },
-                three: { content: '', createdAt: null, userID: ''  },
-                four: { content: '', createdAt: null, userID: ''  },
+                two: { content: '', createdAt: null, userID: '' },
+                three: { content: '', createdAt: null, userID: '' },
+                four: { content: '', createdAt: null, userID: '' },
             }
         };
     };
@@ -55,7 +56,7 @@ const Createpost = () => {
                 description: description,
                 image: imageURL,
                 createdAt: createTimestamp(),
-                comments: [createEmptyComments()] 
+                comments: [createEmptyComments()]
             };
             await addDoc(postRef, newPost);
 

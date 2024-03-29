@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../style/Post.css'
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import Comment from './Comment';
 import Displaycomments from './Displaycomments';
@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Post = () => {
 
-    const [post, setPost] = useState([]);
+    const [post, setPost] = useState([]);    
+    const [infousers, setInfousers] = useState([]);
     const [returncomments, setReturncomments] = useState(false)
 
     const createPost = useNavigate()
@@ -27,6 +28,21 @@ const Post = () => {
         })
     }, [returncomments]);
 
+    useEffect(() => {
+        const getUsers = async () => {
+            try {
+                const usersCollectionRef = collection(db, 'Users');
+                const usersSnapshot = await getDocs(usersCollectionRef);
+                const usersData = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setInfousers(usersData);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+        getUsers();
+    }, [post]);
+
+    //console.log(post)
    
     return (
         <article className="post">
@@ -41,7 +57,7 @@ const Post = () => {
                             postId={p.id}
                             reload={reload}
                         />
-                        <Displaycomments AllPost={post}  post={p} />
+                        <Displaycomments infousers={infousers} AllPost={post}  post={p} />
                     </div>
                 ))
             )}

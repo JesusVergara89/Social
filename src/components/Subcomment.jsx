@@ -5,7 +5,7 @@ import { auth, db } from "../firebaseConfig";
 import '../style/Subcomment.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-const Subcomment = ({ post, handleSubcommentSubmit, index }) => {
+const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,updateSubcomments }) => {
     const [othersComment, setOthersComment] = useState('');
     const [user] = useAuthState(auth);
 
@@ -40,6 +40,7 @@ const Subcomment = ({ post, handleSubcommentSubmit, index }) => {
 
             toast.success('Additional comment added successfully');
             setOthersComment('');
+            setUpdateSubcomments(!updateSubcomments)
             handleSubcommentSubmit(updatedComments);
         } catch (error) {
             console.error('Error adding additional comment:', error);
