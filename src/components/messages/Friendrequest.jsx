@@ -7,10 +7,10 @@ import { toast } from 'react-toastify'
 import './Friendrequest.css'
 
 const Friendrequest = () => {
+
     const { id } = useParams()
     const [user] = useAuthState(auth)
     const [pending, setPending] = useState([]);
-    const [myPending, setMyPending] = useState([])
 
     ////////////////////////////////////////////////////////////////////
     {/** Aqui solicito la db Reques a ver si ya son amigos para impedir que vuelvan 
@@ -28,29 +28,49 @@ const Friendrequest = () => {
         });
     }, []);
 
+    let ExtractedObjs = [];
 
-    const verifyMyPending = () => {
-        if (pending) {
-            const userPending = pending.filter(pen =>
-                pen.friendRequests.some(data => data.id1 === user.uid) &&
-                !pen.friendRequests.every(data => data.status === true) &&///// agregar logica para los demas condiciones false verdadero
-                !pen.friendRequests.every(data => data.status === false)
-            );
-            setMyPending(userPending.length > 0 ? userPending : null);
+    for (let i = 0; i < pending.length; i++) {
+        const objcurrent = pending[i].friendRequests[0];
+        const objnext = pending[i].friendRequests[1];
+
+        const ExtractedObj = {
+            id1: objcurrent.id1,
+            id2: objnext.id2,
+            status1: objcurrent.status,
+            status2: objnext.status
+        };
+
+        ExtractedObjs.push(ExtractedObj);
+
+    }
+
+    const thisObject = ExtractedObjs.find(obj =>
+        obj.id1 === id && obj.id2 === user.uid
+    );
+
+    let friendshipStatus = '';
+
+    if (thisObject && typeof thisObject === 'object') {
+        const element = thisObject;
+        if (element.status1 === true && element.status2 === true) {
+            friendshipStatus = 'x';
+        } else if (element.status1 === false && element.status2 === true) {
+            friendshipStatus = 'y';
+        } else if (element.status1 === null && element.status2 === true) {
+            friendshipStatus = 'z';
+        } else {
+            friendshipStatus = 'w';
         }
-    };
-
-    useEffect(() => {
-        verifyMyPending()
-    }, [pending])
-
-    console.log(pending)
+    } else {
+        friendshipStatus = undefined;
+    }
 
     ////////////////////////////////////////////////////////////////////
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (myPending) {
+        if (friendshipStatus === 'w' || friendshipStatus === undefined) {
             try {
                 const postRef = collection(db, 'Request');
                 const newPost = {
@@ -58,7 +78,7 @@ const Friendrequest = () => {
                         {
                             createdAt: new Date(),
                             id1: id,
-                            status: false
+                            status: null
                         },
                         {
                             createdAt: new Date(),
@@ -74,9 +94,15 @@ const Friendrequest = () => {
                 console.error('Error request: ', error);
                 toast('Error request', { type: 'error' });
             }
+        } else if (friendshipStatus === 'x') {
+            toast('ya eres amigo de esta persona', { type: 'error' });
+        } else if (friendshipStatus === 'y') {
+            toast('Esta persona rechazo la solicitud', { type: 'error' });
+        } else if (friendshipStatus === 'z') {
+            toast('Ya has mandado una solicitud a este usuario', { type: 'error' });
         }
         else {
-            toast('ya eres amigo de esta persona o solicitud de amistad rechazada', { type: 'error' });
+            toast('Comunicate con la plataformar', { type: 'error' });
         }
     };
 

@@ -21,7 +21,7 @@ const Header = () => {
                         <h5>All users</h5>
                     </div>
                 </Link>
-                <Link to={'/Sendmessage'}>
+                <Link to={'/messagesinbox'}>
                     <div className="menu-menu">
                         <i className='bx bx-message-detail'></i>
                         <h5>Messages</h5>

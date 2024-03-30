@@ -11,10 +11,14 @@ import Friendrequest from './components/messages/Friendrequest';
 import Allusers from './components/messages/Allusers';
 import Pendingfriendrequests from './components/messages/Pendingfriendrequests';
 import Messageinbox from './components/messages/Messageinbox';
+import Singleuser from './components/Singleuser';
+import Messagescontainer from './components/messages/Messagescontainer';
 
 function Social() {
 
     const [newuser, setNewuser] = useState({})
+
+    const functionalData = 'hello'
 
     return (
         <div className='SOCIAL'>
@@ -51,6 +55,16 @@ function Social() {
                     <Route path='/profile'
                         element={
                             <Profile setNewuser={setNewuser} newuser={newuser} />
+                        }
+                    />
+                    <Route path='/singlesuser/:iduser'
+                        element={
+                            <Singleuser />
+                        }
+                    />
+                    <Route path='/messagesinbox/'
+                        element={
+                            <Messagescontainer idreceiper={functionalData} />
                         }
                     />
                     <Route path='/Sendmessage/:x1/:x2'
