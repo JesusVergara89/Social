@@ -14,11 +14,13 @@ header {
     left: 0;
     width: 100%;
     height: 70px;
-    background-color: var(--Azul-claro);
     display: flex;
     align-items: center;
     z-index: 1000;
-    backdrop-filter: blur(1000px);
+    background: rgba(173, 216, 230, 0.35);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 header a {
@@ -46,13 +48,13 @@ header .menu {
     height: 100%;
 }
 
-@media (345px <= width < 450px){
+@media (345px <=width < 450px) {
     header .logo img {
         width: calc(400px / 4);
     }
 }
 
-@media (width < 345px){
+@media (width < 345px) {
     header .logo img {
         width: calc(400px / 5);
     }

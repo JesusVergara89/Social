@@ -29,8 +29,8 @@ const Header = () => {
                 </Link>
                 <Link to={'/profile'}>
                     <div className="menu-profile">
-                        <img src={ currentlyLoggedinUser === null ?  nullphoto  : currentlyLoggedinUser.photoURL} alt="" />
-                        <h5>{ currentlyLoggedinUser === null ? 'Inicia sesión' : currentlyLoggedinUser.displayName}</h5>
+                        <img src={ currentlyLoggedinUser === null ?  nullphoto  : currentlyLoggedinUser?.photoURL} alt="" />
+                        <h5>{ currentlyLoggedinUser === null ? 'Inicia sesión' : currentlyLoggedinUser?.displayName}</h5>
                     </div>
                 </Link>
             </div>

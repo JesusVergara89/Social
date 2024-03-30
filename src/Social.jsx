@@ -7,10 +7,10 @@ import Protectedroutes from './components/Protectedroutes';
 import Header from './components/Header';
 import Createpost from './components/Createpost';
 import Post from './components/Post';
-import Sendmessage from './components/messages/Sendmessage';
 import Friendrequest from './components/messages/Friendrequest';
 import Allusers from './components/messages/Allusers';
 import Pendingfriendrequests from './components/messages/Pendingfriendrequests';
+import Messageinbox from './components/messages/Messageinbox';
 
 function Social() {
 
@@ -53,9 +53,9 @@ function Social() {
                             <Profile setNewuser={setNewuser} newuser={newuser} />
                         }
                     />
-                    <Route path='/Sendmessage'
+                    <Route path='/Sendmessage/:x1/:x2'
                         element={
-                            <Sendmessage />
+                            <Messageinbox />
                         }
                     />
                     <Route path='/pendingrequest'

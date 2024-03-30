@@ -33,7 +33,7 @@ const Friendrequest = () => {
         if (pending) {
             const userPending = pending.filter(pen =>
                 pen.friendRequests.some(data => data.id1 === user.uid) &&
-                !pen.friendRequests.every(data => data.status === true) &&
+                !pen.friendRequests.every(data => data.status === true) &&///// agregar logica para los demas condiciones false verdadero
                 !pen.friendRequests.every(data => data.status === false)
             );
             setMyPending(userPending.length > 0 ? userPending : null);
@@ -43,6 +43,8 @@ const Friendrequest = () => {
     useEffect(() => {
         verifyMyPending()
     }, [pending])
+
+    console.log(pending)
 
     ////////////////////////////////////////////////////////////////////
 

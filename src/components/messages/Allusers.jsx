@@ -9,6 +9,8 @@ const Allusers = () => {
 
     const [Allusers, setAllusers] = useState([])
 
+    const [thiIsTheCurrentUser] = useAuthState(auth)
+
     useEffect(() => {
         const getUsers = async () => {
             try {
@@ -22,7 +24,7 @@ const Allusers = () => {
         };
         getUsers();
     }, []);
-    //console.log(Allusers)
+    //console.log(thiIsTheCurrentUser)
     return (
         <div className='all-users'>
             {Allusers &&
@@ -39,7 +41,7 @@ const Allusers = () => {
                                     <p className="all-users-bio">{user.bio}</p>
                                 </div>
                             </div>
-                            <Contactutility idUSER={user.idUser} />
+                            <Contactutility idCurrentUser={thiIsTheCurrentUser?.uid} idUSER={user.idUser} />
                         </div>
                     ))
                 )

@@ -59,7 +59,7 @@ const Profile = ({ newuser, setNewuser }) => {
             }
         };
         getUsers();
-    }, [currentlyLoggedinUser]);
+    }, [currentlyLoggedinUser,setNewuser]);
 
     useEffect(() => {
         if (currentlyLoggedinUser) {
