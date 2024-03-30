@@ -23,8 +23,30 @@ const Messageinbox = () => {
             .catch((error) => {
                 console.error("Error fetching documents: ", error);
             });
-    }, []);
+    }, [x1, x2]);
 
+    let objetosExtraidos = [];
+
+    for (let i = 0; i < allrequest.length; i++) {
+        const objActual = allrequest[i].friendRequests[0];
+        const objSiguiente = allrequest[i].friendRequests[1];
+
+        const objetoExtraido = {
+            id1: objActual.id1,
+            id2: objSiguiente.id2,
+            status1: objActual.status,
+            status2: objSiguiente.status
+        };
+
+        objetosExtraidos.push(objetoExtraido);
+
+    }
+
+    const objetoDeseado = objetosExtraidos.find(objeto =>
+        objeto.id1 === x1 && objeto.id2 === x2
+    );
+
+    console.log(objetoDeseado)
 
     return (
         <div className='Messageinbox'>
