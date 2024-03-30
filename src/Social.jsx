@@ -18,7 +18,7 @@ function Social() {
 
     const [newuser, setNewuser] = useState({})
 
-    const functionalData = 'hello'
+    const functionalData = 'xxhxc'
 
     return (
         <div className='SOCIAL'>

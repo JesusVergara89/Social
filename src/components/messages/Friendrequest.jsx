@@ -26,7 +26,7 @@ const Friendrequest = () => {
             });
             setPending(requests);
         });
-    }, []);
+    }, [pending]);
 
     let ExtractedObjs = [];
 

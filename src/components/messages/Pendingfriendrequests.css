@@ -18,6 +18,11 @@
     margin-top: 150px;
 }
 
+.Pendingfriendrequests span {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
 .no-request {
     all: unset;
     font-weight: bold;
@@ -29,16 +34,18 @@
 .Pendingfriendrequests h2 {
     all: unset;
     text-align: center;
+    font-size: 0.9rem;
     margin-bottom: 20px;
 }
 
 .card-Pendingfriendrequests {
     width: 300px;
-    height: 200px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--Verde-menta);
+    background-color: var(--border);
     border-radius: 5px;
+    padding: 5px 5px 10px 5px;
 }
