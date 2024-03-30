@@ -41,7 +41,12 @@ const Allusers = () => {
                                     <p className="all-users-bio">{user.bio}</p>
                                 </div>
                             </div>
-                            <Contactutility idCurrentUser={thiIsTheCurrentUser?.uid} idUSER={user.idUser} />
+                            {thiIsTheCurrentUser?.uid === user.idUser ?
+                                ''
+                                :
+                                <Contactutility idCurrentUser={thiIsTheCurrentUser?.uid} idUSER={user.idUser} />
+                            }
+
                         </div>
                     ))
                 )
