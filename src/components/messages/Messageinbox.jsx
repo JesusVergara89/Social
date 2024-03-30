@@ -44,7 +44,7 @@ const Messageinbox = () => {
     }
 
     const thisObject = ExtractedObjs.find(obj =>
-        obj.id1 === x1 && obj.id2 === x2
+        obj.id1 === x1 && obj.id2 === x2 || obj.id1 === x2 && obj.id2 === x1
     );
 
     let friendshipStatus = '';
@@ -80,8 +80,6 @@ const Messageinbox = () => {
     }
 
     const allowSendMessages = () => setGoMessages(!goMessages)
-
-    ///console.log(allowMessages)
 
     return (
         <div className='Messageinbox'>

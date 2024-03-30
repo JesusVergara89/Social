@@ -23,7 +23,7 @@ const Messagescontainer = ({idreceiper}) => {
       fetchDocuments();
     }, []);
   
-    console.log(message)
+    //console.log(message)
   return (
     <article className="Messagescontainer">
         {`Hello ${idreceiper}`}
