@@ -50,7 +50,7 @@ const Messageinbox = () => {
 
     return (
         <div className='Messageinbox'>
-            <h2>{`Messageinbox: ${x1} y ${x2}`}</h2>
+            <h2>{`objetoDeseado Messageinbox: ${x1} y ${x2}`}</h2>
         </div>
     )
 }
