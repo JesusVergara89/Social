@@ -23,19 +23,20 @@ const Pendingfriendrequests = () => {
     useEffect(() => {
         if (pending) {
             const userPending = pending.filter(pen =>
-                pen.friendRequests.some(data => data.id1 === user.uid)
+                pen.friendRequests.some(data => data.id1 === user.uid || data.id2 === user.uid)
             );
             setMyPending(userPending.length > 0 ? userPending : null);
         }
     }, [pending, user]);
 
-    let friendshipStatus = '';
+    let friendshipStatus = [];
     if (myPending && myPending.length > 0) {
         let ExtractedObjs = [];
-        for (let i = 0; i < pending.length; i++) {
-            const objcurrent = pending[i].friendRequests[0];
-            const objnext = pending[i].friendRequests[1];
+        for (let i = 0; i < myPending.length; i++) {
+            const objcurrent = myPending[i].friendRequests[0];
+            const objnext = myPending[i].friendRequests[1];
             const ExtractedObj = {
+                id: myPending[i].id,
                 id1: objcurrent.id1,
                 id2: objnext.id2,
                 status1: objcurrent.status,
@@ -43,35 +44,27 @@ const Pendingfriendrequests = () => {
             };
             ExtractedObjs.push(ExtractedObj);
         }
-        const thisObject = ExtractedObjs.find(obj =>
-            obj.id1 === myPending[0].friendRequests[0].id1 && obj.id2 === myPending[0].friendRequests[1].id2
-        );
-        if (thisObject && typeof thisObject === 'object') {
-            const element = thisObject;
-            if (element.status1 === true && element.status2 === true) {
-                friendshipStatus = undefined;
-            } else if (element.status1 === false && element.status2 === true) {
-                friendshipStatus = undefined;
-            } else if (element.status1 === null && element.status2 === true) {
-                friendshipStatus = 'z';
-            } else {
-                friendshipStatus = undefined;
-            }
-        } else {
-            friendshipStatus = undefined;
-        }
+        friendshipStatus = ExtractedObjs
     }
 
-    const handleAccept = (id) => {
-        if (friendshipStatus === 'z' && id === 'x') {
-            const friendRequests = myPending[0].friendRequests.map((request, index) => {
-                if (index === 0) {
-                    return { ...request, status: true };
+    const statusFrienship = friendshipStatus.filter(data => data.status1 === null && data.status2 === true)
+
+    const handleAccept = (id, statusFrienshipId) => {
+        const index = pending.findIndex(item => item.id === statusFrienshipId);
+        if (index !== -1) {
+            const requestId = pending[index].id;
+            const friendRequests = pending[index].friendRequests.map((request, idx) => {
+                if (idx === 0) {
+                    if (id === 'x') {
+                        return { ...request, status: true };
+                    } else if (id === 'y') {
+                        return { ...request, status: false };
+                    }
                 }
                 return request;
             });
 
-            const acceptRef = doc(db, "Request", myPending[0].id);
+            const acceptRef = doc(db, "Request", requestId);
 
             updateDoc(acceptRef, { friendRequests })
                 .then(() => {
@@ -80,47 +73,28 @@ const Pendingfriendrequests = () => {
                 .catch((error) => {
                     console.error("Error al actualizar el documento:", error);
                 });
-        } else if (friendshipStatus === 'z' && id === 'y') {
-            const friendRequests = myPending[0].friendRequests.map((request, index) => {
-                if (index === 0) {
-                    return { ...request, status: false };
-                }
-                return request;
-            });
-
-            const acceptRef = doc(db, "Request", myPending[0].id);
-
-            updateDoc(acceptRef, { friendRequests })
-                .then(() => {
-                    console.log("Documento actualizado exitosamente.");
-                })
-                .catch((error) => {
-                    console.error("Error al actualizar el documento:", error);
-                });
+        } else {
+            console.error("No se encontró ningún objeto en pending que coincida con el ID proporcionado.");
         }
     };
 
     return (
-        <>{friendshipStatus === undefined ?
+        <>{friendshipStatus === 0 ?
             <h2 className='no-request'>No tienes solicitudes</h2>
             :
             (
                 <div className='Pendingfriendrequests'>
                     <h2>Hola <span>{user.displayName}</span>, tienes</h2>
-                    <h2>{<span>{myPending === null ? 0 : myPending.length}</span>} solicitud(es) de amistad de:</h2>
-                    {myPending && myPending.map((requestsArray, i) => (
+                    <h2>{<span>{statusFrienship === 0 ? 0 : statusFrienship.length}</span>} solicitud(es) de amistad de:</h2>
+                    {statusFrienship && statusFrienship.map((request, i) => (
                         <>
                             <div key={i} className='card-Pendingfriendrequests'>
-                                {requestsArray.friendRequests.map((request, j) => (
-                                    <div key={j}>
-                                        <h5>{request.id1}</h5>
-                                        <h5>{request.id2}</h5>
-                                        <h5>{request.status === true ? 'true' : 'false'}</h5>
-                                    </div>
-                                ))}
-
-                                <button onClick={() => handleAccept('x')}>acceptar</button>
-                                <button onClick={() => handleAccept('y')}>rechazar</button>
+                                <div >
+                                    <h5>{request.id1}</h5>
+                                    <h5>{request.id2}</h5>
+                                </div>
+                                <button onClick={() => handleAccept('x', statusFrienship[0].id)}>acceptar</button>
+                                <button onClick={() => handleAccept('y', statusFrienship[0].id)}>rechazar</button>
                             </div>
                         </>
                     ))}

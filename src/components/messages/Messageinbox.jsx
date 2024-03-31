@@ -83,19 +83,19 @@ const Messageinbox = () => {
 
     return (
         <div className='Messageinbox'>
-            <div className={goMessages ? "Messageinbox-container" : ''}>
+            <div className="Messageinbox-container">
                 {allowMessages ?
                     <div className="allow-messages-container">
                         {goMessages ?
-                            <button onClick={allowSendMessages}>hello</button>
+                            <button className='Messageinbox-messages-to' onClick={allowSendMessages}>Mensajear</button>
                             :
                             <Messagescontainer idreceiper={x1} />
                         }
                     </div>
                     :
-                    <div>
+                    <div className='Messageinbox-request-friend' >
                         <h5>Aun no puedes enviarle mensajes a esta persona</h5>
-                        <h5>Enviale una solicitud de amistad primero</h5>
+                        <h5>Enviale una solicitud de amistad</h5>
                         <Link to={`/singlesuser/${x1}`}>
                             <i className='bx bxs-user-plus'></i>
                         </Link>

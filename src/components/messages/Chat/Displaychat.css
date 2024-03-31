@@ -1,0 +1,71 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.display-chat {
+    width: 80%;
+    height: auto;
+    background-color: var(--Gris-perla);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10%;
+    border-radius: 3px;
+}
+
+.display-msg {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.container-msg{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 3px;
+    position: relative;
+}
+
+.display-msg-sender {
+    align-self: flex-end;
+    margin-left: 30%;
+    padding: 2px 5px 3px 5px;
+    border-radius: 3px;
+    background-color: var(--Verde-menta);
+}
+
+.display-msg-receptor {
+    align-self: flex-start;
+    margin-right: 30%;
+    padding: 2px 5px 3px 5px;
+    border-radius: 3px;
+    background-color: var(--Rosa-suave);
+}
+
+.display-time-sender {
+    align-self: flex-end;
+    margin-left: 70%;
+    position: absolute;
+    bottom: -25px;
+    left: 0x;
+}
+
+.display-time-receptor {
+    align-self: flex-start;
+    margin-right: 70%;
+    position: absolute;
+    bottom: -25px;
+    right: 0;
+}
