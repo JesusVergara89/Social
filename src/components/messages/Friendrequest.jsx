@@ -46,7 +46,7 @@ const Friendrequest = () => {
     }
 
     const thisObject = ExtractedObjs.find(obj =>
-        obj.id1 === id && obj.id2 === user.uid
+        obj.id1 === id && obj.id2 === user.uid || obj.id1 === user.uid && obj.id2 === id
     );
 
     let friendshipStatus = '';
