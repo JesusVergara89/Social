@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { addDoc, collection, Timestamp } from 'firebase/firestore';
+import { addDoc, collection, onSnapshot, orderBy, query, Timestamp } from 'firebase/firestore';
 import { auth, db, storage } from '../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -11,6 +11,26 @@ const Createpost = () => {
     const [description, setDescription] = useState('');
     const [photo, setPhoto] = useState(null);
     const [currentlyLoggedinUser] = useAuthState(auth);
+    const [allUsers, setAllUsers] = useState();
+
+    useEffect(() => {
+        const messagesRef = collection(db, 'Users')
+        const q = query(messagesRef, orderBy('userName'))
+        onSnapshot(q, (snapshot) => {
+            const msgs = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setAllUsers(msgs)
+        })
+    }, []);
+
+    const getDataForPost = allUsers?.filter((data) => {
+        if (data.idUser === currentlyLoggedinUser.uid) {
+            return data
+        }
+    }
+    )
 
     const handlePhotoChange = (e) => {
         const file = e.target.files[0];
@@ -29,6 +49,8 @@ const Createpost = () => {
     const createEmptyComments = () => {
         return {
             createdAt: null,
+            userPhoto: '',
+            userName: '',
             main: '',
             idUser: '',
             others: {
@@ -54,6 +76,8 @@ const Createpost = () => {
             const postRef = collection(db, 'Post');
             const newPost = {
                 description: description,
+                userPhoto: getDataForPost[0].photo,
+                userName: getDataForPost[0].userName,
                 image: imageURL,
                 createdAt: createTimestamp(),
                 comments: [createEmptyComments()]

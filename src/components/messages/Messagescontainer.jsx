@@ -1,6 +1,5 @@
-import { collection, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { auth, db } from '../../firebaseConfig';
+import { auth } from '../../firebaseConfig';
 import './Messagescontainer.css'
 import Singlemessage from './Singlemessage';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -9,7 +8,6 @@ import Cardmsg from './Chat/Cardmsg';
 const Messagescontainer = ({ idreceiper }) => {
 
   const [openCloseSingleMessage, setOpenCloseSingleMessage] = useState(false)
-  const [message, setMessage] = useState([]);
   const [thisUser] = useAuthState(auth)
 
   const functionOpenClose = (parameter) => {
@@ -25,19 +23,6 @@ const Messagescontainer = ({ idreceiper }) => {
   }
 
   useEffect(() => {
-    const fetchDocuments = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'Messages'));
-        const documentsData = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setMessage(documentsData);
-      } catch (error) {
-        console.error('Error fetching documents: ', error);
-      }
-    };
-    fetchDocuments();
     functionOpenClose()
   }, [idreceiper]);
 

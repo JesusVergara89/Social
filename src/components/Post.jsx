@@ -50,7 +50,16 @@ const Post = () => {
             {post && (
                 post.map((p, i) => (
                     <div key={i} className="post-card">
-                        <img src={p.image} alt="" />
+                        <img className='post-card-mainimg' src={p.image} alt="" />
+                        <div className="post-card-userinfo">
+                            <div className="post-card-userinfo-1">
+                               <img src={p.userPhoto} alt="" />
+                               <h6>{`${p.userName}`}</h6> 
+                            </div>
+                            <div className="post-card-userinfo-2">
+                               <h6>{p.createdAt.toDate().toDateString()}</h6> 
+                            </div>
+                        </div>
                         <p>{p.description}</p>
                         <Comment
                             thispost={p}

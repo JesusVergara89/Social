@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../../../firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import './Displaychat.css'
 
-const Displaychat = ({ state, newMessage, reloadMsg, idreceiper, ideSender }) => {
+const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
 
     useEffect(() => {
-        const fetchDocuments = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, 'Messages'));
-                const documentsData = querySnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                setAllmsg(documentsData);
-            } catch (error) {
-                console.error('Error fetching documents: ', error);
-            }
-        };
-        fetchDocuments();
-    }, [reloadMsg, newMessage,state]);
+        const messagesRef = collection(db, 'Messages')
+        const q = query(messagesRef, orderBy('message'))
+       onSnapshot(q, (snapshot) => {
+             const msgs = snapshot.docs.map((doc) =>({
+                id: doc.id,
+                ...doc.data()
+             }))
+             setAllmsg(msgs)
+       })
+    }, [reloadMsg, newMessage]);
 
     const userMsgs = allmsg?.filter(data => {
         if (Array.isArray(data.message) && data.message.length > 0) {
@@ -42,7 +38,7 @@ const Displaychat = ({ state, newMessage, reloadMsg, idreceiper, ideSender }) =>
         }
     })
 
-    //console.log(state)
+    ///console.log(allmsg)
 
     return (
         <div className="display-chat">

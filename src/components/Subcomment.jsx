@@ -28,7 +28,7 @@ const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,
             }
 
             mainComment.others[availableIndex] = {
-                userID: user.uid, // Aquí se usa solo el ID del usuario
+                userID: user.uid, 
                 content: othersComment,
                 createdAt: Timestamp.now().toDate()
             };

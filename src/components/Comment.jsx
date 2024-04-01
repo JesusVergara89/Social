@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { auth, db } from "../firebaseConfig";
 import { toast } from 'react-toastify';
 import { Timestamp, doc, setDoc } from "firebase/firestore";
@@ -9,6 +9,21 @@ const Comment = ({ postId, thispost, reload }) => {
 
     const [mainComment, setMainComment] = useState('');
     const [userInfo] = useAuthState(auth)
+    const [textareaHeight, setTextareaHeight] = useState('50px');
+
+    useEffect(() => {
+        const adjustTextareaHeight = () => {
+            const length = mainComment.length;
+            const minHeight = 20;
+            const maxHeight = 300; 
+            const step = 30;
+
+            let height = minHeight + Math.floor(length / 30) * step;
+            height = Math.min(height, maxHeight); 
+            setTextareaHeight(height + 'px');
+        };
+        adjustTextareaHeight();
+    }, [mainComment]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -63,12 +78,13 @@ const Comment = ({ postId, thispost, reload }) => {
     return (
         <div className="comments">
             <form onSubmit={handleSubmit} className="form-container">
-                <input
-                    type="text"
+                <textarea
                     className='main-comment'
                     placeholder="Add a comment..."
                     value={mainComment}
                     onChange={(e) => setMainComment(e.target.value)}
+                    style={{ height: textareaHeight }}
+                    rows={1}
                 />
                 <button type="submit" className="submit-btn"><i className='bx bx-paper-plane'></i></button>
             </form>
