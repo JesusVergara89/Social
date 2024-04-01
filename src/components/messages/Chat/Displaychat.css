@@ -11,7 +11,7 @@
 .display-chat {
     width: 80%;
     height: auto;
-    background-color: var(--Gris-perla);
+    background-color: gainsboro;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,36 +36,53 @@
     justify-content: center;
     border-radius: 3px;
     position: relative;
+    gap: 20px;
 }
 
-.display-msg-sender {
+.container-msg p{
+    text-align: left;
+    font-size: 0.85rem;
+}
+
+.container-msg h6 {
+    font-size: 0.6rem;
+    font-weight: 700;
+}
+
+.display-msg-sender {  
+    width: 80%;
     align-self: flex-end;
     margin-left: 30%;
-    padding: 2px 5px 3px 5px;
+    padding: 5px 8px 5px 5px;
     border-radius: 3px;
-    background-color: var(--Verde-menta);
+    background-color: var(--Azul-claro);
 }
 
-.display-msg-receptor {
+.display-msg-receptor {    
+    width: 80%;
     align-self: flex-start;
     margin-right: 30%;
-    padding: 2px 5px 3px 5px;
-    border-radius: 3px;
-    background-color: var(--Rosa-suave);
+    padding: 5px 5px 5px 8px;
+    border-radius: 8px;
+    background-color: var(--Blanco-hueso);
 }
 
 .display-time-sender {
+    display: flex;
     align-self: flex-end;
     margin-left: 70%;
     position: absolute;
-    bottom: -25px;
-    left: 0x;
+    bottom: -26px;
+    right: 0px;
+    gap: 8px;
 }
 
 .display-time-receptor {
+    display: flex;
     align-self: flex-start;
     margin-right: 70%;
     position: absolute;
-    bottom: -25px;
-    right: 0;
+    bottom: -26px;
+    left: 0;
+    gap: 8px;
 }

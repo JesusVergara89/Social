@@ -11,6 +11,7 @@ const Singlemessage = ({ functionOpenClose, idreceiper, ideSender }) => {
     const [newMessage, setNewMessage] = useState('');
     const [Allusers, setAllusers] = useState([])
     const [reloadMsg, setReloadMsg] = useState(false)
+    const [state, setState] = useState(null);
 
     useEffect(() => {
         const fetchDocuments = async () => {
@@ -37,7 +38,7 @@ const Singlemessage = ({ functionOpenClose, idreceiper, ideSender }) => {
         };
         getUsers();
         fetchDocuments();
-    }, [idreceiper, ideSender,reloadMsg,newMessage]);
+    }, [idreceiper, ideSender,reloadMsg,newMessage,state]);
 
     const arrayMessagesToUpdate = messages.filter(data => {
         return (data.message[0].receptor === idreceiper && data.message[0].sender === ideSender) || (data.message[0].receptor === ideSender && data.message[0].sender === idreceiper);
@@ -122,7 +123,7 @@ const Singlemessage = ({ functionOpenClose, idreceiper, ideSender }) => {
                 }
                 {arrayMessagesToUpdate.length > 0 &&
                     <div className="card-msg-one-one">
-                        <Displaychat newMessage={newMessage} reloadMsg={reloadMsg} idreceiper={idreceiper} ideSender={ideSender} />
+                        <Displaychat state={state} newMessage={newMessage} reloadMsg={reloadMsg} idreceiper={idreceiper} ideSender={ideSender} />
                         <form onSubmit={handleSubmit}>
                             <textarea
                                 placeholder='Escribe tu mensaje...'

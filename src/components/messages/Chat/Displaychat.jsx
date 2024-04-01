@@ -4,7 +4,7 @@ import { auth, db } from '../../../firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import './Displaychat.css'
 
-const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
+const Displaychat = ({ state, newMessage, reloadMsg, idreceiper, ideSender }) => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
@@ -23,7 +23,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
             }
         };
         fetchDocuments();
-    }, [reloadMsg, newMessage]);
+    }, [reloadMsg, newMessage,state]);
 
     const userMsgs = allmsg?.filter(data => {
         if (Array.isArray(data.message) && data.message.length > 0) {
@@ -42,7 +42,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
         }
     })
 
-    console.log(thisChat)
+    //console.log(state)
 
     return (
         <div className="display-chat">
@@ -50,11 +50,15 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                 thisChat.map((chat, i) => (
                     <div key={i} className="display-msg">
                         {chat.message.map((msg, j) => (
-                            <div className='container-msg'>
-                                <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"} key={j}>{msg.content}</p>
-                                <h6 className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} key={j + 1}>
-                                    {`${msg.createdAt.toDate().getHours()}:${msg.createdAt.toDate().getMinutes()}:${msg.createdAt.toDate().getSeconds()}`}
-                                </h6>
+                            <div key={j} className="container-msg">
+                                <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>
+                                <div className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"}>
+                                    <h6>{msg.sender === user.uid ? `@${msg.userNameR}` : `@${msg.userNameS}`}</h6>
+                                    <h6>-</h6>
+                                    <h6 key={j + 1}>
+                                        {`${msg.createdAt.toDate().getHours()}:${msg.createdAt.toDate().getMinutes()}:${msg.createdAt.toDate().getSeconds()}`}
+                                    </h6>
+                                </div>
                             </div>
                         ))}
                     </div>

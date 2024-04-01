@@ -19,6 +19,7 @@
     border-radius: 5px;
     padding: 50px 5px 25px 5px;
     border: 0.01rem solid var(--Gris-perla);
+    margin-bottom: 100px;
 }
 
 .single-card-msg-close {
