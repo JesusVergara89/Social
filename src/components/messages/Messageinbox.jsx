@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Messageinbox.css'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { collection, getDocs, onSnapshot } from 'firebase/firestore'
 import { db } from '../../firebaseConfig'
 import Messagescontainer from './Messagescontainer'

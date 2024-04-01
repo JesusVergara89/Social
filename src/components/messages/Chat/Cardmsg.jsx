@@ -40,7 +40,7 @@ const Cardmsg = () => {
 
     return (
         <div className="card-msg">
-            <h3>tus mensajes con otros usuarios:</h3>
+            <h3 className='card-msg-title'>tus mensajes con otros usuarios:</h3>
             {userMsgs && userMsgs.map((msg, i) => (
                 <div key={i} className='card-msg-info'>
                     <div className="card-user1">

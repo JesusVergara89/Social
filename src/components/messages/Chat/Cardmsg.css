@@ -16,7 +16,12 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
-    margin-top: 100px;
+    margin-top: 120px;
+}
+
+.card-msg-title {
+    text-align: center;
+    font-size: 1rem;
 }
 
 .card-msg-info {
@@ -49,4 +54,16 @@
     all: unset;
     font-size: 0.9rem;
     font-weight: bold;
+}
+
+@media (width < 315px) {
+    .card-msg-info {
+        width: 90%;
+        height: 130px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 0.01rem solid var(--Gris-perla);
+        border-radius: 5px;
+    }
 }

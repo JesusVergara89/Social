@@ -26,7 +26,6 @@ const Messagescontainer = ({ idreceiper }) => {
     functionOpenClose()
   }, [idreceiper]);
 
-
   return (
     <article className="Messagescontainer">
       {openCloseSingleMessage ?

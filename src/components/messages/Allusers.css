@@ -20,6 +20,15 @@
     gap: 10px;
 }
 
+.all-users-mapeo {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .all-users-profile-information {
     width: 400px;
     height: auto;
@@ -81,4 +90,24 @@
     padding-right: 10px;
 }
 
-
+@media (width < 418px) {
+    .all-users-mapeo {
+        width: 90%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 0px 8px 0px 8px;
+        justify-content: center;
+        align-items: center;
+    }
+    .all-users-profile-information {
+        width: auto;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--border);
+        margin-top: 50px;
+        position: relative;
+    }
+}
