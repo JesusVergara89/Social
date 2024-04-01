@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Timestamp, doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
@@ -8,6 +8,22 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,updateSubcomments }) => {
     const [othersComment, setOthersComment] = useState('');
     const [user] = useAuthState(auth);
+    const [textareaHeight, setTextareaHeight] = useState('20px');
+
+
+    useEffect(() => {
+        const adjustTextareaHeight = () => {
+            const length = othersComment.length;
+            const minHeight = 20;
+            const maxHeight = 200; 
+            const step = 30;
+
+            let height = minHeight + Math.floor(length / 30) * step;
+            height = Math.min(height, maxHeight); 
+            setTextareaHeight(height + 'px');
+        };
+        adjustTextareaHeight();
+    }, [othersComment]);
 
     const handleSubmitOthers = async (e) => {
         e.preventDefault();
@@ -60,12 +76,14 @@ const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,
 
     return (
         <form className='form-others' onSubmit={handleSubmitOthers}>
-            <input
+            <textarea
                 type="text"
                 className='others-comment'
                 placeholder="Add Subcomment"
                 value={othersComment}
                 onChange={(e) => setOthersComment(e.target.value)}
+                style={{ height: textareaHeight }}
+                rows={1}
             />
             <button className='comment-btn' type="submit"><i className='bx bx-paper-plane'></i></button>
         </form>

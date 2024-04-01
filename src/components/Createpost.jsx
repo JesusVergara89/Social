@@ -12,6 +12,7 @@ const Createpost = () => {
     const [photo, setPhoto] = useState(null);
     const [currentlyLoggedinUser] = useAuthState(auth);
     const [allUsers, setAllUsers] = useState();
+    const [textareaHeight, setTextareaHeight] = useState('20px');
 
     useEffect(() => {
         const messagesRef = collection(db, 'Users')
@@ -24,6 +25,20 @@ const Createpost = () => {
             setAllUsers(msgs)
         })
     }, []);
+
+    useEffect(() => {
+        const adjustTextareaHeight = () => {
+            const length = description.length;
+            const minHeight = 20;
+            const maxHeight = 450;
+            const step = 30;
+
+            let height = minHeight + Math.floor(length / 30) * step;
+            height = Math.min(height, maxHeight);
+            setTextareaHeight(height + 'px');
+        };
+        adjustTextareaHeight();
+    }, [description]);
 
     const getDataForPost = allUsers?.filter((data) => {
         if (data.idUser === currentlyLoggedinUser.uid) {
@@ -112,7 +127,10 @@ const Createpost = () => {
                         placeholder="Description"
                         name="description"
                         value={description}
-                        onChange={(e) => setDescription(e.target.value)} />
+                        onChange={(e) => setDescription(e.target.value)}
+                        style={{ height: textareaHeight }}
+                        rows={1}
+                    />
                     <button type="submit">Publish</button>
                 </form>
             </div>

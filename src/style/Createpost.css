@@ -86,7 +86,7 @@
 
 .create-post-card textarea {
     width: 90%;
-    height: 80px;
+    height: auto;
     border: none;
     resize: vertical;
     padding: 8px;

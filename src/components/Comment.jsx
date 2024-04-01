@@ -9,7 +9,7 @@ const Comment = ({ postId, thispost, reload }) => {
 
     const [mainComment, setMainComment] = useState('');
     const [userInfo] = useAuthState(auth)
-    const [textareaHeight, setTextareaHeight] = useState('50px');
+    const [textareaHeight, setTextareaHeight] = useState('20px');
 
     useEffect(() => {
         const adjustTextareaHeight = () => {
