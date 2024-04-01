@@ -13,7 +13,7 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     position: relative;
     border-radius: 5px;
@@ -64,10 +64,12 @@
 }
 
 .card-msg-one-one form  textarea{
-    width: 95%;
+    width: 100%;
     height: auto;
     padding: 5px;
     resize: vertical;
+    border-radius: 8px;
+    border: 0.01rem solid var(--Gris-perla);
 }
 
 .card-msg-one-one form button {
@@ -83,4 +85,20 @@
     font-size: 0.8rem;
     font-weight: bold;
     cursor: pointer;
+}
+
+@media (width < 345px){
+    .single-card-msg {
+        width: 90%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border-radius: 5px;
+        padding: 50px 5px 25px 5px;
+        border: 0.01rem solid var(--Gris-perla);
+        margin-bottom: 100px;
+    }
 }

@@ -11,6 +11,7 @@ const Singlemessage = ({ functionOpenClose, idreceiper, ideSender }) => {
     const [newMessage, setNewMessage] = useState('');
     const [Allusers, setAllusers] = useState([])
     const [reloadMsg, setReloadMsg] = useState(false)
+    const [textareaHeight, setTextareaHeight] = useState('30px');
 
     useEffect(() => {
         const fetchDocuments = async () => {
@@ -38,6 +39,20 @@ const Singlemessage = ({ functionOpenClose, idreceiper, ideSender }) => {
         getUsers();
         fetchDocuments();
     }, [idreceiper, ideSender,reloadMsg,newMessage]);
+
+    useEffect(() => {
+        const adjustTextareaHeight = () => {
+            const length = newMessage.length;
+            const minHeight = 30;
+            const maxHeight = 300; 
+            const step = 30;
+
+            let height = minHeight + Math.floor(length / 30) * step;
+            height = Math.min(height, maxHeight); 
+            setTextareaHeight(height + 'px');
+        };
+        adjustTextareaHeight();
+    }, [newMessage]);
 
     const arrayMessagesToUpdate = messages.filter(data => {
         return (data.message[0].receptor === idreceiper && data.message[0].sender === ideSender) || (data.message[0].receptor === ideSender && data.message[0].sender === idreceiper);
@@ -115,6 +130,8 @@ const Singlemessage = ({ functionOpenClose, idreceiper, ideSender }) => {
                                 placeholder='Escribe tu mensaje...'
                                 value={newMessage}
                                 onChange={(e) => setNewMessage(e.target.value)}
+                                style={{ height: textareaHeight }}
+                                rows={1}
                             />
                             <button onClick={functionReload} type='submit'>Enviar</button>
                         </form>
@@ -128,6 +145,8 @@ const Singlemessage = ({ functionOpenClose, idreceiper, ideSender }) => {
                                 placeholder='Escribe tu mensaje...'
                                 value={newMessage}
                                 onChange={(e) => setNewMessage(e.target.value)}
+                                style={{ height: textareaHeight }}
+                                rows={1}
                             />
                             <button onClick={functionReload} type='submit'>Enviar</button>
                         </form>
