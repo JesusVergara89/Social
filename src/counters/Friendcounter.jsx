@@ -30,8 +30,6 @@ const Friendcounter = () => {
         return false;
     });
 
-
-
     console.log(matchFriends)
 
     return (
