@@ -90,7 +90,7 @@
     padding-right: 10px;
 }
 
-@media (width < 415px) {
+@media (width < 440px) {
     .all-users-mapeo {
         width: 100%;
         height: auto;

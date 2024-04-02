@@ -110,7 +110,7 @@
     padding: 10px;
 }
 
-@media (width <= 415px){
+@media (width <= 440px){
     .post-card {
         width: 100%;
         height: auto;

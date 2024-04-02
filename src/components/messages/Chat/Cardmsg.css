@@ -60,7 +60,7 @@
     font-weight: bold;
 }
 
-@media (width < 315px) {
+@media (width < 440px) {
     .card-msg a {
         all: unset;   
         width: 100%;

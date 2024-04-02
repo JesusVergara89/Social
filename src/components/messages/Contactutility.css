@@ -42,10 +42,10 @@
     cursor: pointer;
 }
 
-@media (width < 418px) {
+@media (width < 440px) {
     .profile-utilyties {
         width: 100%;
-        height: 30px;
+        height: 40px;
         display: flex;
         justify-content: center;
         padding: 0;

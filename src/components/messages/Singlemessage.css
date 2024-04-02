@@ -87,7 +87,7 @@
     cursor: pointer;
 }
 
-@media (width < 345px){
+@media (width < 440px){
     .single-card-msg {
         width: 100%;
         height: auto;
