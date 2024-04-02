@@ -12,13 +12,13 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
     useEffect(() => {
         const messagesRef = collection(db, 'Messages')
         const q = query(messagesRef, orderBy('message'))
-       onSnapshot(q, (snapshot) => {
-             const msgs = snapshot.docs.map((doc) =>({
+        onSnapshot(q, (snapshot) => {
+            const msgs = snapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
-             }))
-             setAllmsg(msgs)
-       })
+            }))
+            setAllmsg(msgs)
+        })
     }, [reloadMsg, newMessage]);
 
     const userMsgs = allmsg?.filter(data => {

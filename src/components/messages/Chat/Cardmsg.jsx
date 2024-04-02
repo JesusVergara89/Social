@@ -1,4 +1,4 @@
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { auth, db } from '../../../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -11,19 +11,15 @@ const Cardmsg = () => {
     const [allmsg, setAllmsg] = useState();
 
     useEffect(() => {
-        const fetchDocuments = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, 'Messages'));
-                const documentsData = querySnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                setAllmsg(documentsData);
-            } catch (error) {
-                console.error('Error fetching documents: ', error);
-            }
-        };
-        fetchDocuments();
+        const querySnapshot = collection(db, 'Messages');
+        const q = query(querySnapshot, orderBy('message'))
+        onSnapshot(q, (snapshot) => {
+            const msgs = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setAllmsg(msgs)
+        })
     }, []);
 
     const userMsgs = allmsg?.filter(data => {
@@ -43,7 +39,7 @@ const Cardmsg = () => {
         <div className="card-msg">
             <h3 className='card-msg-title'>tus mensajes con otros usuarios:</h3>
             {userMsgs && userMsgs.map((msg, i) => (
-                <Link key={i+1} to={msg.message[0].receptor === user.uid ? `/Sendmessage/${msg.message[0].sender}/${user.uid}` : `/Sendmessage/${msg.message[0].receptor}/${user.uid}`}>
+                <Link key={i + 1} to={msg.message[0].receptor === user.uid ? `/Sendmessage/${msg.message[0].sender}/${user.uid}` : `/Sendmessage/${msg.message[0].receptor}/${user.uid}`}>
                     <div key={i} className='card-msg-info'>
                         <div className="card-user1">
                             <img src={msg.message[0].photoR} alt="" />

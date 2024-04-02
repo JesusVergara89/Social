@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Singlemessage.css';
-import { addDoc, collection, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { addDoc, collection, getDocs, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { toast } from 'react-toastify';
 import Displaychat from './Chat/Displaychat';
@@ -17,41 +17,36 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     const navigateToAllmsg = useNavigate()
 
     useEffect(() => {
-        const fetchDocuments = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, 'Messages'));
-                const documentsData = querySnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                setMessage(documentsData);
-            } catch (error) {
-                console.error('Error fetching documents: ', error);
-            }
-        };
-        const getUsers = async () => {
-            try {
-                const usersCollectionRef = collection(db, 'Users');
-                const usersSnapshot = await getDocs(usersCollectionRef);
-                const usersData = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setAllusers(usersData);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-        getUsers();
-        fetchDocuments();
-    }, [idreceiper, ideSender,reloadMsg,newMessage]);
+        const querySnapshot = collection(db, 'Messages');
+        const q = query(querySnapshot, orderBy('message'))
+        onSnapshot(q, (snapshot) => {
+            const msgs = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setMessage(msgs);
+        })
+
+        const usersCollectionRef = collection(db, 'Users');
+        const q1 = query(usersCollectionRef, orderBy('userName'))
+        onSnapshot(q1, (snapshot) => {
+            const userx = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setAllusers(userx);
+        })
+    }, [idreceiper, ideSender, reloadMsg, newMessage]);
 
     useEffect(() => {
         const adjustTextareaHeight = () => {
             const length = newMessage.length;
             const minHeight = 30;
-            const maxHeight = 300; 
+            const maxHeight = 300;
             const step = 30;
 
             let height = minHeight + Math.floor(length / 30) * step;
-            height = Math.min(height, maxHeight); 
+            height = Math.min(height, maxHeight);
             setTextareaHeight(height + 'px');
         };
         adjustTextareaHeight();

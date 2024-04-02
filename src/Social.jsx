@@ -13,6 +13,7 @@ import Pendingfriendrequests from './components/messages/Pendingfriendrequests';
 import Messageinbox from './components/messages/Messageinbox';
 import Singleuser from './components/Singleuser';
 import Allmessageswithuser from './components/messages/Allmessageswithuser';
+import Singlepost from './components/Singlepost';
 
 function Social() {
 
@@ -73,6 +74,11 @@ function Social() {
                     <Route path='/pendingrequest'
                         element={
                             <Pendingfriendrequests />
+                        }
+                    />
+                    <Route path='/singlepost/:post'
+                        element={
+                            <Singlepost />
                         }
                     />
                     <Route path='/friendrequest/:id'

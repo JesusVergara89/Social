@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import '../style/Profile.css'
+import Mypost from './Mypost';
 ///import { toast } from 'react-toastify';
 
 const Profile = ({ newuser, setNewuser }) => {
@@ -39,7 +40,7 @@ const Profile = ({ newuser, setNewuser }) => {
         if (!executedOnce) {
             const timer = setTimeout(() => {
                 addUserToDatabase();
-                console.log('La función se ejecutó después de un segundo del primer renderizado.');
+                console.log('La función se ejecutó.');
                 setExecutedOnce(true);
             }, 1000);
 
@@ -80,11 +81,14 @@ const Profile = ({ newuser, setNewuser }) => {
                         <p className="profile-information-bio">{currentUserData.bio}</p>
                     </div>
                     <button onClick={() => { signOut(auth); navigate('/'); }}>Salir</button>
+                    <Link className='pending-request-btn' to={'/pendingrequest'}>
+                        <h3>Solicitudes</h3>
+                    </Link>
                 </div>
             )}
-            <Link className='pending-request-btn' to={'/pendingrequest'}>
-                <h3>Pending requests</h3>
-            </Link>
+            <div className="profile-post">
+                <Mypost/>
+            </div>
         </div>
     );
 };

@@ -7,3 +7,9 @@
     --Rosa-suave: #FFB6C1;
     --btns: #0095f6;
 }
+
+.Mypost {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2px; 
+}

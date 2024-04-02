@@ -15,8 +15,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 80px;
     gap: 10px;
+    position: relative;
 }
 
 .profile-information {
@@ -109,10 +110,12 @@
     border: none;
     height: auto;
     padding: 3px 8px 5px 8px;
-    border-radius: 2px;
     background-color: var(--btns);
     color: #111;
     font-size: 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -124,4 +127,30 @@
 
 .pending-request-btn h3 {
     all: unset;
+}
+
+.profile-post {
+    width: 80%;
+    height: auto;
+}
+
+
+@media (width < 500px){
+    .profile-information {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        border-left: none;
+        border-right: none;
+        margin-top: 50px;
+        position: relative;
+    }
+    .profile-post {
+        width: 100%;
+        height: auto;
+    }
 }

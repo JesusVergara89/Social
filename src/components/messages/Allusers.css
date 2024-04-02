@@ -90,18 +90,18 @@
     padding-right: 10px;
 }
 
-@media (width < 418px) {
+@media (width < 415px) {
     .all-users-mapeo {
-        width: 90%;
+        width: 100%;
         height: auto;
         display: flex;
         flex-direction: column;
-        padding: 0px 8px 0px 8px;
+        padding: 0px 0px 0px 0px;
         justify-content: center;
         align-items: center;
     }
     .all-users-profile-information {
-        width: auto;
+        width: 100%;
         height: auto;
         display: flex;
         justify-content: center;

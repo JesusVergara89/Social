@@ -90,6 +90,7 @@ const Createpost = () => {
 
             const postRef = collection(db, 'Post');
             const newPost = {
+                idOnlineUser: currentlyLoggedinUser.uid,
                 description: description,
                 userPhoto: getDataForPost[0].photo,
                 userName: getDataForPost[0].userName,
