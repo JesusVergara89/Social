@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Messageinbox.css'
 import { Link, useParams } from 'react-router-dom'
-import { collection, getDocs, onSnapshot } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../firebaseConfig'
 import Messagescontainer from './Messagescontainer'
 
@@ -14,16 +14,14 @@ const Messageinbox = () => {
 
     useEffect(() => {
         const requestCollectionRef = collection(db, 'Request');
-        getDocs(requestCollectionRef)
-            .then((querySnapshot) => {
-                const requests = querySnapshot.docs.map((doc) => {
-                    return { id: doc.id, ...doc.data() };
-                });
-                setAllrequest(requests);
-            })
-            .catch((error) => {
-                console.error("Error fetching documents: ", error);
-            });
+        const q = query(requestCollectionRef, orderBy('friendRequests'))
+        onSnapshot(q, (snapshot) => {
+            const req = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setAllrequest(req)
+        })
     }, [x1, x2]);
 
     let ExtractedObjs = [];
@@ -80,6 +78,8 @@ const Messageinbox = () => {
     }
 
     const allowSendMessages = () => setGoMessages(!goMessages)
+
+    //console.log(x1, x2)
 
     return (
         <div className='Messageinbox'>
