@@ -1,4 +1,4 @@
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { auth, db } from '../../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -12,17 +12,15 @@ const Allusers = () => {
     const [thiIsTheCurrentUser] = useAuthState(auth)
 
     useEffect(() => {
-        const getUsers = async () => {
-            try {
-                const usersCollectionRef = collection(db, 'Users');
-                const usersSnapshot = await getDocs(usersCollectionRef);
-                const usersData = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setAllusers(usersData);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-        getUsers();
+        const usersCollectionRef = collection(db, 'Users');
+        const q = query(usersCollectionRef, orderBy('userName'))
+        onSnapshot(q, (snapshot) => {
+            const allUsers = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setAllusers(allUsers);
+        }) 
     }, []);
     //console.log(thiIsTheCurrentUser)
     return (

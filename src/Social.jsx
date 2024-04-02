@@ -12,14 +12,11 @@ import Allusers from './components/messages/Allusers';
 import Pendingfriendrequests from './components/messages/Pendingfriendrequests';
 import Messageinbox from './components/messages/Messageinbox';
 import Singleuser from './components/Singleuser';
-import Messagescontainer from './components/messages/Messagescontainer';
 import Allmessageswithuser from './components/messages/Allmessageswithuser';
 
 function Social() {
 
     const [newuser, setNewuser] = useState({})
-
-    const functionalData = 'xxhxc'
 
     return (
         <div className='SOCIAL'>

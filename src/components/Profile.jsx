@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebaseConfig';
 import { Link, useNavigate } from 'react-router-dom';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import '../style/Profile.css'
 ///import { toast } from 'react-toastify';
@@ -48,18 +48,16 @@ const Profile = ({ newuser, setNewuser }) => {
     }, [executedOnce]);
 
     useEffect(() => {
-        const getUsers = async () => {
-            try {
-                const usersCollectionRef = collection(db, 'Users');
-                const usersSnapshot = await getDocs(usersCollectionRef);
-                const usersData = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setUsers(usersData);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-        getUsers();
-    }, [currentlyLoggedinUser,setNewuser]);
+        const usersCollectionRef = collection(db, 'Users');
+        const q = query(usersCollectionRef, orderBy('userName'))
+        onSnapshot(q, (snapshot) => {
+            const userInfo = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setUsers(userInfo);
+        })
+    }, [currentlyLoggedinUser, setNewuser]);
 
     useEffect(() => {
         if (currentlyLoggedinUser) {
