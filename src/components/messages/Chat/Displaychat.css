@@ -5,13 +5,14 @@
     --Gris-perla: #D3D3D3;
     --Blanco-hueso: #F5F5DC;
     --Rosa-suave: #FFB6C1;
+    --chat: #cffccf;
     --btns: #0095f6;
 }
 
 .display-chat {
     width: 100%;
     height: auto;
-    background-color: gainsboro;
+    background-color: var(--chat);
     display: flex;
     flex-direction: column;
     justify-content: center;

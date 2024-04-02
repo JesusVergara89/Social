@@ -16,7 +16,6 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
-    margin-top: 120px;
 }
 
 .card-msg-title {
@@ -58,7 +57,7 @@
 
 @media (width < 315px) {
     .card-msg-info {
-        width: 90%;
+        width: 95%;
         height: 130px;
         display: flex;
         justify-content: center;

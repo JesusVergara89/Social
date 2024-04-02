@@ -13,6 +13,7 @@ import Pendingfriendrequests from './components/messages/Pendingfriendrequests';
 import Messageinbox from './components/messages/Messageinbox';
 import Singleuser from './components/Singleuser';
 import Messagescontainer from './components/messages/Messagescontainer';
+import Allmessageswithuser from './components/messages/Allmessageswithuser';
 
 function Social() {
 
@@ -62,9 +63,9 @@ function Social() {
                             <Singleuser />
                         }
                     />
-                    <Route path='/messagesinbox/'
+                    <Route path='/messagesinbox'
                         element={
-                            <Messagescontainer idreceiper={functionalData} />
+                            <Allmessageswithuser />
                         }
                     />
                     <Route path='/Sendmessage/:x1/:x2'

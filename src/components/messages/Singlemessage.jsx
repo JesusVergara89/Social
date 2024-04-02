@@ -4,14 +4,17 @@ import { addDoc, collection, getDocs, updateDoc, doc } from 'firebase/firestore'
 import { db } from '../../firebaseConfig';
 import { toast } from 'react-toastify';
 import Displaychat from './Chat/Displaychat';
+import { useNavigate } from 'react-router-dom';
 
-const Singlemessage = ({ functionOpenClose, idreceiper, ideSender }) => {
+const Singlemessage = ({ idreceiper, ideSender }) => {
 
     const [messages, setMessage] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [Allusers, setAllusers] = useState([])
     const [reloadMsg, setReloadMsg] = useState(false)
     const [textareaHeight, setTextareaHeight] = useState('30px');
+
+    const navigateToAllmsg = useNavigate()
 
     useEffect(() => {
         const fetchDocuments = async () => {
@@ -121,7 +124,7 @@ const Singlemessage = ({ functionOpenClose, idreceiper, ideSender }) => {
 
     return (
         <div className='single-card-msg'>
-            <button className='single-card-msg-close' onClick={() => functionOpenClose('x')}><i className='bx bxs-x-circle'></i></button>
+            <button onClick={() => navigateToAllmsg('/messagesinbox')} className='single-card-msg-close'><i className='bx bxs-x-circle'></i></button>
             <div className="card-msg-one-one">
                 {arrayMessagesToUpdate.length === 0 &&
                     <div className="new-chat">

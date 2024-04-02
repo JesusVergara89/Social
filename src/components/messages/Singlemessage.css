@@ -89,16 +89,19 @@
 
 @media (width < 345px){
     .single-card-msg {
-        width: 90%;
+        width: 100%;
         height: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         position: relative;
-        border-radius: 5px;
-        padding: 50px 5px 25px 5px;
-        border: 0.01rem solid var(--Gris-perla);
+        border-radius: 0px;
+        padding: 50px 0px 25px 0px;
+        border-top: 0.01rem solid var(--Gris-perla);
+        border-left: none;
+        border-right: none;
+        border-bottom: 0.01rem solid var(--Gris-perla);
         margin-bottom: 100px;
     }
 }
