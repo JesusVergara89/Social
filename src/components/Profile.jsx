@@ -6,6 +6,7 @@ import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firesto
 import { signOut } from 'firebase/auth';
 import '../style/Profile.css'
 import Mypost from './Mypost';
+import Displaycounters from '../counters/Displaycounters';
 ///import { toast } from 'react-toastify';
 
 const Profile = ({ newuser, setNewuser }) => {
@@ -86,8 +87,11 @@ const Profile = ({ newuser, setNewuser }) => {
                     </Link>
                 </div>
             )}
+            <div className="profile-counters">
+                <Displaycounters />
+            </div>
             <div className="profile-post">
-                <Mypost/>
+                <Mypost />
             </div>
         </div>
     );
