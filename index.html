@@ -12,6 +12,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
     rel="stylesheet">
   <title>Social</title>
+  <style>
+    :root {
+      --background-light: #ffffff;
+      --background-dark: #2c3e50;
+      --text-light: #000000;
+      --text-dark: #E0E0E0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-light);
+      color: var(--text-light);
+      transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out;
+    }
+
+    body.dark-mode {
+      background-color: var(--background-dark);
+      color: var(--text-dark);
+    }
+  </style>
 </head>
 
 <body>

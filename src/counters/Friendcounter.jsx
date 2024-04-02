@@ -26,15 +26,15 @@ const Friendcounter = () => {
 
     if (friends) {
         matchFriends = friends.filter(data => {
-            for (let i = 0; i < data.friendRequests.length; i++) {
-                if ((data.friendRequests[i].id1 === user.uid || data.friendRequests[i].id2 === user.uid) &&
-                    data.friendRequests[i].status === true && data.friendRequests[i + 1].status === true) {
-                    return data
-                }
+            if ((data.friendRequests[0].id1 === user.uid || data.friendRequests[1].id2 === user.uid) &&
+                (data.friendRequests[0].status === true && data.friendRequests[1].status === true)) {
+                return data
+            } else {
+                []
             }
-            return false;
-        });
+        })
     }
+
     //console.log(matchFriends)
 
     return (
