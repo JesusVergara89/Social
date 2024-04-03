@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './Pendingfriendrequests.css';
-import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { collection, doc, onSnapshot, updateDoc, orderBy, query } from 'firebase/firestore';
 import { auth, db } from '../../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Pendingfriendrequests = () => {
+
+    const [allusers, setAllusers] = useState()
     const [pending, setPending] = useState([]);
     const [myPending, setMyPending] = useState([]);
     const [user] = useAuthState(auth);
@@ -17,6 +19,15 @@ const Pendingfriendrequests = () => {
             });
             setPending(requests);
         });
+        const userRef = collection(db, 'Users')
+        const q = query(userRef, orderBy('userName'))
+        onSnapshot(q, (snapshot) => {
+            const userx = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setAllusers(userx)
+        })
         return unsubscribe;
     }, []);
 
@@ -86,18 +97,30 @@ const Pendingfriendrequests = () => {
                 <div className='Pendingfriendrequests'>
                     <h2>Hola <span>{user.displayName}</span>, tienes</h2>
                     <h2>{<span>{statusFrienship === 0 ? 0 : statusFrienship.length}</span>} solicitud(es) de amistad de:</h2>
-                    {statusFrienship && statusFrienship.map((request, i) => (
-                        <>
-                            <div key={i} className='card-Pendingfriendrequests'>
-                                <div >
-                                    <h5>{request.id1}</h5>
-                                    <h5>{request.id2}</h5>
-                                </div>
-                                <button onClick={() => handleAccept('x', statusFrienship[0].id)}>acceptar</button>
-                                <button onClick={() => handleAccept('y', statusFrienship[0].id)}>rechazar</button>
+                    {allusers && statusFrienship && statusFrienship.map((request, i) => (
+                        <div key={i} className='card-Pendingfriendrequests'>
+                            {allusers.filter(data => data.idUser === request.id1 || data.idUser === request.id2)
+                                .map((whoRequest, index) => (
+                                    <div key={index}>
+                                        {(request.id1 === whoRequest.idUser || request.id2 === whoRequest.idUser) && whoRequest.idUser !== user.uid ? (
+                                            <div className="option-request">
+                                                <h5>{`@${whoRequest.userName}`}</h5>
+                                                <img src={whoRequest.photo} alt="" />
+                                                <h5>{whoRequest.name}</h5>
+                                            </div>
+                                        ) : (
+                                            ''
+                                        )}
+                                    </div>
+                                ))
+                            }
+                            <div className="btn-friendsrequest">
+                                <button className='btn-friendsrequest-accept' onClick={() => handleAccept('x', request.id)}>Aceptar</button>
+                                <button className='btn-friendsrequest-decline' onClick={() => handleAccept('y', request.id)}>Rechazar</button>
                             </div>
-                        </>
+                        </div>
                     ))}
+
                 </div>
             )}
         </>

@@ -15,6 +15,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 20px;
     margin-top: 150px;
 }
 
@@ -45,7 +46,86 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--border);
+    border: 0.01rem solid var(--Gris-perla);
     border-radius: 5px;
     padding: 5px 5px 10px 5px;
+}
+
+.option-request {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.option-request img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.option-request h5 {
+    all: unset;
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.btn-friendsrequest {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.btn-friendsrequest-accept {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 3px 6px 3px 6px;
+    border-radius: 3px;
+    background-color: var(--Verde-menta);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.btn-friendsrequest-decline {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 3px 6px 3px 6px;
+    border-radius: 3px;
+    background-color: var(--border);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+@media(width < 440px) {
+    .card-Pendingfriendrequests {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        padding: 5px 5px 10px 5px;
+        border: 0.01rem solid var(--Gris-perla);
+    }
 }
