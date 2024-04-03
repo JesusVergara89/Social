@@ -36,51 +36,6 @@ header .logo {
     position: relative;
 }
 
-.btn-mode {
-    width: 40px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-    position: absolute;
-    bottom: -10px;
-    background-color: var(--border);
-    border: 0.01rem solid var(--Gris-perla);
-}
-
-.btn-mode-circle {
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
-    background-color: #faff92;
-    position: absolute;
-    right: 0;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    margin-right: 1px;
-    opacity: 0;
-}
-
-.btn-mode-circle.run {
-    transform: translateX(-20px);
-    opacity: 1;
-}
-
-.btn-mode img {
-    all: unset;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    position: relative;
-    margin-left: 15px;
-    z-index: 0;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out
-}
-
-.btn-mode img.run {
-    opacity: 0;
-}
-
 header .logo:hover {
     cursor: pointer;
 }

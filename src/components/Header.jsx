@@ -5,30 +5,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import nullphoto from '../images/nullprofile.svg'
-import moon from '../images/moon.svg'
 
 const Header = () => {
+
     const [currentlyLoggedinUser] = useAuthState(auth);
     const navigate = useNavigate()
-    const [isRunning, setIsRunning] = useState(true);
-    const [darkMode, setDarkMode] = useState(false);
-
-    const handleButtonClick = () => {
-        setIsRunning(!isRunning);
-    };
-
-    const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
-        document.body.classList.toggle('dark-mode', darkMode);
-    };
+  
     return (
         <header>
             <div onClick={() => navigate('/')} className="logo">
                 <img src={social} alt="" />
-                <div className='btn-mode' onClick={() => { handleButtonClick(); toggleDarkMode() }}>
-                    <div className={`btn-mode-circle ${isRunning ? 'run' : ''}`}></div>
-                    <img className={isRunning ? 'run' : ''} src={moon} alt="" />
-                </div>
             </div>
             <div className="menu">
                 <Link to={'/allusers'}>
