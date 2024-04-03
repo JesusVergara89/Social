@@ -1,0 +1,89 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --chat: #cffccf;
+    --btns: #0095f6;
+}
+
+.display-chat {
+    width: 100%;
+    height: auto;
+    background-color: var(--chat);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10%;
+    border-radius: 3px;
+}
+
+.display-msg {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.container-msg{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 3px;
+    position: relative;
+    gap: 20px;
+}
+
+.container-msg p{
+    text-align: left;
+    font-size: 0.85rem;
+}
+
+.container-msg h6 {
+    font-size: 0.6rem;
+    font-weight: 700;
+}
+
+.display-msg-sender {  
+    width: 80%;
+    align-self: flex-end;
+    margin-left: 30%;
+    padding: 5px 8px 5px 5px;
+    border-radius: 10px;
+    background-color: var(--Azul-claro);
+}
+
+.display-msg-receptor {    
+    width: 80%;
+    align-self: flex-start;
+    margin-right: 30%;
+    padding: 5px 5px 5px 8px;
+    border-radius: 10px;
+    background-color: var(--Blanco-hueso);
+}
+
+.display-time-sender {
+    display: flex;
+    align-self: flex-end;
+    margin-left: 70%;
+    position: absolute;
+    bottom: -26px;
+    right: 0px;
+    gap: 8px;
+}
+
+.display-time-receptor {
+    display: flex;
+    align-self: flex-start;
+    margin-right: 70%;
+    position: absolute;
+    bottom: -26px;
+    left: 0;
+    gap: 8px;
+}

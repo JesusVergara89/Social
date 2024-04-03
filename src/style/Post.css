@@ -1,0 +1,152 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.post {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 100px;
+    margin-bottom: 150px;
+}
+
+.post a {
+    all: unset;
+    width: 115%;
+}
+
+.post-create-btn {
+    width: auto;
+    height: auto;
+    border: none;
+    background-color: var(--btns);
+    padding: 5px 10px 8px 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #111;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.post-create-btn:hover {
+    background-color: rgb(37, 106, 255);
+}
+
+.post-card {
+    width: 280px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 0px 20px 20px 20px;
+    overflow: hidden;
+}
+
+.post-card-userinfo {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+    margin-top: 8px;
+}
+
+.post-card-userinfo-1 {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.post-card-userinfo-2 {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+.post-card-userinfo h6 {
+    all: unset;
+    font-size: 0.75rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.post-card-userinfo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid var(--btns);
+}
+
+.post-card-mainimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-content {
+    padding: 10px;
+}
+
+@media (width <= 440px){
+    .post-card {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        border-radius: 0px;
+        padding: 0 0px 20px 0px;
+        overflow: hidden;
+    }
+
+    .post-card-userinfo h6 {
+        all: unset;
+        font-size: 0.75rem;
+        text-align: center;
+        font-weight: 700;
+        margin-right: 10px;
+    }
+    
+    .post-card-description{
+        all: unset;
+        width: 90%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        margin-left: 15px;
+        text-align: left;
+        font-size: 0.8rem;
+    }
+
+    .post-card-mainimg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+      
+}

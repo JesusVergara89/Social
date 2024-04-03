@@ -1,0 +1,156 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.profile {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    gap: 10px;
+    position: relative;
+}
+
+.profile-information {
+    width: 400px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--border);
+    margin-top: 50px;
+    position: relative;
+}
+
+.profile-information-image {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.profile-information-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-information-data {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+.profile-information-data h2 {
+    all: unset;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.profile-information-data h3 {
+    all: unset;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.profile-information-data p {
+    all: unset;
+    text-align: left;
+    font-size: 0.75rem;
+    padding-right: 10px;
+}
+
+.profile-information button {
+    width: 60px;
+    height: auto;
+    top: -11px;
+    border: none;
+    height: auto;
+    padding-top: 0.1rem;
+    padding-bottom: 0.2rem;
+    border-radius: 2px;
+    position: absolute;
+    background-color: var(--btns);
+    color: #111;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.profile-information button:hover {
+    cursor: pointer;
+    background-color: #111;
+    color: var(--Azul-claro);
+}
+
+.pending-request-btn{
+    all: unset;
+    width: auto;
+    height: auto;
+    border: none;
+    height: auto;
+    padding: 3px 8px 5px 8px;
+    background-color: var(--btns);
+    color: #111;
+    font-size: 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pending-request-btn:hover {
+    cursor: pointer;
+    background-color: #111;
+    color: var(--Azul-claro);
+}
+
+.pending-request-btn h3 {
+    all: unset;
+}
+
+.profile-post {
+    width: 80%;
+    height: auto;
+}
+
+
+@media (width < 440px){
+    .profile-information {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        border-left: none;
+        border-right: none;
+        margin-top: 50px;
+        position: relative;
+    }
+    .profile-post {
+        width: 100%;
+        height: auto;
+    }
+}

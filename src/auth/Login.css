@@ -1,0 +1,86 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.Login-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login {
+  width: 280px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 150px;
+  border: 1px solid var(--border);
+  padding: 15px;
+}
+
+.Login img {
+  width: calc(400px / 5);
+}
+
+.Login input {
+  width: 90%;
+  height: 40px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.Login-toggle-password .bx {
+  font-size: 1.2rem;
+}
+
+.Login-toggle-password .bx:hover {
+  cursor: pointer;
+}
+
+.Login-button {
+  width: 60px;
+  height: auto;
+  padding-bottom: 0.2rem;
+  border: none;
+  background-color: var(--btns);
+  color: #000000;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.Login-button:hover {
+  cursor: pointer;
+  background-color: var(--Azul-claro);
+  color: #000000;
+}
+
+@media (width < 350px){
+  .Login {
+    width: 280px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 150px;
+    border: 1px solid var(--border);
+    padding: 15px;
+    transform: scale(0.85);
+  }
+}
+
+

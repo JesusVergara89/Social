@@ -1,0 +1,39 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.renderpost {
+    height: 270px;
+    overflow: hidden;
+}
+
+.renderpost img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+.renderpost:hover img {
+    filter: brightness(0.8);
+}
+
+@media ( 600px < width < 800px) {
+    .renderpost {
+        height: 200px;
+        overflow: hidden;
+    } 
+}
+
+@media ( width <= 600px) {
+    .renderpost {
+        height: 120px;
+        overflow: hidden;
+    } 
+}

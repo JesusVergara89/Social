@@ -1,0 +1,83 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.display-comments {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(244, 243, 243);
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.display-comment-card {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    position: relative;
+}
+
+
+.comment-content {
+    all: unset;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.comment-date {
+    all: unset;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: rgb(96, 96, 96);
+    margin-bottom: 3px;
+    margin-left: 5px;
+}
+
+.hide-subcomments {
+    width: fit-content;
+    height: auto;
+    padding: 5px 8px 5px 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    color: var(--btns);
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-decoration: underline;
+    position: absolute;
+    top: -27px;
+    right: -10px;
+    background: none;
+    margin-right: 12px;
+}
+
+.show-subcomments {
+    width: fit-content;
+    height: auto;
+    padding: 5px 8px 5px 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    color: var(--btns);
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-decoration: underline;
+    background: none;
+    margin-bottom: 3px;
+}

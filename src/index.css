@@ -1,0 +1,38 @@
+* {
+  font-family: "Mulish", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --background: #FFFFFF;
+  --darkmode: #2C3E50;
+  --Azul-claro: #ADD8E6;
+  --Verde-menta: #98FB98;
+  --Gris-perla: #D3D3D3;
+  --Blanco-hueso: #F5F5DC;
+  --Rosa-suave: #FFB6C1;
+  --btns: #0095f6;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.SOCIAL {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 200px;
+}
+

@@ -1,0 +1,65 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.comments {
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10%;
+}
+
+.main-comment {
+    width: 90%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0.01rem solid var(--Gris-perla);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+    resize: vertical;
+}
+
+.main-comment::placeholder {
+    color: #111;
+}
+
+.main-comment:focus {
+    border-color: #333;
+}
+
+.submit-btn {
+    width: 10%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 2.3rem;
+    cursor: pointer;
+    color: var(--btns);
+}
+
+.submit-btn:hover {
+    color: #2680d4;
+}
+
+

@@ -1,0 +1,61 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.access {
+    width: 280px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--border);
+    margin-top: 50px;
+    padding: 15px;
+}
+
+.access-options {
+    width: 95%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.access-options h3 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.access-options h3:hover {
+    cursor: pointer;
+}
+
+.access-options h3 span {
+    color: var(--btns);
+    font-weight: 800;
+}
+
+@media (width < 350px){
+    .access {
+        width: 280px;
+        height: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid var(--border);
+        margin-top: 50px;
+        padding: 15px;
+        transform: scale(0.85);
+    }
+}
