@@ -25,7 +25,7 @@ function Social() {
 
             <Header />
 
-            <Invisiblecomp /> {/** In this component i render all the counter values for notifications */}
+            <Invisiblecomp /> {/** In this component i rendered all the counter values for notifications */}
 
             <Routes>
 

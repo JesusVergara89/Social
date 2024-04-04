@@ -10,6 +10,7 @@
 
 .create-post {
     width: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,10 +114,47 @@
     border-radius: 3px;
     margin-top: 10px;
     font-size: 1rem;
+    margin-bottom: 20px;
 }
 
 .create-post-card button:hover {
     cursor: pointer;
     background-color: var(--Azul-claro);
     color: #000000;
+}
+
+@media (width < 440px){
+    .create-post-card {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        padding: 10px;
+        background-color: var(--border);
+        border-radius: 4px;
+    }
+
+    .create-post-card button {
+        width: auto;
+        height: auto;
+        padding-bottom: 0.3rem;
+        border: none;
+        background-color: var(--btns);
+        color: #000000;
+        font-weight: bold;
+        border-radius: 3px;
+        padding: 3px 7px 3px 7px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-size: 1rem;
+    }
+    
+    .create-post-card button:hover {
+        cursor: pointer;
+        background-color: var(--Azul-claro);
+        color: #000000;
+    }
 }
