@@ -15,6 +15,7 @@ import Singleuser from './components/Singleuser';
 import Allmessageswithuser from './components/messages/Allmessageswithuser';
 import Singlepost from './components/Singlepost';
 import Invisiblecomp from './components/Invisiblecomp';
+import Conections from './components/Conections';
 
 function Social() {
 
@@ -62,6 +63,11 @@ function Social() {
                     <Route path='/singlesuser/:iduser'
                         element={
                             <Singleuser />
+                        }
+                    />
+                    <Route path='/conections'
+                        element={
+                            <Conections />
                         }
                     />
                     <Route path='/messagesinbox'

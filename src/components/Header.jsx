@@ -31,7 +31,7 @@ const Header = () => {
                         <i className='bx bx-message-detail'></i>
                     </div>
                 </Link>
-                <Link >
+                <Link to={'/conections'} >
                     <div className="menu-menu">
                         <i className='bx bx-group'></i>
                         <div className={conexionNumber <= 10 ? "conection-counter" : "conection-counter-grosse"}>
