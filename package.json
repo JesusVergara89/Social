@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.2",
+    "@reduxjs/toolkit": "^2.2.3",
     "firebase": "^10.9.0",
     "font-awesome": "^4.7.0",
     "ldrs": "^1.0.1",

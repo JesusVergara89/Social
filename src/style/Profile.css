@@ -46,6 +46,7 @@
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
+    margin-bottom: 20px;
 }
 
 .profile-information-data {
@@ -103,7 +104,7 @@
     color: var(--Azul-claro);
 }
 
-.pending-request-btn{
+.pending-request-btn {
     all: unset;
     width: auto;
     height: auto;
@@ -119,10 +120,47 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.CounterNotifyRequests {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: -20px;
+    right: -25px;
+    z-index: 2;
+    background-color: var(--Azul-claro);
+}
+
+.CounterNotifyRequests h5 {
+    all: unset;
+    font-size: 0.65rem;
+    font-weight: bolder;
+}
+
+.CounterNotifyRequests h5:hover {
+    all: unset;
+    font-size: 0.65rem;
+    font-weight: bolder;
+    color: black;
+}
+
+.CounterNotifyRequests-1 {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -13px;
+    right: -11px;
+    transform: rotate(75deg);
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 15px solid var(--Azul-claro);
+}
+
 .pending-request-btn:hover {
     cursor: pointer;
-    background-color: #111;
-    color: var(--Azul-claro);
 }
 
 .pending-request-btn h3 {
@@ -135,7 +173,7 @@
 }
 
 
-@media (width < 440px){
+@media (width < 440px) {
     .profile-information {
         width: 100%;
         height: auto;
@@ -149,6 +187,7 @@
         margin-top: 50px;
         position: relative;
     }
+
     .profile-post {
         width: 100%;
         height: auto;

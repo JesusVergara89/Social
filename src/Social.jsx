@@ -14,6 +14,7 @@ import Messageinbox from './components/messages/Messageinbox';
 import Singleuser from './components/Singleuser';
 import Allmessageswithuser from './components/messages/Allmessageswithuser';
 import Singlepost from './components/Singlepost';
+import Invisiblecomp from './components/Invisiblecomp';
 
 function Social() {
 
@@ -23,6 +24,8 @@ function Social() {
         <div className='SOCIAL'>
 
             <Header />
+
+            <Invisiblecomp /> {/** In this component i render all the counter values for notifications */}
 
             <Routes>
 
