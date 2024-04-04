@@ -72,7 +72,7 @@ header .menu {
 
 .menu h5 {
     all: unset;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     text-align: center;
 }
 
@@ -103,6 +103,46 @@ header .menu {
     align-items: center;
     cursor: pointer;
     padding: 0 10px 0 10px;
+    position: relative;
+}
+
+.conection-counter {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(148, 182, 230);
+    position: absolute;
+    top: -15px;
+    right: -5px;
+}
+
+.conection-counter-grosse {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(148, 182, 230);
+    position: absolute;
+    top: -15px;
+    right: -5px;
+}
+
+.conection-counter-grosse h6 {
+    all: unset;
+    font-size: 0.45rem;
+    font-weight: bold;
+
+}
+
+.conection-counter h6 {
+    all: unset;
+    font-size: 0.55rem;
+    font-weight: bold;
 }
 
 .menu-profile {

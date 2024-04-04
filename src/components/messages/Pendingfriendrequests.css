@@ -76,6 +76,25 @@
     margin-bottom: 10px;
     font-size: 1rem;
     font-weight: bold;
+    text-align: center;
+}
+
+.send-req {
+    width: auto;
+    height: auto;
+    padding: 3px 6px 3px 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background-color: var(--Rosa-suave);
+}
+
+.received-req {
+    width: auto;
+    height: auto;
+    padding: 3px 6px 3px 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background-color: var(--Azul-claro);
 }
 
 .btn-friendsrequest {

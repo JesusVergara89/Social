@@ -4,15 +4,19 @@ import { useDispatch } from 'react-redux';
 import { auth, db } from '../firebaseConfig';
 import { setRequestValue } from '../store/slices/request.slice';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { setpostValue } from '../store/slices/post.slice';
 
 const Invisiblecomp = () => {
+    
     const dispatch = useDispatch();
-    const [allusers, setAllusers] = useState([]);
     const [pending, setPending] = useState([]);
     const [myPending, setMyPending] = useState([]);
+    const [friends, setFriends] = useState([]);
+    const [matchFriends, setMatchFriends] = useState([]);
     const [user] = useAuthState(auth);
 
     const setSpecific = (value) => dispatch(setRequestValue(value));
+    const setFriendValue = (value) => dispatch(setpostValue(value));
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'Request'), (snapshot) => {
@@ -23,19 +27,19 @@ const Invisiblecomp = () => {
             setPending(requests);
         });
 
-        const userRef = collection(db, 'Users');
-        const q = query(userRef, orderBy('userName'));
-        const unsubscribeUsers = onSnapshot(q, (snapshot) => {
-            const userx = snapshot.docs.map((doc) => ({
+        const matchreqRef = collection(db, 'Request');
+        const q1 = query(matchreqRef, orderBy('friendRequests'));
+        const unsubscribeMatchReq = onSnapshot(q1, (snapshot) => {
+            const request = snapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data()
             }));
-            setAllusers(userx);
+            setFriends(request);
         });
 
         return () => {
             unsubscribe();
-            unsubscribeUsers();
+            unsubscribeMatchReq();
         };
     }, []);
 
@@ -44,9 +48,19 @@ const Invisiblecomp = () => {
             const userPending = pending.filter(pen =>
                 pen.friendRequests.some(data => data.id1 === user.uid || data.id2 === user.uid)
             );
+            const matchFriends = friends.filter(data => {
+                if ((data.friendRequests[0]?.id1 === user.uid || data.friendRequests[1]?.id2 === user.uid) &&
+                    (data.friendRequests[0]?.status === true && data.friendRequests[1]?.status === true)) {
+                    return data;
+                } else {
+                    return null;
+                }
+            });
+            setMatchFriends(matchFriends);
             setMyPending(userPending.length > 0 ? userPending : []);
         }
-    }, [pending, user]);
+        
+    }, [pending, user, friends]);
 
     useEffect(() => {
         const friendshipStatus = myPending.map(pendingItem => ({
@@ -57,8 +71,10 @@ const Invisiblecomp = () => {
 
         const acceptedRequests = friendshipStatus.filter(data => data.status1 === null && data.status2 === true);
         setSpecific(acceptedRequests.length);
-    }, [myPending]);
-
+        setFriendValue(matchFriends.length);
+    }, [myPending, matchFriends]);
+    
+    //console.log(friends);
     return (
         <div style={{ position: 'absolute', top: '-550px' }}>Invisiblecomp</div>
     );

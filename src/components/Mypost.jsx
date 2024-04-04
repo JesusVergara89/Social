@@ -28,7 +28,7 @@ const Mypost = () => {
             return data
         }
     })
-    //console.log(allmypost)
+    //console.log(myPost.length)
     return (
         <div className="Mypost">
             {myPost &&

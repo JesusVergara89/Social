@@ -5,12 +5,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import nullphoto from '../images/nullprofile.svg'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
 
     const [currentlyLoggedinUser] = useAuthState(auth);
     const navigate = useNavigate()
-  
+    const conexionNumber = useSelector(state => state.postnumber)
+
+    //console.log(conexionNumber)
+
     return (
         <header>
             <div onClick={() => navigate('/')} className="logo">
@@ -20,13 +24,19 @@ const Header = () => {
                 <Link to={'/allusers'}>
                     <div className="menu-alluser">
                         <i className='bx bxs-grid'></i>
-                        <h5>All users</h5>
                     </div>
                 </Link>
                 <Link to={'/messagesinbox'}>
                     <div className="menu-menu">
                         <i className='bx bx-message-detail'></i>
-                        <h5>Messages</h5>
+                    </div>
+                </Link>
+                <Link >
+                    <div className="menu-menu">
+                        <i className='bx bx-group'></i>
+                        <div className={conexionNumber <= 10 ? "conection-counter" : "conection-counter-grosse"}>
+                           <h6>{conexionNumber}</h6>
+                        </div>
                     </div>
                 </Link>
                 <Link to={'/profile'}>

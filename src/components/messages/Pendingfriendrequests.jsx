@@ -102,8 +102,9 @@ const Pendingfriendrequests = () => {
                             {allusers.filter(data => data.idUser === request.id1 || data.idUser === request.id2)
                                 .map((whoRequest, index) => (
                                     <div key={index}>
-                                        {(request.id1 === whoRequest.idUser || request.id2 === whoRequest.idUser) && whoRequest.idUser !== user.uid ? (
+                                        {(request.id2 === whoRequest.idUser || request.id1 === whoRequest.idUser) && whoRequest.idUser !== user.uid ? (
                                             <div className="option-request">
+                                                {request.id2 === user.uid ? <h4 className='send-req'>Enviada</h4> : <h4 className='received-req'>Recibida</h4>}
                                                 <h5>{`@${whoRequest.userName}`}</h5>
                                                 <img src={whoRequest.photo} alt="" />
                                                 <h5>{whoRequest.name}</h5>
@@ -112,12 +113,13 @@ const Pendingfriendrequests = () => {
                                             ''
                                         )}
                                     </div>
-                                ))
+                                ))}
+                            {request.id2 === user.uid ? '' :
+                                <div key={i + 1.1} className="btn-friendsrequest">
+                                    <button className='btn-friendsrequest-accept' onClick={() => handleAccept('x', request.id)}>Aceptar</button>
+                                    <button className='btn-friendsrequest-decline' onClick={() => handleAccept('y', request.id)}>Rechazar</button>
+                                </div>
                             }
-                            <div className="btn-friendsrequest">
-                                <button className='btn-friendsrequest-accept' onClick={() => handleAccept('x', request.id)}>Aceptar</button>
-                                <button className='btn-friendsrequest-decline' onClick={() => handleAccept('y', request.id)}>Rechazar</button>
-                            </div>
                         </div>
                     ))}
 
