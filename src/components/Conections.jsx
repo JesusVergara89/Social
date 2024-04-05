@@ -3,12 +3,13 @@ import '../style/Conections.css';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { auth, db } from '../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import Contactutility from './messages/Contactutility';
 
 const Conections = () => {
     const [allrequest, setAllrequest] = useState([]);
-    const [myConections, setMyConections] = useState([]);
     const [usersall, setUsersall] = useState([]);
     const [userlog] = useAuthState(auth);
+    const [thiIsTheCurrentUser] = useAuthState(auth)
 
     useEffect(() => {
         const reqRef = collection(db, 'Users');
@@ -39,38 +40,63 @@ const Conections = () => {
         }
     })
 
-    const example = myRequests.map(data => data.friendRequests)
+    const onlyFriendRequests = myRequests.map(data => data.friendRequests)
 
-    //example[0][0].id1
-    //example[0][1].id2
-    //example[1][0].id1
-    //example[1][1].id2
+    //onlyFriendRequests[0][0].id1
+    //onlyFriendRequests[0][1].id2
+    //onlyFriendRequests[1][0].id1
+    //onlyFriendRequests[1][1].id2
 
     const obtenerIds = (array) => {
         const ids = [];
         for (let i = 0; i < array.length; i++) {
-          for (let j = 0; j < array[i].length; j++) {
-            ids.push(array[i][j]['id' + (j + 1)]);
-          }
+            for (let j = 0; j < array[i].length; j++) {
+                ids.push(array[i][j]['id' + (j + 1)]);
+            }
         }
         return ids;
-      }
-      
-      // Llamada a la función con tu array
-      const ids = obtenerIds(example);
-      const dataarray = ids.filter(data => {
-        if(data !== userlog.uid){
+    }
+
+    const ids = obtenerIds(onlyFriendRequests);
+    const idsMatchFriends = ids.filter(data => {
+        if (data !== userlog.uid) {
             return data
         }
-      })
-      console.log(dataarray);
-      
+    })
+
+    const findFriends = usersall.filter((data) => {
+        for (let i = 0; i < idsMatchFriends.length; i++) {
+            if (data.idUser === idsMatchFriends[i]) {
+                return true;
+            }
+        }
+        return false;
+    });
+    //console.log(findFriends);
 
     //console.log(example)
-     
+
     return (
         <div className="connections">
-            hello
+            {findFriends &&
+                (
+                    findFriends.map((user, i) => (
+                        <div key={i} className="all-users-mapeo">
+                            <div className='all-users-profile-information'>
+                                <div className="all-users-profile-information-image">
+                                    <img src={user.photo} alt="" className="all-users-profile-image" />
+                                </div>
+                                <div className="all-users-profile-information-data">
+                                    <h2 className="all-users-userid">{`@${user.userName}`}</h2>
+                                    <h3 className="all-users-name">{user.name}</h3>
+                                    <p className="all-users-bio">{user.bio}</p>
+                                </div>
+                            </div>
+                            <Contactutility idCurrentUser={thiIsTheCurrentUser?.uid} idUSER={user.idUser} />
+                        </div>
+                    ))
+                )
+            }
         </div>
     );
 };

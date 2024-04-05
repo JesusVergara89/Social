@@ -79,7 +79,7 @@ const Messageinbox = () => {
 
     const allowSendMessages = () => setGoMessages(!goMessages)
 
-    console.log(x1, x2)
+    //console.log(x1, x2)
 
     return (
         <div className='Messageinbox'>
