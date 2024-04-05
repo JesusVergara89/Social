@@ -37,8 +37,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
             return data
         }
     })
-
-    //console.log(thisChat)
+    //console.log(thisChat[0].message[3].sender === user.uid)
 
     return (
         <div className="display-chat">
@@ -49,7 +48,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                             <div key={j} className="container-msg">
                                 <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>
                                 <div className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"}>
-                                    <h6>{msg.sender === user.uid ? `@${msg.userNameS}`  : `@${msg.userNameR}` }</h6>
+                                    <h6>{`@${msg.userNameS}`}</h6>
                                     <h6>-</h6>
                                     <h6 key={j + 1}>
                                         {`${msg.createdAt.toDate().getHours()}:${msg.createdAt.toDate().getMinutes()}:${msg.createdAt.toDate().getSeconds()}`}
