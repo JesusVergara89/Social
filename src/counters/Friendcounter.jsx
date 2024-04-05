@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { auth, db } from '../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './Friendcounter.css'
+import { useNavigate } from 'react-router-dom';
 
 const Friendcounter = () => {
 
     const [friends, setFriends] = useState()
     const [user] = useAuthState(auth)
+    const navigate = useNavigate()
     {/*const [matchFriends, setmatchFriends] = useState(second)*/ }
 
     useEffect(() => {
@@ -38,12 +40,12 @@ const Friendcounter = () => {
     //console.log(matchFriends)
 
     return (
-        <div className='Friendcounter'>
+        <div onClick={()=>{navigate('/conections')}} className='Friendcounter'>
             <div className="Friendcounter-number">
                 <h4><span>{matchFriends.length}</span></h4>
             </div>
             <div className="Friendcounter-connections">
-                <h4>Conexiones</h4>
+                <h4>{matchFriends.length > 1 ? `conexiones` : `conexión` }</h4>
             </div>
         </div>
     )

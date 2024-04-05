@@ -5,11 +5,15 @@ import { auth, db } from '../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Renderpost from './Renderpost';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setPostNumberValue } from '../store/slices/postnumber.slice';
 
 const Mypost = () => {
 
     const [allmypost, setAllmypost] = useState([])
     const [onlineUser] = useAuthState(auth)
+    const dispatch = useDispatch();
+    const setFriendValue = (value) => dispatch(setPostNumberValue(value));
 
     useEffect(() => {
         const usersCollectionRef = collection(db, 'Post');
@@ -28,6 +32,9 @@ const Mypost = () => {
             return data
         }
     })
+    useEffect(()=>{
+        setFriendValue(myPost.length)
+    },[myPost])
     //console.log(myPost.length)
     return (
         <div className="Mypost">

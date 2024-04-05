@@ -76,6 +76,17 @@ const Conections = () => {
 
     //console.log(example)
 
+    const counterConnectios = (array, id) => {
+        let aux = []
+        aux = array.filter((data) => {
+            if ((data.friendRequests[0].id1 === id || data.friendRequests[1].id2 === id)
+                && (data.friendRequests[0].status === true && data.friendRequests[1].status)) {
+                return data.friendRequests
+            }
+        })
+        return aux.length
+    }
+
     return (
         <div className="connections">
             {findFriends &&
@@ -90,6 +101,11 @@ const Conections = () => {
                                     <h2 className="all-users-userid">{`@${user.userName}`}</h2>
                                     <h3 className="all-users-name">{user.name}</h3>
                                     <p className="all-users-bio">{user.bio}</p>
+                                </div>
+                                <div className="all-user-connections">
+                                    {
+                                        counterConnectios(allrequest, user.idUser)
+                                    }
                                 </div>
                             </div>
                             <Contactutility idCurrentUser={thiIsTheCurrentUser?.uid} idUSER={user.idUser} />

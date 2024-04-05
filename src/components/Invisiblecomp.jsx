@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { auth, db } from '../firebaseConfig';
 import { setRequestValue } from '../store/slices/request.slice';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { setpostValue } from '../store/slices/post.slice';
+import { setConectionValue } from '../store/slices/conections.slice';
 
 const Invisiblecomp = () => {
     
@@ -16,7 +16,7 @@ const Invisiblecomp = () => {
     const [user] = useAuthState(auth);
 
     const setSpecific = (value) => dispatch(setRequestValue(value));
-    const setFriendValue = (value) => dispatch(setpostValue(value));
+    const setFriendValue = (value) => dispatch(setConectionValue(value));
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'Request'), (snapshot) => {

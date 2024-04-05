@@ -15,6 +15,17 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    cursor: pointer;
+}
+
+.displaycounters span {
+    font-weight: bold;
+}
+
+.displaycounters h4 {
+    all: unset;
+    font-size: 0.8rem;
+    text-align: center;
 }
 
 @media (width < 440px) {

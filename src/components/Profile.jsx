@@ -9,7 +9,7 @@ import Mypost from './Mypost';
 import Displaycounters from '../counters/Displaycounters';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRequestValue } from '../store/slices/request.slice';
-import { setpostValue } from '../store/slices/post.slice';
+import { setConectionValue } from '../store/slices/conections.slice';
 ///import { toast } from 'react-toastify';
 
 const Profile = ({ newuser, setNewuser }) => {
@@ -21,7 +21,7 @@ const Profile = ({ newuser, setNewuser }) => {
     const [numberOf, setNumberOf] = useState(0);
     const dispatch = useDispatch();
     const CounterNotifyRequests = useSelector(state => state.request);
-    const setFriendValue = (value) => dispatch(setpostValue(value));
+    const setFriendValue = (value) => dispatch(setConectionValue(value));
 
     const navigate = useNavigate()
 

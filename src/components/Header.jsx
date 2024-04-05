@@ -11,7 +11,7 @@ const Header = () => {
 
     const [currentlyLoggedinUser] = useAuthState(auth);
     const navigate = useNavigate()
-    const conexionNumber = useSelector(state => state.postnumber)
+    const conexionNumber = useSelector(state => state.conectionNumber)
 
     //console.log(conexionNumber)
 
