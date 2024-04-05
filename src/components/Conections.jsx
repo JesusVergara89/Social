@@ -18,7 +18,7 @@ const Conections = () => {
                 id: doc.id,
                 ...doc.data()
             }));
-            setAllrequest(reqData);
+            setUsersall(reqData);
         });
 
         const userRef = collection(db, 'Request');
@@ -28,11 +28,46 @@ const Conections = () => {
                 id: doc.id,
                 ...doc.data()
             }));
-            setUsersall(userData);
+            setAllrequest(userData);
         });
     }, []);
 
+    const myRequests = allrequest.filter((data, i) => {
+        if ((data.friendRequests[0].id1 === userlog.uid || data.friendRequests[1].id2 === userlog.uid)
+            && (data.friendRequests[0].status === true && data.friendRequests[1].status)) {
+            return data.friendRequests
+        }
+    })
 
+    const example = myRequests.map(data => data.friendRequests)
+
+    //example[0][0].id1
+    //example[0][1].id2
+    //example[1][0].id1
+    //example[1][1].id2
+
+    const obtenerIds = (array) => {
+        const ids = [];
+        for (let i = 0; i < array.length; i++) {
+          for (let j = 0; j < array[i].length; j++) {
+            ids.push(array[i][j]['id' + (j + 1)]);
+          }
+        }
+        return ids;
+      }
+      
+      // Llamada a la función con tu array
+      const ids = obtenerIds(example);
+      const dataarray = ids.filter(data => {
+        if(data !== userlog.uid){
+            return data
+        }
+      })
+      console.log(dataarray);
+      
+
+    //console.log(example)
+     
     return (
         <div className="connections">
             hello

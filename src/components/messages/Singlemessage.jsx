@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Singlemessage.css';
-import { addDoc, collection, getDocs, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { addDoc, collection, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import { toast } from 'react-toastify';
 import Displaychat from './Chat/Displaychat';
@@ -13,6 +13,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     const [Allusers, setAllusers] = useState([])
     const [reloadMsg, setReloadMsg] = useState(false)
     const [textareaHeight, setTextareaHeight] = useState('30px');
+    const [userChangePosition, setUserChangePosition] = useState(null)
 
     const navigateToAllmsg = useNavigate()
 
@@ -63,6 +64,19 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     }
     )
 
+    const changePosition = (array, uid) => {
+        const index = array.findIndex(objeto => objeto.idUser === uid);
+        const objeto = array.splice(index, 1)[0];
+        array.unshift(objeto);
+
+        return array;
+    }
+
+    useEffect(()=>{
+        setUserChangePosition(changePosition(myMessages, idreceiper))
+        console.log()
+    },[newMessage])
+
     const functionReload = () => setReloadMsg(!reloadMsg)
 
     const handleSubmit = async (e) => {
@@ -76,10 +90,10 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                     createdAt: new Date(),
                     receptor: idreceiper,
                     sender: ideSender,
-                    userNameR: myMessages[0].userName,
-                    userNameS: myMessages[1].userName,
-                    photoR: myMessages[0].photo,
-                    photoS: myMessages[1].photo
+                    userNameR: userChangePosition[0].userName,
+                    userNameS: userChangePosition[1].userName,
+                    photoR: userChangePosition[0].photo,
+                    photoS: userChangePosition[1].photo
                 });
                 const messageId = arrayMessagesToUpdate[0].id;
                 const messageRef = doc(db, 'Messages', messageId);
@@ -92,10 +106,10 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                             createdAt: new Date(),
                             receptor: idreceiper,
                             sender: ideSender,
-                            userNameR: myMessages[0].userName,
-                            userNameS: myMessages[1].userName,
-                            photoR: myMessages[0].photo,
-                            photoS: myMessages[1].photo
+                            userNameR: userChangePosition[0].userName,
+                            userNameS: userChangePosition[1].userName,
+                            photoR: userChangePosition[0].photo,
+                            photoS: userChangePosition[1].photo
                         }
                     ]
                 };
@@ -108,14 +122,13 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
             console.log(error);
             toast('Error request', { type: 'error' });
         }
-    };
+    }
 
+    //console.log(userChangePosition)
 
     if (myMessages.length === 0) {
         return null;
     }
-
-    //console.log(myMessages)
 
     return (
         <div className='single-card-msg'>

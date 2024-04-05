@@ -19,7 +19,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
             }))
             setAllmsg(msgs)
         })
-    }, [reloadMsg, newMessage]);
+    }, [reloadMsg]);
 
     const userMsgs = allmsg?.filter(data => {
         if (Array.isArray(data.message) && data.message.length > 0) {
@@ -38,7 +38,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
         }
     })
 
-    ///console.log(allmsg)
+    //console.log(thisChat)
 
     return (
         <div className="display-chat">
@@ -49,7 +49,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                             <div key={j} className="container-msg">
                                 <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>
                                 <div className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"}>
-                                    <h6>{msg.sender === user.uid ? `@${msg.userNameR}` : `@${msg.userNameS}`}</h6>
+                                    <h6>{msg.sender === user.uid ? `@${msg.userNameS}`  : `@${msg.userNameR}` }</h6>
                                     <h6>-</h6>
                                     <h6 key={j + 1}>
                                         {`${msg.createdAt.toDate().getHours()}:${msg.createdAt.toDate().getMinutes()}:${msg.createdAt.toDate().getSeconds()}`}
