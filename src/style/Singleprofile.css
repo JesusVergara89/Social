@@ -8,29 +8,25 @@
     --btns: #0095f6;
 }
 
-.connections {
+.Singleprofile {
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     margin-top: 150px;
-    gap: 20px;
 }
 
-
-.all-users-mapeo {
+.Singleprofile-container {
     width: auto;
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 
-.all-users-profile-information-connection {
+.Singleprofile-information {
     width: 400px;
     height: auto;
     display: flex;
@@ -39,10 +35,9 @@
     border: 1px solid var(--border);
     margin-top: 50px;
     position: relative;
-    padding-bottom: 40px;
 }
 
-.all-users-profile-information-image {
+.Singleprofile-information-image {
     width: 40%;
     height: 100%;
     display: flex;
@@ -52,14 +47,14 @@
     padding-bottom: 15px;
 }
 
-.all-users-profile-image {
+.Singleprofile-image {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.all-users-profile-information-data {
+.Singleprofile-information-data {
     width: 60%;
     height: 100%;
     display: flex;
@@ -70,7 +65,7 @@
     padding-bottom: 15px;
 }
 
-.all-users-userid {
+.Singleprofile-userid {
     all: unset;
     font-size: 1rem;
     font-weight: bold;
@@ -78,84 +73,71 @@
     text-align: center;
 }
 
-.all-users-name {
+.Singleprofile-name {
     all: unset;
     font-size: 0.8rem;
     font-weight: 600;
     margin-bottom: 15px;
 }
 
-.all-users-bio {
+.Singleprofile-bio {
     all: unset;
     text-align: left;
     font-size: 0.75rem;
     padding-right: 10px;
 }
 
-.all-user-connections {
-    width: 100%;
-    height: 30px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    background-color: var(--Azul-claro);
-    padding-top: 5px;
-    padding-bottom: 10px;
-}
-
-.all-user-connections-counters {
+.single-profile-counters {
     width: 100%;
     height: auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 5px;
+    padding-bottom: 8px;
+    border-bottom: 0.01rem solid var(--Gris-perla);
+    border-left: 0.01rem solid var(--Gris-perla);
+    border-right: 0.01rem solid var(--Gris-perla);
 }
 
-.all-users-other-profile {
-    all: unset;
-    width: 100px;
-    height: 20px;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #ffffff;
-    padding: 2px 6px 3px 6px;
-    background-color: var(--btns);
-    position: absolute;
-    top: 0;
-    left: 0;
+.Singleprofile-posts {
+    width: 80%;
+    height: auto;
+    margin-top: 20px;
 }
 
-.all-user-connections-counters h6 {
-    all: unset;
-    font-size: 0.8rem;
-}
-
-.all-user-connections-counters span {
-    all: unset;
-    font-weight: bold;
-}
-
-@media (width < 440px) {
-    .all-users-mapeo {
+@media (width < 515px) {
+    .Singleprofile-container {
         width: 100%;
         height: auto;
         display: flex;
         flex-direction: column;
-        padding: 0px 0px 0px 0px;
         justify-content: center;
         align-items: center;
     }
-    .all-users-profile-information-connection {
+
+    .Singleprofile-information {
         width: 100%;
         height: auto;
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid var(--border);
         margin-top: 50px;
         position: relative;
     }
+
+    .Singleprofile-information-image {
+        width: 40%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .Singleprofile-posts {
+        width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+
 }

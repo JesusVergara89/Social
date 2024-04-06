@@ -10,7 +10,6 @@ import Displaycounters from '../counters/Displaycounters';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRequestValue } from '../store/slices/request.slice';
 import { setConectionValue } from '../store/slices/conections.slice';
-///import { toast } from 'react-toastify';
 
 const Profile = ({ newuser, setNewuser }) => {
 
@@ -49,7 +48,6 @@ const Profile = ({ newuser, setNewuser }) => {
         if (!executedOnce) {
             const timer = setTimeout(() => {
                 addUserToDatabase();
-                console.log('La función se ejecutó.');
                 setExecutedOnce(true);
             }, 1000);
 

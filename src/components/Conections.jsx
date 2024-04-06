@@ -1,99 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import '../style/Conections.css';
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { auth, db } from '../firebaseConfig';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import useConnections from '../hooks/useConnections';
 import Contactutility from './messages/Contactutility';
+import { Link } from 'react-router-dom';
+import '../style/Conections.css'
 
 const Conections = () => {
-    const [allrequest, setAllrequest] = useState([]);
-    const [usersall, setUsersall] = useState([]);
-    const [userlog] = useAuthState(auth);
-    const [thiIsTheCurrentUser] = useAuthState(auth)
 
-    useEffect(() => {
-        const reqRef = collection(db, 'Users');
-        const q = query(reqRef, orderBy('userName'));
-        onSnapshot(q, (snapshot) => {
-            const reqData = snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-            setUsersall(reqData);
-        });
-
-        const userRef = collection(db, 'Request');
-        const q1 = query(userRef, orderBy('friendRequests'));
-        onSnapshot(q1, (snapshot) => {
-            const userData = snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-            setAllrequest(userData);
-        });
-    }, []);
-
-    const myRequests = allrequest.filter((data, i) => {
-        if ((data.friendRequests[0].id1 === userlog.uid || data.friendRequests[1].id2 === userlog.uid)
-            && (data.friendRequests[0].status === true && data.friendRequests[1].status)) {
-            return data.friendRequests
-        }
-    })
-
-    const onlyFriendRequests = myRequests.map(data => data.friendRequests)
-
-    //onlyFriendRequests[0][0].id1
-    //onlyFriendRequests[0][1].id2
-    //onlyFriendRequests[1][0].id1
-    //onlyFriendRequests[1][1].id2
-
-    const obtenerIds = (array) => {
-        const ids = [];
-        for (let i = 0; i < array.length; i++) {
-            for (let j = 0; j < array[i].length; j++) {
-                ids.push(array[i][j]['id' + (j + 1)]);
-            }
-        }
-        return ids;
-    }
-
-    const ids = obtenerIds(onlyFriendRequests);
-    const idsMatchFriends = ids.filter(data => {
-        if (data !== userlog.uid) {
-            return data
-        }
-    })
-
-    const findFriends = usersall.filter((data) => {
-        for (let i = 0; i < idsMatchFriends.length; i++) {
-            if (data.idUser === idsMatchFriends[i]) {
-                return true;
-            }
-        }
-        return false;
-    });
-    //console.log(findFriends);
-
-    //console.log(example)
-
-    const counterConnectios = (array, id) => {
-        let aux = []
-        aux = array.filter((data) => {
-            if ((data.friendRequests[0].id1 === id || data.friendRequests[1].id2 === id)
-                && (data.friendRequests[0].status === true && data.friendRequests[1].status)) {
-                return data.friendRequests
-            }
-        })
-        return aux.length
-    }
-
+    const { counterPost, counterConnectios, findFriends, userlog, allpost, allrequest,usersall } = useConnections()
+    
     return (
         <div className="connections">
             {findFriends &&
                 (
                     findFriends.map((user, i) => (
                         <div key={i} className="all-users-mapeo">
-                            <div className='all-users-profile-information'>
+                            <div className='all-users-profile-information-connection'>
                                 <div className="all-users-profile-information-image">
                                     <img src={user.photo} alt="" className="all-users-profile-image" />
                                 </div>
@@ -102,13 +22,21 @@ const Conections = () => {
                                     <h3 className="all-users-name">{user.name}</h3>
                                     <p className="all-users-bio">{user.bio}</p>
                                 </div>
-                                <div className="all-user-connections">
-                                    {
-                                        counterConnectios(allrequest, user.idUser)
-                                    }
+                                <div className='all-user-connections'>
+                                    <div className="all-user-connections-counters">
+                                        <h6><span>{counterConnectios(allrequest, user.idUser)}</span></h6>
+                                        <h6>{counterConnectios(allrequest, user.idUser) > 1 ? `Conexiones` : `Conexión`}</h6>
+                                    </div>
+                                    <div className="all-user-connections-counters">
+                                        <h6><span>{counterPost(allpost, user.idUser)}</span></h6>
+                                        <h6>{counterPost(allpost, user.idUser) > 1 ? `Publicaciones` : `Publicación`}</h6>
+                                    </div>
                                 </div>
+                                <Link className='all-users-other-profile' to={`/singleprofile/${user.id}/${counterConnectios(allrequest, user.idUser)}/${counterPost(allpost, user.idUser)}`} >
+                                    Ver perfil
+                                </Link>
                             </div>
-                            <Contactutility idCurrentUser={thiIsTheCurrentUser?.uid} idUSER={user.idUser} />
+                            <Contactutility idCurrentUser={userlog?.uid} idUSER={user.idUser} />
                         </div>
                     ))
                 )

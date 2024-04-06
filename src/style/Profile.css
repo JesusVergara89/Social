@@ -173,7 +173,7 @@
 }
 
 
-@media (width < 440px) {
+@media (width < 515px) {
     .profile-information {
         width: 100%;
         height: auto;

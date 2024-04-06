@@ -125,6 +125,16 @@
         overflow: hidden;
     }
 
+    .post-card-userinfo-1 {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-left: 7px;
+    }
+
     .post-card-userinfo h6 {
         all: unset;
         font-size: 0.75rem;
