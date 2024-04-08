@@ -41,6 +41,10 @@ const Post = () => {
         })
     }, [post]);
 
+    const toProfile = () => {
+        console.log('')
+    }
+
     //console.log(post[0].id)
 
     return (
@@ -52,7 +56,7 @@ const Post = () => {
                         <Link key={i / 2.5} to={`/singlepost/${p.id}`}>
                             <img className='post-card-mainimg' src={p.image} alt="" />
                         </Link>
-                        <Deletebtn image={p.image} deleteId={p.id} postId={p.idOnlineUser} />
+                        <Deletebtn image={p.image} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                         <div className="post-card-userinfo">
                             <div className="post-card-userinfo-1">
                                 <img src={p.userPhoto} alt="" />

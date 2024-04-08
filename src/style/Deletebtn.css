@@ -27,9 +27,11 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--Blanco-hueso);
 }
 
 .delete-btn .bx {
     font-size: 25px;
-    color: var(--btns);
+    color: rgb(253, 81, 81);
 }

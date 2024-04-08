@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { collection, doc, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 import Displaycomments from './Displaycomments'
 import Comment from './Comment'
 import '../style/Post.css'
+import Deletebtn from './Deletebtn'
 
 const Singlepost = () => {
 
@@ -13,6 +14,8 @@ const Singlepost = () => {
     const [postAll, setPostAll] = useState()
     const [infousers, setInfousers] = useState([]);
     const [returncomments, setReturncomments] = useState(false)
+    const [toProfileAfterDeleted, setToProfileAfterDeleted] = useState(false)
+    const navigate = useNavigate()
 
     const reload = () => setReturncomments(!returncomments)
 
@@ -50,6 +53,11 @@ const Singlepost = () => {
         return '';
     }
 
+    const toProfile = () => {
+        setToProfileAfterDeleted(!toProfileAfterDeleted)
+        navigate('/profile')
+    }
+
     //console.log(singlepost)
 
     return (
@@ -58,6 +66,12 @@ const Singlepost = () => {
                 <Link>
                     <img className='post-card-mainimg' src={singlepost.image} alt="" />
                 </Link>
+                <Deletebtn
+                image={singlepost.image}
+                deleteId={singlepost.id}
+                postId={singlepost.idOnlineUser}
+                toProfile={toProfile}
+                />
                 <div className="post-card-userinfo">
                     <div className="post-card-userinfo-1">
                         <img src={singlepost.userPhoto} alt="" />
