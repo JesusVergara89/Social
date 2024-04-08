@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import '../style/Header.css'
 import social from '../images/Social.svg'
 import { Link, useNavigate } from 'react-router-dom'

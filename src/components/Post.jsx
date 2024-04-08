@@ -5,6 +5,7 @@ import { db } from '../firebaseConfig';
 import Comment from './Comment';
 import Displaycomments from './Displaycomments';
 import { Link, useNavigate } from 'react-router-dom';
+import Deletebtn from './Deletebtn';
 
 const Post = () => {
 
@@ -40,7 +41,7 @@ const Post = () => {
         })
     }, [post]);
 
-    //console.log(post)
+    //console.log(post[0].id)
 
     return (
         <article className="post">
@@ -51,6 +52,7 @@ const Post = () => {
                         <Link key={i / 2.5} to={`/singlepost/${p.id}`}>
                             <img className='post-card-mainimg' src={p.image} alt="" />
                         </Link>
+                        <Deletebtn image={p.image} deleteId={p.id} postId={p.idOnlineUser} />
                         <div className="post-card-userinfo">
                             <div className="post-card-userinfo-1">
                                 <img src={p.userPhoto} alt="" />
