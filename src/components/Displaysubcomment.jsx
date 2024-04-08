@@ -1,6 +1,7 @@
 import '../style/Displaysubcomment.css';
+import DeleteSubcomments from './DeleteSubcomments';
 
-const Displaysubcomment = ({ comment, users }) => {
+const Displaysubcomment = ({ comment, users, index, post }) => {
 
     const subcomments = Object.keys(comment.others).map(key => comment.others[key]);
 
@@ -38,6 +39,7 @@ const Displaysubcomment = ({ comment, users }) => {
             {subcommentsFormatted && subcommentsFormatted.map((sub, i) => (
                 sub.content && sub.createdAt && (
                     <div className='display-subcomment-container' key={i}>
+                        <DeleteSubcomments post={post} sub={sub} subcommentsFormatted={subcommentsFormatted}  indexSub={i} />
                         <h4 className='subcomment-comment'>{sub.content}</h4>
                         <h4 className='subcomment-date'>{sub.createdAt}</h4>
                         <h4 className='subcomment-date'>{`@${sub.userName}`}</h4>
