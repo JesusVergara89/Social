@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../firebaseConfig'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 
-const DeleteSubcomments = ({ post, sub, subcommentsFormatted, indexSub }) => {
+const DeleteSubcomments = ({ post, subcommentsFormatted, indexSub }) => {
 
     const [currentoLogUser] = useAuthState(auth)
 

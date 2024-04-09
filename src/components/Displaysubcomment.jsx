@@ -39,7 +39,7 @@ const Displaysubcomment = ({ comment, users, index, post }) => {
             {subcommentsFormatted && subcommentsFormatted.map((sub, i) => (
                 sub.content && sub.createdAt && (
                     <div className='display-subcomment-container' key={i}>
-                        <DeleteSubcomments post={post} sub={sub} subcommentsFormatted={subcommentsFormatted}  indexSub={i} />
+                        <DeleteSubcomments post={post} subcommentsFormatted={subcommentsFormatted}  indexSub={i} />
                         <h4 className='subcomment-comment'>{sub.content}</h4>
                         <h4 className='subcomment-date'>{sub.createdAt}</h4>
                         <h4 className='subcomment-date'>{`@${sub.userName}`}</h4>

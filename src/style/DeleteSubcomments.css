@@ -7,3 +7,31 @@
     --Rosa-suave: #FFB6C1;
     --btns: #0095f6;
 }
+
+.delete-btn-2 {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -12px;
+    right: 5px;
+}
+
+.delete-btn-2 button{
+    all: unset;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--Blanco-hueso);
+    cursor: pointer;
+}
+
+.delete-btn-2 .bx{
+    font-size: 17px;
+    color: rgb(253, 81, 81);
+}

@@ -21,6 +21,7 @@
     margin-bottom: 15px;
     border-radius: 5px;
     padding-bottom: 20px;
+    gap: 20px;
 }
 
 .display-subcomment-container {
@@ -31,12 +32,13 @@
     justify-content: center;
     align-items: flex-end;
     padding-right: 15px;
+    position: relative;
+    margin-top: 15px;
 }
 
 .subcomment-comment {
     all: unset;
-    font-size: 0.8rem;
-    font-weight: bold;
+    font-size: 0.75rem;
     margin-top: 10px;
     margin-bottom: 5px;
     border-bottom: 0.01rem solid #111;
@@ -47,4 +49,22 @@
     font-size: 0.6rem;
     margin-bottom: 5px; 
     color: rgb(108, 108, 108);
+}
+
+@media (width < 440px){
+    .display-subcomment {
+        width: 95%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        border: 0.01rem solid #111;
+        padding-left: 5px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        padding-bottom: 20px;
+        margin-left: 2px;
+    }
 }
