@@ -76,7 +76,8 @@
     justify-content: flex-start;
     align-items: center;
     padding: 5px;
-    margin-top: 8px;
+    margin-top: 15px;
+    position: relative;
 }
 
 .post-card-userinfo-1 {

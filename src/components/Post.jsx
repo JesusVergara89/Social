@@ -7,6 +7,7 @@ import Displaycomments from './Displaycomments';
 import { Link, useNavigate } from 'react-router-dom';
 import Deletebtn from './Deletebtn';
 import Countercomments from '../counters/Countercomments';
+import Likepost from './Likescomponents/Likepost';
 
 const Post = () => {
 
@@ -46,7 +47,7 @@ const Post = () => {
         console.log('')
     }
 
-    //console.log(post[0].id)
+    ///console.log(post[0].id)
 
     return (
         <article className="post">
@@ -59,6 +60,7 @@ const Post = () => {
                         </Link>
                         <Deletebtn image={p.image} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                         <div className="post-card-userinfo">
+                        <Likepost postId={p.id}  likes={p.likes}/>
                             <div className="post-card-userinfo-1">
                                 <img src={p.userPhoto} alt="" />
                                 <h6>{`${p.userName}`}</h6>
