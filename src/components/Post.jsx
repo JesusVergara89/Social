@@ -6,6 +6,7 @@ import Comment from './Comment';
 import Displaycomments from './Displaycomments';
 import { Link, useNavigate } from 'react-router-dom';
 import Deletebtn from './Deletebtn';
+import Countercomments from '../counters/Countercomments';
 
 const Post = () => {
 
@@ -72,6 +73,7 @@ const Post = () => {
                             postId={p.id}
                             reload={reload}
                         />
+                        <Countercomments thispost={p} />
                         <Displaycomments infousers={infousers} AllPost={post} post={p} />
                     </div>
                 ))

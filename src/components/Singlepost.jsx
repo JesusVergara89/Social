@@ -6,6 +6,7 @@ import Displaycomments from './Displaycomments'
 import Comment from './Comment'
 import '../style/Post.css'
 import Deletebtn from './Deletebtn'
+import Countercomments from '../counters/Countercomments'
 
 const Singlepost = () => {
 
@@ -87,6 +88,7 @@ const Singlepost = () => {
                     postId={singlepost.id}
                     reload={reload}
                 />
+                <Countercomments thispost={singlepost} />
                 <Displaycomments infousers={infousers} AllPost={postAll} post={singlepost} />
             </div>
         </div>
