@@ -28,8 +28,7 @@ const DeleteSubcomments = ({ post, sub, subcommentsFormatted, indexSub }) => {
                         let emptyObject = {
                             content: "",
                             createdAt: null,
-                            userID: "",
-                            userName: ""
+                            userID: ""
                         };
                         commentsData[0].others[keyFound] = emptyObject;
                         await updateDoc(docRef, { comments: commentsData });
