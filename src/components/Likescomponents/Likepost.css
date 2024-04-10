@@ -29,3 +29,17 @@
 .Likepost i {
     font-size: 1rem;
 }
+
+@media(width < 440px){
+    .Likepost {
+        width: auto;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        gap: 5px;
+        top: -8px;
+        right: 28px;
+    } 
+}

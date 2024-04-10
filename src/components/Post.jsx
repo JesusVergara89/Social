@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import '../style/Post.css'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { auth, db } from '../firebaseConfig';
+import { db } from '../firebaseConfig';
 import Comment from './Comment';
 import Displaycomments from './Displaycomments';
 import { Link, useNavigate } from 'react-router-dom';
 import Deletebtn from './Deletebtn';
 import Countercomments from '../counters/Countercomments';
 import Likepost from './Likescomponents/Likepost';
-//import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Post = () => {
-
-    //const [userOnline] = useAuthState(auth)
 
     const [post, setPost] = useState([]);
     const [infousers, setInfousers] = useState([]);
@@ -63,7 +60,7 @@ const Post = () => {
                         </Link>
                         <Deletebtn image={p.image} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                         <div className="post-card-userinfo">
-                        <Likepost postId={p.id}  likes={p.likes}/>
+                            <Likepost postId={p.id} likes={p.likes} />
                             <div className="post-card-userinfo-1">
                                 <img src={p.userPhoto} alt="" />
                                 <h6>{`${p.userName}`}</h6>
