@@ -68,7 +68,6 @@ const Createpost = () => {
             userName: '',
             main: '',
             idUser: '',
-            likecomments: [],
             others: {
                 one: { content: '', createdAt: null, userID: '' },
                 two: { content: '', createdAt: null, userID: '' },
