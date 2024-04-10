@@ -17,6 +17,7 @@ import Singlepost from './components/Singlepost';
 import Invisiblecomp from './components/Invisiblecomp';
 import Conections from './components/Conections';
 import Singleprofile from './components/Singleprofile';
+import Configprofile from './components/configurationprofile/Configprofile';
 
 function Social() {
 
@@ -104,6 +105,11 @@ function Social() {
                     <Route path='/createpost'
                         element={
                             <Createpost />
+                        }
+                    />
+                    <Route path='/configprofile/:toConfig'
+                        element={
+                            <Configprofile />
                         }
                     />
                 </Route>

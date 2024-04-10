@@ -81,6 +81,11 @@ const Profile = ({ newuser, setNewuser }) => {
         <div className='profile'>
             {currentUserData && currentlyLoggedinUser && (
                 <div className='profile-information'>
+                    <div className='Configprofile'>
+                        <Link to={`/configprofile/${currentUserData?.id}`}>
+                            <i className='bx bx-cog'></i>
+                        </Link>
+                    </div>
                     <div className="profile-information-image">
                         <img src={currentlyLoggedinUser.photoURL} alt="" />
                     </div>

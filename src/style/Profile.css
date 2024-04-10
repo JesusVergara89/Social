@@ -31,6 +31,25 @@
     position: relative;
 }
 
+.Configprofile {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.Configprofile a {
+    all: unset;
+}
+
+.Configprofile .bx {
+    font-size: 1.5rem;
+}
+
 .profile-information-image {
     width: 40%;
     height: 100%;
@@ -39,6 +58,7 @@
     align-items: center;
     padding-top: 15px;
     padding-bottom: 15px;
+    position: relative;
 }
 
 .profile-information-image img {
@@ -227,4 +247,18 @@
         width: 100%;
         height: auto;
     }
+
+    .Configprofile {
+        width: auto;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
 }
+
+
+

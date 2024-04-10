@@ -1,0 +1,60 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.Configprofilemain {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 150px;
+}
+
+.Configprofilemain h2 {
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.Configprofilemain h3 {
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.Configprofilemain p {
+    margin-bottom: 10px;
+}
+
+.Configprofilemain input[type="text"],
+.Configprofilemain input[type="email"],
+.Configprofilemain input[type="password"],
+.Configprofilemain input[type="file"],
+.Configprofilemain button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.Configprofilemain button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.Configprofilemain button:hover {
+    background-color: #0056b3;
+}
+
+.Configprofilemain img {
+    max-width: 100%;
+    margin-bottom: 15px;
+}
