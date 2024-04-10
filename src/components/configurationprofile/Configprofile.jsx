@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Configprofile.css'
 import { auth, db, storage } from '../../firebaseConfig'
 import { useParams } from 'react-router-dom'
 import { updateProfile, sendPasswordResetEmail } from 'firebase/auth'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { doc, updateDoc } from 'firebase/firestore'
+import { collection, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore'
 
 const Configprofile = () => {
 
@@ -17,6 +17,19 @@ const Configprofile = () => {
     const [email, setEmail] = useState('')
     const [error, setError] = useState(null)
     const [message, setMessage] = useState('')
+    const [allpost, setAllpost] = useState()
+
+    useEffect(() => {
+        const usersCollectionRef = collection(db, 'Post');
+        const q = query(usersCollectionRef, orderBy("createdAt", "desc"))
+        onSnapshot(q, (snapshot) => {
+            const allpost = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }))
+            setAllpost(allpost)
+        })
+    }, []);
 
     const handleChangeDisplayName = (e) => {
         setNewDisplayName(e.target.value)
@@ -64,6 +77,16 @@ const Configprofile = () => {
                     photo: photoURL
                 });
             }
+            let postForChangeUserPhoto = allpost.filter((data,i) =>{
+                if(data.idOnlineUser === onlineUser.uid){
+                    return data
+                }
+            })
+            for (let i = 0; i < postForChangeUserPhoto.length; i++) {
+                await updateDoc(doc(db, "Post", postForChangeUserPhoto[i].id), {
+                    userPhoto: photoURL
+                })
+            }
             setNewDisplayName('');
             setNewPhoto(null);
             setError(null);
@@ -71,6 +94,8 @@ const Configprofile = () => {
             setError(error.message);
         }
     }
+
+    ///console.log(allpost)
 
     return (
         <div className='Configprofilemain'>
