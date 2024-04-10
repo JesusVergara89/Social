@@ -44,6 +44,7 @@ const Comment = ({ postId, thispost, reload }) => {
                         createdAt: Timestamp.now().toDate(),
                         main: mainComment,
                         idUser: userInfo.uid,
+                        likecomments: [],
                         others: { ...emptyOthers }
                     },
                     ...thispost.comments,
@@ -53,6 +54,7 @@ const Comment = ({ postId, thispost, reload }) => {
                     createdAt: Timestamp.now().toDate(),
                     main: mainComment,
                     idUser: userInfo.uid,
+                    likecomments: [],
                     others: {
                         one: { content: '', createdAt: null, userID: '' },
                         two: { content: '', createdAt: null, userID: '' },

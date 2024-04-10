@@ -68,6 +68,7 @@ const Createpost = () => {
             userName: '',
             main: '',
             idUser: '',
+            likecomments: [],
             others: {
                 one: { content: '', createdAt: null, userID: '' },
                 two: { content: '', createdAt: null, userID: '' },
@@ -95,6 +96,7 @@ const Createpost = () => {
                 userPhoto: getDataForPost[0].photo,
                 userName: getDataForPost[0].userName,
                 image: imageURL,
+                likes: [],
                 createdAt: createTimestamp(),
                 comments: [createEmptyComments()]
             };

@@ -5,6 +5,7 @@ import Displaysubcomment from "./Displaysubcomment";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import DeleteComment from "./DeleteComment";
+import Likecomment from "./Likescomponents/Likecomment";
 
 const Displaycomments = ({ post, infousers }) => {
 
@@ -55,6 +56,7 @@ const Displaycomments = ({ post, infousers }) => {
                         <div key={i} className="display-comment-card">
                             <button onClick={showComments} className="hide-subcomments">Ocultar comentarios</button>
                             <p className="comment-content">{comment.main}</p>
+                            <Likecomment post={post} index={i} likes={comment}  />
                             <DeleteComment post={post} commentPosition={i} />
                             <p className="comment-date">
                                 {`@${userNameIdArray.find(match => match.idUser === comment.idUser)?.userName || ''}`}

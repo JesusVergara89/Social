@@ -1,0 +1,31 @@
+:root {
+    --border: #dbdbdb;
+    --Azul-claro: #ADD8E6;
+    --Verde-menta: #98FB98;
+    --Gris-perla: #D3D3D3;
+    --Blanco-hueso: #F5F5DC;
+    --Rosa-suave: #FFB6C1;
+    --btns: #0095f6;
+}
+
+.Likepostcomment {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3px;
+    padding-left: 5px;
+}
+
+.Likepostcomment h6 {
+    all: unset;
+    font-size: 0.68rem;
+    text-align: center;
+}
+
+.Likepostcomment i {
+    font-size: 0.75rem;
+    text-align: center;
+}
