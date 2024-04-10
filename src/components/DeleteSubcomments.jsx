@@ -12,31 +12,34 @@ const DeleteSubcomments = ({ post, subcommentsFormatted, indexSub }) => {
         try {
             const docRef = doc(db, 'Post', post.id);
             const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    let commentsData = docSnap.data().comments;
-                    let keyFound = null;
-                    for (let clave in commentsData[0].others) {
-                        let data1 = commentsData[0].others[clave];
-                        if (data1.content == data.content &&
-                            data1.userID == data.userID) {
-                                keyFound = clave;
+            if (docSnap.exists()) {
+                let commentsData = docSnap.data().comments;
+                let keyFound = null;
+                for (let i = 0; i < commentsData.length; i++) {
+                    for (let clave in commentsData[i].others) {
+                        let data1 = commentsData[i].others[clave];
+                        if (data1.content == data.content && data1.userID == data.userID) {
+                            keyFound = clave;
                             break;
                         }
                     }
                     if (keyFound) {
-                        delete commentsData[0].others[keyFound];
+                        delete commentsData[i].others[keyFound];
                         let emptyObject = {
                             content: "",
                             createdAt: null,
                             userID: ""
                         };
-                        commentsData[0].others[keyFound] = emptyObject;
+                        commentsData[i].others[keyFound] = emptyObject;
                         await updateDoc(docRef, { comments: commentsData });
-                        console.log(`subcomentario ${keyFound} eliminado`);
-                    } else {
-                        console.log('No se encontró el subcomentario a eliminar');
+                        console.log(`Subcomentario ${keyFound} eliminado`);
+                        break; 
                     }
                 }
+                if (!keyFound) {
+                    console.log('No se encontró el subcomentario a eliminar');
+                }
+            }
         } catch (error) {
             console.log('Error obteniendo documento:', error);
         }

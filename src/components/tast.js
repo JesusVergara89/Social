@@ -36,22 +36,26 @@ const post = {
                 one: {
                     content: 'jejejeeje',
                     createdAt: 'time',
-                    userID: 'hahahahahah'
+                    userID: 'hahahahahah',
+                    likesSubcomments: []
                 },
                 two: {
                     content: 'jejejeeje',
                     createdAt: 'time',
-                    userID: 'hahahahahah'
+                    userID: 'hahahahahah',
+                    likesSubcomments: []
                 },
                 three: {
                     content: 'jejejeeje',
                     createdAt: 'time',
-                    userID: 'hahahahahah'
+                    userID: 'hahahahahah',
+                    likesSubcomments: []
                 },
                 four: {
                     content: 'jejejeeje',
                     createdAt: 'time',
-                    userID: 'hahahahahah'
+                    userID: 'hahahahahah',
+                    likesSubcomments: []
                 }
             } 
         }

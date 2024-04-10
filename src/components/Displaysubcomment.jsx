@@ -1,5 +1,6 @@
 import '../style/Displaysubcomment.css';
 import DeleteSubcomments from './DeleteSubcomments';
+import LikesSubcom from './Likescomponents/LikesSubcom';
 
 const Displaysubcomment = ({ comment, users, index, post }) => {
 
@@ -41,6 +42,7 @@ const Displaysubcomment = ({ comment, users, index, post }) => {
                     <div className='display-subcomment-container' key={i}>
                         <DeleteSubcomments post={post} subcommentsFormatted={subcommentsFormatted}  indexSub={i} />
                         <h4 className='subcomment-comment'>{sub.content}</h4>
+                        <LikesSubcom post={post} sub={sub} indexSub={i}/>
                         <h4 className='subcomment-date'>{sub.createdAt}</h4>
                         <h4 className='subcomment-date'>{`@${sub.userName}`}</h4>
                     </div>

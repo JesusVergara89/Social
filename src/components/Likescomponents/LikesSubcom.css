@@ -8,17 +8,21 @@
     --btns: #0095f6;
 }
 
-.countercomments {
-    width: 90%;
-    height: 20px;
+.LikesSubcom {
+    width: auto;
+    height: auto;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    padding-left: 10px;
-    margin-top: 10px;
+    gap: 4px;
 }
 
-.countercomments h5 {
+.LikesSubcom h6 {
     all: unset;
+    font-size: 0.7rem;
+}
+
+.LikesSubcom  i {
     font-size: 0.8rem;
 }

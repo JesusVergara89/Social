@@ -80,3 +80,17 @@
     background: none;
     margin-bottom: 3px;
 }
+
+@media (width < 440px){
+    .display-comment-card {
+        width: 95%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 15px;
+        margin-top: 20px;
+        margin-left: 10px;
+        position: relative;
+    }
+}
