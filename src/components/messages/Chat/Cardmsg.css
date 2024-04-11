@@ -52,6 +52,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .card-user1 h4 {

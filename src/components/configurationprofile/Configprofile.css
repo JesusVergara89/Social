@@ -130,3 +130,12 @@
     text-align: center;
     color: rgb(0, 150, 35);
 }
+
+@media (width < 440px){
+    .Configprofilemain-form-currentdatauser img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}

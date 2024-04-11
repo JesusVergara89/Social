@@ -18,6 +18,8 @@ const Register = ({ setNewuser }) => {
     const [age, setAge] = useState('');
     const [bio, setBio] = useState('');
     const [userName, setUserName] = useState('')
+    const [textareaHeight, setTextareaHeight] = useState('30px');
+    const [modalusername, setModalusername] = useState(false)
 
     function scrollToTop() {
         window.scrollTo({
@@ -43,7 +45,19 @@ const Register = ({ setNewuser }) => {
         }
     }, [currentlyLoggedinUser]);
 
+    useEffect(() => {
+        const adjustTextareaHeight = () => {
+            const length = bio.length;
+            const minHeight = 30;
+            const maxHeight = 300;
+            const step = 30;
 
+            let height = minHeight + Math.floor(length / 30) * step;
+            height = Math.min(height, maxHeight);
+            setTextareaHeight(height + 'px');
+        };
+        adjustTextareaHeight();
+    }, [bio]);
 
     const handleSingUp = async () => {
         if (!name || !email || !photo) {
@@ -88,6 +102,20 @@ const Register = ({ setNewuser }) => {
         setUserName('');
     };
 
+    const modalUsername = document.getElementById("username")
+
+    document.addEventListener("click", function(event) {
+        if (!modalUsername.contains(event.target)) {
+            setModalusername(false)
+        }
+    });
+
+    const functionmodalusername = () => {
+        setModalusername(!modalusername)
+        document.getElementById("username").removeEventListener("click", functionmodalusername);
+    }
+    document.getElementById("username")?.addEventListener("click", functionmodalusername);
+    ///console.log(modalusername)
     return (
         <article className="register">
             <div className="register-container1">
@@ -124,20 +152,27 @@ const Register = ({ setNewuser }) => {
                         value={age}
                         onChange={(e) => { setAge(e.target.value); }}
                     />
-                    <input
+                    <textarea
                         type="text"
-                        className='register-container2-password'
+                        className='register-container2-textarea'
                         placeholder='Biography'
                         value={bio}
                         onChange={(e) => { setBio(e.target.value); }}
+                        style={{ height: textareaHeight }}
                     />
-                    <input
-                        type="text"
-                        className='register-container2-password'
-                        placeholder='User: @user'
-                        value={userName}
-                        onChange={(e) => { setUserName(e.target.value); }}
-                    />
+                    <div className="around">
+                        <input
+                            id='username'
+                            type="text"
+                            className='register-container2-username'
+                            placeholder='User: @user'
+                            value={userName}
+                            onChange={(e) => { setUserName(e.target.value); }}
+                        />
+                        <div className={modalusername ? "modalusername" : "none"}>
+                            <h6>Una vez establecido el @userName, no podras cmabiarlo. &#128556;</h6>
+                        </div>
+                    </div>
                     <div className='warning-photo'>Upload your profile photo here</div>
                     <input
                         className='register-container2-img'
