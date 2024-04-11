@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './Configprofile.css'
 import { auth, db, storage } from '../../firebaseConfig'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { updateProfile, sendPasswordResetEmail } from 'firebase/auth'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytes } from 'firebase/storage'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { collection, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 
 const Configprofile = () => {
 
@@ -18,11 +18,11 @@ const Configprofile = () => {
     const [email, setEmail] = useState('')
     const [error, setError] = useState(null)
     const [message, setMessage] = useState('')
-    const [allpost, setAllpost] = useState()
+    ///const [allpost, setAllpost] = useState() Sin uso por por pruebas. 
     const [textareaHeight, setTextareaHeight] = useState('70px');
-    const [isChecked, setIsChecked] = useState(false);
+    const navigate = useNavigate()
 
-    useEffect(() => {
+    {/*useEffect(() => {
         const usersCollectionRef = collection(db, 'Post');
         const q = query(usersCollectionRef, orderBy("createdAt", "desc"))
         onSnapshot(q, (snapshot) => {
@@ -32,7 +32,7 @@ const Configprofile = () => {
             }))
             setAllpost(allpost)
         })
-    }, []);
+    }, []);*/}
 
     useEffect(() => {
         const adjustTextareaHeight = () => {
@@ -83,30 +83,31 @@ const Configprofile = () => {
         try {
             let photoURL = onlineUser.photoURL;
             if (newPhoto) {
-                const photoRef = ref(storage, `/images/${Date.now()}/${newPhoto.name}`);
-                await uploadBytes(photoRef, newPhoto);
-                photoURL = await getDownloadURL(photoRef);
+                try {
+                    const photoRef = ref(storage, photoURL);           
+                    await uploadBytes(photoRef, newPhoto);      
+                    console.log('Foto actualizada exitosamente.');
+                } catch (error) {
+                    console.error('Error al actualizar la foto:', error);
+                }
             }
             if (newDisplayName !== '' && newBio !== '') {
-                await updateProfile(auth.currentUser, { displayName: newDisplayName, photoURL });
+                await updateProfile(auth.currentUser, { displayName: newDisplayName });
                 await updateDoc(doc(db, "Users", toConfig), {
                     name: newDisplayName,
-                    photo: photoURL,
                     bio: newBio
                 });
             } else if (newDisplayName !== '' && newBio == '') {
-                await updateProfile(auth.currentUser, { displayName: newDisplayName, photoURL });
+                await updateProfile(auth.currentUser, { displayName: newDisplayName });
                 await updateDoc(doc(db, "Users", toConfig), {
-                    name: newDisplayName,
-                    photo: photoURL
+                    name: newDisplayName
                 });
             } else if (newDisplayName == '' && newBio !== '') {
-                await updateProfile(auth.currentUser, { displayName: newDisplayName, photoURL });
+                await updateProfile(auth.currentUser, { displayName: newDisplayName });
                 await updateDoc(doc(db, "Users", toConfig), {
-                    bio: newBio,
-                    photo: photoURL
+                    bio: newBio
                 });
-            } else {
+            }{/* else {
                 await updateProfile(auth.currentUser, { photoURL });
                 await updateDoc(doc(db, "Users", toConfig), {
                     photo: photoURL
@@ -123,21 +124,16 @@ const Configprofile = () => {
                         userPhoto: photoURL
                     })
                 }
-            }
+            }*/}
             setNewBio('')
             setNewDisplayName('');
             setNewPhoto(null);
             setError(null);
+            navigate('/profile')
         } catch (error) {
             setError(error.message);
         }
     }
-
-    const handleCheckboxChange = () => {
-        setIsChecked(!isChecked);
-    };
-
-    console.log(isChecked)
 
     return (
         <div className='Configprofilemain'>
@@ -166,15 +162,6 @@ const Configprofile = () => {
 
                         <button type="submit">Actualizar</button>
                     </form>
-                    <div className="proposal-config-profile">
-                        <p>¡Únete a nosotros en el <span>#WrappProfileYear</span> y descubre una emocionante recopilación de todas las fotos que has establecido como perfil! Marca la casilla para unirte...</p>
-                        <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={handleCheckboxChange}
-                        />
-                        <h6>Al marcar la casilla, autorizas a Social a no cambiar las fotos de perfil en las publicaciones ya realizadas. La nueva foto de perfil solo aparecerá en las publicaciones que realices después de establecerla.</h6>
-                    </div>
                     <div className="Configprofilemain-form2">
                         <h4>Restablecer Contraseña</h4>
                         <p>Ingrese su correo electrónico para restablecer la contraseña</p>
