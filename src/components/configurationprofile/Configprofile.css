@@ -18,6 +18,7 @@
     margin-top: 150px;
 }
 
+
 .Configprofilemain h2 {
     all: unset;
     text-align: center;
@@ -47,14 +48,14 @@
     gap: 20px;
 }
 
-.Configprofilemain-form-currentdatauser img{
+.Configprofilemain-form-currentdatauser img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.Configprofilemain-form-currentdatauser h3{
+.Configprofilemain-form-currentdatauser h3 {
     all: unset;
     text-align: center;
     font-size: 1rem;
@@ -127,7 +128,7 @@
     margin-bottom: 8px;
 }
 
-.Configprofilemain-form p{
+.Configprofilemain-form p {
     all: unset;
     width: 90%;
     line-height: 1.5;
@@ -160,15 +161,15 @@
     height: 20px;
 }
 
-.proposal-config-profile h6{
+.proposal-config-profile h6 {
     all: unset;
     font-size: 0.8rem;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-@media (width < 440px){
-    .Configprofilemain-form-currentdatauser img{
+@media (width < 440px) {
+    .Configprofilemain-form-currentdatauser img {
         width: 100px;
         height: 100px;
         border-radius: 50%;

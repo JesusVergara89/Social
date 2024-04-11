@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Register from './auth/Register'
 import Login from './auth/Login';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Profile from './components/Profile';
 import Protectedroutes from './components/Protectedroutes';
 import Header from './components/Header';
@@ -46,15 +46,13 @@ function Social() {
                 />
 
                 <Route path='/login'
-                    element={
-                        <Login />
-                    }
+                    element={onlineuser ? <Navigate to="/profile" /> : <Login />}
                 />
 
                 <Route path='/allusers'
                     element={
-                        <Allusers />
-                    }
+                        <Allusers
+                        />}
                 />
 
                 <Route element={<Protectedroutes />}>

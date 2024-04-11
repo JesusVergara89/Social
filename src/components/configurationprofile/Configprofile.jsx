@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './Configprofile.css'
 import { auth, db, storage } from '../../firebaseConfig'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { updateProfile, sendPasswordResetEmail } from 'firebase/auth'
 import { ref, uploadBytes } from 'firebase/storage'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { doc, updateDoc } from 'firebase/firestore'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPhotoValue } from '../../store/slices/photoupdate.slice'
 
 const Configprofile = () => {
 
     const { toConfig } = useParams()
-
+    const dispatch = useDispatch()
     const [onlineUser] = useAuthState(auth)
     const [newDisplayName, setNewDisplayName] = useState('')
     const [newBio, setNewBio] = useState('')
@@ -20,8 +22,7 @@ const Configprofile = () => {
     const [message, setMessage] = useState('')
     ///const [allpost, setAllpost] = useState() Sin uso por por pruebas. 
     const [textareaHeight, setTextareaHeight] = useState('70px');
-    const navigate = useNavigate()
-
+    
     {/*useEffect(() => {
         const usersCollectionRef = collection(db, 'Post');
         const q = query(usersCollectionRef, orderBy("createdAt", "desc"))
@@ -33,6 +34,11 @@ const Configprofile = () => {
             setAllpost(allpost)
         })
     }, []);*/}
+    const funcitonReloadProfile = () => {// this does not work
+        const currentValue = useSelector(state => state.newPhoto);
+        const newValue = !currentValue;
+        dispatch(setPhotoValue(newValue));
+    }
 
     useEffect(() => {
         const adjustTextareaHeight = () => {
@@ -79,57 +85,32 @@ const Configprofile = () => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
         try {
-            let photoURL = onlineUser.photoURL;
+
             if (newPhoto) {
-                try {
-                    const photoRef = ref(storage, photoURL);           
-                    await uploadBytes(photoRef, newPhoto);      
-                    console.log('Foto actualizada exitosamente.');
-                } catch (error) {
-                    console.error('Error al actualizar la foto:', error);
-                }
+                const photoRef = ref(storage, onlineUser.photoURL);
+                await uploadBytes(photoRef, newPhoto);
+                console.log('Foto actualizada exitosamente.');
             }
-            if (newDisplayName !== '' && newBio !== '') {
-                await updateProfile(auth.currentUser, { displayName: newDisplayName });
-                await updateDoc(doc(db, "Users", toConfig), {
-                    name: newDisplayName,
-                    bio: newBio
-                });
-            } else if (newDisplayName !== '' && newBio == '') {
-                await updateProfile(auth.currentUser, { displayName: newDisplayName });
-                await updateDoc(doc(db, "Users", toConfig), {
-                    name: newDisplayName
-                });
-            } else if (newDisplayName == '' && newBio !== '') {
-                await updateProfile(auth.currentUser, { displayName: newDisplayName });
-                await updateDoc(doc(db, "Users", toConfig), {
-                    bio: newBio
-                });
-            }{/* else {
-                await updateProfile(auth.currentUser, { photoURL });
-                await updateDoc(doc(db, "Users", toConfig), {
-                    photo: photoURL
-                });
+
+
+            const userUpdates = {};
+            if (newDisplayName !== '') userUpdates.displayName = newDisplayName;
+            if (newBio !== '') userUpdates.bio = newBio;
+
+            if (Object.keys(userUpdates).length > 0) {
+                await updateProfile(auth.currentUser, userUpdates);
+                await updateDoc(doc(db, "Users", toConfig), userUpdates);
             }
-            let postForChangeUserPhoto = allpost.filter((data, i) => {
-                if (data.idOnlineUser === onlineUser.uid) {
-                    return data
-                }
-            })
-            if (isChecked === false) {
-                for (let i = 0; i < postForChangeUserPhoto.length; i++) {
-                    await updateDoc(doc(db, "Post", postForChangeUserPhoto[i].id), {
-                        userPhoto: photoURL
-                    })
-                }
-            }*/}
-            setNewBio('')
+
+
+            setNewBio('');
             setNewDisplayName('');
             setNewPhoto(null);
             setError(null);
-            navigate('/profile')
+            funcitonReloadProfile()
         } catch (error) {
             setError(error.message);
         }

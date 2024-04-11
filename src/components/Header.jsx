@@ -5,12 +5,18 @@ import { auth } from '../firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import nullphoto from '../images/nullprofile.svg'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 const Header = () => {
 
     const [currentlyLoggedinUser] = useAuthState(auth);
     const navigate = useNavigate()
     const conexionNumber = useSelector(state => state.conectionNumber)
+    const newPhoto = useSelector(state => state.photoUpdate)
+
+    useEffect(() => {
+       console.log(newPhoto)
+    }, [newPhoto])
 
     //console.log(conexionNumber)
 
@@ -34,7 +40,7 @@ const Header = () => {
                     <div className="menu-menu">
                         <i className='bx bx-group'></i>
                         <div className={conexionNumber <= 10 ? "conection-counter" : "conection-counter-grosse"}>
-                           <h6>{conexionNumber}</h6>
+                            <h6>{conexionNumber}</h6>
                         </div>
                     </div>
                 </Link>
