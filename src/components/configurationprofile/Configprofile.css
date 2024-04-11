@@ -78,6 +78,15 @@
     font-weight: bold;
 }
 
+.Configprofilemain-form textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    text-align: left;
+    padding: 10px 0px 10px 0px;
+    margin-bottom: 10px;
+}
+
 .Configprofilemain input[type="text"],
 .Configprofilemain input[type="email"],
 .Configprofilemain input[type="password"],
@@ -129,6 +138,33 @@
 .Configprofilemain-form2 i {
     text-align: center;
     color: rgb(0, 150, 35);
+}
+
+.proposal-config-profile {
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.proposal-config-profile span {
+    color: var(--btns);
+    font-weight: bold;
+}
+
+.proposal-config-profile input {
+    width: 20px;
+    height: 20px;
+}
+
+.proposal-config-profile h6{
+    all: unset;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 @media (width < 440px){
