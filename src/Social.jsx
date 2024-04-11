@@ -18,11 +18,12 @@ import Invisiblecomp from './components/Invisiblecomp';
 import Conections from './components/Conections';
 import Singleprofile from './components/Singleprofile';
 import Configprofile from './components/configurationprofile/Configprofile';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './firebaseConfig';
 
 function Social() {
-
+    const [onlineuser] = useAuthState(auth)
     const [newuser, setNewuser] = useState({})
-
     return (
         <div className='SOCIAL'>
 

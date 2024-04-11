@@ -28,7 +28,7 @@
 
 .Singleprofile-information {
     width: 400px;
-    height: auto;
+    min-height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -117,7 +117,7 @@
 
     .Singleprofile-information {
         width: 100%;
-        height: auto;
+        min-height: 200px;
         display: flex;
         justify-content: center;
         align-items: center;

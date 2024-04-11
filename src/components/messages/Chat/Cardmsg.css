@@ -20,7 +20,7 @@
 
 .card-msg a {
     all: unset;   
-    width: 280px;
+    width: 350px;
 }
 
 .card-msg-title {
@@ -29,7 +29,7 @@
 }
 
 .card-msg-info {
-    width: 280px;
+    width: 350px;
     height: 130px;
     display: flex;
     justify-content: center;

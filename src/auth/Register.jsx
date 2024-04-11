@@ -57,7 +57,7 @@ const Register = ({ setNewuser }) => {
             if (user) {
                 await updateProfile(user, { displayName: name, photoURL: '' });
                 if (photo) {
-                    const photoRef = `images/${user.uid}/${photo.name}`;
+                    const photoRef = `/images/${Date.now()}${photo.name}}`;
                     const storageRef = ref(storage, photoRef);
                     await uploadBytes(storageRef, photo);
                     const downloadURL = await getDownloadURL(storageRef);

@@ -40,7 +40,7 @@ const Configprofile = () => {
             setNewPhoto(e.target.files[0])
         }
     }
-    
+
     const handleChangeEmail = (e) => {
         setEmail(e.target.value)
     }
@@ -50,6 +50,7 @@ const Configprofile = () => {
             await sendPasswordResetEmail(auth, email);
             setMessage(`Se ha enviado un correo electrónico de restablecimiento de contraseña a ${email}`);
             setError(null);
+            setEmail('')
         } catch (error) {
             setError(error.message);
             setMessage('');
@@ -57,11 +58,11 @@ const Configprofile = () => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()  
+        e.preventDefault()
         try {
             let photoURL = onlineUser.photoURL;
             if (newPhoto) {
-                const photoRef = ref(storage, `images/${onlineUser.uid}/${newPhoto.name}`);
+                const photoRef = ref(storage, `/images/${Date.now()}/${newPhoto.name}`);
                 await uploadBytes(photoRef, newPhoto);
                 photoURL = await getDownloadURL(photoRef);
             }
@@ -77,8 +78,8 @@ const Configprofile = () => {
                     photo: photoURL
                 });
             }
-            let postForChangeUserPhoto = allpost.filter((data,i) =>{
-                if(data.idOnlineUser === onlineUser.uid){
+            let postForChangeUserPhoto = allpost.filter((data, i) => {
+                if (data.idOnlineUser === onlineUser.uid) {
                     return data
                 }
             })
@@ -99,27 +100,32 @@ const Configprofile = () => {
 
     return (
         <div className='Configprofilemain'>
-            <h2>Configuración de Perfil</h2>
+            <h2>Actualizar perfil</h2>
             {onlineUser && (
-                <div>
-                    <h3>Nombre de usuario actual: {onlineUser.displayName}</h3>
-                    <img src={onlineUser.photoURL} alt="Profile" />
+                <div className='Configprofilemain-form'>
+                    <div className="Configprofilemain-form-currentdatauser">
+                        <h3><span>Nombre actual:</span> <br /> {onlineUser.displayName}</h3>
+                        <img src={onlineUser.photoURL} alt="Profile" />
+                    </div>
+                    
                     <form onSubmit={handleSubmit}>
-                        <label>Nuevo Nombre de Usuario:</label>
+                        <h6>Nuevo Nombre de Usuario:</h6>
                         <input type="text" value={newDisplayName} onChange={handleChangeDisplayName} />
 
-                        <label>Nueva Foto de Perfil:</label>
+                        <h6>Nueva Foto de Perfil:</h6>
                         <input type="file" accept="image/*" onChange={handleImageChange} />
 
-                        <button type="submit">Actualizar Perfil</button>
+                        <button type="submit">Actualizar</button>
                     </form>
-                    <hr />
-                    <h3>Restablecer Contraseña</h3>
-                    <p>Ingrese su correo electrónico para recibir un enlace de restablecimiento de contraseña.</p>
+
+                <div className="Configprofilemain-form2">
+                    <h4>Restablecer Contraseña</h4>
+                    <p>Ingrese su correo electrónico para restablecer la contraseña</p>
                     <input type="email" value={email} onChange={handleChangeEmail} placeholder="Correo electrónico" />
-                    <button onClick={handleResetPassword}>Enviar Correo Electrónico</button>
-                    {message && <p>{message}</p>}
+                    <button onClick={handleResetPassword}>Enviar</button>
+                    {message && <i>{message}</i>}
                     {error && <p>{error}</p>}
+                </div>             
                 </div>
             )}
         </div>

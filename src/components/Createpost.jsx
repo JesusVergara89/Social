@@ -82,7 +82,7 @@ const Createpost = () => {
         try {
             let imageURL = '';
             if (photo) {
-                const photoRef = `images/${currentlyLoggedinUser.uid}/${photo.name}`;
+                const photoRef = `/images/${Date.now()}${photo.name}`;
                 const storageRef = ref(storage, photoRef);
                 await uploadBytes(storageRef, photo);
                 imageURL = await getDownloadURL(storageRef);

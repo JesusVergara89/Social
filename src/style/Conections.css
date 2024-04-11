@@ -32,7 +32,7 @@
 
 .all-users-profile-information-connection {
     width: 400px;
-    height: auto;
+    min-height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -151,7 +151,7 @@
     }
     .all-users-profile-information-connection {
         width: 100%;
-        height: auto;
+        min-height: 200px;
         display: flex;
         justify-content: center;
         align-items: center;
