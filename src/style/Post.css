@@ -110,6 +110,7 @@
     height: 40px;
     border-radius: 50%;
     border: 3px solid var(--btns);
+    object-fit: cover;
 }
 
 .post-card-mainimg {

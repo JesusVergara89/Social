@@ -162,6 +162,7 @@ header .menu {
     height: 30px;
     border-radius: 50%;
     display: flex;
+    object-fit: cover;
 }
 
 @media (width < 345px) {
