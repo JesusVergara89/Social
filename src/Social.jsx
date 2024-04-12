@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Register from './auth/Register'
 import Login from './auth/Login';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -46,7 +46,7 @@ function Social() {
                 />
 
                 <Route path='/login'
-                    element={onlineuser ? <Navigate to="/profile" /> : <Login />}
+                    element={onlineuser ? <Navigate to="/" /> : <Login />}
                 />
 
                 <Route path='/allusers'

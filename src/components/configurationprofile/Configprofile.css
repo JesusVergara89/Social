@@ -37,6 +37,23 @@
     gap: 5px;
 }
 
+.reload-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reload-overlay-content {
+    color: white;
+    font-size: 24px;
+}
+
 .Configprofilemain-form-currentdatauser {
     width: 100%;
     height: auto;

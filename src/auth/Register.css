@@ -10,7 +10,7 @@
 
 .register {
     width: 350px;
-    height: 500px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;

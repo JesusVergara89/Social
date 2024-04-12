@@ -1,24 +1,34 @@
 import '../style/Header.css'
 import social from '../images/Social.svg'
 import { Link, useNavigate } from 'react-router-dom'
-import { auth } from '../firebaseConfig'
+import { auth, db } from '../firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import nullphoto from '../images/nullprofile.svg'
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 
 const Header = () => {
-
+    
     const [currentlyLoggedinUser] = useAuthState(auth);
     const navigate = useNavigate()
     const conexionNumber = useSelector(state => state.conectionNumber)
-    const newPhoto = useSelector(state => state.photoUpdate)
+    const [allusers, setAllusers] = useState()
+    const reloadPhoto = useSelector(state => state.photoUpdate);
 
-    useEffect(() => {
-       console.log(newPhoto)
-    }, [newPhoto])
-
-    //console.log(conexionNumber)
+    useEffect(()=>{
+        const usersCollectionRef = collection(db, 'Users');
+        const q = query(usersCollectionRef, orderBy('userName'))
+        onSnapshot(q, (snapshot) => {
+            const allUsers = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setAllusers(allUsers);
+        })
+    },[reloadPhoto])
+    
+    //console.log(allusers)
 
     return (
         <header>

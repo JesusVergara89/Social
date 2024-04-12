@@ -6,13 +6,10 @@ import { updateProfile, sendPasswordResetEmail } from 'firebase/auth'
 import { ref, uploadBytes } from 'firebase/storage'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { doc, updateDoc } from 'firebase/firestore'
-import { useDispatch, useSelector } from 'react-redux'
-import { setPhotoValue } from '../../store/slices/photoupdate.slice'
 
 const Configprofile = () => {
 
     const { toConfig } = useParams()
-    const dispatch = useDispatch()
     const [onlineUser] = useAuthState(auth)
     const [newDisplayName, setNewDisplayName] = useState('')
     const [newBio, setNewBio] = useState('')
@@ -20,25 +17,8 @@ const Configprofile = () => {
     const [email, setEmail] = useState('')
     const [error, setError] = useState(null)
     const [message, setMessage] = useState('')
-    ///const [allpost, setAllpost] = useState() Sin uso por por pruebas. 
     const [textareaHeight, setTextareaHeight] = useState('70px');
-    
-    {/*useEffect(() => {
-        const usersCollectionRef = collection(db, 'Post');
-        const q = query(usersCollectionRef, orderBy("createdAt", "desc"))
-        onSnapshot(q, (snapshot) => {
-            const allpost = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }))
-            setAllpost(allpost)
-        })
-    }, []);*/}
-    const funcitonReloadProfile = () => {// this does not work
-        const currentValue = useSelector(state => state.newPhoto);
-        const newValue = !currentValue;
-        dispatch(setPhotoValue(newValue));
-    }
+    const [showUpdateOverlay, setShowUpdateOverlay] = useState(false);
 
     useEffect(() => {
         const adjustTextareaHeight = () => {
@@ -84,6 +64,14 @@ const Configprofile = () => {
         }
     }
 
+    const functionReload = () => {
+        setShowUpdateOverlay(true);
+        setTimeout(() => {
+            setShowUpdateOverlay(false);
+            window.location.reload();
+        }, 2000);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -110,7 +98,7 @@ const Configprofile = () => {
             setNewDisplayName('');
             setNewPhoto(null);
             setError(null);
-            funcitonReloadProfile()
+            functionReload()
         } catch (error) {
             setError(error.message);
         }
@@ -119,6 +107,15 @@ const Configprofile = () => {
     return (
         <div className='Configprofilemain'>
             <h2>Actualizar perfil</h2>
+            <div>
+                {showUpdateOverlay && (
+                    <div className="reload-overlay">
+                        <div className="reload-overlay-content">
+                            Actualizando perfil...
+                        </div>
+                    </div>
+                )}
+            </div>
             {onlineUser && (
                 <div className='Configprofilemain-form'>
                     <div className="Configprofilemain-form-currentdatauser">

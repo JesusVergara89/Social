@@ -66,6 +66,7 @@
     height: 90px;
     border-radius: 50%;
     overflow: hidden;
+    object-fit: cover;
 }
 
 .option-request h5 {
