@@ -20,6 +20,12 @@
     gap: 10px;
 }
 
+.all-users p{
+    all: unset;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 .all-user-find {
     width: 100%;
     height: auto;
@@ -29,28 +35,52 @@
     align-items: center;
 }
 
-#inputfind{
+.all-user-find-inner{
     width: 350px;
-    padding: 10px;
-    border: 1px solid #ccc;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 0.2rem solid var(--border);
     border-radius: 10px;
+    padding: 8px;
+}
+
+.user-find {
+    width: 20%;
+    height: 150%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-find .bx {
+    all: unset;
+    columns: #111;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#inputfind{
+    width: 80%;
+    border: none;
     font-size: 14px;
     text-align: center;
 }
 
 #inputfind:focus{
     outline: none;
-    border-color: var(--btns);
-    box-shadow: 0 0 0 2px #007bff1a;
 }
 
 @media ( width < 440px) {
-    #inputfind{
-        width: 80%;
-        padding: 10px;
-        border: 1px solid #ccc;
+    .all-user-find-inner{
+        width: 90%;
+        height: auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border: 0.2rem solid var(--border);
         border-radius: 10px;
-        font-size: 14px;
-        text-align: center;
+        padding: 8px;
     }
 }

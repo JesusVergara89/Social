@@ -38,13 +38,19 @@ const Allusers = () => {
         <div className='all-users'>
             <p>Encuentra conexiones por nombre o usuario</p>
             <div className="all-user-find">
-                <input
-                    id='inputfind'
-                    type="text"
-                    value={filtro}
-                    onChange={handleInputChange}
-                    placeholder="Buscar usuario..."
-                />
+                <div className="all-user-find-inner">
+                    <input
+                        id='inputfind'
+                        type="text"
+                        value={filtro}
+                        onChange={handleInputChange}
+                        placeholder="Buscar usuario..."
+                    />
+                    <div className="user-find">
+                        <i className='bx bx-search'></i>
+                    </div>
+                </div>
+
                 {filtro && usuariosFiltrados.length > 0 && (
                     <div className='all-user-find-card'>
                         {usuariosFiltrados.map(usuario => (

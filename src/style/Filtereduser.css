@@ -8,7 +8,7 @@
     --btns: #0095f6;
 }
 
-.all-users-mapeo {
+.all-users-mapeo-1 {
     width: auto;
     height: auto;
     display: flex;
@@ -17,10 +17,11 @@
     align-items: center;
 }
 
-.all-users-profile-information {
-    width: 400px;
+.all-users-profile-information-1 {
+    max-width: 400px;
     min-height: 200px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 1px solid var(--border);
@@ -42,9 +43,9 @@
     cursor: pointer;
 }
 
-.all-users-profile-information-image {
-    width: 40%;
-    height: 100%;
+.all-users-profile-information-image-1 {
+    width: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,44 +53,45 @@
     padding-bottom: 15px;
 }
 
-.all-users-profile-image {
-    width: 100px;
-    height: 100px;
+.all-users-profile-image-1 {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
+    margin-top: 70px;
 }
 
-.all-users-profile-information-data {
-    width: 60%;
-    height: 100%;
+.all-users-profile-information-data-1 {
+    width: 90%;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-top: 15px;
-    padding-left: 15px;
     padding-bottom: 15px;
 }
 
-.all-users-userid {
+.all-users-userid-1 {
     all: unset;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 15px;
     text-align: center;
 }
 
-.all-users-name {
+.all-users-name-1 {
     all: unset;
     font-size: 0.8rem;
     font-weight: 600;
+    text-align: center;
     margin-bottom: 15px;
 }
 
-.all-users-bio {
+.all-users-bio-1 {
     all: unset;
-    text-align: left;
-    font-size: 0.75rem;
-    padding-right: 10px;
+    text-align: justify;
+    font-size: 1rem;
+    padding: 5px;
 }
 
 @media (width < 440px) {
@@ -103,7 +105,7 @@
         align-items: center;
     }
     .all-users-profile-information {
-        width: 100%;
+        width: 90%;
         min-height: 200px;
         display: flex;
         justify-content: center;
