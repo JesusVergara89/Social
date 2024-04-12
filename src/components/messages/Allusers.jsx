@@ -8,6 +8,8 @@ import Contactutility from './Contactutility';
 const Allusers = () => {
 
     const [Allusers, setAllusers] = useState([])
+    const [filtro, setFiltro] = useState('');
+    const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
 
     const [thiIsTheCurrentUser] = useAuthState(auth)
 
@@ -20,11 +22,35 @@ const Allusers = () => {
                 ...doc.data()
             }))
             setAllusers(allUsers);
-        }) 
+        })
     }, []);
-    //console.log(thiIsTheCurrentUser)
+
+    const handleInputChange = (event) => {
+        const valor = event.target.value.toLowerCase();
+        setFiltro(valor);
+        const resultados = Allusers.filter(usuario =>
+            usuario.userName.toLowerCase().includes(valor) || usuario.name.toLowerCase().includes(valor)
+        );
+        setUsuariosFiltrados(resultados);
+    };
+    //console.log(Allusers)
     return (
         <div className='all-users'>
+            <div className="all-user-find">
+                <input
+                    type="text"
+                    value={filtro}
+                    onChange={handleInputChange}
+                    placeholder="Buscar usuario..."
+                />
+                {filtro && usuariosFiltrados.length > 0 && (
+                    <div>
+                        {usuariosFiltrados.map(usuario => (
+                            <div key={usuario.id}>{usuario.name} ({usuario.userName})</div>
+                        ))}
+                    </div>
+                )}
+            </div>
             {Allusers &&
                 (
                     Allusers.map((user, i) => (
