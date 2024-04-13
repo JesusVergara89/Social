@@ -38,10 +38,20 @@ const post = {
                     userID: 'hahahahahah',
                     likesSubcomments: []
                 }
-            } 
+            }
         }
     ]
 }
 
+//timerMsg
+
+timer = {
+    Mytimer: [
+        {
+            creatorID: 'zzzzz',
+            time: 'timespam'
+        }
+    ]
+}
 
 

@@ -3,11 +3,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import './Displaychat.css'
+import useSetMsgTimer from '../../../hooks/useSetMsgTimer';
 
 const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
+    const {timer}=useSetMsgTimer()
 
     useEffect(() => {
         const messagesRef = collection(db, 'Messages')
@@ -37,6 +39,13 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
             return data
         }
     })
+
+    const functionTest = (x) => {
+    console.log(x);
+    const lastTime = timer[0].data[timer[0].data.length - 1].time.toDate();
+    const formattedTime = lastTime.getHours() + ":" + lastTime.getMinutes() + ":" + lastTime.getSeconds();
+    console.log(formattedTime);
+};
     //console.log(thisChat[0].message[3].sender === user.uid)
 
     return (
@@ -50,7 +59,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                                 <div className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"}>
                                     <h6>{`@${msg.userNameS}`}</h6>
                                     <h6>-</h6>
-                                    <h6 key={j + 1}>
+                                    <h6 onClick={msg.sender === user.uid ? functionTest('x') : functionTest(`${msg.createdAt.toDate().getHours()}:${msg.createdAt.toDate().getMinutes()}:${msg.createdAt.toDate().getSeconds()}`)} key={j + 1}>
                                         {`${msg.createdAt.toDate().getHours()}:${msg.createdAt.toDate().getMinutes()}:${msg.createdAt.toDate().getSeconds()}`}
                                     </h6>
                                 </div>
