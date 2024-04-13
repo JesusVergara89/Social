@@ -120,7 +120,7 @@ const Register = ({ setNewuser }) => {
         setModalusername(!modalusername)
         document.getElementById("username").removeEventListener("click", functionmodalusername);
     }
-    const letElementforModalUserName = () => {
+    const letGoElementForModalUserName = () => {
         setModalusername(!modalusername)
         document.getElementById("username").removeEventListener("click", functionmodalusername);
     }
@@ -193,7 +193,7 @@ const Register = ({ setNewuser }) => {
                             onChange={(e) => { setUserName(e.target.value); handleInputChange(e) }}
                         />
                         <div className={modalusername ? "modalusername" : "none"}>
-                            <h6 onClick={letElementforModalUserName}><i className='bx bxs-x-circle'></i></h6>
+                            <h6 onClick={letGoElementForModalUserName}><i className='bx bxs-x-circle'></i></h6>
                             <h6>Una vez establecido el @userName, no podras cambiarlo. &#128556;</h6>
                         </div>
                     </div>
