@@ -34,8 +34,8 @@ const Singleuser = () => {
     return (
         <article className="single-user">
             {thisUser ?
-                <div className="all-users-mapeo">
-                    <div className='all-users-profile-information'>
+                <div className="single-user-to-contact">
+                    <div className='all-users-profile-information-to-contact'>
                         <div className="all-users-profile-information-image">
                             <img src={thisUser.photo} alt="" className="all-users-profile-image" />
                         </div>

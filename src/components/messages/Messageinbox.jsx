@@ -10,7 +10,6 @@ const Messageinbox = () => {
     const { x1, x2 } = useParams()
 
     const [allrequest, setAllrequest] = useState([])
-    const [goMessages, setGoMessages] = useState(true)
 
     useEffect(() => {
         const requestCollectionRef = collection(db, 'Request');
@@ -77,8 +76,6 @@ const Messageinbox = () => {
         allowMessages = false
     }
 
-    const allowSendMessages = () => setGoMessages(!goMessages)
-
     //console.log(x1, x2)
 
     return (
@@ -86,11 +83,9 @@ const Messageinbox = () => {
             <div className="Messageinbox-container">
                 {allowMessages ?
                     <div className="allow-messages-container">
-                        {goMessages ?
-                            <button className='Messageinbox-messages-to' onClick={allowSendMessages}>Mensajear</button>
-                            :
-                            <Messagescontainer idreceiper={x1} />
-                        }
+
+                        <Messagescontainer idreceiper={x1} />
+
                     </div>
                     :
                     <div className='Messageinbox-request-friend' >

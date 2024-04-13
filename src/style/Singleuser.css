@@ -18,15 +18,23 @@
     margin-top: 150px;
 }
 
-.single-user-card {
+.single-user-to-contact {
     width: 400px;
     height: auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 1px solid var(--border);
     margin-top: 50px;
     position: relative;
+}
+
+.all-users-profile-information-to-contact {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
 }
 
 .all-users-profile-information-image {
@@ -77,4 +85,18 @@
     text-align: left;
     font-size: 0.75rem;
     padding-right: 10px;
+}
+
+@media (width < 440px){
+    .single-user-to-contact {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--border);
+        margin-top: 50px;
+        position: relative;
+    }
 }
