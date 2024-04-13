@@ -10,7 +10,7 @@ const Cardmsg = () => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
-    const { timer,myTimes } = useSetMsgTimer()
+    const { timer ,myTimes } = useSetMsgTimer(user)
 
     useEffect(() => {
         const querySnapshot = collection(db, 'Messages');
@@ -34,8 +34,6 @@ const Cardmsg = () => {
         }
         return false;
     });
-  
-    //console.log('')
 
     const testFunction = (data) => {
         myTimes(user.uid,data)

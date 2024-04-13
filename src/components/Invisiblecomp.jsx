@@ -67,6 +67,12 @@ const Invisiblecomp = () => {
         };
     }, []);
 
+    /*code for msg notifications*/
+    useEffect(()=>{
+       
+    },[])
+    /*code for msg notifications*/
+
     useEffect(() => {
         if (pending.length > 0 && user) {
             const userPending = pending.filter(pen =>

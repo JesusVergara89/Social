@@ -2,7 +2,7 @@ import { addDoc, arrayRemove, arrayUnion, collection, doc, onSnapshot, orderBy, 
 import { useEffect, useState } from "react"
 import { db } from "../firebaseConfig"
 
-const useSetMsgTimer = () => {
+const useSetMsgTimer = (user) => {
 
     const [timer, setTimer] = useState()
 
@@ -18,34 +18,28 @@ const useSetMsgTimer = () => {
         })
     }, [])
 
-    const myTimes = (userID,data) => {
-        for (let i = 0; i < timer.length; i++) {
-            const timerData = timer[i].data;
-            if (timerData) {
-                const timerDocRef = doc(db, "timerMsg", timer[i].id);
+    const myTimes = (userID, data) => {
+        if (timer) {
+            const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid);
+            if (findingCorrectObject) {
+                const timerDocRef = doc(db, "timerMsg", findingCorrectObject.id);
+                const timerData = findingCorrectObject.data;
                 let newData = [...timerData];
                 if (timerData.length >= 9) {
                     newData = timerData.slice(9);
-                    updateDoc(timerDocRef, { data: newData })
-                        .then(() => {
-                            //console.log("Elementos eliminados correctamente");
-                        })
-                        .catch((error) => {
-                            console.error("Error eliminando elementos:", error);
-                        });
                 }
                 newData.push({ creatorID: userID, withwho: data, time: new Date() });
                 updateDoc(timerDocRef, { data: newData })
                     .then(() => {
-                        //console.log("Nuevo objeto agregado correctamente");
+                        //console.log("Datos actualizados correctamente");
                     })
                     .catch((error) => {
-                        console.error("Error agregando nuevo objeto:", error);
+                        console.error("Error al actualizar los datos:", error);
                     });
             }
         }
     };
-    
+
 
     return { timer, myTimes }
 }
