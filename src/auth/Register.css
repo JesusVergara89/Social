@@ -83,27 +83,32 @@
 
 .modalusername {
     width: 90px;
-    height: 100px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: rgb(24, 24, 24);
     border-radius: 5px;
     position: absolute;
-    top: -120px;
+    top: -130px;
     right: calc(50% - 45px);
-    padding: 10px 5px 5px 5px;
+    padding: 10px 5px 15px 5px;
+}
+
+.modalusername .bx {
+    color: var(--Blanco-hueso);
+    font-size: 1rem;
 }
 
 .modalusername::after {
     content: '';
     position: absolute;
-    bottom: -10px; 
-    left: 50%; 
+    bottom: -10px;
+    left: 50%;
     transform: translateX(-50%);
-    border-width: 10px 10px 0; 
+    border-width: 10px 10px 0;
     border-style: solid;
-    border-color: rgb(24, 24, 24) transparent transparent; 
+    border-color: rgb(24, 24, 24) transparent transparent;
 }
 
 .none {
@@ -174,7 +179,7 @@
     cursor: pointer;
     background-color: var(--Azul-claro);
     color: #000000;
-  }
+}
 
 .register-container3 {
     width: 100%;
@@ -185,7 +190,7 @@
     padding-bottom: 10px;
 }
 
-@media ( width < 350px){
+@media (width < 350px) {
     .register {
         width: 300px;
         height: 500px;

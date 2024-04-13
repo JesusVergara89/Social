@@ -21,7 +21,8 @@ const Register = ({ setNewuser }) => {
     const [userName, setUserName] = useState('')
     const [textareaHeight, setTextareaHeight] = useState('30px');
     const [modalusername, setModalusername] = useState(false)
-    const [allUsers, setAllUsers] = useState()
+    const [allUsers, setAllUsers] = useState([])
+    const [usuarioExistente, setUsuarioExistente] = useState(false);
 
     function scrollToTop() {
         window.scrollTo({
@@ -78,7 +79,6 @@ const Register = ({ setNewuser }) => {
             toast('Please fill in name, email, and photo fields', { type: 'error' });
             return;
         }
-
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
@@ -116,20 +116,29 @@ const Register = ({ setNewuser }) => {
         setUserName('');
     };
 
-    const modalUsername = document.getElementById("username")
-
-    document.addEventListener("click", function(event) {
-        if (!modalUsername.contains(event.target)) {
-            setModalusername(false)
-        }
-    });
-
     const functionmodalusername = () => {
         setModalusername(!modalusername)
         document.getElementById("username").removeEventListener("click", functionmodalusername);
     }
+    const letElementforModalUserName = () => {
+        setModalusername(!modalusername)
+        document.getElementById("username").removeEventListener("click", functionmodalusername);
+    }
     document.getElementById("username")?.addEventListener("click", functionmodalusername);
-    console.log(allUsers)
+
+    const handleInputChange = (event) => {
+        const valor = event.target.value;
+        if (allUsers && allUsers.length > 0) {
+            const usuarioExistente = allUsers.some(usuario =>
+                usuario.userName === valor
+            );
+            setUsuarioExistente(usuarioExistente);
+            if (usuarioExistente) {
+                toast('Este usuario ya existe, tienes que elegir uno distinto!', { type: 'warning' });
+            }
+        }
+    };
+    console.log(usuarioExistente)
     return (
         <article className="register">
             <div className="register-container1">
@@ -181,10 +190,11 @@ const Register = ({ setNewuser }) => {
                             className='register-container2-username'
                             placeholder='User: @user'
                             value={userName}
-                            onChange={(e) => { setUserName(e.target.value); }}
+                            onChange={(e) => { setUserName(e.target.value); handleInputChange(e) }}
                         />
                         <div className={modalusername ? "modalusername" : "none"}>
-                            <h6>Una vez establecido el @userName, no podras cmabiarlo. &#128556;</h6>
+                            <h6 onClick={letElementforModalUserName}><i className='bx bxs-x-circle'></i></h6>
+                            <h6>Una vez establecido el @userName, no podras cambiarlo. &#128556;</h6>
                         </div>
                     </div>
                     <div className='warning-photo'>Upload your profile photo here</div>
@@ -195,7 +205,7 @@ const Register = ({ setNewuser }) => {
                         accept="image/*"
                         onChange={handlePhotoChange}
                     />
-                    <button onClick={handleSingUp} className="register-container2-btn">Register</button>
+                    {usuarioExistente ? '' : <button onClick={handleSingUp} className="register-container2-btn">Register</button>}
                 </div>
             </div>
 
