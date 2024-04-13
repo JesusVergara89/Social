@@ -14,6 +14,8 @@ const Invisiblecomp = () => {
     const [friends, setFriends] = useState([]);
     const [matchFriends, setMatchFriends] = useState([]);
     const [user] = useAuthState(auth);
+    const [timer, setTimer] = useState()
+    const [allmsg, setAllmsg] = useState();
 
     const setSpecific = (value) => dispatch(setRequestValue(value));
     const setFriendValue = (value) => dispatch(setConectionValue(value));
@@ -36,6 +38,28 @@ const Invisiblecomp = () => {
             }));
             setFriends(request);
         });
+
+        const timerRef = collection(db, "timerMsg")
+        const q2 = query(timerRef, orderBy("data"))
+        onSnapshot(q2, (snapshot) => {
+            const timers = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setTimer(timers)
+        })
+
+
+        const messagesRef = collection(db, 'Messages')
+        const q3 = query(messagesRef, orderBy('message'))
+        onSnapshot(q3, (snapshot) => {
+            const msgs = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setAllmsg(msgs)
+        })
+
 
         return () => {
             unsubscribe();

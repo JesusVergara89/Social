@@ -18,7 +18,7 @@ const useSetMsgTimer = () => {
         })
     }, [])
 
-    const myTimes = (userID) => {
+    const myTimes = (userID,data) => {
         for (let i = 0; i < timer.length; i++) {
             const timerData = timer[i].data;
             if (timerData) {
@@ -34,7 +34,7 @@ const useSetMsgTimer = () => {
                             console.error("Error eliminando elementos:", error);
                         });
                 }
-                newData.push({ creatorID: userID, time: new Date() });
+                newData.push({ creatorID: userID, withwho: data, time: new Date() });
                 updateDoc(timerDocRef, { data: newData })
                     .then(() => {
                         //console.log("Nuevo objeto agregado correctamente");

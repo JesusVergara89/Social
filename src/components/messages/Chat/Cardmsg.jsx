@@ -37,8 +37,8 @@ const Cardmsg = () => {
   
     //console.log('')
 
-    const testFunction = () => {
-        myTimes(user.uid)
+    const testFunction = (data) => {
+        myTimes(user.uid,data)
         //console.log(user.uid)
     }
 
@@ -47,7 +47,7 @@ const Cardmsg = () => {
             <h3 className='card-msg-title'>tus mensajes con otros usuarios:</h3>
             {userMsgs && userMsgs.map((msg, i) => (
                 <Link key={i + 1} to={msg.message[0].receptor === user.uid ? `/Sendmessage/${msg.message[0].sender}/${user.uid}` : `/Sendmessage/${msg.message[0].receptor}/${user.uid}`}>
-                    <div onClick={testFunction} key={i} className='card-msg-info'>
+                    <div onClick={msg.message[0].receptor === user.uid ? () => testFunction(msg.message[0].userNameS) : () => testFunction(msg.message[0].userNameR)} key={i} className='card-msg-info'>
                         <div className="card-user1">
                             <img src={msg.message[0].photoR} alt="" />
                             <h4>{`@${msg.message[0].userNameR}`}</h4>
