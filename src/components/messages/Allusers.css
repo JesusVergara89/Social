@@ -20,6 +20,13 @@
     gap: 10px;
 }
 
+.all-user-noallowit {
+    width: 100%;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
 .all-users .all-users-explanations{
     all: unset;
     text-align: center;

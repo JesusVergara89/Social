@@ -63,7 +63,7 @@ const Allusers = () => {
                     )}
                 </div>
                 :
-                <h2>Registrate o inicia sesión para buscar usuarios</h2>
+                <h2 className='all-user-noallowit'>Registrate <br /> o <br /> inicia sesión para buscar otros usuarios</h2>
             }
         </div>
     )
