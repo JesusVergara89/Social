@@ -20,7 +20,7 @@
     gap: 10px;
 }
 
-.all-users p{
+.all-users .all-users-explanations{
     all: unset;
     text-align: center;
     margin-bottom: 30px;

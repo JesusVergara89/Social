@@ -3,11 +3,12 @@ import './Register.css';
 import social from '../images/Social.svg';
 import { createUserWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { auth, storage } from '../firebaseConfig';
+import { auth, db, storage } from '../firebaseConfig';
 import { toast } from 'react-toastify';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import Access from '../components/Access';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 
 const Register = ({ setNewuser }) => {
     const [currentlyLoggedinUser] = useAuthState(auth);
@@ -20,6 +21,7 @@ const Register = ({ setNewuser }) => {
     const [userName, setUserName] = useState('')
     const [textareaHeight, setTextareaHeight] = useState('30px');
     const [modalusername, setModalusername] = useState(false)
+    const [allUsers, setAllUsers] = useState()
 
     function scrollToTop() {
         window.scrollTo({
@@ -27,6 +29,18 @@ const Register = ({ setNewuser }) => {
             behavior: 'smooth'
         });
     }
+
+    useEffect(() => {
+        const usersCollectionRef = collection(db, 'Users');
+        const q = query(usersCollectionRef, orderBy('userName'))
+        onSnapshot(q, (snapshot) => {
+            const users = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setAllUsers(users);
+        })
+    }, []);
 
     const navigate = useNavigate()
 
@@ -115,7 +129,7 @@ const Register = ({ setNewuser }) => {
         document.getElementById("username").removeEventListener("click", functionmodalusername);
     }
     document.getElementById("username")?.addEventListener("click", functionmodalusername);
-    ///console.log(modalusername)
+    console.log(allUsers)
     return (
         <article className="register">
             <div className="register-container1">

@@ -36,31 +36,35 @@ const Allusers = () => {
     //console.log(Allusers)
     return (
         <div className='all-users'>
-            <p>Encuentra conexiones por nombre o usuario</p>
-            <div className="all-user-find">
-                <div className="all-user-find-inner">
-                    <input
-                        id='inputfind'
-                        type="text"
-                        value={filtro}
-                        onChange={handleInputChange}
-                        placeholder="Buscar usuario..."
-                    />
-                    <div className="user-find">
-                        <i className='bx bx-search'></i>
+            {thiIsTheCurrentUser !== null ? <p className='all-users-explanations'>Encuentra conexiones por nombre o usuario</p> : ''}
+            {thiIsTheCurrentUser !== null ?
+                <div className="all-user-find">
+                    <div className="all-user-find-inner">
+                        <input
+                            id='inputfind'
+                            type="text"
+                            value={filtro}
+                            onChange={handleInputChange}
+                            placeholder="Buscar usuario..."
+                        />
+                        <div className="user-find">
+                            <i className='bx bx-search'></i>
+                        </div>
                     </div>
-                </div>
 
-                {filtro && usuariosFiltrados.length > 0 && (
-                    <div className='all-user-find-card'>
-                        {usuariosFiltrados.map(usuario => (
-                            <div key={usuario.id}>
-                                <Filtereduser thiIsTheCurrentUser={thiIsTheCurrentUser} usuario={usuario} />
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
+                    {filtro && usuariosFiltrados.length > 0 && (
+                        <div className='all-user-find-card'>
+                            {usuariosFiltrados.map(usuario => (
+                                <div key={usuario.id}>
+                                    <Filtereduser thiIsTheCurrentUser={thiIsTheCurrentUser} usuario={usuario} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                :
+                <h2>Registrate o inicia sesión para buscar usuarios</h2>
+            }
         </div>
     )
 }
