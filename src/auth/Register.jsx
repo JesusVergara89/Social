@@ -138,7 +138,7 @@ const Register = ({ setNewuser }) => {
             }
         }
     };
-    console.log(usuarioExistente)
+    //console.log(usuarioExistente)
     return (
         <article className="register">
             <div className="register-container1">
