@@ -68,9 +68,41 @@ const Invisiblecomp = () => {
     }, []);
 
     /*code for msg notifications*/
-    useEffect(()=>{
-       
-    },[])
+    useEffect(() => {
+        if (timer && allmsg) {
+            const userMsgs = allmsg?.filter(data => {
+                if (Array.isArray(data.message) && data.message.length > 0) {
+                    for (let i = 0; i < data.message.length; i++) {
+                        if (data.message[i].sender === user.uid || data.message[i].receptor === user.uid) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            });
+            const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid);
+            const timestamp1 = userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1].createdAt;
+            const timestamp2 = findingCorrectObject.data[findingCorrectObject.data.length - 1].time;
+
+            const segundos1 = timestamp1.seconds;
+            const nanosegundos1 = timestamp1.nanoseconds;
+            const date1 = new Date(segundos1 * 1000 + nanosegundos1 / 1000000);
+
+            const segundos2 = timestamp2.seconds;
+            const nanosegundos2 = timestamp2.nanoseconds;
+            const date2 = new Date(segundos2 * 1000 + nanosegundos2 / 1000000);
+
+            if (date1 > date2) {
+                console.log("El primer Timestamp es más reciente que el segundo.");
+            } else if (date1 < date2) {
+                console.log("El segundo Timestamp es más reciente que el primero.");
+            } else {
+                console.log("Ambos Timestamps representan la misma fecha.");
+            }
+
+
+        }
+    }, [timer, allmsg])
     /*code for msg notifications*/
 
     useEffect(() => {

@@ -25,8 +25,8 @@ const useSetMsgTimer = (user) => {
                 const timerDocRef = doc(db, "timerMsg", findingCorrectObject.id);
                 const timerData = findingCorrectObject.data;
                 let newData = [...timerData];
-                if (timerData.length >= 9) {
-                    newData = timerData.slice(9);
+                if (timerData.length >= 7) {
+                    newData = timerData.slice(7);
                 }
                 newData.push({ creatorID: userID, withwho: data, time: new Date() });
                 updateDoc(timerDocRef, { data: newData })
