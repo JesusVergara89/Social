@@ -67,19 +67,15 @@ const Invisiblecomp = () => {
         };
     }, []);
 
-    /*code for msg notifications*/
+    
     useEffect(() => {
         if (timer && allmsg) {
-            const userMsgs = allmsg?.filter(data => {
-                if (Array.isArray(data.message) && data.message.length > 0) {
-                    for (let i = 0; i < data.message.length; i++) {
-                        if (data.message[i].sender === user.uid || data.message[i].receptor === user.uid) {
-                            return true;
-                        }
-                    }
-                }
-                return false;
+            const userMsgs = allmsg.filter(msg => {
+                msg.message = msg.message.filter(m => m.receptor === user.uid);
+                return msg.message.length > 0;
             });
+
+            console.log(userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1])
             const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid);
             const timestamp1 = userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1].createdAt;
             const timestamp2 = findingCorrectObject.data[findingCorrectObject.data.length - 1].time;
