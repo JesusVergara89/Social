@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebaseConfig';
 import { setRequestValue } from '../store/slices/request.slice';
 import { setConectionValue } from '../store/slices/conections.slice';
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import { setMsgValue } from '../store/slices/countermsg.slice';
 
 const Invisiblecomp = () => {
@@ -17,6 +17,7 @@ const Invisiblecomp = () => {
     const [user] = useAuthState(auth);
     const [timer, setTimer] = useState()
     const [allmsg, setAllmsg] = useState();
+    const [lastAll, setLastall] = useState();
 
     const setSpecific = (value) => dispatch(setRequestValue(value));
     const setFriendValue = (value) => dispatch(setConectionValue(value));
@@ -62,6 +63,15 @@ const Invisiblecomp = () => {
             setAllmsg(msgs)
         })
 
+        const lasRef = collection(db, 'lasMsg')
+        const q4 = query(lasRef, orderBy('data'))
+        onSnapshot(q4, (snapshot) => {
+            const last = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setLastall(last)
+        })
 
         return () => {
             unsubscribe();
@@ -71,23 +81,40 @@ const Invisiblecomp = () => {
 
 
     useEffect(() => {
-        if (timer && allmsg && user) {
+        if (timer && allmsg && user && lastAll) {
             const userMsgs = allmsg.filter(msg => {
                 msg.message = msg.message.filter(m => m.receptor === user.uid);
                 return msg.message.length > 0;
             });
-    
+
             const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid);
-    
+            const lastMsgData = lastAll.find(obj => obj.data[0].creatorID === user.uid);
+
             if (userMsgs.length > 0 && findingCorrectObject) {
                 const lastUserMsg = userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1];
                 const lastTimerObj = findingCorrectObject.data[findingCorrectObject.data.length - 1];
-    
+                console.log(lastTimerObj)
                 const timestamp1 = lastUserMsg.createdAt.toDate();
                 const timestamp2 = lastTimerObj.time.toDate();
-    
+
                 if (timestamp1 > timestamp2) {
                     setMesgValue(1)
+                    if (findingCorrectObject && lastTimerObj && lastMsgData) {
+                        const timerDocRef = doc(db, "lasMsg", lastMsgData.id);
+                        const timerData = lastMsgData.data;
+                        let newData = [...timerData];
+                        if (timerData.length >= 7) {
+                            newData = timerData.slice(5);
+                        }
+                        newData.push({ creatorID: lastTimerObj.creatorID, withwho: lastTimerObj.withwho, time: new Date() });
+                        updateDoc(timerDocRef, { data: newData })
+                            .then(() => {
+                                //console.log("Datos actualizados correctamente");
+                            })
+                            .catch((error) => {
+                                console.error("Error al actualizar los datos:", error);
+                            });
+                    }
                 } else if (timestamp1 < timestamp2) {
                     setMesgValue(0)
                 } else {
@@ -98,7 +125,7 @@ const Invisiblecomp = () => {
             }
         }
     }, [timer, allmsg]);
-    
+
     /*code for msg notifications*/
 
     useEffect(() => {

@@ -28,6 +28,7 @@ const Profile = ({ newuser, setNewuser }) => {
         try {
             const articleRef = collection(db, 'Users');
             const msgRef = collection(db, 'timerMsg');
+            const lasRef = collection(db, 'lasMsg');
             await addDoc(articleRef, {
                 age: newuser.age,
                 bio: newuser.bio,
@@ -38,6 +39,9 @@ const Profile = ({ newuser, setNewuser }) => {
             });
             const data = [{ creatorID: currentlyLoggedinUser.uid, withwho: '', time: new Date() }]
             await addDoc(msgRef, {
+                data
+            });
+            await addDoc(lasRef, {
                 data
             });
             //toast('Bio added successfully', { type: 'success' });
