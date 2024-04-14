@@ -55,3 +55,25 @@ timer = {
 }
 
 
+//msg
+
+msg = {
+    id:'hhhh',
+    message: [
+        {
+            content: 'hhhh',
+            createdAt: 'timer',
+            photoR: 'jjjj',
+            photoS: 'ffffff',
+            receptor: 'ooooo',
+            sender: 'jjjj',
+            userNameR: 'wwwww',
+            userNameS: 'eeeeee'
+        },
+        {
+           datosigusles:  '...'
+        }
+    ]
+}
+
+

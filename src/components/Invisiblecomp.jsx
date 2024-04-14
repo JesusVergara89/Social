@@ -5,6 +5,7 @@ import { auth, db } from '../firebaseConfig';
 import { setRequestValue } from '../store/slices/request.slice';
 import { setConectionValue } from '../store/slices/conections.slice';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { setMsgValue } from '../store/slices/countermsg.slice';
 
 const Invisiblecomp = () => {
 
@@ -19,6 +20,7 @@ const Invisiblecomp = () => {
 
     const setSpecific = (value) => dispatch(setRequestValue(value));
     const setFriendValue = (value) => dispatch(setConectionValue(value));
+    const setMesgValue = (value) => dispatch(setMsgValue(value));
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'Request'), (snapshot) => {
@@ -67,38 +69,36 @@ const Invisiblecomp = () => {
         };
     }, []);
 
-    
+
     useEffect(() => {
-        if (timer && allmsg) {
+        if (timer && allmsg && user) {
             const userMsgs = allmsg.filter(msg => {
                 msg.message = msg.message.filter(m => m.receptor === user.uid);
                 return msg.message.length > 0;
             });
-
-            console.log(userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1])
+    
             const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid);
-            const timestamp1 = userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1].createdAt;
-            const timestamp2 = findingCorrectObject.data[findingCorrectObject.data.length - 1].time;
-
-            const segundos1 = timestamp1.seconds;
-            const nanosegundos1 = timestamp1.nanoseconds;
-            const date1 = new Date(segundos1 * 1000 + nanosegundos1 / 1000000);
-
-            const segundos2 = timestamp2.seconds;
-            const nanosegundos2 = timestamp2.nanoseconds;
-            const date2 = new Date(segundos2 * 1000 + nanosegundos2 / 1000000);
-
-            if (date1 > date2) {
-                console.log("El primer Timestamp es más reciente que el segundo.");
-            } else if (date1 < date2) {
-                console.log("El segundo Timestamp es más reciente que el primero.");
+    
+            if (userMsgs.length > 0 && findingCorrectObject) {
+                const lastUserMsg = userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1];
+                const lastTimerObj = findingCorrectObject.data[findingCorrectObject.data.length - 1];
+    
+                const timestamp1 = lastUserMsg.createdAt.toDate();
+                const timestamp2 = lastTimerObj.time.toDate();
+    
+                if (timestamp1 > timestamp2) {
+                    setMesgValue(1)
+                } else if (timestamp1 < timestamp2) {
+                    setMesgValue(0)
+                } else {
+                    setMesgValue(0)
+                }
             } else {
-                console.log("Ambos Timestamps representan la misma fecha.");
+                console.log("No hay mensajes del usuario o no se encontró el objeto correcto en timer.");
             }
-
-
         }
-    }, [timer, allmsg])
+    }, [timer, allmsg]);
+    
     /*code for msg notifications*/
 
     useEffect(() => {

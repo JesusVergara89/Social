@@ -9,14 +9,15 @@ import { useEffect, useState } from 'react'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 
 const Header = () => {
-    
+
     const [currentlyLoggedinUser] = useAuthState(auth);
     const navigate = useNavigate()
     const conexionNumber = useSelector(state => state.conectionNumber)
     const [allusers, setAllusers] = useState()
     const reloadPhoto = useSelector(state => state.photoUpdate);
+    const msgNotification = useSelector(state => state.countermsg);
 
-    useEffect(()=>{
+    useEffect(() => {
         const usersCollectionRef = collection(db, 'Users');
         const q = query(usersCollectionRef, orderBy('userName'))
         onSnapshot(q, (snapshot) => {
@@ -26,9 +27,9 @@ const Header = () => {
             }))
             setAllusers(allUsers);
         })
-    },[reloadPhoto])
-    
-    //console.log(allusers)
+    }, [reloadPhoto])
+
+    console.log(msgNotification)
 
     return (
         <header>
@@ -44,6 +45,9 @@ const Header = () => {
                 <Link to={'/messagesinbox'}>
                     <div className="menu-menu">
                         <i className='bx bx-message-detail'></i>
+                        <div className={msgNotification === 1 ? 'menu-menu-notify' : 'menu-menu-notify-none'}>
+                            <i className='bx bxs-bell-ring'></i>
+                        </div>
                     </div>
                 </Link>
                 <Link to={'/conections'} >

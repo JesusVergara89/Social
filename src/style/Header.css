@@ -106,6 +106,38 @@ header .menu {
     position: relative;
 }
 
+.menu-menu-notify {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -13px;
+    right: 0px;
+}
+
+.menu-menu-notify-none {
+    display: none;
+}
+
+.menu-menu-notify .bx {
+    color: red;
+    font-size: 1rem;
+    animation: vibrar 0.1s infinite alternate, cambio-color 1s infinite alternate;
+}
+
+@keyframes vibrar {
+    0% { transform: translateX(-2px); }
+    100% { transform: translateX(2px); }
+}
+
+@keyframes cambio-color {
+    0% { color: black; }
+    50% { color: red; }
+    100% { color: black; }
+}
+
 .conection-counter {
     width: 20px;
     height: 20px;
