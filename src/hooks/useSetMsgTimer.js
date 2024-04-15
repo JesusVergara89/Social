@@ -18,17 +18,20 @@ const useSetMsgTimer = (user) => {
         })
     }, [])
 
-    const myTimes = (userID, data) => {
+    const myTimes = (creatorID, receptorID) => {
         if (timer) {
-            const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid);
-            if (findingCorrectObject) {
-                const timerDocRef = doc(db, "timerMsg", findingCorrectObject.id);
-                const timerData = findingCorrectObject.data;
+            const EnterTestExistance = timer.find(obj => {
+                return obj.data[0].creatorID === user.uid && obj.data[0].receptorID === ''
+            });
+            if (EnterTestExistance !== undefined) {
+
+                const timerDocRef = doc(db, "timerMsg", EnterTestExistance.id);
+                const timerData = EnterTestExistance.data;
                 let newData = [...timerData];
                 if (timerData.length >= 7) {
                     newData = timerData.slice(7);
                 }
-                newData.push({ creatorID: userID, withwho: data, time: new Date() });
+                newData.push({ creatorID: creatorID, receptorID: receptorID, time: new Date() });
                 updateDoc(timerDocRef, { data: newData })
                     .then(() => {
                         //console.log("Datos actualizados correctamente");
@@ -36,7 +39,31 @@ const useSetMsgTimer = (user) => {
                     .catch((error) => {
                         console.error("Error al actualizar los datos:", error);
                     });
+
+            } else {
+                const findingCorrectObject = timer.find(obj => {
+                    return obj.data[0].creatorID === user.uid && obj.data[0].receptorID === receptorID || obj.data[0].creatorID === creatorID && obj.data[0].receptorID === user.uid || obj.data[0].creatorID === receptorID && obj.data[0].receptorID === creatorID;
+                });
+                console.log(findingCorrectObject)
+                if (findingCorrectObject) {
+                    const timerDocRef = doc(db, "timerMsg", findingCorrectObject.id);
+                    const timerData = findingCorrectObject.data;
+                    let newData = [...timerData];
+                    if (timerData.length >= 7) {
+                        newData = timerData.slice(7);
+                    }
+                    newData.push({ creatorID: creatorID, receptorID: receptorID, time: new Date() });
+                    updateDoc(timerDocRef, { data: newData })
+                        .then(() => {
+                            //console.log("Datos actualizados correctamente");
+                        })
+                        .catch((error) => {
+                            console.error("Error al actualizar los datos:", error);
+                        });
+                }
             }
+
+
         }
     };
 

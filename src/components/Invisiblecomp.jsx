@@ -79,21 +79,21 @@ const Invisiblecomp = () => {
         };
     }, []);
 
-
-    useEffect(() => {
+   
+    {/*useEffect(() => {
         if (timer && allmsg && user && lastAll) {
             const userMsgs = allmsg.filter(msg => {
                 msg.message = msg.message.filter(m => m.receptor === user.uid);
                 return msg.message.length > 0;
             });
-
+            console.log(userMsgs)
             const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid);
             const lastMsgData = lastAll.find(obj => obj.data[0].creatorID === user.uid);
-
+            //console.log(lastMsgData)
             if (userMsgs.length > 0 && findingCorrectObject) {
                 const lastUserMsg = userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1];
                 const lastTimerObj = findingCorrectObject.data[findingCorrectObject.data.length - 1];
-                console.log(lastTimerObj)
+                //console.log(lastUserMsg)
                 const timestamp1 = lastUserMsg.createdAt.toDate();
                 const timestamp2 = lastTimerObj.time.toDate();
 
@@ -124,7 +124,7 @@ const Invisiblecomp = () => {
                 console.log("No hay mensajes del usuario o no se encontró el objeto correcto en timer.");
             }
         }
-    }, [timer, allmsg]);
+    }, [timer, allmsg]);*/}
 
     /*code for msg notifications*/
 
