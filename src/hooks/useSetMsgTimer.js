@@ -30,7 +30,7 @@ const useSetMsgTimer = (user) => {
                 if (timerData.length >= 7) {
                     newData = timerData.slice(7);
                 }
-                newData.push({ creatorID: creatorID, receptorID: receptorID, time: new Date() });
+                newData.push({ creatorID: creatorID, receptorID: receptorID, userNameS: userNameS, userNameR: userNameR, time: new Date()});
                 updateDoc(timerDocRef, { data: newData })
                     .then(() => {
                         //console.log("Datos actualizados correctamente");

@@ -106,7 +106,6 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                 const messageId = arrayMessagesToUpdate[0].id;
                 const messageRef = doc(db, 'Messages', messageId);
                 await updateDoc(messageRef, { message: updatedMessages });
-                myTimes()
             } else {
                 const newPost = {
                     message: [
