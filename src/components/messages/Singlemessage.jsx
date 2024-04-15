@@ -106,7 +106,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                 const messageId = arrayMessagesToUpdate[0].id;
                 const messageRef = doc(db, 'Messages', messageId);
                 await updateDoc(messageRef, { message: updatedMessages });
-                myTimes(ideSender,idreceiper,userChangePosition[0].userName,userChangePosition[1].userName)
+                //myTimes(ideSender,idreceiper,userChangePosition[0].userName,userChangePosition[1].userName)
             } else {
                 const newPost = {
                     message: [
@@ -124,7 +124,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                 };
                 const postRef = collection(db, 'Messages');
                 await addDoc(postRef, newPost);
-                myTimes(ideSender,idreceiper,userChangePosition[0].userName,userChangePosition[1].userName)
+                //myTimes(ideSender,idreceiper,userChangePosition[0].userName,userChangePosition[1].userName)
             }
             setNewMessage('');
             toast('Message send', { type: 'success' });
