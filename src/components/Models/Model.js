@@ -76,4 +76,65 @@ msg = {
     ]
 }
 
+timer = [
+    {
+        id: 'gagagagaga',
+        data: [
+            {
+                creatorID: 'xxxxxxx',
+                receptorID: 'yyyyyyy',
+                time: 'ssssssss',
+                userNameR: 'pppppp',
+                userNameS: 'ggggggggg'
+            },
+            {
+                creatorID: 'xxxxxxx',
+                receptorID: 'yyyyyyy',
+                time: 'ssssssss',
+                userNameR: 'pppppp',
+                userNameS: 'ggggggggg'
+            },
+            {
+                creatorID: 'xxxxxxx',
+                receptorID: 'yyyyyyy',
+                time: 'ssssssss',
+                userNameR: 'pppppp',
+                userNameS: 'ggggggggg'
+            },
+            {
+                masDataIgual: '..........'
+            }
+        ]
+    },
+    {
+        id: 'gagagagaga',
+        data: [
+            {
+                creatorID: 'xxxxxxx',
+                receptorID: 'yyyyyyy',
+                time: 'ssssssss',
+                userNameR: 'pppppp',
+                userNameS: 'ggggggggg'
+            },
+            {
+                creatorID: 'xxxxxxx',
+                receptorID: 'yyyyyyy',
+                time: 'ssssssss',
+                userNameR: 'pppppp',
+                userNameS: 'ggggggggg'
+            },
+            {
+                creatorID: 'xxxxxxx',
+                receptorID: 'yyyyyyy',
+                time: 'ssssssss',
+                userNameR: 'pppppp',
+                userNameS: 'ggggggggg'
+            },
+            {
+                masDataIgual: '..........'
+            }
+        ]
+    }
+]
+
 
