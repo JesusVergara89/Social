@@ -98,7 +98,7 @@ const Invisiblecomp = () => {
                 //console.log('im in')
                 const lastUserMsg = userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1];// last msm where the user log in is the receptor
                 const lastTimerObj = findingCorrectObject.data[findingCorrectObject.data.length - 1];
-                console.log(lastTimerObj)
+                //console.log(lastTimerObj)
                 const timestamp1 = lastUserMsg.createdAt.toDate();
                 //console.log(timestamp1)
                 const timestamp2 = lastTimerObj.time.toDate();
