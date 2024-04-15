@@ -91,8 +91,8 @@ const Invisiblecomp = () => {
                 return msg.message.length > 0;
             }); 
             //console.log(userMsgs)
-            const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid || obj.data[0].receptorID === user.uid );
-            const lastMsgData = lastAll.find(obj => obj.data[0].creatorID === user.uid || obj.data[0].receptorID === user.uid);
+            const findingCorrectObject = timer.find(obj => obj.data[0].receptorID === user.uid );
+            const lastMsgData = lastAll.find(obj => obj.data[0].receptorID === user.uid );
             //console.log(findingCorrectObject)
             if (userMsgs.length > 0 && findingCorrectObject) {
                 //console.log('im in')
