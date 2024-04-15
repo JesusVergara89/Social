@@ -23,6 +23,10 @@ const Invisiblecomp = () => {
     const setFriendValue = (value) => dispatch(setConectionValue(value));
     const setMesgValue = (value) => dispatch(setMsgValue(value));
 
+    if(user === null){
+        setMesgValue(0)
+    }
+
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'Request'), (snapshot) => {
             const requests = snapshot.docs.map((doc) => {
@@ -80,51 +84,57 @@ const Invisiblecomp = () => {
     }, []);
 
    
-    {/*useEffect(() => {
+    useEffect(() => {
         if (timer && allmsg && user && lastAll) {
             const userMsgs = allmsg.filter(msg => {
                 msg.message = msg.message.filter(m => m.receptor === user.uid);
                 return msg.message.length > 0;
-            });
-            console.log(userMsgs)
+            }); 
+            //console.log(userMsgs)
             const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid);
             const lastMsgData = lastAll.find(obj => obj.data[0].creatorID === user.uid);
-            //console.log(lastMsgData)
+            //console.log(findingCorrectObject)
             if (userMsgs.length > 0 && findingCorrectObject) {
-                const lastUserMsg = userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1];
+                //console.log('im in')
+                const lastUserMsg = userMsgs[userMsgs.length - 1].message[userMsgs[userMsgs.length - 1].message.length - 1];// last msm where the user log in is the receptor
                 const lastTimerObj = findingCorrectObject.data[findingCorrectObject.data.length - 1];
-                //console.log(lastUserMsg)
+                console.log(lastTimerObj)
                 const timestamp1 = lastUserMsg.createdAt.toDate();
+                //console.log(timestamp1)
                 const timestamp2 = lastTimerObj.time.toDate();
+                //console.log(timestamp2)
 
                 if (timestamp1 > timestamp2) {
+                    //console.log('if')
                     setMesgValue(1)
                     if (findingCorrectObject && lastTimerObj && lastMsgData) {
                         const timerDocRef = doc(db, "lasMsg", lastMsgData.id);
                         const timerData = lastMsgData.data;
                         let newData = [...timerData];
-                        if (timerData.length >= 7) {
+                        if (timerData.length >= 10) {
                             newData = timerData.slice(5);
                         }
-                        newData.push({ creatorID: lastTimerObj.creatorID, withwho: lastTimerObj.withwho, time: new Date() });
+                        newData.push({ creatorID: lastTimerObj.creatorID, receptorID: lastTimerObj.receptorID, userNameR: lastTimerObj.userNameR, userNameS: lastTimerObj.userNameS , time: new Date() });
                         updateDoc(timerDocRef, { data: newData })
                             .then(() => {
-                                //console.log("Datos actualizados correctamente");
+                                console.log("Datos actualizados correctamente");
                             })
                             .catch((error) => {
                                 console.error("Error al actualizar los datos:", error);
                             });
                     }
                 } else if (timestamp1 < timestamp2) {
+                    //console.log('else if')
                     setMesgValue(0)
                 } else {
+                    console.log('else')
                     setMesgValue(0)
                 }
             } else {
                 console.log("No hay mensajes del usuario o no se encontró el objeto correcto en timer.");
             }
         }
-    }, [timer, allmsg]);*/}
+    }, [timer, allmsg]);
 
     /*code for msg notifications*/
 

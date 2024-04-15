@@ -37,7 +37,7 @@ const Profile = ({ newuser, setNewuser }) => {
                 photo: currentlyLoggedinUser.photoURL,
                 name: newuser.name
             });
-            const data = [{ creatorID: currentlyLoggedinUser.uid, receptorID: '', time: new Date() }]
+            const data = [{ creatorID: currentlyLoggedinUser.uid, receptorID: '', userNameS: newuser.userName, userNameR: '', time: new Date() }]
             await addDoc(msgRef, {
                 data
             });

@@ -28,7 +28,7 @@ const Header = () => {
             setAllusers(allUsers);
         })
     }, [reloadPhoto])
-
+    console.log(msgNotification)
     return (
         <header>
             <div onClick={() => navigate('/')} className="logo">

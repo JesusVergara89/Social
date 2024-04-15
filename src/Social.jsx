@@ -21,7 +21,7 @@ import Configprofile from './components/configurationprofile/Configprofile';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebaseConfig';
 
-function Social() {
+function Social() {    
     const [onlineuser] = useAuthState(auth)
     const [newuser, setNewuser] = useState({})
     return (

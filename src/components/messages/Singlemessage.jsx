@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import './Singlemessage.css';
 import { addDoc, collection, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { db } from '../../firebaseConfig';
+import { auth, db } from '../../firebaseConfig';
 import { toast } from 'react-toastify';
 import Displaychat from './Chat/Displaychat';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setMsgValue } from '../../store/slices/countermsg.slice';
+import useSetMsgTimer from '../../hooks/useSetMsgTimer';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Singlemessage = ({ idreceiper, ideSender }) => {
 
+    const [userOnline]=useAuthState(auth)
     const [messages, setMessage] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [Allusers, setAllusers] = useState([])
     const [reloadMsg, setReloadMsg] = useState(false)
     const [textareaHeight, setTextareaHeight] = useState('30px');
     const [userChangePosition, setUserChangePosition] = useState(null)
+    const dispatch = useDispatch()
+    const setMesgValue = (value) => dispatch(setMsgValue(value));
+    const { timer, myTimes } = useSetMsgTimer(userOnline)
 
     const navigateToAllmsg = useNavigate()
 
@@ -72,10 +80,10 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         return array;
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setUserChangePosition(changePosition(myMessages, idreceiper))
         console.log()
-    },[newMessage])
+    }, [newMessage])
 
     const functionReload = () => setReloadMsg(!reloadMsg)
 
@@ -98,6 +106,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                 const messageId = arrayMessagesToUpdate[0].id;
                 const messageRef = doc(db, 'Messages', messageId);
                 await updateDoc(messageRef, { message: updatedMessages });
+                myTimes()
             } else {
                 const newPost = {
                     message: [
@@ -130,6 +139,11 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         return null;
     }
 
+    const functionImIn = () => {
+        setMesgValue(0)
+        console.log('hello')
+    }
+
     return (
         <div className='single-card-msg'>
             <button onClick={() => navigateToAllmsg('/messagesinbox')} className='single-card-msg-close'><i className='bx bxs-x-circle'></i></button>
@@ -144,7 +158,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                                 style={{ height: textareaHeight }}
                                 rows={1}
                             />
-                            <button onClick={functionReload} type='submit'>Enviar</button>
+                            <button onClick={() => { functionReload(); functionImIn() }} type='submit'>Enviar</button>
                         </form>
                     </div>
                 }
@@ -159,7 +173,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                                 style={{ height: textareaHeight }}
                                 rows={1}
                             />
-                            <button onClick={functionReload} type='submit'>Enviar</button>
+                            <button onClick={() => { functionReload(); functionImIn() }} type='submit'>Enviar</button>
                         </form>
                     </div>
                 }
