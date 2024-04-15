@@ -111,8 +111,8 @@ const Invisiblecomp = () => {
                         const timerDocRef = doc(db, "lasMsg", lastMsgData.id);
                         const timerData = lastMsgData.data;
                         let newData = [...timerData];
-                        if (timerData.length >= 10) {
-                            newData = timerData.slice(5);
+                        if (timerData.length >= 7) {
+                            newData = timerData.slice(3);
                         }
                         newData.push({ creatorID: lastTimerObj.creatorID, receptorID: lastTimerObj.receptorID, userNameR: lastTimerObj.userNameR, userNameS: lastTimerObj.userNameS , time: new Date() });
                         updateDoc(timerDocRef, { data: newData })
