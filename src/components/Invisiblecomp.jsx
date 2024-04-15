@@ -87,12 +87,12 @@ const Invisiblecomp = () => {
     useEffect(() => {
         if (timer && allmsg && user && lastAll) {
             const userMsgs = allmsg.filter(msg => {
-                msg.message = msg.message.filter(m => m.receptor === user.uid);
+                msg.message = msg.message.filter(m => m.receptor === user.uid || m.sender === user.uid);
                 return msg.message.length > 0;
             }); 
             //console.log(userMsgs)
-            const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid ||obj.data[0].receptorID === user.uid );
-            const lastMsgData = lastAll.find(obj => obj.data[0].creatorID === user.uid);
+            const findingCorrectObject = timer.find(obj => obj.data[0].creatorID === user.uid || obj.data[0].receptorID === user.uid );
+            const lastMsgData = lastAll.find(obj => obj.data[0].creatorID === user.uid || obj.data[0].receptorID === user.uid);
             //console.log(findingCorrectObject)
             if (userMsgs.length > 0 && findingCorrectObject) {
                 //console.log('im in')
