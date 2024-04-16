@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebaseConfig';
 import { setRequestValue } from '../store/slices/request.slice';
 import { setConectionValue } from '../store/slices/conections.slice';
-import { collection, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { setMsgValue } from '../store/slices/countermsg.slice';
 
 const Invisiblecomp = () => {
@@ -20,10 +20,6 @@ const Invisiblecomp = () => {
     const setSpecific = (value) => dispatch(setRequestValue(value));
     const setFriendValue = (value) => dispatch(setConectionValue(value));
     const setMesgValue = (value) => dispatch(setMsgValue(value));
-
-    if (user === null) {
-        setMesgValue(0)
-    }
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'Request'), (snapshot) => {

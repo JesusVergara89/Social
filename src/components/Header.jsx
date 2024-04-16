@@ -1,7 +1,7 @@
 import '../style/Header.css'
 import social from '../images/Social.svg'
 import { Link, useNavigate } from 'react-router-dom'
-import { auth, db } from '../firebaseConfig'
+import { auth } from '../firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import nullphoto from '../images/nullprofile.svg'
 import { useSelector } from 'react-redux'
@@ -9,11 +9,10 @@ import { useSelector } from 'react-redux'
 const Header = () => {
 
     const [currentlyLoggedinUser] = useAuthState(auth);
-    const navigate = useNavigate()
     const conexionNumber = useSelector(state => state.conectionNumber)
     const msgNotification = useSelector(state => state.countermsg);
+   
 
-  
     return (
         <header>
             <div onClick={() => navigate('/')} className="logo">
