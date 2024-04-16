@@ -9,9 +9,10 @@ import { useSelector } from 'react-redux'
 const Header = () => {
 
     const [currentlyLoggedinUser] = useAuthState(auth);
+    const navigate = useNavigate()
     const conexionNumber = useSelector(state => state.conectionNumber)
     const msgNotification = useSelector(state => state.countermsg);
-   
+
 
     return (
         <header>
