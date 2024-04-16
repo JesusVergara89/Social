@@ -37,8 +37,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
             return data
         }
     })
-
-   
+  
     return (
         <div className="display-chat">
             {thisChat &&
@@ -47,6 +46,9 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                         {chat.message.map((msg, j) => (
                             <div key={j} className="container-msg">
                                 <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>
+                                <div className={msg.sender === user.uid ? "container-msg-img-sender": "container-msg-img-receptor"}>
+                                    <img src={msg.photoS} alt="" />
+                                </div>
                                 <div className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"}>
                                     <h6>{`@${msg.userNameS}`}</h6>
                                     <h6>-</h6>

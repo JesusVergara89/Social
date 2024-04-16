@@ -9,7 +9,7 @@
 }
 
 .single-card-msg {
-    width: 320px;
+    width: auto;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -17,8 +17,8 @@
     justify-content: center;
     position: relative;
     border-radius: 5px;
-    padding: 50px 5px 25px 5px;
-    border: 0.01rem solid var(--Gris-perla);
+    padding: 50px 5px 25px 5px;    
+    background-color: #F2F2F2;
     margin-bottom: 100px;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .card-msg-one-one {
-    width: 90%;
+    width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -68,7 +68,7 @@
 }
 
 .card-msg-one-one form {
-    width: 115%;
+    width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -78,7 +78,7 @@
 }
 
 .card-msg-one-one form  textarea{
-    width: 100%;
+    width: 95%;
     height: auto;
     padding: 5px;
     resize: vertical;
@@ -101,7 +101,7 @@
     cursor: pointer;
 }
 
-@media (width < 440px){
+@media ( width < 500px){
     .single-card-msg {
         width: 100%;
         height: auto;
@@ -110,12 +110,9 @@
         align-items: center;
         justify-content: center;
         position: relative;
-        border-radius: 0px;
-        padding: 50px 0px 25px 0px;
-        border-top: 0.01rem solid var(--Gris-perla);
-        border-left: none;
-        border-right: none;
-        border-bottom: 0.01rem solid var(--Gris-perla);
+        border-radius: 5px;
+        padding: 50px 5px 25px 5px;    
+        background-color: #F2F2F2;
         margin-bottom: 100px;
     }
 }
