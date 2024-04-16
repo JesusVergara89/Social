@@ -15,9 +15,7 @@ const Invisiblecomp = () => {
     const [friends, setFriends] = useState([]);
     const [matchFriends, setMatchFriends] = useState([]);
     const [user] = useAuthState(auth);
-    const [timer, setTimer] = useState()
-    const [allmsg, setAllmsg] = useState();
-    const [lastAll, setLastall] = useState();
+    const [timer, setTimer] = useState([])
 
     const setSpecific = (value) => dispatch(setRequestValue(value));
     const setFriendValue = (value) => dispatch(setConectionValue(value));
@@ -55,28 +53,6 @@ const Invisiblecomp = () => {
             }))
             setTimer(timers)
         })
-
-
-        const messagesRef = collection(db, 'Messages')
-        const q3 = query(messagesRef, orderBy('message'))
-        onSnapshot(q3, (snapshot) => {
-            const msgs = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }))
-            setAllmsg(msgs)
-        })
-
-        const lasRef = collection(db, 'lasMsg')
-        const q4 = query(lasRef, orderBy('data'))
-        onSnapshot(q4, (snapshot) => {
-            const last = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }))
-            setLastall(last)
-        })
-
         return () => {
             unsubscribe();
             unsubscribeMatchReq();
@@ -115,19 +91,33 @@ const Invisiblecomp = () => {
         setFriendValue(matchFriends.length);
     }, [myPending, matchFriends]);
 
-    useEffect(()=>{
-        const lastObjects = [];
+    useEffect(() => {
+        let hasMatchingObject = false;
 
-        for (const obj of timer) {
-            const filteredData = obj.data.filter(item =>
-                item.creatorID === user.uid || item.receptorID === user.uid
-            );
-            if (filteredData.length > 0) {
-                lastObjects.push(filteredData[filteredData.length - 1]);
+        if (user) {
+            for (const obj of timer) {
+                const filteredData = obj.data.filter(item =>
+                    item.creatorID === user.uid || item.receptorID === user.uid
+                );
+                if (filteredData.length > 0) {
+                    const lastObject = filteredData[filteredData.length - 1];
+                    //console.log(lastObject)
+                    if (lastObject.receptorID === user.uid && lastObject.userNameR !== '' && lastObject.userNameR !== '' ) {
+                        hasMatchingObject = true;
+                        break;
+                    }
+                }
+            }
+
+            if (hasMatchingObject) {
+                //console.log('yes')
+                setMesgValue(1);
+            } else {
+                //console.log('nop')
+                setMesgValue(0);
             }
         }
-        console.log(lastObjects)
-    },[timer])
+    }, [timer, user]);
 
 
     return (

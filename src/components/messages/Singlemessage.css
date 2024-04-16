@@ -22,6 +22,20 @@
     margin-bottom: 100px;
 }
 
+.message-read {
+    all: unset;
+    width: auto;
+    height: auto;
+    padding:  5px 6px 5px 6px;
+    background-color: var(--btns);
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
 .single-card-msg-close {
     width: 30px;
     height: 30px;
@@ -54,7 +68,7 @@
 }
 
 .card-msg-one-one form {
-    width: 100%;
+    width: 115%;
     height: auto;
     display: flex;
     flex-direction: column;

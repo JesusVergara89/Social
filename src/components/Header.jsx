@@ -5,30 +5,15 @@ import { auth, db } from '../firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import nullphoto from '../images/nullprofile.svg'
 import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 
 const Header = () => {
 
     const [currentlyLoggedinUser] = useAuthState(auth);
     const navigate = useNavigate()
     const conexionNumber = useSelector(state => state.conectionNumber)
-    const [allusers, setAllusers] = useState()
-    const reloadPhoto = useSelector(state => state.photoUpdate);
     const msgNotification = useSelector(state => state.countermsg);
 
-    useEffect(() => {
-        const usersCollectionRef = collection(db, 'Users');
-        const q = query(usersCollectionRef, orderBy('userName'))
-        onSnapshot(q, (snapshot) => {
-            const allUsers = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }))
-            setAllusers(allUsers);
-        })
-    }, [reloadPhoto])
-    console.log(msgNotification)
+  
     return (
         <header>
             <div onClick={() => navigate('/')} className="logo">

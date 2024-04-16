@@ -4,14 +4,11 @@ import { auth, db } from '../../../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './Cardmsg.css'
 import { Link } from 'react-router-dom';
-import useSetMsgTimer from '../../../hooks/useSetMsgTimer';
 
 const Cardmsg = () => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
-    const { timer, myTimes } = useSetMsgTimer(user)
-    const [lastAll, setLastall] = useState();
 
     useEffect(() => {
         const querySnapshot = collection(db, 'Messages');
@@ -22,15 +19,6 @@ const Cardmsg = () => {
                 ...doc.data()
             }))
             setAllmsg(msgs)
-        })
-        const lasRef = collection(db, 'lasMsg')
-        const q1 = query(lasRef, orderBy('data'))
-        onSnapshot(q1, (snapshot) => {
-            const last = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }))
-            setLastall(last)
         })
     }, []);
 
@@ -44,10 +32,6 @@ const Cardmsg = () => {
         }
         return false;
     });
-
-    const testFunction = (IDuserR, IDuserS, userNameR, userNameS) => {
-        myTimes(IDuserR, IDuserS,userNameR,userNameS)
-    }///onClick={() => { testFunction(msg.message[0].receptor, msg.message[0].sender,msg.message[0].userNameR,msg.message[0].userNameS) }}
 
     return (
         <div className="card-msg">
