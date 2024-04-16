@@ -27,8 +27,6 @@ const Profile = ({ newuser, setNewuser }) => {
     const addUserToDatabase = async () => {
         try {
             const articleRef = collection(db, 'Users');
-            const msgRef = collection(db, 'timerMsg');
-            const lasRef = collection(db, 'lasMsg');
             await addDoc(articleRef, {
                 age: newuser.age,
                 bio: newuser.bio,
@@ -36,13 +34,6 @@ const Profile = ({ newuser, setNewuser }) => {
                 userName: newuser.userName,
                 photo: currentlyLoggedinUser.photoURL,
                 name: newuser.name
-            });
-            const data = [{ creatorID: currentlyLoggedinUser.uid, receptorID: '', userNameS: newuser.userName, userNameR: '', time: new Date() }]
-            await addDoc(msgRef, {
-                data
-            });
-            await addDoc(lasRef, {
-                data
             });
             //toast('Bio added successfully', { type: 'success' });
             setNewuser({})

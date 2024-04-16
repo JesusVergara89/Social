@@ -115,6 +115,20 @@ const Invisiblecomp = () => {
         setFriendValue(matchFriends.length);
     }, [myPending, matchFriends]);
 
+    useEffect(()=>{
+        const lastObjects = [];
+
+        for (const obj of timer) {
+            const filteredData = obj.data.filter(item =>
+                item.creatorID === user.uid || item.receptorID === user.uid
+            );
+            if (filteredData.length > 0) {
+                lastObjects.push(filteredData[filteredData.length - 1]);
+            }
+        }
+        console.log(lastObjects)
+    },[timer])
+
 
     return (
         <div style={{ position: 'absolute', top: '-550px' }}>{`Invisiblecomp ${friends}`}</div>

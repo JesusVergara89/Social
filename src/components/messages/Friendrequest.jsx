@@ -73,6 +73,8 @@ const Friendrequest = () => {
         if (friendshipStatus === 'w' || friendshipStatus === undefined) {
             try {
                 const postRef = collection(db, 'Request');
+                const msgRef = collection(db, 'timerMsg');
+                const lasRef = collection(db, 'lasMsg');
                 const newPost = {
                     friendRequests: [
                         {
@@ -88,7 +90,13 @@ const Friendrequest = () => {
                     ]
                 }
                 await addDoc(postRef, newPost);
-
+                const data = [{ creatorID: user.uid, receptorID: id, userNameS: '', userNameR: '', time: new Date() }]
+                await addDoc(msgRef, {
+                    data
+                });
+                await addDoc(lasRef, {
+                    data
+                });
                 toast('Request successfully', { type: 'success' });
             } catch (error) {
                 console.error('Error request: ', error);
