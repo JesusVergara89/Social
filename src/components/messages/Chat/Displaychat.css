@@ -13,7 +13,6 @@
 .display-chat {
     width: 450px;
     height: auto;
-    background-color: var(--backGchat);
     display: flex;
     flex-direction: column;
     justify-content: center;

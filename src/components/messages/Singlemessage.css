@@ -6,6 +6,7 @@
     --Blanco-hueso: #F5F5DC;
     --Rosa-suave: #FFB6C1;
     --btns: #0095f6;
+    --backGchat: #F2F2F2;
 }
 
 .single-card-msg {
@@ -17,8 +18,7 @@
     justify-content: center;
     position: relative;
     border-radius: 5px;
-    padding: 50px 5px 25px 5px;    
-    background-color: #F2F2F2;
+    padding: 50px 5px 25px 5px;   
     margin-bottom: 100px;
 }
 
