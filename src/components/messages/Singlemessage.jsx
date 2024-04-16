@@ -142,7 +142,6 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
 
     const functionImIn = () => {
         setMesgValue(0)
-        console.log('hello')
     }
 
     return (

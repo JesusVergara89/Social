@@ -115,30 +115,6 @@ const Invisiblecomp = () => {
         setFriendValue(matchFriends.length);
     }, [myPending, matchFriends]);
 
-    {/* function extractUniqueIds(matchFriends) {
-        if (matchFriends) {
-            const allFriendRequests = matchFriends.flatMap(entry => entry.friendRequests);
-
-            const uniqueIds = Array.from(new Set(allFriendRequests.flatMap(request => [request.id1, request.id2])))
-                .filter(id => id) 
-                .map(id => ({ id }));
-
-            return uniqueIds;
-        }
-    }*/}
-
-    //console.log(extractUniqueIds(matchFriends));
-    useEffect(() => {
-        const lastItemsOfData = timer?.map(obj => {
-            const lastDataIndex = obj.data.length - 1;
-            return obj.data[lastDataIndex];
-        });
-        const whoTextMe = lastItemsOfData?.filter((obj => obj.receptorID === user?.uid));
-        console.log(whoTextMe);
-    }, [timer])
-
-
-
 
     return (
         <div style={{ position: 'absolute', top: '-550px' }}>{`Invisiblecomp ${friends}`}</div>

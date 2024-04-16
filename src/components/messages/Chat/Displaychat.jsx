@@ -38,14 +38,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
         }
     })
 
-    {/*const functionTest = (x) => {
-    console.log(x);
-    const lastTime = timer[0].data[timer[0].data.length - 1].time.toDate();
-    const formattedTime = lastTime.getHours() + ":" + lastTime.getMinutes() + ":" + lastTime.getSeconds();
-    console.log(formattedTime);
-    };*/}
-    //console.log(thisChat[0].message[3].sender === user.uid)
-    //{/*onClick={msg.sender === user.uid ? functionTest('x') : functionTest(`${msg.createdAt.toDate().getHours()}:${msg.createdAt.toDate().getMinutes()}:${msg.createdAt.toDate().getSeconds()}`)}*/}
+   
     return (
         <div className="display-chat">
             {thisChat &&
