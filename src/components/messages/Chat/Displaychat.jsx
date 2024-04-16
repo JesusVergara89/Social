@@ -8,7 +8,6 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
-    const [timer, setTimer] = useState()
 
     useEffect(() => {
         const messagesRef = collection(db, 'Messages')
@@ -19,15 +18,6 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                 ...doc.data()
             }))
             setAllmsg(msgs)
-        })
-        const timerRef = collection(db, "timerMsg")
-        const q2 = query(timerRef, orderBy("data"))
-        onSnapshot(q2, (snapshot) => {
-            const timers = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }))
-            setTimer(timers)
         })
     }, [reloadMsg]);
 
@@ -47,20 +37,6 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
             return data
         }
     })
-
-    const matchingObjects = timer?.map(obj => {
-        const matchingData = obj.data.filter(item =>
-            (item.creatorID === idreceiper && item.receptorID === ideSender) ||
-            (item.creatorID === ideSender && item.receptorID === idreceiper)
-        );
-    
-        // Devolver el último elemento de matchingData, si existe
-        return matchingData.length > 0 ? matchingData[matchingData.length - 1] : null;
-    });
-
-    const filteredMatchingObjects = matchingObjects?.filter(obj => obj !== null);
-
-    console.log(filteredMatchingObjects)
 
     {/*const functionTest = (x) => {
     console.log(x);

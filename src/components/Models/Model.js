@@ -137,4 +137,37 @@ timer = [
     }
 ]
 
+Request = [
+    {
+        id: 'tttttttttt',
+        friendRequests: [
+            {
+                createdAt: 'time',
+                id1: 'wwwwwwwww',
+                status: 'false/true'
+            },
+            {
+                createdAt: 'time',
+                id2: 'wwwwwwwww',
+                status: 'false/true'
+            }
+        ]
+    },
+    {
+        id: 'tttttttttt',
+        friendRequests: [
+            {
+                createdAt: 'time',
+                id1: 'wwwwwwwww',
+                status: 'false/true'
+            },
+            {
+                createdAt: 'time',
+                id2: 'wwwwwwwww',
+                status: 'false/true'
+            }
+        ]
+    }
+]
+
 
