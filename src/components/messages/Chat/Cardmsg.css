@@ -19,13 +19,28 @@
 }
 
 .card-msg a {
-    all: unset;   
+    all: unset;
     width: 350px;
 }
 
 .card-msg-title {
     text-align: center;
     font-size: 1rem;
+}
+
+
+.card-msg-newsms {
+    width: 350px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 0.01rem solid var(--Gris-perla);
+    align-items: center;
+    padding: 18px 0px 18px 0px;
+    border-radius: 5px;
+    gap: 10px;
+    background-color: var(--Azul-claro);
 }
 
 .card-msg-info {
@@ -36,6 +51,35 @@
     align-items: center;
     border: 0.01rem solid var(--Gris-perla);
     border-radius: 5px;
+}
+
+.card-msg-title-none {
+    display: none;
+}
+
+.card-msg-newsms-none {
+    display: none;
+}
+
+.card-msg-newsms-sms {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+.card-msg-newsms-sms h4{
+    all: unset;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.card-msg-newsms-sms span {
+    font-weight: bolder;
 }
 
 .card-user1 {
@@ -63,9 +107,10 @@
 
 @media (width < 440px) {
     .card-msg a {
-        all: unset;   
+        all: unset;
         width: 100%;
     }
+
     .card-msg-info {
         width: 100%;
         height: 130px;
@@ -74,5 +119,19 @@
         align-items: center;
         border: 0.01rem solid var(--Gris-perla);
         border-radius: 0px;
+    }
+
+    .card-msg-newsms {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 0.01rem solid var(--Gris-perla);
+        align-items: center;
+        padding: 18px 0px 18px 0px;
+        border-radius: 5px;
+        gap: 10px;
+        background-color: var(--Azul-claro);
     }
 }
