@@ -37,22 +37,33 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
             return data
         }
     })
-  
+
     return (
         <div className="display-chat">
+            <div className="display-chat-information">
+                {thisChat &&
+                  <div className={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].receptor === user.uid ? "display-chat-information-profiles-reverse" : "display-chat-information-profiles"}>
+                          <div className={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].receptor === user.uid ? "display-chat-information-profiles-1-reverse"  : "display-chat-information-profiles-1"}>
+                                 <img src={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].photoR} alt="" />
+                                 <h5>@{thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].userNameR}</h5>
+                          </div>
+                          <div className={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].receptor === user.uid ? "display-chat-information-profiles-2-reverse"  : "display-chat-information-profiles-2"}>
+                                 <img src={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].photoS} alt="" />
+                                 <h5>@{thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].userNameS}</h5>
+                          </div>
+                  </div>
+                }
+            </div>
             {thisChat &&
                 thisChat.map((chat, i) => (
                     <div key={i} className="display-msg">
                         {chat.message.map((msg, j) => (
                             <div key={j} className="container-msg">
                                 <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>
-                                <div className={msg.sender === user.uid ? "container-msg-img-sender": "container-msg-img-receptor"}>
-                                    <img src={msg.photoS} alt="" />
-                                </div>
                                 <div className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"}>
                                     <h6>{`@${msg.userNameS}`}</h6>
                                     <h6>-</h6>
-                                    <h6  key={j + 1}>
+                                    <h6 key={j + 1}>
                                         {`${msg.createdAt.toDate().getHours()}:${msg.createdAt.toDate().getMinutes()}:${msg.createdAt.toDate().getSeconds()}`}
                                     </h6>
                                 </div>

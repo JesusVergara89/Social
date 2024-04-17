@@ -51,6 +51,7 @@
     align-items: center;
     border: 0.01rem solid var(--Gris-perla);
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .card-msg-title-none {
