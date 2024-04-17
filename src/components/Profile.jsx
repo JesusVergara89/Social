@@ -25,6 +25,7 @@ const Profile = ({ newuser, setNewuser }) => {
     const setMesgValue = (value) => dispatch(setMsgValue(value));
 
     const navigate = useNavigate()
+    const createPost = useNavigate()
 
     const addUserToDatabase = async () => {
         try {
@@ -104,6 +105,7 @@ const Profile = ({ newuser, setNewuser }) => {
                     </Link>
                 </div>
             )}
+            <button onClick={() => createPost('/createpost')} className="post-create-btn">New post</button>
             <div className="profile-counters">
                 <Displaycounters />
             </div>
