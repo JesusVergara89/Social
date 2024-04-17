@@ -48,7 +48,7 @@
     cursor: pointer;
     position: absolute;
     border-radius:50%;
-    top: 5px;
+    top: 0px;
     right: 5px;
 }
 
@@ -111,8 +111,7 @@
         justify-content: center;
         position: relative;
         border-radius: 5px;
-        padding: 50px 5px 25px 5px;    
-        background-color: #F2F2F2;
+        padding: 50px 5px 25px 5px;  
         margin-bottom: 100px;
     }
 }
