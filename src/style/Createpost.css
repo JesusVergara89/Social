@@ -1,160 +1,92 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #ADD8E6;
-    --Verde-menta: #98FB98;
-    --Gris-perla: #D3D3D3;
-    --Blanco-hueso: #F5F5DC;
-    --Rosa-suave: #FFB6C1;
-    --btns: #0095f6;
+    --border-color: #dbdbdb;
+    --btn-background: #0095f6;
+    --btn-hover: #0080d4;
 }
 
 .create-post {
-    width: 100%;
-    height: auto;
     display: flex;
     justify-content: center;
-    align-items: center;
     margin-top: 150px;
 }
 
 .create-post-card {
-    width: 280px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    padding: 10px;
-    background-color: var(--border);
-    border-radius: 4px;
-}
-
-.create-post-card img {
-    width: calc(400px / 3.5);
-}
-
-.brand-announcement {
     width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.brand-announcement h2 {
-    all: unset;
-    font-size: 1rem;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.create-post-card form {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.create-post-card input {
-    appearance: none;
-    border: 2px solid var(--border);
-    border-radius: 2px;
-    padding: 5px;
-    font-size: 16px;
-    width: 100%;
-    box-sizing: border-box;
-    outline: none;
-    cursor: pointer;
-}
-
-.create-post-card input:focus {
-    border-color: var(--border);
-}
-
-.create-post-card input:valid {
-    border-color: var(--border);
-}
-
-.create-post-card input:hover {
-    background-color: var(--border);
-}
-
-.create-post-card textarea {
-    width: 90%;
-    height: auto;
-    border: none;
-    resize: vertical;
-    padding: 8px;
-    font-size: 16px;
-    line-height: 1.5;
-    border-radius: 4px;
-    background-color: #f4f4f4;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.create-post-card textarea:focus {
+.create-post-card img {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.brand-announcement h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.create-post-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.create-post-card input[type="file"],
+.create-post-card textarea {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
     outline: none;
-    box-shadow: 0 0 0 2px #007bff;
+}
+
+.create-post-card input[type="file"]:hover,
+.create-post-card textarea:hover {
+    background-color: #f9f9f9;
+}
+
+.create-post-card textarea {
+    resize: vertical;
+    min-height: 100px;
 }
 
 .create-post-card button {
-    width: 70px;
-    height: auto;
-    padding-bottom: 0.3rem;
-    border: none;
-    background-color: var(--btns);
-    color: #000000;
+    padding: 10px 20px;
+    background-color: var(--btn-background);
+    color: #ffffff;
     font-weight: bold;
-    border-radius: 3px;
-    margin-top: 10px;
-    font-size: 1rem;
-    margin-bottom: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .create-post-card button:hover {
-    cursor: pointer;
-    background-color: var(--Azul-claro);
-    color: #000000;
+    background-color: var(--btn-hover);
 }
 
-@media (width < 440px){
+@media (max-width: 500px) {
     .create-post-card {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        padding: 5px;
+    }
+
+    .create-post-card form {
         gap: 5px;
-        padding: 10px;
-        background-color: var(--border);
-        border-radius: 4px;
+    }
+
+    .create-post-card input[type="file"],
+    .create-post-card textarea {
+        padding: 4px;
+        font-size: 12px;
     }
 
     .create-post-card button {
-        width: auto;
-        height: auto;
-        padding-bottom: 0.3rem;
-        border: none;
-        background-color: var(--btns);
-        color: #000000;
-        font-weight: bold;
-        border-radius: 3px;
-        padding: 3px 7px 3px 7px;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        font-size: 1rem;
-    }
-    
-    .create-post-card button:hover {
-        cursor: pointer;
-        background-color: var(--Azul-claro);
-        color: #000000;
+        padding: 4px 8px;
     }
 }
