@@ -90,4 +90,7 @@
         border-radius: 10px;
         padding: 8px;
     }
+    .all-user-find-card {
+        width: 100%;
+    }
 }

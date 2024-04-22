@@ -9,7 +9,7 @@ const Filtereduser = ({ thiIsTheCurrentUser, usuario }) => {
     return (
         <div className="all-users-mapeo-1">
             <div className='all-users-profile-information-1'>
-                <Link className='all-users-other-profile-find' to={`/singleprofile/${usuario.id}/${counterConnectios(allrequest, usuario.idUser)}/${counterPost(allpost, usuario.idUser)}`} >
+                <Link className='all-users-other-profile-find-1' to={`/singleprofile/${usuario.id}/${counterConnectios(allrequest, usuario.idUser)}/${counterPost(allpost, usuario.idUser)}`} >
                     Ver perfil
                 </Link>
                 <div className="all-users-profile-information-image-1">

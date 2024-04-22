@@ -15,9 +15,7 @@
 }
 
 .Renderimagespost img {
-    width: 100%;
-    height: auto;
-    display: block;
+    width: 350px;
     object-fit: cover;
 }
 
@@ -78,5 +76,12 @@
 
 .buttons-container button.active {
     font-weight: bold;
+}
+
+@media (width < 440px){
+    .Renderimagespost img {
+        width: 55%;
+        object-fit: cover;
+    }
 }
 

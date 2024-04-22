@@ -18,7 +18,7 @@
 }
 
 .all-users-profile-information-1 {
-    max-width: 400px;
+    width: 100%;
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -29,7 +29,7 @@
     position: relative;
 }
 
-.all-users-other-profile-find {
+.all-users-other-profile-find-1 {
     all: unset;
     width: 100px;
     height: 20px;
@@ -95,7 +95,7 @@
 }
 
 @media (width < 440px) {
-    .all-users-mapeo {
+    .all-users-mapeo-1 {
         width: 100%;
         height: auto;
         display: flex;
@@ -104,7 +104,7 @@
         justify-content: center;
         align-items: center;
     }
-    .all-users-profile-information {
+    .all-users-profile-information-1 {
         width: 90%;
         min-height: 200px;
         display: flex;
