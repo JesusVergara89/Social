@@ -4,7 +4,7 @@ import '../style/Renderpost.css'
 const Renderpost = ({post}) => {
   return (
     <div className="renderpost">
-        <img src={post.image} alt="" />
+        <img src={post.images[0]} alt="" />
     </div>
   )
 }

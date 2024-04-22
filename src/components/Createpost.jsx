@@ -9,7 +9,7 @@ import social from '../images/Social.svg'
 
 const Createpost = () => {
     const [description, setDescription] = useState('');
-    const [photo, setPhoto] = useState(null);
+    const [photos, setPhotos] = useState([null, null, null, null]); 
     const [currentlyLoggedinUser] = useAuthState(auth);
     const [allUsers, setAllUsers] = useState();
     const [textareaHeight, setTextareaHeight] = useState('20px');
@@ -44,17 +44,18 @@ const Createpost = () => {
         if (data.idUser === currentlyLoggedinUser.uid) {
             return data
         }
-    }
-    )
+    });
 
-    const handlePhotoChange = (e) => {
+    const handlePhotoChange = (e, index) => {
         const file = e.target.files[0];
-        setPhoto(file);
+        const newPhotos = [...photos];
+        newPhotos[index] = file;
+        setPhotos(newPhotos);
     };
 
     const clearForm = () => {
         setDescription('');
-        setPhoto(null);
+        setPhotos([null, null, null, null]);
     };
 
     const createTimestamp = () => {
@@ -80,13 +81,17 @@ const Createpost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let imageURL = '';
-            if (photo) {
-                const photoRef = `/images/${Date.now()}${photo.name}`;
-                const storageRef = ref(storage, photoRef);
-                await uploadBytes(storageRef, photo);
-                imageURL = await getDownloadURL(storageRef);
-            }
+            const imageUrls = await Promise.all(
+                photos.map(async (photo) => {
+                    if (photo) {
+                        const photoRef = `/images/${Date.now()}${photo.name}`;
+                        const storageRef = ref(storage, photoRef);
+                        await uploadBytes(storageRef, photo);
+                        return getDownloadURL(storageRef);
+                    }
+                    return null;
+                })
+            );
 
             const postRef = collection(db, 'Post');
             const newPost = {
@@ -94,7 +99,7 @@ const Createpost = () => {
                 description: description,
                 userPhoto: getDataForPost[0].photo,
                 userName: getDataForPost[0].userName,
-                image: imageURL,
+                images: imageUrls,
                 likes: [],
                 createdAt: createTimestamp(),
                 comments: [createEmptyComments()]
@@ -119,12 +124,15 @@ const Createpost = () => {
                     <h2>Observa cómo se vuelve viral...</h2>
                 </div>
                 <form onSubmit={handleSubmit}>
-                    <input
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={handlePhotoChange}
-                    />
+                    {photos.map((_, index) => (
+                        <input
+                            key={index}
+                            type="file"
+                            name={`image${index}`}
+                            accept="image/*"
+                            onChange={(e) => handlePhotoChange(e, index)}
+                        />
+                    ))}
                     <textarea
                         placeholder="Description"
                         name="description"

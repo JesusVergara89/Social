@@ -54,7 +54,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 20px;
-    padding: 0px 20px 20px 20px;
+    padding: 10px 20px 20px 20px;
     overflow: hidden;
     position: relative;
 }
@@ -75,7 +75,7 @@
     justify-content: flex-start;
     align-items: center;
     padding: 5px;
-    margin-top: 15px;
+    margin-top: 30px;
     position: relative;
 }
 
@@ -137,13 +137,15 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        border: 1px solid #ccc;
+        border-top: 0px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        border-left: 0px solid #ccc;
+        border-right: 0px solid #ccc;
         margin-bottom: 20px;
         border-radius: 0px;
-        padding: 0 0px 20px 0px;
+        padding: 0px 0px 20px 0px;
         overflow: hidden;
     }
-
     .post-card-userinfo-1 {
         width: 50%;
         height: 100%;

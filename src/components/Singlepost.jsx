@@ -8,6 +8,7 @@ import '../style/Post.css'
 import Deletebtn from './Deletebtn'
 import Countercomments from '../counters/Countercomments'
 import Likepost from './Likescomponents/Likepost'
+import Renderimagespost from './Renderimagespost'
 
 const Singlepost = () => {
 
@@ -66,11 +67,9 @@ const Singlepost = () => {
         <div className='post'>
             {singlepost.id && singlepost.likes &&
                 <div className="post-card">
-                    <Link>
-                        <img className='post-card-mainimg' src={singlepost.image} alt="" />
-                    </Link>
+                    <Renderimagespost id={singlepost.id} images={singlepost.images} />
                     <Deletebtn
-                        image={singlepost.image}
+                        images={singlepost.images}
                         deleteId={singlepost.id}
                         postId={singlepost.idOnlineUser}
                         toProfile={toProfile}

@@ -4,10 +4,11 @@ import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import Comment from './Comment';
 import Displaycomments from './Displaycomments';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Deletebtn from './Deletebtn';
 import Countercomments from '../counters/Countercomments';
 import Likepost from './Likescomponents/Likepost';
+import Renderimagespost from './Renderimagespost';
 
 const Post = () => {
 
@@ -47,7 +48,7 @@ const Post = () => {
         console.log('')
     }
 
-    ///console.log(post[0].id)
+    ///console.log(post[0].images[0])
 
     return (
         <article className="post">
@@ -55,10 +56,8 @@ const Post = () => {
             {post && (
                 post.map((p, i) => (
                     <div key={i} className="post-card">
-                        <Link key={i / 2.5} to={`/singlepost/${p.id}`}>
-                            <img className='post-card-mainimg' src={p.image} alt="" />
-                        </Link>
-                        <Deletebtn image={p.image} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
+                        <Renderimagespost id={p.id} images={p.images} />
+                        <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                         <div className="post-card-userinfo">
                             <Likepost postId={p.id} likes={p.likes} />
                             <div className="post-card-userinfo-1">
