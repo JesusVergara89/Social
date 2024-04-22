@@ -67,7 +67,9 @@ const Singlepost = () => {
         <div className='post'>
             {singlepost.id && singlepost.likes &&
                 <div className="post-card">
-                    <Renderimagespost id={singlepost.id} images={singlepost.images} />
+                    <div className="post-card-img-container">
+                        <Renderimagespost id={singlepost.id} images={singlepost.images} />
+                    </div>
                     <Deletebtn
                         images={singlepost.images}
                         deleteId={singlepost.id}
