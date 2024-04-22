@@ -36,16 +36,3 @@
     color: rgb(253, 81, 81);
 }
 
-@media (width < 440px){
-    .delete-btn {
-        width: auto;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 33px;
-        right: 5px;
-     }
-     
-}
