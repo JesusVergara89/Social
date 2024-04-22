@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db, storage } from '../firebaseConfig'
 import '../style/Deletebtn.css'
@@ -9,17 +9,18 @@ import { deleteObject, ref } from 'firebase/storage'
 const Deletebtn = ({ images, deleteId, postId, toProfile }) => {
 
     const [currentoLogUser] = useAuthState(auth)
+    const [deleteConfirmation, setDeleteConfirmation] = useState(false)
 
     const handleDeletePost = async () => {
         try {
-            
+
             await deleteDoc(doc(db, "Post", deleteId))
- 
+
             await Promise.all(images.map(async (image) => {
                 const storeref = ref(storage, image);
                 await deleteObject(storeref);
             }));
-            
+
             toast('post deleted successfully', { type: 'success' });
             toProfile();
         } catch (er) {
@@ -27,11 +28,24 @@ const Deletebtn = ({ images, deleteId, postId, toProfile }) => {
         }
     }
 
+    const functionDelete = () => {
+        setDeleteConfirmation(!deleteConfirmation)
+    }
+
     return (
         <>
             {currentoLogUser?.uid === postId ?
                 <div className="delete-btn">
-                    <button onClick={handleDeletePost}><i className='bx bxs-x-circle'></i></button>
+                    {deleteConfirmation ?
+                        <div className="delete-btn-warning">
+                            <h5>¿Eliminar este post?</h5>
+                            <button onClick={handleDeletePost}><i className='bx bxs-trash'></i></button>
+                            <h5>Regresar al post</h5>
+                            <i onClick={functionDelete} className='bx bx-arrow-back' ></i>
+                        </div>
+                        :
+                        <i onClick={functionDelete} className='bx bx-dots-horizontal '></i>
+                    }
                 </div>
                 :
                 ''

@@ -10,8 +10,8 @@ const Renderimagespost = ({ id, images }) => {
     };
 
     return (
-        <div className='Renderimagespost'>
-            <div className="carousel">
+        <>
+            <div className="Renderimagespost">
                 <Link to={`/singlepost/${id}`}>
                     <div className="slides">
                         {images.map((image, index) => (
@@ -23,15 +23,15 @@ const Renderimagespost = ({ id, images }) => {
                         ))}
                     </div>
                 </Link>
-                <div className="buttons-container">
-                    {images.map((_, index) => (
-                        <button key={index} onClick={() => goToSlide(index)} className={index === currentImageIndex ? "active" : ""}>
-                            <div className={index === currentImageIndex ? "circulo active": "circulo" }></div>
-                        </button>
-                    ))}
-                </div>
             </div>
-        </div>
+            <div className="buttons-container">
+                {images.map((_, index) => (
+                    <button key={index} onClick={() => goToSlide(index)} className={index === currentImageIndex ? "active" : ""}>
+                        <div className={index === currentImageIndex ? "circulo active" : "circulo"}></div>
+                    </button>
+                ))}
+            </div>
+        </>
     );
 };
 

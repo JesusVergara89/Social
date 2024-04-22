@@ -56,7 +56,9 @@ const Post = () => {
             {post && (
                 post.map((p, i) => (
                     <div key={i} className="post-card">
-                        <Renderimagespost id={p.id} images={p.images} />
+                        <div className="post-card-img-container">
+                           <Renderimagespost id={p.id} images={p.images} />  
+                        </div>                       
                         <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                         <div className="post-card-userinfo">
                             <Likepost postId={p.id} likes={p.likes} />

@@ -1,8 +1,10 @@
 .Renderimagespost {
     position: relative;
     width: 120%;
-    height: 400px;
+    height: 500px;
     display: flex;
+    overflow: hidden;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
@@ -17,13 +19,6 @@
     height: auto;
     display: block;
     object-fit: cover;
-}
-
-.carousel {
-    width: 100%;
-    width: 400px;
-    margin: 0 auto;
-    overflow: hidden;
 }
 
 .slides {
@@ -47,17 +42,16 @@
 
 .buttons-container {
     position: absolute;
-    bottom: -10px;
+    top: 480px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
-    margin-top: 10px;
 }
 
 .circulo {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background-color: rgb(20, 145, 248);
     border: 2px solid rgb(29, 29, 29);
@@ -65,11 +59,11 @@
 }
 
 .circulo.active {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background-color: rgb(254, 75, 75);
-    border: 2px solid rgb(29, 29, 29);
+    background-color: rgb(113, 223, 253);
+    border: 3px solid rgb(29, 29, 29);
     box-shadow: 0 0 10px rgba(254, 254, 254, 0.5);
 }
 
@@ -77,7 +71,7 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 20px 5px 0px 5px;
+    padding: 5px 5px 5px 5px;
     margin: 0 5px;
     color: #333;
 }
