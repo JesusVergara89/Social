@@ -24,7 +24,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--border);
+    border: 0.01rem solid var(--border);
     margin-top: 50px;
     position: relative;
 }
@@ -96,7 +96,7 @@
 
 @media (width < 440px) {
     .all-users-mapeo-1 {
-        width: 100%;
+        width: auto;
         height: auto;
         display: flex;
         flex-direction: column;
@@ -105,7 +105,7 @@
         align-items: center;
     }
     .all-users-profile-information-1 {
-        width: 90%;
+        width: 100%;
         min-height: 200px;
         display: flex;
         justify-content: center;
