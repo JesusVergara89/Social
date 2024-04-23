@@ -16,7 +16,7 @@ const Renderimagespost = ({ id, images }) => {
     const handleTouchEnd = (e) => {
         const touchEndX = e.changedTouches[0].clientX;
         const delta = touchEndX - touchStartX;
-        const threshold = 20;
+        const threshold = 30;
         if (delta > threshold) {
             goToPreviousSlide();
         } else if (delta < -threshold) {
