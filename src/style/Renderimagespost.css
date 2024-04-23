@@ -48,11 +48,10 @@
 }
 
 .circulo {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
-    background-color: rgb(20, 145, 248);
-    border: 2px solid rgb(29, 29, 29);
+    background-color: rgb(0, 0, 0);
     box-shadow: 0 0 10px rgba(254, 254, 254, 0.5);
 }
 
@@ -60,8 +59,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: rgb(113, 223, 253);
-    border: 3px solid rgb(29, 29, 29);
+    background-color: var(--btns);
     box-shadow: 0 0 10px rgba(254, 254, 254, 0.5);
 }
 
