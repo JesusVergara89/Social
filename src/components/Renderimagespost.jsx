@@ -7,11 +7,16 @@ const Renderimagespost = ({ id, images }) => {
 
     const nonNullImages = images.filter(image => image !== null);
 
+    let touchStartX = 0;
+
     const handleTouchStart = (e) => {
-        const touchStartX = e.touches[0].clientX;
-        const touchEndX = touchStartX;
+        touchStartX = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
         const delta = touchEndX - touchStartX;
-        const threshold = 50; // Puedes ajustar este valor según tu preferencia
+        const threshold = 20;
         if (delta > threshold) {
             goToPreviousSlide();
         } else if (delta < -threshold) {
@@ -39,26 +44,27 @@ const Renderimagespost = ({ id, images }) => {
 
     return (
         <>
-            <div className="Renderimagespost" onTouchStart={handleTouchStart}>
-            <Link to={`/singlepost/${id}`}>
-                <div className="slides">
-                    {nonNullImages.map((image, index) => (
-                        <div key={index} className={index === currentImageIndex ? "slide active" : "slide"}>
-                            <img src={image} alt={`Slide ${index}`} />
-                        </div>
-                    ))}
-                </div>
-            </Link>
+            <div className="Renderimagespost" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+                <Link to={`/singlepost/${id}`}>
+                    <div className="slides">
+                        {nonNullImages.map((image, index) => (
+                            <div key={index} className={index === currentImageIndex ? "slide active" : "slide"}>
+                                <img src={image} alt={`Slide ${index}`} />
+                            </div>
+                        ))}
+                    </div>
+                </Link>
             </div>
             <div className="buttons-container">
                 {images.map((data, index) => {
                     if (data !== null) {
-                        return (<button key={index} onClick={() => goToSlide(index)} className={index === currentImageIndex ? "active" : ""}>
-                            <div className={index === currentImageIndex ? "circulo active" : "circulo"}></div>
-                        </button>)
+                        return (
+                            <button key={index} onClick={() => goToSlide(index)} className={index === currentImageIndex ? "active" : ""}>
+                                <div className={index === currentImageIndex ? "circulo active" : "circulo"}></div>
+                            </button>
+                        );
                     }
-                }
-                )}
+                })}
             </div>
         </>
     );
