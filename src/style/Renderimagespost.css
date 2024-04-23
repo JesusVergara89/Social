@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .Renderimagespost a {
@@ -78,10 +78,11 @@
     font-weight: bold;
 }
 
-@media (width < 440px){
+@media (width < 350px){
     .Renderimagespost img {
-        width: 55%;
+        width: 330px;
         object-fit: cover;
     }
 }
+
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../style/Renderimagespost.css'
 
 const Renderimagespost = ({ id, images }) => {
+
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const goToSlide = (index) => {
@@ -25,11 +26,14 @@ const Renderimagespost = ({ id, images }) => {
                 </Link>
             </div>
             <div className="buttons-container">
-                {images.map((_, index) => (
-                    <button key={index} onClick={() => goToSlide(index)} className={index === currentImageIndex ? "active" : ""}>
-                        <div className={index === currentImageIndex ? "circulo active" : "circulo"}></div>
-                    </button>
-                ))}
+                {images.map((data, index) => {
+                    if (data !== null) {
+                        return (<button key={index} onClick={() => goToSlide(index)} className={index === currentImageIndex ? "active" : ""}>
+                            <div className={index === currentImageIndex ? "circulo active" : "circulo"}></div>
+                        </button>)
+                    }
+                }
+                )}
             </div>
         </>
     );
