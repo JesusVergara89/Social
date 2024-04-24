@@ -8,7 +8,7 @@ const PostSkeleton = () => {
             {Array(3).fill(0).map((x, index) =>
                 <div key={index} className="post-card">
                     <div className="post-card-img-container">
-                        <Skeleton height={500} width={350} />
+                        <Skeleton height={500} width={'100vw'} />
                     </div>
                     <div className="post-card-userinfo">
                         <Skeleton height={15} width={30} style={{ position: 'absolute',top:'-8px', right:'15px' }} />
