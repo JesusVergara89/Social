@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Register from './auth/Register'
 import Login from './auth/Login';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Profile from './components/Profile';
 import Protectedroutes from './components/Protectedroutes';
 import Header from './components/Header';
@@ -21,9 +21,13 @@ import Configprofile from './components/configurationprofile/Configprofile';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebaseConfig';
 
-function Social() {    
+function Social() {
     const [onlineuser] = useAuthState(auth)
     const [newuser, setNewuser] = useState({})
+    const { pathname } = useLocation()
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [pathname])
     return (
         <div className='SOCIAL'>
 
@@ -58,7 +62,7 @@ function Social() {
                 <Route element={<Protectedroutes />}>
                     <Route path='/profile'
                         element={
-                            <Profile setNewuser={setNewuser} newuser={newuser} />
+                            <Profile/>
                         }
                     />
                     <Route path='/singlesuser/:iduser'

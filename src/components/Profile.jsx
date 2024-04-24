@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebaseConfig';
 import { Link, useNavigate } from 'react-router-dom';
-import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import '../style/Profile.css'
 import Mypost from './Mypost';
@@ -11,52 +11,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setRequestValue } from '../store/slices/request.slice';
 import { setConectionValue } from '../store/slices/conections.slice';
 import { setMsgValue } from '../store/slices/countermsg.slice';
-
-const Profile = ({ newuser, setNewuser }) => {
-
+const Profile = () => {
     const [currentlyLoggedinUser] = useAuthState(auth);
     const [users, setUsers] = useState([]);
     const [currentUserData, setCurrentUserData] = useState(null);
-    const [executedOnce, setExecutedOnce] = useState(false);
     const [numberOf, setNumberOf] = useState(0);
     const dispatch = useDispatch();
     const CounterNotifyRequests = useSelector(state => state.request);
     const setFriendValue = (value) => dispatch(setConectionValue(value));
     const setMesgValue = (value) => dispatch(setMsgValue(value));
-
     const navigate = useNavigate()
     const createPost = useNavigate()
-
-    const addUserToDatabase = async () => {
-        try {
-            const articleRef = collection(db, 'Users');
-            await addDoc(articleRef, {
-                age: newuser.age,
-                bio: newuser.bio,
-                idUser: currentlyLoggedinUser.uid,
-                userName: newuser.userName,
-                photo: currentlyLoggedinUser.photoURL,
-                name: newuser.name
-            });
-            //toast('Bio added successfully', { type: 'success' });
-            setNewuser({})
-        } catch (error) {
-            //console.log(error)
-            //toast('Error adding bio', { type: 'error' });
-            setNewuser({})
-        }
-    };
-
-    useEffect(() => {
-        if (!executedOnce) {
-            const timer = setTimeout(() => {
-                addUserToDatabase();
-                setExecutedOnce(true);
-            }, 1000);
-
-            return () => clearTimeout(timer);
-        }
-    }, [executedOnce]);
 
     useEffect(() => {
         const usersCollectionRef = collection(db, 'Users');
@@ -68,7 +33,7 @@ const Profile = ({ newuser, setNewuser }) => {
             }))
             setUsers(userInfo);
         })
-    }, [currentlyLoggedinUser, setNewuser]);
+    }, [currentlyLoggedinUser]);
 
     useEffect(() => {
         if (currentlyLoggedinUser) {
@@ -78,8 +43,7 @@ const Profile = ({ newuser, setNewuser }) => {
     }, [currentlyLoggedinUser, users]);
 
     const setSpecific = () => dispatch(setRequestValue(numberOf));
-
-    //console.log(currentUserData)
+    
     return (
         <div className='profile'>
             {currentUserData && currentlyLoggedinUser && (
