@@ -47,7 +47,7 @@ const Displaycomments = ({ post, infousers }) => {
         userName: user.userName,
         idUser: user.idUser
     }));
-
+console.log(users)
     return (
         <div className="display-comments">
             {setshowcomments ?
@@ -56,7 +56,7 @@ const Displaycomments = ({ post, infousers }) => {
                         <div key={i} className="display-comment-card">
                             <button onClick={showComments} className="hide-subcomments">Ocultar comentarios</button>
                             <p className="comment-content">{comment.main}</p>
-                            <Likecomment post={post} index={i} likes={comment}  />
+                            <Likecomment post={post} index={i} likes={comment} />
                             <DeleteComment post={post} commentPosition={i} />
                             <p className="comment-date">
                                 {`@${userNameIdArray.find(match => match.idUser === comment.idUser)?.userName || ''}`}

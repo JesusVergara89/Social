@@ -151,6 +151,8 @@
     flex-direction: column;
     justify-content: center;
     border-radius: 3px;
+    gap: 1rem;
+    margin-top: 15px;
 }
 
 .container-msg{
@@ -158,15 +160,15 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     border-radius: 3px;
     position: relative;
-    gap: 20px;
+    gap: 5px;
 }
 
 .container-msg p{
     text-align: left;
     font-size: 0.85rem;
+    padding: 15px;
 }
 
 .container-msg h6 {
@@ -175,40 +177,36 @@
 }
 
 .display-msg-sender {  
-    width: 80%;
+    width: auto;
+    max-width: 75%;
     align-self: flex-end;
-    margin-left: 30%;
     padding: 5px 8px 5px 5px;
     border-radius: 10px;
     background-color: var(--Azul-claro);
 }
 
 .display-msg-receptor {    
-    width: 80%;
+    width: auto;
+    max-width: 75%;
     align-self: flex-start;
-    margin-right: 30%;
     padding: 5px 5px 5px 8px;
     border-radius: 10px;
     background-color: var(--Blanco-hueso);
 }
 
 .display-time-sender {
+    width: auto;
     display: flex;
     align-self: flex-end;
-    margin-left: 70%;
-    position: absolute;
-    bottom: -26px;
-    right: 0px;
+    justify-content: center;
     gap: 8px;
 }
 
 .display-time-receptor {
+    width: auto;
     display: flex;
     align-self: flex-start;
-    margin-right: 70%;
-    position: absolute;
-    bottom: -26px;
-    left: 0;
+    justify-content: center;
     gap: 8px;
 }
 

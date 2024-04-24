@@ -36,7 +36,8 @@ const Register = () => {
         const lenthLine = (biografy?.split('\n').length - 1) * 30
         const minHeight = 30;
         const maxHeight = 200;
-        const step = 15;
+        const step = 20;
+        
         let height = minHeight + Math.floor((length + lenthLine) / 30) * step;
         height = Math.min(height, maxHeight);
         setTextareaHeight(height + 'px');
@@ -49,7 +50,7 @@ const Register = () => {
         try {
             setOk(false)
             await createUserWithEmailAndPassword(auth, email, password);
-            const storageRef = ref(storage, `/Perfiles/${Date.now()}${name}`);
+            const storageRef = ref(storage, `/images/${Date.now()}${name}`);
             const snapshot = await uploadBytesResumable(storageRef, InformImg.File);
             //se obtiene la url de la imagen subida
             const url = await getDownloadURL(snapshot.ref);
@@ -252,79 +253,6 @@ const Register = () => {
                 ¿Ya tiene cuenta?
                 <p onClick={() => navigateToLogin('/login')}>Iniciar sesión</p>
             </p>
-            {/*<article className="register">
-            <div className="register-container1">
-                <img src={social} alt="" />
-            </div>
-
-            <div className="register-container2">
-                <div className="register-container2-form">
-                    <input
-                        type="text"
-                        className='register-container2-name'
-                        placeholder='Name'
-                        value={name}
-                        onChange={(e) => { setName(e.target.value); }}
-                    />
-                    <input
-                        type="text"
-                        className='register-container2-email'
-                        placeholder='Email'
-                        value={email}
-                        onChange={(e) => { setEmail(e.target.value); }}
-                    />
-                    <input
-                        type="password"
-                        className='register-container2-password'
-                        placeholder='Password'
-                        value={password}
-                        onChange={(e) => { setPassword(e.target.value); }}
-                    />
-                    <input
-                        type="text"
-                        className='register-container2-password'
-                        placeholder='Age'
-                        value={age}
-                        onChange={(e) => { setAge(e.target.value); }}
-                    />
-                    <textarea
-                        type="text"
-                        className='register-container2-textarea'
-                        placeholder='Biography'
-                        value={bio}
-                        onChange={(e) => { setBio(e.target.value); }}
-                        style={{ height: textareaHeight }}
-                    />
-                    <div className="around">
-                        <input
-                            id='username'
-                            type="text"
-                            className='register-container2-username'
-                            placeholder='User: @user'
-                            value={userName}
-                            onChange={(e) => { setUserName(e.target.value); handleInputChange(e) }}
-                        />
-                        <div className={modalusername ? "modalusername" : "none"}>
-                            <h6 onClick={letGoElementForModalUserName}><i className='bx bxs-x-circle'></i></h6>
-                            <h6>Una vez establecido el @userName, no podras cambiarlo. &#128556;</h6>
-                        </div>
-                    </div>
-                    <div className='warning-photo'>Upload your profile photo here</div>
-                    <input
-                        className='register-container2-img'
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={handlePhotoChange}
-                    />
-                    {usuarioExistente ? '' : <button onClick={handleSingUp} className="register-container2-btn">Register</button>}
-                </div>
-            </div>
-
-            <div className="register-container3">
-                <Access />
-            </div>
-    </article>*/}
         </form>
     );
 }

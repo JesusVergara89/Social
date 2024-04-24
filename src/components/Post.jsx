@@ -48,19 +48,14 @@ const Post = () => {
     const toProfile = () => {
         console.log('')
     }
-    
+
     return (
         <article className="post">
             <button onClick={() => createPost('/createpost')} className="post-create-btn">New post</button>
             {post?.[0] ? (
                 post.map((p, i) => (
                     <div key={i} className="post-card">
-                        <div className="post-card-img-container">
-                            <Renderimagespost id={p.id} images={p.images} />
-                        </div>
-                        <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                         <div className="post-card-userinfo">
-                            <Likepost postId={p.id} likes={p.likes} />
                             <div className="post-card-userinfo-1">
                                 <img src={p.userPhoto} alt="" />
                                 <h6>{`${p.userName}`}</h6>
@@ -69,14 +64,28 @@ const Post = () => {
                                 <h6>{p.createdAt.toDate().toDateString()}</h6>
                             </div>
                         </div>
+                        <div className="post-card-img-container">
+                            <Renderimagespost id={p.id} images={p.images} />
+                        </div>
+                        <div className='post-card-action'>
+                            <Likepost postId={p.id} likes={p.likes} />
+                            <i className='bx bx-message-rounded' />
+                        </div>
+                        <div className='post-card-countinfo'>
+                            <div className='like'>
+                                <h6>{p.likes.length}</h6>
+                                <i className='bx bx-heart' />
+                            </div>
+                            <Countercomments thispost={p} />
+                        </div>
+                        <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                         <p className='post-card-description'>{p.description}</p>
+                        <Displaycomments infousers={infousers} AllPost={post} post={p} />
                         <Comment
                             thispost={p}
                             postId={p.id}
                             reload={reload}
                         />
-                        <Countercomments thispost={p} />
-                        <Displaycomments infousers={infousers} AllPost={post} post={p} />
                     </div>
                 ))
             ) : <PostSkeleton />}

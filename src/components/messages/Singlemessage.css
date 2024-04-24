@@ -1,16 +1,110 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #ADD8E6;
-    --Verde-menta: #98FB98;
-    --Gris-perla: #D3D3D3;
-    --Blanco-hueso: #F5F5DC;
-    --Rosa-suave: #FFB6C1;
-    --btns: #0095f6;
-    --backGchat: #F2F2F2;
+  --border: #dbdbdb;
+  --Azul-claro: #add8e6;
+  --Verde-menta: #98fb98;
+  --Gris-perla: #d3d3d3;
+  --Blanco-hueso: #f5f5dc;
+  --Rosa-suave: #ffb6c1;
+  --btns: #0095f6;
+  --backGchat: #f2f2f2;
 }
 
 .single-card-msg {
-    width: auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 5px;
+  padding: 50px 5px 25px 5px;
+  margin-bottom: 100px;
+}
+
+.message-read {
+  all: unset;
+  width: auto;
+  height: auto;
+  padding: 5px 6px 5px 6px;
+  background-color: var(--btns);
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.single-card-msg-close {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  border-radius: 50%;
+  top: 0px;
+  right: 5px;
+}
+
+.single-card-msg-close .bx {
+  font-size: 30px;
+  color: var(--btns);
+}
+
+.card-msg-one-one {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card-msg-one-one form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.card-msg-one-one form textarea {
+  width: 95%;
+  height: auto;
+  padding: 5px;
+  border-radius: 5px;
+  resize: none;
+  transition: height 0.3s ease-in-out;
+  border-color: var(--Gris-perla);
+}
+
+.card-msg-one-one form button {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px 5px 8px;
+  background-color: var(--btns);
+  border: none;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (width < 500px) {
+  .single-card-msg {
+    width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -18,100 +112,7 @@
     justify-content: center;
     position: relative;
     border-radius: 5px;
-    padding: 50px 5px 25px 5px;   
+    padding: 50px 5px 25px 5px;
     margin-bottom: 100px;
-}
-
-.message-read {
-    all: unset;
-    width: auto;
-    height: auto;
-    padding:  5px 6px 5px 6px;
-    background-color: var(--btns);
-    color: white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-    font-size: 0.8rem;
-}
-
-.single-card-msg-close {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: none;
-    border: none; 
-    font-weight: bold;
-    cursor: pointer;
-    position: absolute;
-    border-radius:50%;
-    top: 0px;
-    right: 5px;
-}
-
-.single-card-msg-close .bx {
-    font-size: 30px;
-    color: var(--btns);
-}
-
-.card-msg-one-one {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.card-msg-one-one form {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
-
-.card-msg-one-one form  textarea{
-    width: 95%;
-    height: auto;
-    padding: 5px;
-    resize: vertical;
-    border-radius: 8px;
-    border: 0.01rem solid var(--Gris-perla);
-}
-
-.card-msg-one-one form button {
-    width: auto;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 8px 5px 8px;
-    background-color: var(--btns);
-    border: none;
-    border-radius: 3px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-@media ( width < 500px){
-    .single-card-msg {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        border-radius: 5px;
-        padding: 50px 5px 25px 5px;  
-        margin-bottom: 100px;
-    }
+  }
 }

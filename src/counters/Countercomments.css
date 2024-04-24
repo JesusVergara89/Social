@@ -9,13 +9,13 @@
 }
 
 .countercomments {
-    width: 90%;
+    width: auto;
     height: 20px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding-left: 10px;
-    margin-top: 10px;
+    gap: 5px;
 }
 
 .countercomments h5 {

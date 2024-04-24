@@ -48,11 +48,12 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     useEffect(() => {
         const adjustTextareaHeight = () => {
             const length = newMessage.length;
+            const lenthLine = (newMessage.split('\n').length - 1) * 30
             const minHeight = 30;
-            const maxHeight = 300;
-            const step = 30;
+            const maxHeight = 150;
+            const step = 7;
 
-            let height = minHeight + Math.floor(length / 30) * step;
+            let height = minHeight + Math.floor((length + lenthLine) / 30) * step;
             height = Math.min(height, maxHeight);
             setTextareaHeight(height + 'px');
         };
@@ -132,8 +133,6 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         }
     }
 
-    //console.log(userChangePosition)
-
     if (myMessages.length === 0) {
         return null;
     }
@@ -141,7 +140,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     const testFunction = (IDuserR, IDuserS, userNameR, userNameS) => {
         myTimes(IDuserR, IDuserS, userNameR, userNameS)
     }
-
+    console.log(arrayMessagesToUpdate)
     return (
         <div className='single-card-msg'>
             {msgNotification === 1 ?
@@ -166,7 +165,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                     </div>
                 }
                 {arrayMessagesToUpdate.length > 0 &&
-                    <div className="card-msg-one-one">
+                    <>
                         <Displaychat newMessage={newMessage} reloadMsg={reloadMsg} idreceiper={idreceiper} ideSender={ideSender} />
                         <form onSubmit={handleSubmit}>
                             <textarea
@@ -178,7 +177,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                             />
                             <button onClick={() => { functionReload() }} type='submit'>Enviar</button>
                         </form>
-                    </div>
+                    </>
                 }
             </div>
         </div>

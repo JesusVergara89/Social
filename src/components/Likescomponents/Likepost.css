@@ -1,45 +1,38 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #ADD8E6;
-    --Verde-menta: #98FB98;
-    --Gris-perla: #D3D3D3;
-    --Blanco-hueso: #F5F5DC;
-    --Rosa-suave: #FFB6C1;
-    --btns: #0095f6;
+  --border: #dbdbdb;
+  --Azul-claro: #add8e6;
+  --Verde-menta: #98fb98;
+  --Gris-perla: #d3d3d3;
+  --Blanco-hueso: #f5f5dc;
+  --Rosa-suave: #ffb6c1;
+  --btns: #0095f6;
 }
 
 .Likepost {
-    width: auto;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    gap: 5px;
-    top: -8px;
-    right: 15px;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
-.Likepost h6{
-    all: unset;
-    font-size: 0.75rem;
-    text-align: center;
+.Likepost h6 {
+  all: unset;
+  font-size: 0.75rem;
+  text-align: center;
 }
 
-.Likepost i {
-    font-size: 1rem;
+.Likepost .bxs-heart.on {
+  color: red;
+  animation: pulso 0.3s ease-in-out normal;
 }
 
-@media(width < 440px){
-    .Likepost {
-        width: auto;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        gap: 5px;
-        top: -8px;
-        right: 28px;
-    } 
+@keyframes pulso {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
 }

@@ -14,12 +14,12 @@ const Comment = ({ postId, thispost, reload }) => {
     useEffect(() => {
         const adjustTextareaHeight = () => {
             const length = mainComment.length;
+            const lenthLine = (mainComment?.split('\n').length - 1) * 30
             const minHeight = 20;
-            const maxHeight = 300; 
-            const step = 30;
-
-            let height = minHeight + Math.floor(length / 30) * step;
-            height = Math.min(height, maxHeight); 
+            const maxHeight = 100;
+            const step = 20;
+            let height = minHeight + Math.floor((length + lenthLine) / 30) * step;
+            height = Math.min(height, maxHeight);
             setTextareaHeight(height + 'px');
         };
         adjustTextareaHeight();
@@ -77,7 +77,7 @@ const Comment = ({ postId, thispost, reload }) => {
 
     return (
         <div className="comments">
-            <form onSubmit={handleSubmit} className="form-container">
+            <form className="form-container">
                 <textarea
                     className='main-comment'
                     placeholder="Add a comment..."
@@ -86,7 +86,7 @@ const Comment = ({ postId, thispost, reload }) => {
                     style={{ height: textareaHeight }}
                     rows={1}
                 />
-                <button type="submit" className="submit-btn"><i className='bx bx-paper-plane'></i></button>
+                <button onClick={handleSubmit} className="submit-btn"><i className='bx bx-paper-plane'></i></button>
             </form>
         </div>
     );
