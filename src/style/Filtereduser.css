@@ -18,7 +18,7 @@
 }
 
 .all-users-profile-information-1 {
-    width: 100%;
+    width: 400px;
     min-height: 200px;
     display: flex;
     flex-direction: column;
