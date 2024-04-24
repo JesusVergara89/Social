@@ -9,6 +9,7 @@ import Deletebtn from './Deletebtn';
 import Countercomments from '../counters/Countercomments';
 import Likepost from './Likescomponents/Likepost';
 import Renderimagespost from './Renderimagespost';
+import PostSkeleton from './Loading/PostSkeleton';
 
 const Post = () => {
 
@@ -47,18 +48,16 @@ const Post = () => {
     const toProfile = () => {
         console.log('')
     }
-
-    ///console.log(post[0].images[0])
-
+    
     return (
         <article className="post">
             <button onClick={() => createPost('/createpost')} className="post-create-btn">New post</button>
-            {post && (
+            {post?.[0] ? (
                 post.map((p, i) => (
                     <div key={i} className="post-card">
                         <div className="post-card-img-container">
-                           <Renderimagespost id={p.id} images={p.images} />  
-                        </div>                       
+                            <Renderimagespost id={p.id} images={p.images} />
+                        </div>
                         <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                         <div className="post-card-userinfo">
                             <Likepost postId={p.id} likes={p.likes} />
@@ -80,7 +79,7 @@ const Post = () => {
                         <Displaycomments infousers={infousers} AllPost={post} post={p} />
                     </div>
                 ))
-            )}
+            ) : <PostSkeleton />}
         </article>
     )
 }
