@@ -1,8 +1,14 @@
-# React + Vite
+# Welcome to Social
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+![](https://raw.githubusercontent.com/JesusVergara89/Social/main/src/images/Social.png)- - 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+------------
+
+
+
+Welcome to Social, the social network redefined. Social is an open-source platform that mirrors real-life connections. Here, you won't find the typical follower-centric dynamics; instead, connections are meaningful and reciprocal. You can't follow or connect with someone unless they've accepted your friend request, ensuring authenticity and fostering genuine interactions.
+
+In Social, your connections define your status. Every post you make is visible to all users, but it's the interactions with your connections that truly matter. Your network is tailored to your preferences and desires, allowing you to curate your online experience authentically.
+
+Join us in reshaping social networking, where connections reign supreme and meaningful interactions flourish. Welcome to Social, where real connections thrive.
