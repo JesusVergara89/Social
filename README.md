@@ -1,7 +1,7 @@
 # Welcome to Social
 
 
-![](https://raw.githubusercontent.com/JesusVergara89/Social/main/src/images/Social.png)- - 
+![](https://raw.githubusercontent.com/JesusVergara89/Social/main/src/images/Social.png) 
 
 ------------
 
