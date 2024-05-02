@@ -77,13 +77,41 @@
     gap: 5px;
 }
 
-.card-msg-one-one form  textarea{
-    width: 95%;
+.card-msg-one-one-form {
+    width: 100%;
+    width: 100%;
     height: auto;
-    padding: 5px;
-    resize: vertical;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 8px;
     border: 0.01rem solid var(--Gris-perla);
+}
+
+.card-msg-one-one form  textarea {
+    all: unset;
+    width: 80%;
+    height: auto;
+    padding: 5px;
+    resize: none;
+    overflow-y: auto;
+    word-wrap: break-word;
+    border-right: 0.01rem solid var(--Gris-perla);
+}
+
+.card-msg-one-one form .file-input-label {
+    width: 20%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.card-msg-one-one form .file-input-label i {
+    font-size: 2rem; 
+    color: rgb(0, 0, 0); 
+    text-align: center;
 }
 
 .card-msg-one-one form button {

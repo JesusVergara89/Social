@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Singlemessage.css';
-import { addDoc, collection, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { auth, db } from '../../firebaseConfig';
+import { addDoc, collection, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore'; // Importar ref, uploadBytes y getDownloadURL para Firebase Storage
+import { auth, db, storage } from '../../firebaseConfig';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { toast } from 'react-toastify';
 import Displaychat from './Chat/Displaychat';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +17,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     const [newMessage, setNewMessage] = useState('');
     const [Allusers, setAllusers] = useState([])
     const [reloadMsg, setReloadMsg] = useState(false)
+    const [imgUPto, setImgUPto] = useState('');
     const [textareaHeight, setTextareaHeight] = useState('30px');
     const [userChangePosition, setUserChangePosition] = useState(null)
     const { timer, myTimes } = useSetMsgTimer(userOnline)
@@ -67,8 +69,12 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         if (match.idUser === idreceiper || match.idUser === ideSender) {
             return match
         }
-    }
-    )
+    });
+
+    const handlePhotoChange = (e) => {
+        const file = e.target.files[0];
+        setImgUPto(file);
+    };
 
     const changePosition = (array, uid) => {
         const index = array.findIndex(objeto => objeto.idUser === uid);
@@ -80,7 +86,6 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
 
     useEffect(() => {
         setUserChangePosition(changePosition(myMessages, idreceiper))
-        console.log()
     }, [newMessage])
 
     const functionReload = () => setReloadMsg(!reloadMsg)
@@ -89,6 +94,16 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         e.preventDefault();
         try {
             let updatedMessages;
+            let imageUrls = '';
+
+            if (imgUPto) {
+                const photoRef = `/images/${Date.now()}${imgUPto.name}`;
+                const storageRef = ref(storage, photoRef);
+                await uploadBytes(storageRef, imgUPto);
+                const downloadUrl = await getDownloadURL(storageRef);
+                imageUrls = downloadUrl;
+            }
+
             if (arrayMessagesToUpdate.length > 0) {
                 updatedMessages = [...arrayMessagesToUpdate[0].message];
                 updatedMessages.push({
@@ -99,7 +114,8 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                     userNameR: userChangePosition[0].userName,
                     userNameS: userChangePosition[1].userName,
                     photoR: userChangePosition[0].photo,
-                    photoS: userChangePosition[1].photo
+                    photoS: userChangePosition[1].photo,
+                    imgUp: imageUrls
                 });
                 const messageId = arrayMessagesToUpdate[0].id;
                 const messageRef = doc(db, 'Messages', messageId);
@@ -116,7 +132,8 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                             userNameR: userChangePosition[0].userName,
                             userNameS: userChangePosition[1].userName,
                             photoR: userChangePosition[0].photo,
-                            photoS: userChangePosition[1].photo
+                            photoS: userChangePosition[1].photo,
+                            imgUp: imageUrls
                         }
                     ]
                 };
@@ -131,8 +148,6 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
             toast('Error request', { type: 'error' });
         }
     }
-
-    //console.log(userChangePosition)
 
     if (myMessages.length === 0) {
         return null;
@@ -161,6 +176,12 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                                 style={{ height: textareaHeight }}
                                 rows={1}
                             />
+                            <input
+                                type="file"
+                                name={`image`}
+                                accept="image/*"
+                                onChange={(e) => handlePhotoChange(e)}
+                            />
                             <button onClick={() => { functionReload() }} type='submit'>Enviar</button>
                         </form>
                     </div>
@@ -169,16 +190,29 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                     <div className="card-msg-one-one">
                         <Displaychat newMessage={newMessage} reloadMsg={reloadMsg} idreceiper={idreceiper} ideSender={ideSender} />
                         <form onSubmit={handleSubmit}>
-                            <textarea
-                                placeholder='Escribe tu mensaje...'
-                                value={newMessage}
-                                onChange={(e) => setNewMessage(e.target.value)}
-                                style={{ height: textareaHeight }}
-                                rows={1}
-                            />
+                            <div className="card-msg-one-one-form">
+                                <textarea
+                                    placeholder='Escribe tu mensaje...'
+                                    value={newMessage}
+                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    style={{ height: textareaHeight }}
+                                    rows={1}
+                                />
+                                <label className="file-input-label">
+                                    <input
+                                        type="file"
+                                        name={`image`}
+                                        accept="image/*"
+                                        onChange={(e) => handlePhotoChange(e)}
+                                        style={{ display: 'none' }} // Ocultar el input
+                                    />
+                                    <i className='bx bxs-image-alt'></i> {/* Ícono para subir la foto */}
+                                </label>
+                            </div>
                             <button onClick={() => { functionReload() }} type='submit'>Enviar</button>
                         </form>
                     </div>
+
                 }
             </div>
         </div>
