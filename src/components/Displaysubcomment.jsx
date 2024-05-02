@@ -1,25 +1,13 @@
+import { useState } from 'react';
 import '../style/Displaysubcomment.css';
 import DeleteSubcomments from './DeleteSubcomments';
 import LikesSubcom from './Likescomponents/LikesSubcom';
+import Subcomment from './Subcomment';
 
-const Displaysubcomment = ({ comment, users, index, post }) => {
+const Displaysubcomment = ({ comment, post, index, handleSubcommentSubmit, setUpdateSubcomments, updateSubcomments }) => {
+    const [showsubcomments, setShowsubcomments] = useState(false)
 
     const subcomments = Object.keys(comment.others).map(key => comment.others[key]);
-
-    const getUserNames = (subcomments, users) => {
-        subcomments.forEach(subcomment => {
-            const matchedUser = users.find(user => user.idUser === subcomment.userID);
-            if (matchedUser) {
-                subcomment.userName = matchedUser.userName;
-            } else {
-                subcomment.userName = '';
-            }
-        });
-
-        return subcomments;
-    };
-
-    let arrayNames = getUserNames(subcomments, users)
 
     const formatCreatedAtDate = (sub) => {
         if (sub.createdAt && sub.createdAt.seconds) {
@@ -30,24 +18,46 @@ const Displaysubcomment = ({ comment, users, index, post }) => {
         return '';
     }
 
-    const subcommentsFormatted = arrayNames.map(sub => ({
+    const subcommentsFormatted = subcomments.map(sub => ({
         ...sub,
         createdAt: formatCreatedAtDate(sub)
     }));
-    //console.log(subcommentsFormatted)
+
+    const filterConteComment = subcommentsFormatted.filter(data => data.content != '').reverse()
+
     return (
         <div className="display-subcomment">
-            {subcommentsFormatted && subcommentsFormatted.map((sub, i) => (
-                sub.content && sub.createdAt && (
-                    <div className='display-subcomment-container' key={i}>
-                        <DeleteSubcomments post={post} subcommentsFormatted={subcommentsFormatted}  indexSub={i} />
-                        <h4 className='subcomment-comment'>{sub.content}</h4>
-                        <LikesSubcom post={post} sub={sub} indexSub={i}/>
-                        <h4 className='subcomment-date'>{sub.createdAt}</h4>
-                        <h4 className='subcomment-date'>{`@${sub.userName}`}</h4>
-                    </div>
-                )
-            ))}
+            {filterConteComment?.[0] ?
+                <>
+                    <button className="hide-subcomments" onClick={() => setShowsubcomments(prev => !prev)}>{showsubcomments ? 'Ocultar respuestas' : 'Ver respuestas'}</button>
+                    {filterConteComment.map((sub, i) => (
+                        showsubcomments &&
+                        <div className='display-subcomment-container' key={i}>
+                            <div className="inform-commet">
+                                <DeleteSubcomments post={post} subcommentsFormatted={subcommentsFormatted} indexSub={i} />
+                                <img src={sub.photo} className="PhotoAvatar" />
+                                <div className="comment-content-main">
+                                    <p className="comment-date">
+                                        {`@${sub.userName}`}
+                                    </p>
+                                    <p className="comment-content">{sub.content}</p>
+                                    <h4 className='comment-date'>{sub.createdAt}</h4>
+                                </div>
+                                <LikesSubcom post={post} sub={sub} indexSub={i} />
+                            </div>
+                        </div>
+                    ))}
+                    {showsubcomments &&
+                        <Subcomment
+                            post={post}
+                            handleSubcommentSubmit={handleSubcommentSubmit}
+                            index={index}
+                            setUpdateSubcomments={setUpdateSubcomments}
+                            updateSubcomments={updateSubcomments}
+                        />}
+                </>
+                : ''
+            }
         </div>
     );
 };

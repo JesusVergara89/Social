@@ -5,7 +5,7 @@ import { auth, db } from "../firebaseConfig";
 import '../style/Subcomment.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,updateSubcomments }) => {
+const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments, updateSubcomments }) => {
     const [othersComment, setOthersComment] = useState('');
     const [user] = useAuthState(auth);
     const [textareaHeight, setTextareaHeight] = useState('20px');
@@ -14,12 +14,13 @@ const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,
     useEffect(() => {
         const adjustTextareaHeight = () => {
             const length = othersComment.length;
+            const lenthLine = (othersComment?.split('\n').length - 1) * 30
             const minHeight = 20;
-            const maxHeight = 200; 
-            const step = 30;
+            const maxHeight = 100;
+            const step = 20;
 
-            let height = minHeight + Math.floor(length / 30) * step;
-            height = Math.min(height, maxHeight); 
+            let height = minHeight + Math.floor((length + lenthLine) / 30) * step;
+            height = Math.min(height, maxHeight);
             setTextareaHeight(height + 'px');
         };
         adjustTextareaHeight();
@@ -44,7 +45,7 @@ const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,
             }
 
             mainComment.others[availableIndex] = {
-                userID: user.uid, 
+                userID: user.uid,
                 content: othersComment,
                 createdAt: Timestamp.now().toDate()
             };
@@ -75,7 +76,7 @@ const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,
     };
 
     return (
-        <form className='form-others' onSubmit={handleSubmitOthers}>
+        <form className='form-others'>
             <textarea
                 type="text"
                 className='others-comment'
@@ -85,7 +86,7 @@ const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,
                 style={{ height: textareaHeight }}
                 rows={1}
             />
-            <button className='comment-btn' type="submit"><i className='bx bx-paper-plane'></i></button>
+            <button onClick={handleSubmitOthers} className="submit-btn"><i className='bx bx-paper-plane'></i></button>
         </form>
     )
 }

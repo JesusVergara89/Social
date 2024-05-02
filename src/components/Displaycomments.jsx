@@ -8,27 +8,9 @@ import DeleteComment from "./DeleteComment";
 import Likecomment from "./Likescomponents/Likecomment";
 
 const Displaycomments = ({ post, infousers }) => {
-
     const [comments, setComments] = useState([]);
-
     const [setshowcomments, setSetshowcomments] = useState(false)
-
-    const [users, setUsers] = useState([]);
-
     const [updateSubcomments, setUpdateSubcomments] = useState(false)
-
-    useEffect(() => {
-        const messagesRef = collection(db, 'Users')
-        const q = query(messagesRef, orderBy('userName'))
-        onSnapshot(q, (snapshot) => {
-            const userx = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }))
-            setUsers(userx)
-        })
-    }, [comments, updateSubcomments]);
-
     const showComments = () => setSetshowcomments(!setshowcomments)
 
     useEffect(() => {
@@ -43,42 +25,43 @@ const Displaycomments = ({ post, infousers }) => {
         setComments(updatedComments);
     };
 
-    const userNameIdArray = infousers.map(user => ({
-        userName: user.userName,
-        idUser: user.idUser
-    }));
-console.log(users)
     return (
         <div className="display-comments">
             {setshowcomments ?
-                comments.map((comment, i) => (
-                    comment.main && (
-                        <div key={i} className="display-comment-card">
-                            <button onClick={showComments} className="hide-subcomments">Ocultar comentarios</button>
-                            <p className="comment-content">{comment.main}</p>
-                            <Likecomment post={post} index={i} likes={comment} />
-                            <DeleteComment post={post} commentPosition={i} />
-                            <p className="comment-date">
-                                {`@${userNameIdArray.find(match => match.idUser === comment.idUser)?.userName || ''}`}
-                            </p>
-                            <p className="comment-date">{comment.createdAt && comment.createdAt.toDate().toDateString()}</p>
-                            <Subcomment
-                                post={post}
-                                handleSubcommentSubmit={handleSubcommentSubmit}
-                                index={i}
-                                setUpdateSubcomments={setUpdateSubcomments}
-                                updateSubcomments={updateSubcomments}
-                            />
-                            <Displaysubcomment users={users} comment={comment} index={i} post={post} />
-                        </div>
-                    )
-                ))
+                <>
+                    <button onClick={showComments} className="hide-subcomments">Ocultar comentarios</button>
+                    {comments.map((comment, i) => (
+                        comment.main && (
+                            <div key={i} className="display-comment-card">
+                                <div className="inform-commet">
+                                    <img src={comment.photo} className="PhotoAvatar" />
+                                    <div className="comment-content-main">
+                                        <p className="comment-date">
+                                            {`@${comment.userName}`}
+                                        </p>
+                                        <p className="comment-content">{comment.main}</p>
+                                        <DeleteComment post={post} commentPosition={i} />
+                                        <p className="comment-date">{comment.createdAt && comment.createdAt.toDate().toDateString()}</p>
+                                    </div>
+                                    <Likecomment post={post} index={i} likes={comment} />
+                                </div>
+                                <Displaysubcomment comment={comment}
+                                    handleSubcommentSubmit={handleSubcommentSubmit}
+                                    index={i}
+                                    setUpdateSubcomments={setUpdateSubcomments}
+                                    updateSubcomments={updateSubcomments}
+                                    post={post} />
+                            </div>
+                        )
+                    ))
+                    }
+                    {comments.length - 1 === 0 && (
+                        <p className="noneComment">No hay comentarios disponibles. Se el primero en comentar.</p>
+                    )}
+                </>
                 :
                 <button onClick={showComments} className="show-subcomments">Ver comentarios</button>
             }
-            {comments.length === 0 && (
-                <p>No hay comentarios disponibles.</p>
-            )}
         </div>
     );
 

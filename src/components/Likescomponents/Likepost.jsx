@@ -31,6 +31,7 @@ const Likepost = ({ postId, likes }) => {
         <div className="Likepost">
             <i className={!likes?.includes(currentUser?.uid) ? 'bx bx-heart' : 'bx bxs-heart on'}
                 onClick={handleClick} />
+            <h6>{likes.length}</h6>
         </div>
     )
 }

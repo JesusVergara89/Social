@@ -1,68 +1,61 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #ADD8E6;
-    --Verde-menta: #98FB98;
-    --Gris-perla: #D3D3D3;
-    --Blanco-hueso: #F5F5DC;
-    --Rosa-suave: #FFB6C1;
-    --btns: #0095f6;
+  --border: #dbdbdb;
+  --Azul-claro: #add8e6;
+  --Verde-menta: #98fb98;
+  --Gris-perla: #d3d3d3;
+  --Blanco-hueso: #f5f5dc;
+  --Rosa-suave: #ffb6c1;
+  --btns: #0095f6;
 }
 
 .display-subcomment {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.display-subcomment-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 25px;
+  position: relative;
+}
+
+.subcomment-comment {
+  all: unset;
+  font-size: 0.75rem;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border-bottom: 0.01rem solid #111;
+}
+
+.subcomment-date {
+  all: unset;
+  font-size: 0.6rem;
+  margin-bottom: 5px;
+  color: rgb(108, 108, 108);
+}
+
+@media (width < 440px) {
+  .display-subcomment {
     width: 95%;
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    padding-left: 10px;
+    padding-left: 5px;
     margin-top: 15px;
     margin-bottom: 15px;
     border-radius: 5px;
     padding-bottom: 20px;
-    gap: 20px;
-}
-
-.display-subcomment-container {
-    width: 90%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    padding-right: 15px;
-    position: relative;
-    margin-top: 15px;
-}
-
-.subcomment-comment {
-    all: unset;
-    font-size: 0.75rem;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    border-bottom: 0.01rem solid #111;
-}
-
-.subcomment-date {
-    all: unset;
-    font-size: 0.6rem;
-    margin-bottom: 5px; 
-    color: rgb(108, 108, 108);
-}
-
-@media (width < 440px){
-    .display-subcomment {
-        width: 95%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-end;
-        padding-left: 5px;
-        margin-top: 15px;
-        margin-bottom: 15px;
-        border-radius: 5px;
-        padding-bottom: 20px;
-        margin-left: 2px;
-    }
+    margin-left: 2px;
+  }
 }

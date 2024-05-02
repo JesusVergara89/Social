@@ -36,16 +36,6 @@
   transition: height 0.3s ease-in-out;
 }
 
-.main-comment {
-  width: 90%;
-  padding: 5px;
-  border-radius: 5px;
-  border: 0.01rem solid var(--Gris-perla);
-  border-bottom: 1px solid var(--border);
-  font-size: 0.8rem;
-  resize: vertical;
-}
-
 .main-comment::placeholder {
   color: #111;
 }

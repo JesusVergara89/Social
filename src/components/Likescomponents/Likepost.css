@@ -19,18 +19,30 @@
 
 .Likepost h6 {
   all: unset;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   text-align: center;
 }
 
 .Likepost .bxs-heart.on {
   color: red;
-  animation: pulso 0.3s ease-in-out normal;
+  animation: scale-down-center 0.3s ease-in-out;
+}
+.Likepost .bx-heart{
+  animation: scale-up-center 0.3s ease-in-out;
 }
 
-@keyframes pulso {
+@keyframes scale-up-center {
   from {
-    transform: scale(1.1);
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-down-center {
+  from {
+    transform: scale(1.5);
   }
   to {
     transform: scale(1);

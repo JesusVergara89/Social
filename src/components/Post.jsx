@@ -69,15 +69,15 @@ const Post = () => {
                         </div>
                         <div className='post-card-action'>
                             <Likepost postId={p.id} likes={p.likes} />
-                            <i className='bx bx-message-rounded' />
+                            <Countercomments thispost={p} />
                         </div>
-                        <div className='post-card-countinfo'>
+                        {/*<div className='post-card-countinfo'>
                             <div className='like'>
                                 <h6>{p.likes.length}</h6>
                                 <i className='bx bx-heart' />
                             </div>
                             <Countercomments thispost={p} />
-                        </div>
+                </div>*/}
                         <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                         <p className='post-card-description'>{p.description}</p>
                         <Displaycomments infousers={infousers} AllPost={post} post={p} />
