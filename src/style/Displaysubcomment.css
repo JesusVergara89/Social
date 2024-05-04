@@ -42,20 +42,8 @@
   margin-bottom: 5px;
   color: rgb(108, 108, 108);
 }
-
-@media (width < 440px) {
-  .display-subcomment {
-    width: 95%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    padding-left: 5px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    padding-bottom: 20px;
-    margin-left: 2px;
+@media (width < 300px) {
+  .display-subcomment-container{
+    padding: 0 10px;  
   }
 }
