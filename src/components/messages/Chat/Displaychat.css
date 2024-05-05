@@ -248,6 +248,47 @@
     gap: 8px;
 }
 
+.display-time-sender-img {
+    display: flex;
+    align-self: flex-end;
+    margin-left: 70%;
+    position: absolute;
+    bottom: -26px;
+    right: 0px;
+    gap: 8px;
+}
+
+.display-time-sender-img.enlarge {
+    display: block;
+    align-self: center;
+    margin-left: 70%;
+    position: absolute;
+    bottom: 10px;
+    margin: auto;
+}
+
+.container-msg-with-img.enlarge img {
+    max-width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    margin: 0;
+    transform: translate(-50%, -50%) scale(2.5)
+}
+
+.display-time-receptor-img {
+    display: flex;
+    align-self: flex-start;
+    margin-right: 70%;
+    position: absolute;
+    bottom: -26px;
+    left: 0;
+    gap: 8px;
+}
+
+
 @media(width < 500px) {
 
     .display-chat,

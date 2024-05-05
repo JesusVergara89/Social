@@ -8,6 +8,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
+    const [setEnlarge_Image, setSetEnlarge_Image] = useState('')
 
     useEffect(() => {
         const messagesRef = collection(db, 'Messages')
@@ -32,11 +33,34 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
         return false;
     });
 
+    const clickObject = document.getElementById("img-center");
+
+    const EnlargeImage = (token) => {
+        const match = token.match(/token=([a-zA-Z0-9-]+)/)
+        if (match) {
+            setSetEnlarge_Image((match[1]))
+        } else {
+            setSetEnlarge_Image('')
+        }
+        clickObject.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    const ExtractToken = (url) => {
+        const match = url.match(/token=([a-zA-Z0-9-]+)/)
+        if (match) {
+            return (match[1])
+        } else {
+            return ''; 
+        }
+        clickObject.scrollIntoView({ behavior: 'smooth' });
+    }
+
     const thisChat = userMsgs?.filter((data) => {
         if (data.message[0].receptor === idreceiper && data.message[0].sender === ideSender || data.message[0].receptor === ideSender && data.message[0].sender === idreceiper) {
             return data
         }
     })
+
 
     return (
         <div className="display-chat">
@@ -58,12 +82,12 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                 thisChat.map((chat, i) => (
                     <div key={i} className="display-msg">
                         {chat.message.map((msg, j) => (
-                            <div key={j} className={(msg.imgUp && msg.imgUp !== null && msg.imgUp.length === 0) || msg.imgUp === "" ? "container-msg" : "container-msg-with-img"}>
+                            <div key={j} className={(msg.imgUp && msg.imgUp !== null && msg.imgUp.length === 0) || msg.imgUp === "" ? "container-msg" : `container-msg-with-img ${setEnlarge_Image === ExtractToken(msg.imgUp) ? 'enlarge' : ''}`}>
                                 <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>
                                 {(msg.imgUp && msg.imgUp === null && msg.imgUp.length === 0) || msg.imgUp === "" ?
                                     ''
                                     :
-                                    <img className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp} alt="" />
+                                    <img id='img-center' onClick={() => {EnlargeImage(msg.imgUp)}} className={msg.sender === user.uid ? `display-time-sender-img ${setEnlarge_Image === ExtractToken(msg.imgUp) ? 'enlarge' : ''}` : `display-time-receptor-img ${setEnlarge_Image === ExtractToken(msg.imgUp) ? 'enlarge' : ''}`} src={msg.imgUp} alt="" />
                                 }
                                 <div className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"}>
                                     <h6>{`@${msg.userNameS}`}</h6>
