@@ -20,12 +20,8 @@ const PostSkeleton = () => {
                         <Skeleton height={500} width={'100vw'} />
                     </div>
                     <div className='post-card-action'>
-                        <Skeleton width={24} height={24} />
-                        <Skeleton width={24} height={24} />
-                    </div>
-                    <div className='post-card-countinfo'>
-                        <Skeleton width={30} height={16} />
-                        <Skeleton width={30} height={16} />
+                        <Skeleton width={38} height={24} />
+                        <Skeleton width={38} height={24} />
                     </div>
                     <p className='post-card-description'>
                         <Skeleton height={180} style={{ marginTop: '10px' }} />

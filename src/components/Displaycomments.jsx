@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import '../style/Displaycomments.css'
-import Subcomment from "./Subcomment";
 import Displaysubcomment from "./Displaysubcomment";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { db } from "../firebaseConfig";
 import DeleteComment from "./DeleteComment";
 import Likecomment from "./Likescomponents/Likecomment";
+import Comment from "./Comment";
 
-const Displaycomments = ({ post, infousers }) => {
+const Displaycomments = ({ post, reload }) => {
+    const [UserResponse, setUserResponse] = useState()
     const [comments, setComments] = useState([]);
     const [setshowcomments, setSetshowcomments] = useState(false)
     const [updateSubcomments, setUpdateSubcomments] = useState(false)
@@ -24,7 +23,9 @@ const Displaycomments = ({ post, infousers }) => {
     const handleSubcommentSubmit = (updatedComments) => {
         setComments(updatedComments);
     };
-
+    const FunctionUserResponse = (i, user, photo) => {
+        setUserResponse({ index: i, userName: user, photo: photo })
+    }
     return (
         <div className="display-comments">
             {setshowcomments ?
@@ -41,16 +42,15 @@ const Displaycomments = ({ post, infousers }) => {
                                         </p>
                                         <p className="comment-content">{comment.main}</p>
                                         <DeleteComment post={post} commentPosition={i} />
-                                        <p className="comment-date">{comment.createdAt && comment.createdAt.toDate().toDateString()}</p>
+                                        <div className="respond">
+                                            <p className="comment-date">{comment.createdAt && comment.createdAt.toDate().toDateString()}
+                                            </p>
+                                            <button onClick={() => FunctionUserResponse(i, comment.userName, comment.photo)}>Responder</button>
+                                        </div>
                                     </div>
                                     <Likecomment post={post} index={i} likes={comment} />
                                 </div>
-                                <Displaysubcomment comment={comment}
-                                    handleSubcommentSubmit={handleSubcommentSubmit}
-                                    index={i}
-                                    setUpdateSubcomments={setUpdateSubcomments}
-                                    updateSubcomments={updateSubcomments}
-                                    post={post} />
+                                <Displaysubcomment comment={comment} post={post} />
                             </div>
                         )
                     ))
@@ -62,6 +62,16 @@ const Displaycomments = ({ post, infousers }) => {
                 :
                 <button onClick={showComments} className="show-subcomments">Ver comentarios</button>
             }
+            <Comment
+                UserResponse={UserResponse}
+                setUserResponse={setUserResponse}
+                thispost={post}
+                postId={post.id}
+                reload={reload}
+                setUpdateSubcomments={setUpdateSubcomments}
+                updateSubcomments={updateSubcomments}
+                handleSubcommentSubmit={handleSubcommentSubmit}
+            />
         </div>
     );
 

@@ -15,6 +15,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 15px;
+  padding-left: 10px;
+}
+
+.Information-response {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
+  font-size: 0.875rem;
+  padding-bottom: 15px;
+}
+
+.Information-response .bx{
+  font-size: 20px;
+  cursor: pointer;
+  color: red;
 }
 
 .form-container {

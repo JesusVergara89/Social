@@ -24,7 +24,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 0 25px;
+  padding-left: 25px;
   position: relative;
 }
 

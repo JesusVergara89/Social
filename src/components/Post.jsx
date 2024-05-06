@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import '../style/Post.css'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import Comment from './Comment';
 import Displaycomments from './Displaycomments';
 import { useNavigate } from 'react-router-dom';
 import Deletebtn from './Deletebtn';
@@ -12,13 +11,10 @@ import Renderimagespost from './Renderimagespost';
 import PostSkeleton from './Loading/PostSkeleton';
 
 const Post = () => {
-
     const [post, setPost] = useState([]);
-    const [infousers, setInfousers] = useState([]);
     const [returncomments, setReturncomments] = useState(false)
 
     const createPost = useNavigate()
-
     const reload = () => setReturncomments(!returncomments)
 
     useEffect(() => {
@@ -33,17 +29,6 @@ const Post = () => {
         })
     }, [returncomments]);
 
-    useEffect(() => {
-        const usersCollectionRef = collection(db, 'Users');
-        const q = query(usersCollectionRef, orderBy('userName'))
-        onSnapshot(q, (snapshot) => {
-            const usex = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }))
-            setInfousers(usex);
-        })
-    }, [post]);
 
     const toProfile = () => {
         console.log('')
@@ -58,7 +43,7 @@ const Post = () => {
                         <div className="post-card-userinfo">
                             <div className="post-card-userinfo-1">
                                 <img src={p.userPhoto} alt="" />
-                                <h6>{`${p.userName}`}</h6>
+                                <h6>{`@${p.userName}`}</h6>
                             </div>
                             <div className="post-card-userinfo-2">
                                 <h6>{p.createdAt.toDate().toDateString()}</h6>
@@ -73,12 +58,7 @@ const Post = () => {
                         </div>
                         <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                         <p className='post-card-description'>{p.description}</p>
-                        <Displaycomments infousers={infousers} AllPost={post} post={p} />
-                        <Comment
-                            thispost={p}
-                            postId={p.id}
-                            reload={reload}
-                        />
+                        <Displaycomments post={p} reload={reload} />
                     </div>
                 ))
             ) : <PostSkeleton />}

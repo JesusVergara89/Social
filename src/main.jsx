@@ -8,12 +8,15 @@ import { HashRouter } from 'react-router-dom'
 import 'font-awesome/css/font-awesome.css'
 import { Provider } from 'react-redux'
 import store from './store/index'
+import StatelCurrentUser from './components/Context/StatelCurrentUser.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <HashRouter>
-    <ToastContainer />
-    <Provider store={store} >
-      <Social />
-    </Provider>
+    <StatelCurrentUser>
+      <Provider store={store} >
+        <ToastContainer />
+        <Social />
+      </Provider>
+    </StatelCurrentUser>
   </HashRouter>
 )

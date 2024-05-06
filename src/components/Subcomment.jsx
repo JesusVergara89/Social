@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Timestamp, doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
 import '../style/Subcomment.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
-
+import { CurrentUsercontext } from './Context/CurrentUsercontext';
 const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments, updateSubcomments }) => {
     const [othersComment, setOthersComment] = useState('');
     const [user] = useAuthState(auth);
     const [textareaHeight, setTextareaHeight] = useState('20px');
+    const { CurrentUser } = useContext(CurrentUsercontext)
 
 
     useEffect(() => {
@@ -46,6 +47,8 @@ const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,
 
             mainComment.others[availableIndex] = {
                 userID: user.uid,
+                userName: CurrentUser.userName,
+                photo: CurrentUser.photo,
                 content: othersComment,
                 createdAt: Timestamp.now().toDate()
             };
