@@ -8,6 +8,8 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
+    const [setshowPhoto, setSetshowPhoto] = useState(false)
+    const [value, setValue] = useState('')
 
     useEffect(() => {
         const messagesRef = collection(db, 'Messages')
@@ -38,6 +40,14 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
         }
     })
 
+    const ShowPic = () => {
+        setSetshowPhoto(!setshowPhoto)
+    }
+
+    const getPhotoRef = (ref) => {
+        setValue(ref)
+    }
+
     return (
         <div className="display-chat">
             <div className="display-chat-information">
@@ -54,17 +64,35 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                     </div>
                 }
             </div>
+            {setshowPhoto ? (
+                <div className="display-chat-img-larger">
+                    <div onClick={ShowPic} className="display-chat-img-larger-close">
+                        <i className='bx bxs-x-circle'></i>
+                    </div>
+                    {
+                        value ? 
+                        <img src={value} alt="" />
+                        :
+                        <div className="loading-img">
+
+                        </div>
+                    }
+                    
+                </div>
+            ) : (
+                ''
+            )}
             {thisChat &&
                 thisChat.map((chat, i) => (
-                    <div key={i} className="display-msg">
+                    <div key={i} className={`display-msg ${setshowPhoto === true ? 'bluer-bg' : ''}`}>
                         {chat.message.map((msg, j) => (
                             <div key={j} className={(msg.imgUp && msg.imgUp !== null && msg.imgUp.length === 0) || msg.imgUp === "" ? "container-msg" : "container-msg-with-img"}>
                                 <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>
-                                {(msg.imgUp && msg.imgUp === null && msg.imgUp.length === 0) || msg.imgUp === "" ?
-                                    ''
-                                    :
-                                    <img className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp} alt="" />
-                                }
+                                {(msg.imgUp && msg.imgUp !== null && msg.imgUp.length !== 0) || msg.imgUp !== "" ? (
+                                    <img onClick={() => { getPhotoRef(msg.imgUp); ShowPic() }} className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp} alt="" />
+                                ) : (
+                                    null
+                                )}
                                 <div className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"}>
                                     <h6>{`@${msg.userNameS}`}</h6>
                                     <h6>-</h6>
@@ -77,6 +105,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                     </div>
                 ))
             }
+
         </div>
     )
 }
