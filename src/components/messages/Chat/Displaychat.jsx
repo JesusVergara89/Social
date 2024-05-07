@@ -51,7 +51,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
         if (match) {
             return (match[1])
         } else {
-            return ''; 
+            return '';
         }
         clickObject.scrollIntoView({ behavior: 'smooth' });
     }
@@ -91,15 +91,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                     <div onClick={ShowPic} className="display-chat-img-larger-close">
                         <i className='bx bxs-x-circle'></i>
                     </div>
-                    {
-                        value ? 
-                        <img src={value} alt="" />
-                        :
-                        <div className="loading-img">
-
-                        </div>
-                    }
-                    
+                    <img src={value} alt="" />
                 </div>
             ) : (
                 ''
