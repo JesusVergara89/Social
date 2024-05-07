@@ -157,7 +157,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         myTimes(IDuserR, IDuserS, userNameR, userNameS)
     }
 
-    console.log(userChangePosition)
+
 
     return (
         <div className='single-card-msg'>

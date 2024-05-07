@@ -34,28 +34,6 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
         return false;
     });
 
-    const clickObject = document.getElementById("img-center");
-
-    const EnlargeImage = (token) => {
-        const match = token.match(/token=([a-zA-Z0-9-]+)/)
-        if (match) {
-            setSetEnlarge_Image((match[1]))
-        } else {
-            setSetEnlarge_Image('')
-        }
-        clickObject.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    const ExtractToken = (url) => {
-        const match = url.match(/token=([a-zA-Z0-9-]+)/)
-        if (match) {
-            return (match[1])
-        } else {
-            return '';
-        }
-        clickObject.scrollIntoView({ behavior: 'smooth' });
-    }
-
     const thisChat = userMsgs?.filter((data) => {
         if (data.message[0].receptor === idreceiper && data.message[0].sender === ideSender || data.message[0].receptor === ideSender && data.message[0].sender === idreceiper) {
             return data
