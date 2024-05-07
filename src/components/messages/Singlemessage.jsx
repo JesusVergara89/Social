@@ -204,9 +204,9 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                                         name={`image`}
                                         accept="image/*"
                                         onChange={(e) => handlePhotoChange(e)}
-                                        style={{ display: 'none' }} // Ocultar el input
+                                        style={{ display: 'none' }} 
                                     />
-                                    <i className='bx bxs-image-alt'></i> {/* Ícono para subir la foto */}
+                                    <i className='bx bxs-image-alt'></i> 
                                 </label>
                             </div>
                             <button onClick={() => { functionReload() }} type='submit'>Enviar</button>
