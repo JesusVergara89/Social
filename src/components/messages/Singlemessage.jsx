@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Singlemessage.css';
-import { addDoc, collection, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore'; 
+import { addDoc, collection, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth, db, storage } from '../../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { toast } from 'react-toastify';
@@ -86,7 +86,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
 
     useEffect(() => {
         setUserChangePosition(changePosition(myMessages, idreceiper))
-    }, [newMessage])
+    }, [newMessage, imgUPto])
 
     const functionReload = () => setReloadMsg(!reloadMsg)
 
@@ -206,9 +206,9 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                                         name={`image`}
                                         accept="image/*"
                                         onChange={(e) => handlePhotoChange(e)}
-                                        style={{ display: 'none' }} 
+                                        style={{ display: 'none' }}
                                     />
-                                    <i className='bx bxs-image-alt'></i> 
+                                    <i className='bx bxs-image-alt'></i>
                                 </label>
                             </div>
                             <button onClick={() => { functionReload() }} type='submit'>Enviar</button>
