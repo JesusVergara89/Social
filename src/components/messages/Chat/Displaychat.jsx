@@ -101,7 +101,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                     <div key={i} className={`display-msg ${setshowPhoto === true ? 'bluer-bg' : ''}`}>
                         {chat.message.map((msg, j) => (
                             <div key={j} className={(msg.imgUp && msg.imgUp !== null && msg.imgUp.length === 0) || msg.imgUp === "" ? "container-msg" : "container-msg-with-img"}>
-                                <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>
+                                {msg.content === '' ? '' : <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>}
                                 {(msg.imgUp && msg.imgUp !== null && msg.imgUp.length !== 0) || msg.imgUp !== "" ? (
                                     <img onClick={() => { getPhotoRef(msg.imgUp); ShowPic() }} className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp} alt="" />
                                 ) : (
