@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Singlemessage.css';
-import { addDoc, collection, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore'; // Importar ref, uploadBytes y getDownloadURL para Firebase Storage
+import { addDoc, collection, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore'; 
 import { auth, db, storage } from '../../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { toast } from 'react-toastify';
@@ -156,6 +156,8 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     const testFunction = (IDuserR, IDuserS, userNameR, userNameS) => {
         myTimes(IDuserR, IDuserS, userNameR, userNameS)
     }
+
+    console.log(userChangePosition)
 
     return (
         <div className='single-card-msg'>
