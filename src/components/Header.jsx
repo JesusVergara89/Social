@@ -28,7 +28,7 @@ const Header = () => {
                 <Link to={'/messagesinbox'}>
                     <div className="menu-menu">
                         <i className='bx bx-message-detail'></i>
-                        <div className={msgNotification === 1 ? 'menu-menu-notify' : 'menu-menu-notify-none'}>
+                        <div className={msgNotification[0] === 1 ? 'menu-menu-notify' : 'menu-menu-notify-none'}>
                             <i className='bx bxs-bell-ring'></i>
                         </div>
                     </div>

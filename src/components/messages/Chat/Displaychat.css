@@ -48,16 +48,16 @@
     left: 3px;
     cursor: pointer;
     z-index: 30;
-    background-color:  #000000;
+    background-color: #000000;
     border: 1px solid #000000;
 }
 
-.display-chat-img-larger-close .bx{
+.display-chat-img-larger-close .bx {
     font-size: 30px;
     color: #FFFFFF;
 }
 
-.display-chat-img-larger  img {
+.display-chat-img-larger img {
     max-width: 400px;
     border-radius: 5px;
 }
@@ -229,16 +229,47 @@
     justify-content: center;
     border-radius: 3px;
     position: relative;
-    margin-bottom: 180px;
+    margin-bottom: 200px;
     gap: 20px;
+}
+
+.container-msg-with-img-emojis {
+    width: 100%;
+    height: auto;
+    position: relative;
 }
 
 .container-msg-with-img img {
     max-height: 150px;
     position: absolute;
-    bottom: -160px;
+    bottom: -170px;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.container-msg-with-img-emojis .bx {
+    position: absolute;
+    top: 80px;
+}
+
+.emoji-container {
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 40px;
+}
+
+.emoji-comtainer-map {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
 }
 
 .container-msg p {
@@ -252,8 +283,10 @@
 }
 
 .container-msg-with-img h6 {
+    all: unset;
     font-size: 0.6rem;
     font-weight: 700;
+    margin-bottom: 30px;
 }
 
 .container-msg h6 {
@@ -293,6 +326,16 @@
     gap: 8px;
 }
 
+.display-time-sender.off-time {
+    display: flex;
+    align-self: flex-end;
+    margin-left: 70%;
+    position: absolute;
+    bottom: -220px;
+    right: 0px;
+    gap: 8px;
+}
+
 .display-time-receptor {
     display: flex;
     align-self: flex-start;
@@ -303,19 +346,30 @@
     gap: 8px;
 }
 
-@media(360px <= width < 400px) {
-    .display-chat-img-larger  img {
+.display-time-receptor.off-time {
+    display: flex;
+    align-self: flex-start;
+    margin-right: 70%;
+    position: absolute;
+    bottom: -220px;
+    left: 0;
+    gap: 8px;
+}
+
+@media(360px <=width < 400px) {
+    .display-chat-img-larger img {
         max-width: 358px;
     }
 }
 
-@media(310px <= width < 359px) {
-    .display-chat-img-larger  img {
+@media(310px <=width < 359px) {
+    .display-chat-img-larger img {
         max-width: 320px;
     }
 }
 
 @media(width < 500px) {
+
     .display-chat,
     .display-chat-information {
         width: 95%;

@@ -115,7 +115,13 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                     userNameS: userChangePosition[1].userName,
                     photoR: userChangePosition[0].photo,
                     photoS: userChangePosition[1].photo,
-                    imgUp: imageUrls
+                    imgUp:
+                        [imageUrls,
+                            {
+                                emojisDB: ["😊", "👍", "👎", "🎉", "🙏", "🤣", "❤️", "😍", "😎", "😜", "😇", "😂", "😘", "😁", "🤩", "😋", "😴", "🤗", "🤔", "😕"],
+                                emojisREACT: []
+                            }
+                        ]
                 });
                 const messageId = arrayMessagesToUpdate[0].id;
                 const messageRef = doc(db, 'Messages', messageId);
@@ -133,7 +139,13 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                             userNameS: userChangePosition[1].userName,
                             photoR: userChangePosition[0].photo,
                             photoS: userChangePosition[1].photo,
-                            imgUp: imageUrls
+                            imgUp:
+                                [imageUrls,
+                                    {
+                                        emojisDB: ["😊", "👍", "👎", "🎉", "🙏", "🤣", "❤️", "😍", "😎", "😜", "😇", "😂", "😘", "😁", "🤩", "😋", "😴", "🤗", "🤔", "😕"],
+                                        emojisREACT: []
+                                    }
+                                ]
                         }
                     ]
                 };
@@ -142,6 +154,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                 myTimes(ideSender, idreceiper, userChangePosition[0].userName, userChangePosition[1].userName)
             }
             setNewMessage('');
+            setImgUPto('')
             toast('Message send', { type: 'success' });
         } catch (error) {
             console.log(error);
@@ -157,13 +170,12 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         myTimes(IDuserR, IDuserS, userNameR, userNameS)
     }
 
-
-
     return (
         <div className='single-card-msg'>
-            {msgNotification === 1 ?
-                <button onClick={() => testFunction(idreceiper, ideSender, '', '')} className='message-read'>Marcar como leido</button>
-                :
+            {msgNotification[0] === 1 &&
+                ((msgNotification[1][0] === idreceiper || msgNotification[1][0] === ideSender) &&
+                    (msgNotification[1][1] === idreceiper || msgNotification[1][1] === ideSender)) ?
+                <button onClick={() => testFunction(idreceiper, ideSender, '', '')} className='message-read'>Marcar como leído</button> :
                 ''
             }
             <button onClick={() => navigateToAllmsg('/messagesinbox')} className='single-card-msg-close'><i className='bx bxs-x-circle'></i></button>

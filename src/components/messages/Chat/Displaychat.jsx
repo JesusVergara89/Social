@@ -10,6 +10,9 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
     const [allmsg, setAllmsg] = useState();
     const [setshowPhoto, setSetshowPhoto] = useState(false)
     const [value, setValue] = useState('')
+    const [EMoji_Show, setEMoji_Show] = useState(false)
+    const [indexInfo, setIndexInfo] = useState('')
+    const [reaction, setReaction] = useState({})
 
     useEffect(() => {
         const messagesRef = collection(db, 'Messages')
@@ -48,6 +51,11 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
         setValue(ref)
     }
 
+    const EMojiShow = (index) => {
+        setEMoji_Show(!EMoji_Show)
+        setIndexInfo(index)
+    }
+
     return (
         <div className="display-chat">
             <div className="display-chat-information">
@@ -78,14 +86,28 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                 thisChat.map((chat, i) => (
                     <div key={i} className={`display-msg ${setshowPhoto === true ? 'bluer-bg' : ''}`}>
                         {chat.message.map((msg, j) => (
-                            <div key={j} className={(msg.imgUp && msg.imgUp !== null && msg.imgUp.length === 0) || msg.imgUp === "" ? "container-msg" : "container-msg-with-img"}>
+                            <div key={j} className={(msg.imgUp && msg.imgUp[0] !== '') ? "container-msg-with-img" : "container-msg"}>
                                 {msg.content === '' ? '' : <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>}
-                                {(msg.imgUp && msg.imgUp !== null && msg.imgUp.length !== 0) || msg.imgUp !== "" ? (
-                                    <img onClick={() => { getPhotoRef(msg.imgUp); ShowPic() }} className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp} alt="" />
+                                {msg.imgUp && msg.imgUp[0] !== '' ? (
+                                    <div className="container-msg-with-img-emojis">
+                                        <img onClick={() => { getPhotoRef(msg.imgUp[0]); ShowPic() }} className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp[0]} alt="" />
+                                        <i onClick={() => { EMojiShow(j) }} className='bx bxs-plus-circle'></i>
+                                        <div className="emoji-container">
+                                            {EMoji_Show && (indexInfo === j) ?
+                                                <div className="emoji-comtainer-map">
+                                                    {msg.imgUp[1].emojisDB.map((emoji, i) => (
+                                                        <button key={i}>{emoji}</button>
+                                                    ))}
+                                                </div>
+                                                :
+                                                ''
+                                            }
+                                        </div>
+                                    </div>
                                 ) : (
                                     null
                                 )}
-                                <div className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"}>
+                                <div className={msg.sender === user.uid ? `display-time-sender ${msg.content === '' ? 'off-time' : ''}` : `display-time-receptor ${msg.content === '' ? 'off-time' : ''}`}>
                                     <h6>{`@${msg.userNameS}`}</h6>
                                     <h6>-</h6>
                                     <h6 key={j + 1}>
