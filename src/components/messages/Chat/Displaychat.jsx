@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
@@ -13,7 +13,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
     const [value, setValue] = useState('')
     const [EMoji_Show, setEMoji_Show] = useState(false)
     const [indexInfo, setIndexInfo] = useState('')
-    const [reaction, setReaction] = useState({})
+    const [reaction, setReaction] = useState([])
 
     useEffect(() => {
         const messagesRef = collection(db, 'Messages')
@@ -46,13 +46,16 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
 
     const ShowPic = () => {
         setSetshowPhoto(!setshowPhoto)
+        setEMoji_Show(false)
     }
 
-    const getPhotoRef = (ref) => {
+    const getPhotoRef = (ref, emojiReact) => {
         setValue(ref)
+        setReaction(emojiReact)
     }
 
     const EMojiShow = (index) => {
+        setSetshowPhoto(false)
         setEMoji_Show(!EMoji_Show)
         setIndexInfo(index)
     }
@@ -91,9 +94,16 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                                 {msg.content === '' ? '' : <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>}
                                 {msg.imgUp && msg.imgUp[0] !== '' ? (
                                     <div className="container-msg-with-img-emojis">
-                                        <img onClick={() => { getPhotoRef(msg.imgUp[0]); ShowPic() }} className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp[0]} alt="" />
+                                        <img onClick={() => { getPhotoRef(msg.imgUp[0], msg.imgUp[1].emojisREACT); ShowPic() }} className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp[0]} alt="" />
+                                        <div className={msg.sender === user.uid ? "container-msg-with-img-emojis-reaction-sender" : "container-msg-with-img-emojis-reaction-receptor"} >
+                                            {
+                                                msg.imgUp[1].emojisREACT.map((data, i) => (
+                                                    <i key={i}>{data}</i>
+                                                ))
+                                            }
+                                        </div>
                                         <i onClick={() => { EMojiShow(j) }} className={msg.sender === user.uid ? 'bx bxs-plus-circle sender' : 'bx bxs-plus-circle receptor'}></i>
-                                        <Emoji EMoji_Show={EMoji_Show} indexInfo={indexInfo} j={j} msg={msg} user={user}/>
+                                        <Emoji EMoji_Show={EMoji_Show} indexInfo={indexInfo} j={j} msg={msg} user={user} />
                                     </div>
                                 ) : (
                                     null

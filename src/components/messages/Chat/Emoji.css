@@ -1,24 +1,20 @@
-.emoji-container-sender {
-    width: 100px;
+.emoji-container-sender,
+.emoji-container-receptor {
+    width: 200px;
     height: 160px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 20px;
-    left: 40%;
-    overflow: scroll;  
+    top: 18px;
+    left: calc(50% - 100px);
+    overflow-y: visible; 
+    padding: 5px; 
 }
 
-.emoji-container-receptor {
-    width: 100px;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 40px;
-    right: 40%;
+.emoji-container-sender.off-this,
+.emoji-container-receptor.off-this {
+    display: none;
 }
 
 .emoji-comtainer-map {
@@ -29,4 +25,27 @@
     justify-content: center;
     align-items: center;
     gap: 0.2rem;
+    border-radius: 10px;
+    background: rgba(173, 216, 230, 0.35);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
+.emoji-comtainer-map button {
+    all: unset;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+    cursor: pointer;
+}
+
+.emoji-comtainer-map button:hover {
+    background-color: rgba(0, 0, 0, 0.1); 
+    transform: scale(1.1); 
+}
+

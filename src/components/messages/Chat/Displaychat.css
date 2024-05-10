@@ -247,18 +247,74 @@
     cursor: pointer;
 }
 
+/* here go the reaction*/
+
+.container-msg-with-img-emojis-reaction-sender {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -175px;
+    z-index: 50;
+    right: 5px;
+    gap: 0.3rem;
+    padding: 1px 3px 1px 3px;
+    border-radius: 10px;
+    background: rgba(193, 53, 244, 0.35);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
+    border: 1px solid rgba(255, 255, 255, 0.449);
+}
+
+.container-msg-with-img-emojis-reaction-sender i {
+    all: unset;
+    width: 17px;
+    height: 17px;
+    font-size: 17px;
+}
+
+.container-msg-with-img-emojis-reaction-receptor {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -175px;
+    z-index: 50;
+    left: 0;
+    gap: 0.3rem;
+}
+
+.container-msg-with-img-emojis-reaction-receptor i {
+    all: unset;
+    width: 17px;
+    height: 17px;
+    font-size: 17px;
+}
+
+/* here go the reaction*/
+
 .container-msg-with-img-emojis .bx.bxs-plus-circle.sender {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid white;
+    background-color: rgb(255, 255, 255);
     bottom: -40px;
-    right: 0;
+    right: 2px;
+    color: rgb(77, 77, 77);
+    cursor: pointer;
 }
 
 .container-msg-with-img-emojis .bx.bxs-plus-circle.receptor {
     position: absolute;
+    border-radius: 50%;
     bottom: -40px;
-    left: 0;
+    background-color: rgb(255, 255, 255);
+    left: 2px;
+    color: rgb(77, 77, 77);
+    cursor: pointer;
 }
 
 .container-msg p {
