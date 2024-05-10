@@ -95,15 +95,15 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                                 {msg.imgUp && msg.imgUp[0] !== '' ? (
                                     <div className="container-msg-with-img-emojis">
                                         <img onClick={() => { getPhotoRef(msg.imgUp[0], msg.imgUp[1].emojisREACT); ShowPic() }} className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp[0]} alt="" />
-                                        <div className={msg.sender === user.uid ? "container-msg-with-img-emojis-reaction-sender" : "container-msg-with-img-emojis-reaction-receptor"} >
+                                        <div className={msg.sender === user.uid ? `container-msg-with-img-emojis-reaction-sender ${msg.imgUp[1].emojisREACT.length <= 0 ? 'off-this' : ''}` : `container-msg-with-img-emojis-reaction-receptor ${msg.imgUp[1].emojisREACT.length <= 0 ? 'off-this': ''}`} >
                                             {
-                                                msg.imgUp[1].emojisREACT.map((data, i) => (
+                                                msg.imgUp[1].emojisREACT.slice(-8).map((data, i) => (
                                                     <i key={i}>{data}</i>
                                                 ))
                                             }
                                         </div>
                                         <i onClick={() => { EMojiShow(j) }} className={msg.sender === user.uid ? 'bx bxs-plus-circle sender' : 'bx bxs-plus-circle receptor'}></i>
-                                        <Emoji EMoji_Show={EMoji_Show} indexInfo={indexInfo} j={j} msg={msg} user={user} />
+                                        <Emoji id={chat.id} EMoji_Show={EMoji_Show} indexInfo={indexInfo} j={j} msg={msg} user={user} />
                                     </div>
                                 ) : (
                                     null

@@ -256,11 +256,13 @@
     justify-content: center;
     align-items: center;
     position: absolute;
+    overflow-y: hidden;
+    overflow-x: auto;
     bottom: -175px;
     z-index: 50;
     right: 5px;
     gap: 0.3rem;
-    padding: 1px 3px 1px 3px;
+    padding: 1px 3px 5px 3px;
     border-radius: 10px;
     background: rgba(193, 53, 244, 0.35);
     backdrop-filter: blur(2.5px);
@@ -268,11 +270,15 @@
     border: 1px solid rgba(255, 255, 255, 0.449);
 }
 
+.container-msg-with-img-emojis-reaction-sender::-webkit-scrollbar {
+    display: none;
+}
+
 .container-msg-with-img-emojis-reaction-sender i {
     all: unset;
-    width: 17px;
-    height: 17px;
-    font-size: 17px;
+    width: 15px;
+    height: 15px;
+    font-size: 15px;
 }
 
 .container-msg-with-img-emojis-reaction-receptor {
@@ -286,13 +292,24 @@
     z-index: 50;
     left: 0;
     gap: 0.3rem;
+    padding: 1px 3px 2px 3px;
+    border-radius: 10px;
+    background: rgba(193, 53, 244, 0.35);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
+    border: 1px solid rgba(255, 255, 255, 0.449);
+}
+
+.container-msg-with-img-emojis-reaction-sender.off-this,
+.container-msg-with-img-emojis-reaction-receptor.off-this{
+    display: none;
 }
 
 .container-msg-with-img-emojis-reaction-receptor i {
     all: unset;
-    width: 17px;
-    height: 17px;
-    font-size: 17px;
+    width: 15px;
+    height: 15px;
+    font-size: 15px;
 }
 
 /* here go the reaction*/

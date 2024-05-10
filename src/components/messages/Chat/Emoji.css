@@ -10,6 +10,7 @@
     left: calc(50% - 100px);
     overflow-y: visible; 
     padding: 5px; 
+    z-index: 51;
 }
 
 .emoji-container-sender.off-this,

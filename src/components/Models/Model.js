@@ -68,11 +68,53 @@ msg = {
             receptor: 'ooooo',
             sender: 'jjjj',
             userNameR: 'wwwww',
-            userNameS: 'eeeeee'
+            userNameS: 'eeeeee',
+            imgUp: 
+            [
+                image,
+                {
+                    emojisDB: [],
+                    emojisREACT: []
+                }
+            ]
         },
         {
-           datosigusles:  '...'
+            content: 'hhhh',
+            createdAt: 'timer',
+            photoR: 'jjjj',
+            photoS: 'ffffff',
+            receptor: 'ooooo',
+            sender: 'jjjj',
+            userNameR: 'wwwww',
+            userNameS: 'eeeeee',
+            imgUp: 
+            [
+                data,
+                {
+                    emojisDB: [],
+                    emojisREACT: []
+                }
+            ]
+        },
+        {
+            content: 'hhhh',
+            createdAt: 'timer',
+            photoR: 'jjjj',
+            photoS: 'ffffff',
+            receptor: 'ooooo',
+            sender: 'jjjj',
+            userNameR: 'wwwww',
+            userNameS: 'eeeeee',
+            imgUp: 
+            [
+                data,
+                {
+                    emojisDB: [],
+                    emojisREACT: []
+                }
+            ]
         }
+        
     ]
 }
 
