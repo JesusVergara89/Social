@@ -1,0 +1,32 @@
+.emoji-container-sender {
+    width: 100px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    left: 40%;
+    overflow: scroll;  
+}
+
+.emoji-container-receptor {
+    width: 100px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 40px;
+    right: 40%;
+}
+
+.emoji-comtainer-map {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+}

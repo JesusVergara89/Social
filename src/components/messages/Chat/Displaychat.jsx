@@ -3,6 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import './Displaychat.css'
+import Emoji from './Emoji';
 
 const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
 
@@ -91,18 +92,8 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                                 {msg.imgUp && msg.imgUp[0] !== '' ? (
                                     <div className="container-msg-with-img-emojis">
                                         <img onClick={() => { getPhotoRef(msg.imgUp[0]); ShowPic() }} className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp[0]} alt="" />
-                                        <i onClick={() => { EMojiShow(j) }} className='bx bxs-plus-circle'></i>
-                                        <div className="emoji-container">
-                                            {EMoji_Show && (indexInfo === j) ?
-                                                <div className="emoji-comtainer-map">
-                                                    {msg.imgUp[1].emojisDB.map((emoji, i) => (
-                                                        <button key={i}>{emoji}</button>
-                                                    ))}
-                                                </div>
-                                                :
-                                                ''
-                                            }
-                                        </div>
+                                        <i onClick={() => { EMojiShow(j) }} className={msg.sender === user.uid ? 'bx bxs-plus-circle sender' : 'bx bxs-plus-circle receptor'}></i>
+                                        <Emoji EMoji_Show={EMoji_Show} indexInfo={indexInfo} j={j} msg={msg} user={user}/>
                                     </div>
                                 ) : (
                                     null

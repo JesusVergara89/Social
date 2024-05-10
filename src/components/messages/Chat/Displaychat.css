@@ -247,29 +247,18 @@
     cursor: pointer;
 }
 
-.container-msg-with-img-emojis .bx {
+.container-msg-with-img-emojis .bx.bxs-plus-circle.sender {
     position: absolute;
-    top: 80px;
+    border-radius: 50%;
+    border: 1px solid white;
+    bottom: -40px;
+    right: 0;
 }
 
-.emoji-container {
-    width: 50%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.container-msg-with-img-emojis .bx.bxs-plus-circle.receptor {
     position: absolute;
-    top: 40px;
-}
-
-.emoji-comtainer-map {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 0.2rem;
+    bottom: -40px;
+    left: 0;
 }
 
 .container-msg p {
