@@ -1,13 +1,17 @@
 .display-chat-img-larger-reactions {
-    width: 100%;
+    width: auto;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     column-gap: 50px;
-    position: absolute;
-    z-index: 30;
-    bottom: -60px;
+    border-radius: 30px;
+    padding: 10px 20px 10px 20px;
+    background: rgba(244, 161, 53, 0.35);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
+    border: 1px solid rgba(255, 255, 255, 0.449);
+    margin-top: 10px;
 }
 
 .display-chat-img-larger-reactions .span1 {
