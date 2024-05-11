@@ -16,7 +16,7 @@ const Emoji = ({ id, EMoji_Show, indexInfo, j, msg, user }) => {
             if (messageDoc.exists()) {
                 const messageData = messageDoc.data();
                 const currentUserUid = userinfo.uid;
-                const emojiObject = { emoji: emoji, userid: currentUserUid };
+                const emojiObject = { emoji: emoji, userid: currentUserUid, userName: currentUserUid === msg.sender ? msg.userNameS : msg.userNameR };
                 let emojisREACT = messageData.message[j].imgUp[1].emojisREACT || [];
                 const existingIndex = emojisREACT.findIndex(emoji => emoji.userid === currentUserUid);
                 if (existingIndex !== -1) {

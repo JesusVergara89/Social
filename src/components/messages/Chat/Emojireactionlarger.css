@@ -1,0 +1,21 @@
+.display-chat-img-larger-reactions {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px;
+    position: absolute;
+    z-index: 30;
+    bottom: -60px;
+}
+
+.display-chat-img-larger-reactions .span1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.display-chat-img-larger-reactions .span2 {
+    font-size: 0.6rem;
+    font-weight: bold;
+}

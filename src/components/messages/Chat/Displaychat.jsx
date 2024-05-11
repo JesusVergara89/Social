@@ -4,6 +4,8 @@ import { auth, db } from '../../../firebaseConfig';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import './Displaychat.css'
 import Emoji from './Emoji';
+import Emojireactions from './Emojireactions';
+import Emojireactionlarger from './Emojireactionlarger';
 
 const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
 
@@ -82,6 +84,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                         <i className='bx bxs-x-circle'></i>
                     </div>
                     <img src={value} alt="" />
+                    <Emojireactionlarger reaction={reaction} />
                 </div>
             ) : (
                 ''
@@ -95,13 +98,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                                 {msg.imgUp && msg.imgUp[0] !== '' ? (
                                     <div className="container-msg-with-img-emojis">
                                         <img onClick={() => { getPhotoRef(msg.imgUp[0], msg.imgUp[1].emojisREACT); ShowPic() }} className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp[0]} alt="" />
-                                        <div className={msg.sender === user.uid ? `container-msg-with-img-emojis-reaction-sender ${msg.imgUp[1].emojisREACT.length <= 0 ? 'off-this' : ''}` : `container-msg-with-img-emojis-reaction-receptor ${msg.imgUp[1].emojisREACT.length <= 0 ? 'off-this': ''}`} >
-                                            {
-                                                msg.imgUp[1].emojisREACT.slice(-8).map((data, i) => (
-                                                    <i key={i}>{data?.emoji}</i>
-                                                ))
-                                            }
-                                        </div>
+                                        <Emojireactions user={user} msg={msg}/>
                                         <i onClick={() => { EMojiShow(j) }} className={msg.sender === user.uid ? 'bx bxs-plus-circle sender' : 'bx bxs-plus-circle receptor'}></i>
                                         <Emoji id={chat.id} EMoji_Show={EMoji_Show} indexInfo={indexInfo} j={j} msg={msg} user={user} />
                                     </div>
