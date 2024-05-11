@@ -1,21 +1,29 @@
 import React from 'react';
 import './Emoji.css';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../../../firebaseConfig';
+import { auth, db } from '../../../firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Emoji = ({ id, EMoji_Show, indexInfo, j, msg, user }) => {
 
+    const [userinfo] = useAuthState(auth)
+
     const handleClick = async (emoji) => {
-
         const messageDocRef = doc(db, 'Messages', id);
-
         try {
             const messageDoc = await getDoc(messageDocRef);
 
             if (messageDoc.exists()) {
                 const messageData = messageDoc.data();
-                const updatedEmojis = [...messageData.message[j].imgUp[1].emojisREACT, emoji];
-
+                const currentUserUid = userinfo.uid;
+                const emojiObject = { emoji: emoji, userid: currentUserUid };
+                let emojisREACT = messageData.message[j].imgUp[1].emojisREACT || [];
+                const existingIndex = emojisREACT.findIndex(emoji => emoji.userid === currentUserUid);
+                if (existingIndex !== -1) {
+                    emojisREACT[existingIndex].emoji = emoji;
+                } else {
+                    emojisREACT.push(emojiObject);
+                }
                 const updatedMessage = messageData.message.map((message, index) => {
                     if (index === j) {
                         return {
@@ -24,17 +32,14 @@ const Emoji = ({ id, EMoji_Show, indexInfo, j, msg, user }) => {
                                 message.imgUp[0],
                                 {
                                     ...message.imgUp[1],
-                                    emojisREACT: updatedEmojis
+                                    emojisREACT: emojisREACT
                                 }
                             ]
                         };
                     }
                     return message;
                 });
-
                 await updateDoc(messageDocRef, { message: updatedMessage });
-
-                console.log('Emoji agregado correctamente en Firebase.');
             } else {
                 console.error('El documento del mensaje no existe.');
             }

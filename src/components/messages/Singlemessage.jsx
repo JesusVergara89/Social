@@ -183,19 +183,25 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                 {arrayMessagesToUpdate.length === 0 &&
                     <div className="new-chat">
                         <form onSubmit={handleSubmit}>
-                            <textarea
-                                placeholder='Escribe tu mensaje...'
-                                value={newMessage}
-                                onChange={(e) => setNewMessage(e.target.value)}
-                                style={{ height: textareaHeight }}
-                                rows={1}
-                            />
-                            <input
-                                type="file"
-                                name={`image`}
-                                accept="image/*"
-                                onChange={(e) => handlePhotoChange(e)}
-                            />
+                            <div className="card-msg-one-one-form">
+                                <textarea
+                                    placeholder='Escribe tu mensaje...'
+                                    value={newMessage}
+                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    style={{ height: textareaHeight }}
+                                    rows={1}
+                                />
+                                <label className="file-input-label">
+                                    <input
+                                        type="file"
+                                        name={`image`}
+                                        accept="image/*"
+                                        onChange={(e) => handlePhotoChange(e)}
+                                        style={{ display: 'none' }}
+                                    />
+                                    <i className='bx bxs-image-alt'></i>
+                                </label>
+                            </div>
                             <button onClick={() => { functionReload() }} type='submit'>Enviar</button>
                         </form>
                     </div>

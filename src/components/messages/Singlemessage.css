@@ -10,7 +10,7 @@
 }
 
 .single-card-msg {
-    width: auto;
+    width: 400px;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@
     justify-content: center;
     position: relative;
     border-radius: 5px;
-    padding: 50px 5px 25px 5px;   
+    padding: 50px 5px 25px 5px;  
     margin-bottom: 100px;
 }
 
@@ -67,6 +67,10 @@
     gap: 10px;
 }
 
+.new-chat {
+    width: 80%;
+}
+
 .card-msg-one-one form {
     width: 100%;
     height: auto;
@@ -79,7 +83,6 @@
 
 .card-msg-one-one-form {
     width: 100%;
-    width: 100%;
     height: auto;
     display: flex;
     align-items: center;
@@ -88,7 +91,7 @@
     border: 0.01rem solid var(--Gris-perla);
 }
 
-.card-msg-one-one form  textarea {
+.card-msg-one-one form textarea {
     all: unset;
     width: 80%;
     height: auto;

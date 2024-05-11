@@ -260,9 +260,9 @@
     overflow-x: auto;
     bottom: -175px;
     z-index: 50;
-    right: 5px;
+    right: 0;
     gap: 0.3rem;
-    padding: 1px 3px 5px 3px;
+    padding: 1px 3px 7px 3px;
     border-radius: 10px;
     background: rgba(193, 53, 244, 0.35);
     backdrop-filter: blur(2.5px);
@@ -292,7 +292,7 @@
     z-index: 50;
     left: 0;
     gap: 0.3rem;
-    padding: 1px 3px 2px 3px;
+    padding: 1px 3px 7px 3px;
     border-radius: 10px;
     background: rgba(193, 53, 244, 0.35);
     backdrop-filter: blur(2.5px);
