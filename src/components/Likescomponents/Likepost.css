@@ -14,20 +14,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    gap: 5px;
-    top: -8px;
-    right: 15px;
+    gap: 0.3rem;
 }
 
 .Likepost h6{
     all: unset;
-    font-size: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: bold;
     text-align: center;
 }
 
 .Likepost i {
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
 @media(width < 440px){
@@ -37,9 +36,5 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        position: absolute;
-        gap: 5px;
-        top: -8px;
-        right: 28px;
     } 
 }

@@ -53,14 +53,16 @@
     border-bottom: 2px solid #ccc;
 }
 
-.post-card-img-container{
-   width: 100%;
-   height: 500px;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-} 
+.post-card-msg-likes {
+  width: 90%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5px 0px 5px 8px;
+  gap: 1rem;
+  margin-top: 20px;
+}
 
 .post-card-description{
     all: unset;
@@ -69,51 +71,6 @@
     margin-bottom: 20px;
     text-align: left;
     font-size: 0.8rem;
-}
-
-.post-card-userinfo {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 5px;
-    margin-top: 40px;
-    position: relative;
-}
-
-.post-card-userinfo-1 {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-
-.post-card-userinfo-2 {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 15px;
-    padding-right: 12px;
-}
-
-.post-card-userinfo h6 {
-    all: unset;
-    font-size: 0.75rem;
-    text-align: center;
-    font-weight: 700;
-}
-
-.post-card-userinfo img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 3px solid var(--btns);
-    object-fit: cover;
 }
 
 .post-content {
@@ -136,34 +93,6 @@
         padding: 10px 0px 20px 0px;
         overflow: hidden;
     }
-    .post-card-userinfo {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 5px;
-        margin-top: 50px;
-        position: relative;
-    }
-    .post-card-userinfo-1 {
-        width: 50%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        margin-left: 7px;
-    }
-
-    .post-card-userinfo h6 {
-        all: unset;
-        font-size: 0.75rem;
-        text-align: center;
-        font-weight: 700;
-        margin-right: 10px;
-    }
-    
     .post-card-description{
         all: unset;
         width: 90%;

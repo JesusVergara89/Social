@@ -1,12 +1,20 @@
-import './Countercomments.css'
+import './Countercomments.css';
 
 const Countercomments = ({ thispost }) => {
-        
     return (
         <div className="countercomments">
-            <h5>{thispost.comments?.length - 1 >= 1 ? `${thispost.comments.length - 1} Comments`: '0 Coments'}</h5>
+            {thispost.comments && thispost.comments.length > 1 ? (
+                <div className='countercomments-inner'>
+                    {thispost.comments.length - 1}{' '}
+                    <i className="bx bx-message-rounded-dots"></i>
+                </div>
+            ) : (
+                <div className='countercomments-inner'>
+                    0 <i className="bx bx-message-rounded-dots"></i>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default Countercomments
+export default Countercomments;

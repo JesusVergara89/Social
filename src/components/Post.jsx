@@ -9,6 +9,7 @@ import Deletebtn from './Deletebtn';
 import Countercomments from '../counters/Countercomments';
 import Likepost from './Likescomponents/Likepost';
 import Renderimagespost from './Renderimagespost';
+import Postuserinfo from './Postuserinfo';
 
 const Post = () => {
 
@@ -56,19 +57,12 @@ const Post = () => {
             {post && (
                 post.map((p, i) => (
                     <div key={i} className="post-card">
-                        <div className="post-card-img-container">
-                           <Renderimagespost id={p.id} images={p.images} />  
-                        </div>                       
+                        <Postuserinfo p={p} />
+                        <Renderimagespost id={p.id} images={p.images} />
                         <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
-                        <div className="post-card-userinfo">
+                        <div className="post-card-msg-likes">
                             <Likepost postId={p.id} likes={p.likes} />
-                            <div className="post-card-userinfo-1">
-                                <img src={p.userPhoto} alt="" />
-                                <h6>{`${p.userName}`}</h6>
-                            </div>
-                            <div className="post-card-userinfo-2">
-                                <h6>{p.createdAt.toDate().toDateString()}</h6>
-                            </div>
+                            <Countercomments thispost={p} />
                         </div>
                         <p className='post-card-description'>{p.description}</p>
                         <Comment
@@ -76,7 +70,7 @@ const Post = () => {
                             postId={p.id}
                             reload={reload}
                         />
-                        <Countercomments thispost={p} />
+
                         <Displaycomments infousers={infousers} AllPost={post} post={p} />
                     </div>
                 ))

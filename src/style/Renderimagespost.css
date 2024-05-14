@@ -1,9 +1,17 @@
-.Renderimagespost {
-    position: relative;
-    width: 120%;
-    height: 500px;
+.Post-render-img {
+    width: 350px;
+    height: auto;
     display: flex;
-    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.Renderimagespost {
+    width: 100%;
+    height: auto;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -12,16 +20,16 @@
 }
 
 .Renderimagespost a {
-    width: 120%;
-    height: 500px;
+    width: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .Renderimagespost img {
-    height: 500px;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
 }
 
 .slides {
@@ -49,10 +57,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 500px;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     justify-content: center;
 }
@@ -86,11 +90,5 @@
     font-weight: bold;
 }
 
-@media (width < 350px){
-    .Renderimagespost img {
-        width: 330px;
-        object-fit: cover;
-    }
-}
 
 
