@@ -15,11 +15,11 @@ const Comment = ({ postId, thispost, reload }) => {
         const adjustTextareaHeight = () => {
             const length = mainComment.length;
             const minHeight = 20;
-            const maxHeight = 300; 
+            const maxHeight = 300;
             const step = 30;
 
             let height = minHeight + Math.floor(length / 30) * step;
-            height = Math.min(height, maxHeight); 
+            height = Math.min(height, maxHeight);
             setTextareaHeight(height + 'px');
         };
         adjustTextareaHeight();
@@ -27,6 +27,10 @@ const Comment = ({ postId, thispost, reload }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!mainComment.trim()) {
+            toast.error('Please enter a comment');
+            return;
+        }
         try {
             const postRef = doc(db, 'Post', postId);
             let updatedComments = [];
@@ -86,7 +90,7 @@ const Comment = ({ postId, thispost, reload }) => {
                     style={{ height: textareaHeight }}
                     rows={1}
                 />
-                <button type="submit" className="submit-btn"><i className='bx bx-paper-plane'></i></button>
+                <button type="submit" className="submit-btn"><i className='bx bxs-comment-edit' ></i></button>
             </form>
         </div>
     );

@@ -55,26 +55,28 @@ const Post = () => {
         <article className="post">
             <button onClick={() => createPost('/createpost')} className="post-create-btn">New post</button>
             {post && (
-                post.map((p, i) => (
-                    <div key={i} className="post-card">
-                        <Postuserinfo p={p} />
-                        <Renderimagespost id={p.id} images={p.images} />
-                        <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
-                        <div className="post-card-msg-likes">
-                            <Likepost postId={p.id} likes={p.likes} />
-                            <Countercomments thispost={p} />
+                post.map((p, i) => {
+                    return (
+                        <div key={i} className="post-card">
+                            <Postuserinfo p={p} />
+                            <Renderimagespost id={p.id} images={p.images} />
+                            <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
+                            <div className="post-card-msg-likes">
+                                <Likepost postId={p.id} likes={p.likes} />
+                                <Countercomments thispost={p} index={i} />
+                            </div>
+                            <p className='post-card-description'>{p.description}</p>
+                            <Comment
+                                thispost={p}
+                                postId={p.id}
+                                reload={reload}
+                            />
+                            <Displaycomments infousers={infousers} AllPost={post} post={p} />
                         </div>
-                        <p className='post-card-description'>{p.description}</p>
-                        <Comment
-                            thispost={p}
-                            postId={p.id}
-                            reload={reload}
-                        />
-
-                        <Displaycomments infousers={infousers} AllPost={post} post={p} />
-                    </div>
-                ))
+                    );
+                })
             )}
+
         </article>
     )
 }

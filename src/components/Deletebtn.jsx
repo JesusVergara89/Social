@@ -35,7 +35,7 @@ const Deletebtn = ({ images, deleteId, postId, toProfile }) => {
     return (
         <>
             {currentoLogUser?.uid === postId ?
-                <div className="delete-btn">
+                <div className={`${deleteConfirmation === true ? 'delete-btn active' : 'delete-btn'}`}>
                     {deleteConfirmation ?
                         <div className="delete-btn-warning">
                             <h5>¿Eliminar este post?</h5>
@@ -50,6 +50,7 @@ const Deletebtn = ({ images, deleteId, postId, toProfile }) => {
                 :
                 ''
             }
+            <div className={`${deleteConfirmation === true ? 'delete-btn-block' : 'delete-btn-no-blok' }`}></div>
         </>
     )
 }

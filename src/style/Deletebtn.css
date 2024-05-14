@@ -9,16 +9,23 @@
 }
 
 .delete-btn {
-   width: auto;
+   width: 100%;
    height: auto;
    display: flex;
-   justify-content: center;
+   justify-content: right;
    align-items: center;
-   position: absolute;
-   top: 500px;
-   right: 30px;
-   z-index: 10;
+   position: relative;
+   left: 0;
 }
+
+.delete-btn.active {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+ }
 
 .delete-btn-warning {
     width: 140px;
@@ -64,6 +71,15 @@
 .delete-btn .bx.bx-dots-horizontal {
     font-size: 25px;
     cursor: pointer;
+}
+
+.delete-btn-block {
+    width: 80%;
+    height: 25px;
+}
+
+.delete-btn-no-blok {
+    display: none;
 }
 
 

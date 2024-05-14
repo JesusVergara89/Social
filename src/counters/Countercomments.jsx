@@ -1,6 +1,7 @@
 import './Countercomments.css';
 
 const Countercomments = ({ thispost }) => {
+
     return (
         <div className="countercomments">
             {thispost.comments && thispost.comments.length > 1 ? (

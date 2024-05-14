@@ -27,6 +27,10 @@ const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,
 
     const handleSubmitOthers = async (e) => {
         e.preventDefault();
+        if (!othersComment.trim()) {
+            toast.error('Please enter a subcomment');
+            return;
+        }
         try {
             const postRef = doc(db, 'Post', post.id);
             const updatedComments = [...post.comments];
@@ -53,7 +57,6 @@ const Subcomment = ({ post, handleSubcommentSubmit, index, setUpdateSubcomments,
                 ...post,
                 comments: updatedComments
             });
-
             toast.success('Additional comment added successfully');
             setOthersComment('');
             setUpdateSubcomments(!updateSubcomments)
