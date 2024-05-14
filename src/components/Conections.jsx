@@ -6,7 +6,7 @@ import '../style/Conections.css'
 const Conections = () => {
 
     const { counterPost, counterConnectios, findFriends, userlog, allpost, allrequest } = useConnections()
-    
+
     return (
         <div className="connections">
             {findFriends &&

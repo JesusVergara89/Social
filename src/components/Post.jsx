@@ -71,7 +71,7 @@ const Post = () => {
                                 postId={p.id}
                                 reload={reload}
                             />
-                            <Displaycomments infousers={infousers} AllPost={post} post={p} />
+                            <Displaycomments infousers={infousers}  post={p} />
                         </div>
                     );
                 })

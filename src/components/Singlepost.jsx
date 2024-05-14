@@ -9,6 +9,7 @@ import Deletebtn from './Deletebtn'
 import Countercomments from '../counters/Countercomments'
 import Likepost from './Likescomponents/Likepost'
 import Renderimagespost from './Renderimagespost'
+import Postuserinfo from './Postuserinfo'
 
 const Singlepost = () => {
 
@@ -47,44 +48,21 @@ const Singlepost = () => {
         })
     }, [])
 
-    const formatCreatedAtDate = (sub) => {
-        if (sub.createdAt && sub.createdAt.seconds) {
-            const timestamp = sub.createdAt.seconds * 1000;
-            const date = new Date(timestamp);
-            return date.toDateString();
-        }
-        return '';
-    }
-
     const toProfile = () => {
         setToProfileAfterDeleted(!toProfileAfterDeleted)
         navigate('/profile')
     }
 
-    //console.log(singlepost.likes)
-
     return (
         <div className='post'>
             {singlepost.id && singlepost.likes &&
                 <div className="post-card">
-                    <div className="post-card-img-container">
-                        <Renderimagespost id={singlepost.id} images={singlepost.images} />
-                    </div>
-                    <Deletebtn
-                        images={singlepost.images}
-                        deleteId={singlepost.id}
-                        postId={singlepost.idOnlineUser}
-                        toProfile={toProfile}
-                    />
-                    <div className="post-card-userinfo">
+                    <Postuserinfo p={singlepost} />
+                    <Renderimagespost id={singlepost.id} images={singlepost.images} />
+                    <Deletebtn images={singlepost.images} deleteId={singlepost.id} postId={singlepost.idOnlineUser} toProfile={toProfile} />
+                    <div className="post-card-msg-likes">
                         <Likepost postId={singlepost.id} likes={singlepost.likes} />
-                        <div className="post-card-userinfo-1">
-                            <img src={singlepost.userPhoto} alt="" />
-                            <h6>{`${singlepost.userName}`}</h6>
-                        </div>
-                        <div className="post-card-userinfo-2">
-                            <h6>{singlepost && singlepost.createdAt && formatCreatedAtDate(singlepost)}</h6>
-                        </div>
+                        <Countercomments thispost={singlepost} />
                     </div>
                     <p className='post-card-description'>{singlepost.description}</p>
                     <Comment
@@ -92,8 +70,7 @@ const Singlepost = () => {
                         postId={singlepost.id}
                         reload={reload}
                     />
-                    <Countercomments thispost={singlepost} />
-                    <Displaycomments infousers={infousers} AllPost={postAll} post={singlepost} />
+                    <Displaycomments infousers={infousers} post={singlepost} />
                 </div>
             }
         </div>
@@ -101,3 +78,4 @@ const Singlepost = () => {
 }
 
 export default Singlepost
+
