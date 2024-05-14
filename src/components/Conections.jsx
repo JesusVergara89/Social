@@ -32,7 +32,7 @@ const Conections = () => {
                                         <h6>{counterPost(allpost, user.idUser) > 1 ? `Publicaciones` : `Publicación`}</h6>
                                     </div>
                                 </div>
-                                <Link className='all-users-other-profile' to={`/singleprofile/${user.id}/${counterConnectios(allrequest, user.idUser)}/${counterPost(allpost, user.idUser)}`} >
+                                <Link className='all-users-other-profile' to={`/singleprofile/${user.id}`} >
                                     Ver perfil
                                 </Link>
                             </div>

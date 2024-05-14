@@ -4,10 +4,13 @@ import { useParams } from 'react-router-dom'
 import { doc, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
 import Postofusers from './Postofusers'
+import useConnections from '../hooks/useConnections'
 
 const Singleprofile = () => {
 
-  const { userProfile, connections, post } = useParams()
+  const { userProfile } = useParams()
+
+  const { counterPost, counterConnectios, allpost, allrequest } = useConnections()
 
   const [user, setUser] = useState([])
 
@@ -34,24 +37,24 @@ const Singleprofile = () => {
         <div className="single-profile-counters">
           <div className='Friendcounter'>
             <div className="Friendcounter-number">
-              <h4><span>{connections}</span></h4>
+              <h4><span>{counterConnectios(allrequest, user.idUser)}</span></h4>
             </div>
             <div className="Friendcounter-connections">
-              <h4>{connections > 1 ? `Conexiones` : `Conexión`}</h4>
+              <h4>{counterConnectios(allrequest, user.idUser) > 1 ? `Conexiones` : `Conexión`}</h4>
             </div>
           </div>
           <div className='Friendcounter'>
             <div className="Friendcounter-number">
-              <h4><span>{post}</span></h4>
+              <h4><span>{counterPost(allpost, user.idUser)}</span></h4>
             </div>
             <div className="Friendcounter-connections">
-              <h4>{post > 1 ? `Publicaciones` : `Publicación`}</h4>
+              <h4>{counterPost(allpost, user.idUser) > 1 ? `Publicaciones` : `Publicación`}</h4>
             </div>
           </div>
         </div>
       </div>
       <div className="Singleprofile-posts">
-         <Postofusers  id={user.idUser} />
+        <Postofusers id={user.idUser} />
       </div>
     </div>
 

@@ -66,7 +66,7 @@ function Social() {
                             <Singleuser />
                         }
                     />
-                    <Route path='/singleprofile/:userProfile/:connections/:post'
+                    <Route path='/singleprofile/:userProfile'
                         element={
                             <Singleprofile />
                         }
