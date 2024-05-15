@@ -6,8 +6,11 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import DeleteComment from "./DeleteComment";
 import Likecomment from "./Likescomponents/Likecomment";
+import { useNavigate } from "react-router-dom";
 
-const Displaycomments = ({ post, infousers }) => {
+const Displaycomments = ({ post, infousers, IdAndUserName }) => {
+
+    const navigate = useNavigate()
 
     const [comments, setComments] = useState([]);
 
@@ -50,6 +53,17 @@ const Displaycomments = ({ post, infousers }) => {
         setSetshowcomments(!setshowcomments)
     }
 
+    const takeUserId = (id) => {
+        const matchData = IdAndUserName.filter(data => {
+            if (data.idUser === id) {
+                return data
+            }
+        })
+        navigate(`/singleprofile/${matchData[0].id}`)
+    }
+
+    /** */
+
     return (
         <div className="display-comments">
             {
@@ -61,7 +75,7 @@ const Displaycomments = ({ post, infousers }) => {
                                 <p className="comment-content">{comment.main}</p>
                                 <Likecomment post={post} index={i} likes={comment} />
                                 <DeleteComment post={post} commentPosition={i} />
-                                <p className="comment-date">
+                                <p onClick={() => { takeUserId(comment.idUser) }} className="comment-date">
                                     {`@${userNameIdArray.find(match => match.idUser === comment.idUser)?.userName || ''}`}
                                 </p>
                                 <p className="comment-date">{comment.createdAt && comment.createdAt.toDate().toDateString()}</p>
@@ -79,7 +93,7 @@ const Displaycomments = ({ post, infousers }) => {
                 ) : (
                     post.comments.length > 1 ? (
                         <div onClick={showComments} className="display-comments-there-is-not-comments">
-                            <h5>{`Ver ${post.comments.length - 1} mensajes`}</h5>
+                            <h5>{`Ver ${post.comments.length - 1} ${(post.comments.length - 1) > 1 ? 'Comentarios' : 'Comentario'}`}</h5>
                         </div>
                     ) : (
                         <div className="display-comments-there-is-not-comments">

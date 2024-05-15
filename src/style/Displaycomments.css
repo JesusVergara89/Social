@@ -44,6 +44,7 @@
     color: rgb(96, 96, 96);
     margin-bottom: 3px;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 .hide-subcomments {

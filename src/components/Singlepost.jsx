@@ -37,7 +37,8 @@ const Singlepost = () => {
             }))
             const usersWithNames = usex.map(user => ({
                 id: user.id,
-                userName: user.userName
+                userName: user.userName,
+                idUser: user.idUser
             }));
             setInfousers(usex);
             setOnlyIds(usersWithNames)
@@ -67,7 +68,7 @@ const Singlepost = () => {
                         postId={singlepost.id}
                         reload={reload}
                     />
-                    <Displaycomments infousers={infousers} post={singlepost} />
+                    <Displaycomments infousers={infousers} post={singlepost} IdAndUserName={onlyIds} />
                 </div>
             }
         </div>
