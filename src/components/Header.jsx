@@ -20,6 +20,12 @@ const Header = () => {
                 <img src={social} alt="" />
             </div>
             <div className="menu">
+                <Link to={'/createpost'}>
+                    <div className="menu-menu create not-activate">
+                        <i className='bx bxs-plus-square'></i>
+                        <h5>New post</h5>
+                    </div>
+                </Link>
                 <Link to={'/allusers'}>
                     <div className="menu-alluser">
                         <i className='bx bxs-grid'></i>

@@ -105,7 +105,6 @@ const Profile = ({ newuser, setNewuser }) => {
                     </Link>
                 </div>
             )}
-            <button onClick={() => createPost('/createpost')} className="post-create-btn">New post</button>
             <div className="profile-counters">
                 <Displaycounters />
             </div>

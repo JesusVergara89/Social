@@ -20,6 +20,7 @@ import Singleprofile from './components/Singleprofile';
 import Configprofile from './components/configurationprofile/Configprofile';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebaseConfig';
+import Footer from './components/Footer';
 
 function Social() {
     const [onlineuser] = useAuthState(auth)
@@ -113,6 +114,8 @@ function Social() {
                     />
                 </Route>
             </Routes>
+
+            <Footer/>
         </div>
     )
 }

@@ -17,10 +17,10 @@ header {
     display: flex;
     align-items: center;
     z-index: 1000;
-    background: rgba(173, 216, 230, 0.35);
+    background: rgba(43, 200, 252, 0.35);
     backdrop-filter: blur(2.5px);
     -webkit-backdrop-filter: blur(2.5px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.34);
 }
 
 header a {
@@ -57,7 +57,7 @@ header .menu {
 
 @media (width < 345px) {
     header .logo img {
-        width: calc(400px / 5);
+        width: calc(400px / 4.2);
     }
 }
 
@@ -67,7 +67,7 @@ header .menu {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5%;
+    gap: 3%;
 }
 
 .menu h5 {
@@ -106,6 +106,22 @@ header .menu {
     position: relative;
 }
 
+.menu-menu.create{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 10px 0 10px;
+    position: relative;
+}
+
+.menu-menu.create .bx {
+    font-size: 22px;
+}
+
 .menu-menu-notify {
     width: auto;
     height: auto;
@@ -119,6 +135,7 @@ header .menu {
 
 .menu-menu-notify-none {
     display: none;
+    columns: var(--btns);
 }
 
 .menu-menu-notify .bx {
@@ -197,7 +214,13 @@ header .menu {
     object-fit: cover;
 }
 
-@media (width < 345px) {
+@media (width < 700px) {
+    .menu-menu.not-activate{
+        display: none;
+    }
+}
+
+@media (width < 370px) {
     .menu h5 {
         display: none;
     }

@@ -56,16 +56,13 @@ const Post = () => {
         console.log('')
     }
 
-    //console.log(onlyIds)
-
     return (
         <article className="post">
-            <button onClick={() => createPost('/createpost')} className="post-create-btn">New post</button>
             {post && (
                 post.map((p, i) => {
                     return (
                         <div key={i} className="post-card">
-                            <Postuserinfo p={p} IdAndUserName={onlyIds}/>
+                            <Postuserinfo p={p} IdAndUserName={onlyIds} />
                             <Renderimagespost id={p.id} images={p.images} />
                             <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                             <div className="post-card-msg-likes">
@@ -78,7 +75,7 @@ const Post = () => {
                                 postId={p.id}
                                 reload={reload}
                             />
-                            <Displaycomments infousers={infousers}  post={p} IdAndUserName={onlyIds} />
+                            <Displaycomments infousers={infousers} post={p} IdAndUserName={onlyIds} />
                         </div>
                     );
                 })

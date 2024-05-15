@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom'
 import useConnections from '../hooks/useConnections'
 
 const Filtereduser = ({ thiIsTheCurrentUser, usuario }) => {
-    const { counterPost, counterConnectios, allpost, allrequest } = useConnections()
     return (
         <div className="all-users-mapeo-1">
             <div className='all-users-profile-information-1'>
-                <Link className='all-users-other-profile-find-1' to={`/singleprofile/${usuario.id}/${counterConnectios(allrequest, usuario.idUser)}/${counterPost(allpost, usuario.idUser)}`} >
+                <Link className='all-users-other-profile-find-1' to={`/singleprofile/${usuario.id}`} >
                     Ver perfil
                 </Link>
                 <div className="all-users-profile-information-image-1">
@@ -24,7 +23,7 @@ const Filtereduser = ({ thiIsTheCurrentUser, usuario }) => {
             {thiIsTheCurrentUser?.uid === usuario.idUser ?
                 ''
                 :
-                <Contactutility idCurrentUser={thiIsTheCurrentUser?.uid} idUSER={usuario.idUser} />
+                <Contactutility idCurrentUser={thiIsTheCurrentUser?.uid} idUSER={usuario.idUser}/>
             }
         </div>
     )
