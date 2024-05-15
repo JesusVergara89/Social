@@ -15,6 +15,7 @@ const Post = () => {
 
     const [post, setPost] = useState([]);
     const [infousers, setInfousers] = useState([]);
+    const [onlyIds, setOnlyIds] = useState([])
     const [returncomments, setReturncomments] = useState(false)
 
     const createPost = useNavigate()
@@ -41,7 +42,12 @@ const Post = () => {
                 id: doc.id,
                 ...doc.data()
             }))
+            const usersWithNames = usex.map(user => ({
+                id: user.id,
+                userName: user.userName
+            }));
             setInfousers(usex);
+            setOnlyIds(usersWithNames)
         })
     }, [post]);
 
@@ -49,7 +55,7 @@ const Post = () => {
         console.log('')
     }
 
-    ///console.log(post[0].images[0])
+    //console.log(onlyIds)
 
     return (
         <article className="post">
@@ -58,7 +64,7 @@ const Post = () => {
                 post.map((p, i) => {
                     return (
                         <div key={i} className="post-card">
-                            <Postuserinfo p={p} />
+                            <Postuserinfo p={p} IdAndUserName={onlyIds}/>
                             <Renderimagespost id={p.id} images={p.images} />
                             <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
                             <div className="post-card-msg-likes">

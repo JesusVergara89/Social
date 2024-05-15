@@ -1,5 +1,5 @@
 import '../style/Header.css'
-import social from '../images/Social.svg'
+import social from '../images/Social.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'

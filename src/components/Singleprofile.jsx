@@ -19,7 +19,9 @@ const Singleprofile = () => {
     onSnapshot(postRef, (snapshot) => {
       setUser({ ...snapshot.data(), id: snapshot.id })
     })
-  }, [])
+  }, [userProfile])
+
+  //console.log(userProfile)
 
   return (
     <div className="Singleprofile">

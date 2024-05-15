@@ -15,7 +15,7 @@ const Singlepost = () => {
 
     const { post } = useParams()
     const [singlepost, setSinglepost] = useState('')
-    const [postAll, setPostAll] = useState()
+    const [onlyIds, setOnlyIds] = useState([])
     const [infousers, setInfousers] = useState([]);
     const [returncomments, setReturncomments] = useState(false)
     const [toProfileAfterDeleted, setToProfileAfterDeleted] = useState(false)
@@ -35,17 +35,14 @@ const Singlepost = () => {
                 id: doc.id,
                 ...doc.data()
             }))
+            const usersWithNames = usex.map(user => ({
+                id: user.id,
+                userName: user.userName
+            }));
             setInfousers(usex);
+            setOnlyIds(usersWithNames)
         })
-        const usersCollectionRef1 = collection(db, 'Post');
-        const q1 = query(usersCollectionRef1, orderBy("createdAt", "desc"))
-        onSnapshot(q1, (snapshot) => {
-            const allpost = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }))
-            setPostAll(allpost)
-        })
+        
     }, [])
 
     const toProfile = () => {
@@ -57,7 +54,7 @@ const Singlepost = () => {
         <div className='post'>
             {singlepost.id && singlepost.likes &&
                 <div className="post-card">
-                    <Postuserinfo p={singlepost} />
+                    <Postuserinfo p={singlepost} IdAndUserName={onlyIds}/>
                     <Renderimagespost id={singlepost.id} images={singlepost.images} />
                     <Deletebtn images={singlepost.images} deleteId={singlepost.id} postId={singlepost.idOnlineUser} toProfile={toProfile} />
                     <div className="post-card-msg-likes">
