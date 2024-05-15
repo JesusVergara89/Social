@@ -1,7 +1,7 @@
 # Welcome to EcoSocial
 
 
-![](https://raw.githubusercontent.com/JesusVergara89/Social/main/src/images/Social.png) 
+![](https://raw.githubusercontent.com/JesusVergara89/Social/main/src/images/Social.png?token=GHSAT0AAAAAACQO6Y6FCPOKVX4T27HM3HI2ZSE6LFA) 
 
 ------------
 
