@@ -37,7 +37,7 @@ const Register = () => {
         const minHeight = 30;
         const maxHeight = 200;
         const step = 20;
-        
+
         let height = minHeight + Math.floor((length + lenthLine) / 30) * step;
         height = Math.min(height, maxHeight);
         setTextareaHeight(height + 'px');
@@ -195,7 +195,7 @@ const Register = () => {
                 <label>Biography:</label>
             </section>
             <section className={watch('user') ? 'form_user on' : 'form_user'}>
-                <input autoComplete='off' className={errors.user?.type === 'required' ? 'input_user on' : 'input_user'} type="text" inputMode='text' {...register("user", { required: true, validate: ValidateUser })} />
+                <input autoComplete='off' className={errors.user?.type === 'required' || errors.user?.type === 'validate' || errors.user?.type === 'pattern' ? 'input_user on' : 'input_user'} type="text" inputMode='text' {...register("user", { required: true, validate: ValidateUser, pattern: /^[a-zA-Z0-9_]+$/ })} />
                 <label>User:</label>
                 <i className='bx bx-at'></i>
                 <p>
@@ -207,6 +207,9 @@ const Register = () => {
             }
             {errors.user?.type === 'validate' &&
                 <p className='error'>Este usuario ya existe, tienes que elegir uno distinto!</p>
+            }
+            {errors.user?.type === 'pattern' &&
+                <p className='error'>No se permite caracteres especiales.</p>
             }
             <section className={errors.photo?.type === 'required' || errors.photo?.type === 'validate' ? 'form_file on' : 'form_file'}>
                 <label>Subir foto de perfil</label>

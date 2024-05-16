@@ -2,7 +2,6 @@ import { useState } from 'react';
 import '../style/Displaysubcomment.css';
 import DeleteSubcomments from './DeleteSubcomments';
 import LikesSubcom from './Likescomponents/LikesSubcom';
-import Subcomment from './Subcomment';
 
 const Displaysubcomment = ({ comment, post }) => {
     const [showsubcomments, setShowsubcomments] = useState(false)

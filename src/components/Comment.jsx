@@ -5,9 +5,10 @@ import { Timestamp, doc, setDoc } from "firebase/firestore";
 import '../style/Comment.css';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { CurrentUsercontext } from './Context/CurrentUsercontext';
+import { useNavigate } from "react-router-dom";
 
 const Comment = ({ postId, thispost, reload, UserResponse, setUserResponse, handleSubcommentSubmit, setUpdateSubcomments, updateSubcomments }) => {
-
+    const navigate = useNavigate();
     const [mainComment, setMainComment] = useState('');
     const [userInfo] = useAuthState(auth)
     const [textareaHeight, setTextareaHeight] = useState('20px');
@@ -27,10 +28,14 @@ const Comment = ({ postId, thispost, reload, UserResponse, setUserResponse, hand
     }, [mainComment]);
 
     const handleSubmit = (e) => {
-        if (UserResponse) {
-            FunctionResponse(e)
+        if (userInfo) {
+            if (UserResponse) {
+                FunctionResponse(e)
+            } else {
+                FunctioComment(e)
+            }
         } else {
-            FunctioComment(e)
+            navigate('/login')
         }
 
     };
@@ -92,35 +97,25 @@ const Comment = ({ postId, thispost, reload, UserResponse, setUserResponse, hand
             toast.error('Failed to add comment');
         }
     }
-
-    const getAvailableCommentIndex = (others) => {
-        const availableComments = ['one', 'two', 'three', 'four'];
-        for (const comment of availableComments) {
-            if (!others[comment].content) {
-                return comment;
-            }
-        }
-        return null;
-    };
     const FunctionResponse = async (e) => {
         e.preventDefault();
         try {
             const postRef = doc(db, 'Post', postId);
             const updatedComments = [...thispost.comments];
-            const mainComment = updatedComments[UserResponse.index];
+            const mainComment_Response = updatedComments[UserResponse.index];
 
-            if (!mainComment.main) {
+            if (!mainComment_Response.main) {
                 toast.error('Main comment does not exist');
                 return;
             }
 
-            const availableIndex = getAvailableCommentIndex(mainComment.others);
+            const availableIndex = getAvailableCommentIndex(mainComment_Response.others);
             if (availableIndex === null) {
                 toast.error('Subcomments full');
                 return;
             }
 
-            mainComment.others[availableIndex] = {
+            mainComment_Response.others[availableIndex] = {
                 userID: userInfo.uid,
                 userName: CurrentUser.userName,
                 photo: CurrentUser.photo,
@@ -137,11 +132,21 @@ const Comment = ({ postId, thispost, reload, UserResponse, setUserResponse, hand
             setMainComment('');
             setUpdateSubcomments(!updateSubcomments)
             handleSubcommentSubmit(updatedComments);
+            setUserResponse(null)
         } catch (error) {
             console.error('Error adding additional comment:', error);
             toast.error('Failed to add additional comment');
         }
     }
+    const getAvailableCommentIndex = (others) => {
+        const availableComments = ['one', 'two', 'three', 'four'];
+        for (const comment of availableComments) {
+            if (!others[comment].content) {
+                return comment;
+            }
+        }
+        return null;
+    };
     return (
         <div className="comments">
             {UserResponse &&
