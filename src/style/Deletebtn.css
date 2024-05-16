@@ -84,4 +84,28 @@
 }
 
 
+@media( 400px <= width < 440px){
+    .delete-btn {
+        width: 85%;
+        height: auto;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        position: relative;
+        left: 0;
+     }
+}
+
+@media( 300px < width < 400px){
+    .delete-btn {
+        width: 90%;
+        height: auto;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        position: relative;
+        left: 0;
+     }
+}
+
 
