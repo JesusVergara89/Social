@@ -169,7 +169,7 @@ const Comment = ({ postId, thispost, reload, UserResponse, setUserResponse, hand
                     style={{ height: textareaHeight }}
                     rows={1}
                 />
-                <button type="submit" className="submit-btn"><i className='bx bxs-comment-edit' ></i></button>
+                <button onClick={handleSubmit} className="submit-btn"><i className='bx bxs-comment-edit' ></i></button>
             </form>
         </div>
     );

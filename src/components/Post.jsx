@@ -12,7 +12,7 @@ import Postuserinfo from './Postuserinfo';
 import PostSkeleton from './Loading/PostSkeleton';
 
 const Post = () => {
-    const [post, setPost] = useState([]);
+    const [post, setPost] = useState();
     const [onlyIds, setOnlyIds] = useState([])
     const [infousers, setInfousers] = useState([]);
     const [returncomments, setReturncomments] = useState(false)
@@ -56,7 +56,7 @@ const Post = () => {
 
     return (
         <article className="post">
-            {post && (
+            {post ? (
                 post.map((p, i) => {
                     return (
                         <div key={i} className="post-card">
@@ -72,7 +72,7 @@ const Post = () => {
                         </div>
                     );
                 })
-            )}
+            ):<PostSkeleton/>}
 
         </article>
     )

@@ -22,7 +22,7 @@ const Displaysubcomment = ({ comment, post, takeUserId }) => {
         createdAt: formatCreatedAtDate(sub)
     }));
 
-    const filterConteComment = subcommentsFormatted.filter(data => data.content != '')
+    const filterConteComment = subcommentsFormatted.reverse().filter(data => data.content != '')
 
     return (
         <div className="display-subcomment">

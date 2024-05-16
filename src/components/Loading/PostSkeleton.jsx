@@ -19,7 +19,7 @@ const PostSkeleton = () => {
                     <div className="post-card-img-container">
                         <Skeleton height={500} width={'100vw'} />
                     </div>
-                    <div className='post-card-action'>
+                    <div className='post-card-msg-likes'>
                         <Skeleton width={38} height={24} />
                         <Skeleton width={38} height={24} />
                     </div>
