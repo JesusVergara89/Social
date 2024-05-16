@@ -128,10 +128,10 @@ const Comment = ({ postId, thispost, reload, UserResponse, setUserResponse, hand
                 createdAt: Timestamp.now().toDate()
             };
 
-            /*await setDoc(postRef, {
+            await setDoc(postRef, {
                 ...thispost,
                 comments: updatedComments
-            });*/
+            });
 
             toast.success('Additional comment added successfully');
             setMainComment('');
