@@ -5,7 +5,7 @@ import { auth, db, storage } from '../firebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import '../style/Createpost.css';
-import social from '../images/Social.svg'
+import social from '../images/Social.png'
 
 const Createpost = () => {
     const [description, setDescription] = useState('');
