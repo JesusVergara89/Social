@@ -9,6 +9,7 @@ import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firesto
 import { useForm } from 'react-hook-form';
 import Compressor from 'compressorjs';
 import Loader from '../components/Loading/Loader';
+import social from '../images/Social.png'
 
 const Register = () => {
     const [textareaHeight, setTextareaHeight] = useState('35px');
@@ -144,6 +145,7 @@ const Register = () => {
 
     return (
         <form className='form_main' onSubmit={handleSubmit(submit)} >
+            <img src={social} alt="" />
             <h3>Register</h3>
             <section className={watch('name') ? 'form_user on' : 'form_user'}>
                 <input autoComplete='off' className={errors.name?.type === 'required' ? 'input_user on' : 'input_user'} type="text" inputMode='text' {...register("name", { required: true })} />

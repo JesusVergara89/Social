@@ -3,7 +3,7 @@ import '../style/Displaysubcomment.css';
 import DeleteSubcomments from './DeleteSubcomments';
 import LikesSubcom from './Likescomponents/LikesSubcom';
 
-const Displaysubcomment = ({ comment, post }) => {
+const Displaysubcomment = ({ comment, post, takeUserId }) => {
     const [showsubcomments, setShowsubcomments] = useState(false)
 
     const subcomments = Object.keys(comment.others).map(key => comment.others[key]);
@@ -23,7 +23,7 @@ const Displaysubcomment = ({ comment, post }) => {
     }));
 
     const filterConteComment = subcommentsFormatted.filter(data => data.content != '')
-        
+
     return (
         <div className="display-subcomment">
             {filterConteComment?.[0] ?
@@ -33,16 +33,16 @@ const Displaysubcomment = ({ comment, post }) => {
                         showsubcomments &&
                         <div className='display-subcomment-container' key={i}>
                             <div className="inform-commet">
-                                <DeleteSubcomments post={post} subcommentsFormatted={sub}/>
-                                <img src={sub.photo} className="PhotoAvatar" />
+                                <DeleteSubcomments post={post} subcommentsFormatted={sub} />
+                                <img src={sub.photo} className="PhotoAvatar" onClick={() => takeUserId(sub.userID)} />
                                 <div className="comment-content-main">
-                                    <p className="comment-date">
+                                    <p className="comment-userName" onClick={() => takeUserId(sub.userID)}>
                                         {`@${sub.userName}`}
                                     </p>
                                     <p className="comment-content">{sub.content}</p>
                                     <h4 className='comment-date'>{sub.createdAt}</h4>
                                 </div>
-                                <LikesSubcom post={post} sub={sub}/>
+                                <LikesSubcom post={post} sub={sub} />
                             </div>
                         </div>
                     ))}

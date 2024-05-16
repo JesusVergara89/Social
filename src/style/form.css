@@ -21,7 +21,7 @@
   padding: 30px;
   border-radius: 5px;
   row-gap: 5px;
-  margin-top: 150px;
+  margin: 120px 0;
   border: 1px solid var(--border);
 }
 .form_main h3 {
@@ -166,6 +166,10 @@
   top: 10px;
   font-size: 18px;
   color: var(--colorP);
+}
+
+.form_main img {
+  width: 100%;
 }
 
 .form_password .bx.bx-lock {

@@ -9,12 +9,13 @@ import Deletebtn from './Deletebtn'
 import Countercomments from '../counters/Countercomments'
 import Likepost from './Likescomponents/Likepost'
 import Renderimagespost from './Renderimagespost'
+import Postuserinfo from './Postuserinfo'
 
 const Singlepost = () => {
 
     const { post } = useParams()
     const [singlepost, setSinglepost] = useState('')
-    const [postAll, setPostAll] = useState()
+    const [onlyIds, setOnlyIds] = useState([])
     const [infousers, setInfousers] = useState([]);
     const [returncomments, setReturncomments] = useState(false)
     const [toProfileAfterDeleted, setToProfileAfterDeleted] = useState(false)
@@ -34,66 +35,35 @@ const Singlepost = () => {
                 id: doc.id,
                 ...doc.data()
             }))
+            const usersWithNames = usex.map(user => ({
+                id: user.id,
+                userName: user.userName,
+                idUser: user.idUser
+            }));
             setInfousers(usex);
+            setOnlyIds(usersWithNames)
         })
-        const usersCollectionRef1 = collection(db, 'Post');
-        const q1 = query(usersCollectionRef1, orderBy("createdAt", "desc"))
-        onSnapshot(q1, (snapshot) => {
-            const allpost = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }))
-            setPostAll(allpost)
-        })
-    }, [])
 
-    const formatCreatedAtDate = (sub) => {
-        if (sub.createdAt && sub.createdAt.seconds) {
-            const timestamp = sub.createdAt.seconds * 1000;
-            const date = new Date(timestamp);
-            return date.toDateString();
-        }
-        return '';
-    }
+    }, [])
 
     const toProfile = () => {
         setToProfileAfterDeleted(!toProfileAfterDeleted)
         navigate('/profile')
     }
 
-    //console.log(singlepost.likes)
-
     return (
         <div className='post'>
             {singlepost.id && singlepost.likes &&
                 <div className="post-card">
-                    <div className="post-card-img-container">
-                        <Renderimagespost id={singlepost.id} images={singlepost.images} />
-                    </div>
-                    <Deletebtn
-                        images={singlepost.images}
-                        deleteId={singlepost.id}
-                        postId={singlepost.idOnlineUser}
-                        toProfile={toProfile}
-                    />
-                    <div className="post-card-userinfo">
+                    <Postuserinfo p={singlepost} IdAndUserName={onlyIds} />
+                    <Renderimagespost id={singlepost.id} images={singlepost.images} />
+                    <Deletebtn images={singlepost.images} deleteId={singlepost.id} postId={singlepost.idOnlineUser} toProfile={toProfile} />
+                    <div className="post-card-msg-likes">
                         <Likepost postId={singlepost.id} likes={singlepost.likes} />
-                        <div className="post-card-userinfo-1">
-                            <img src={singlepost.userPhoto} alt="" />
-                            <h6>{`${singlepost.userName}`}</h6>
-                        </div>
-                        <div className="post-card-userinfo-2">
-                            <h6>{singlepost && singlepost.createdAt && formatCreatedAtDate(singlepost)}</h6>
-                        </div>
+                        <Countercomments thispost={singlepost} />
                     </div>
                     <p className='post-card-description'>{singlepost.description}</p>
-                    <Comment
-                        thispost={singlepost}
-                        postId={singlepost.id}
-                        reload={reload}
-                    />
-                    <Countercomments thispost={singlepost} />
-                    <Displaycomments infousers={infousers} AllPost={postAll} post={singlepost} />
+                    <Displaycomments reload={reload} post={singlepost} IdAndUserName={onlyIds} />
                 </div>
             }
         </div>
@@ -101,3 +71,4 @@ const Singlepost = () => {
 }
 
 export default Singlepost
+

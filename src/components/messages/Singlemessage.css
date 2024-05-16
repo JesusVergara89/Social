@@ -67,6 +67,10 @@
   gap: 10px;
 }
 
+.new-chat {
+  width: 80%;
+}
+
 .card-msg-one-one form {
   width: 100%;
   height: auto;
@@ -76,6 +80,15 @@
   justify-content: center;
   gap: 5px;
 }
+.card-msg-one-one-form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 0.01rem solid var(--Gris-perla);
+}
 
 .card-msg-one-one form textarea {
   width: 95%;
@@ -84,7 +97,23 @@
   border-radius: 5px;
   resize: none;
   transition: height 0.3s ease-in-out;
+  word-wrap: break-word;
   border-color: var(--Gris-perla);
+}
+
+.card-msg-one-one form .file-input-label {
+  width: 20%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card-msg-one-one form .file-input-label i {
+  font-size: 2rem;
+  color: rgb(0, 0, 0);
+  text-align: center;
 }
 
 .card-msg-one-one form button {
@@ -105,14 +134,8 @@
 @media (width < 500px) {
   .single-card-msg {
     width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border-radius: 5px;
-    padding: 50px 5px 25px 5px;
-    margin-bottom: 100px;
+  }
+  .card-msg-one-one-form{
+    width: 90%;
   }
 }

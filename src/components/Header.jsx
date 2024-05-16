@@ -1,5 +1,5 @@
 import '../style/Header.css'
-import social from '../images/Social.svg'
+import social from '../images/Social.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -20,6 +20,12 @@ const Header = () => {
                 <img src={social} alt="" />
             </div>
             <div className="menu">
+                <Link to={'/createpost'}>
+                    <div className="menu-menu create not-activate">
+                        <i className='bx bxs-plus-square'></i>
+                        <h5>New post</h5>
+                    </div>
+                </Link>
                 <Link to={'/allusers'}>
                     <div className="menu-alluser">
                         <i className='bx bxs-grid'></i>
@@ -28,7 +34,7 @@ const Header = () => {
                 <Link to={'/messagesinbox'}>
                     <div className="menu-menu">
                         <i className='bx bx-message-detail'></i>
-                        <div className={msgNotification === 1 ? 'menu-menu-notify' : 'menu-menu-notify-none'}>
+                        <div className={msgNotification[0] === 1 ? 'menu-menu-notify' : 'menu-menu-notify-none'}>
                             <i className='bx bxs-bell-ring'></i>
                         </div>
                     </div>

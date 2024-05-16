@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Singlemessage.css';
 import { addDoc, collection, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { auth, db } from '../../firebaseConfig';
+import { auth, db, storage } from '../../firebaseConfig';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { toast } from 'react-toastify';
 import Displaychat from './Chat/Displaychat';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +17,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     const [newMessage, setNewMessage] = useState('');
     const [Allusers, setAllusers] = useState([])
     const [reloadMsg, setReloadMsg] = useState(false)
+    const [imgUPto, setImgUPto] = useState('');
     const [textareaHeight, setTextareaHeight] = useState('30px');
     const [userChangePosition, setUserChangePosition] = useState(null)
     const { timer, myTimes } = useSetMsgTimer(userOnline)
@@ -50,8 +52,8 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
             const length = newMessage.length;
             const lenthLine = (newMessage.split('\n').length - 1) * 30
             const minHeight = 30;
-            const maxHeight = 150;
-            const step = 7;
+            const maxHeight = 100;
+            const step = 20;
 
             let height = minHeight + Math.floor((length + lenthLine) / 30) * step;
             height = Math.min(height, maxHeight);
@@ -68,8 +70,12 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         if (match.idUser === idreceiper || match.idUser === ideSender) {
             return match
         }
-    }
-    )
+    });
+
+    const handlePhotoChange = (e) => {
+        const file = e.target.files[0];
+        setImgUPto(file);
+    };
 
     const changePosition = (array, uid) => {
         const index = array.findIndex(objeto => objeto.idUser === uid);
@@ -81,8 +87,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
 
     useEffect(() => {
         setUserChangePosition(changePosition(myMessages, idreceiper))
-        console.log()
-    }, [newMessage])
+    }, [newMessage, imgUPto])
 
     const functionReload = () => setReloadMsg(!reloadMsg)
 
@@ -90,6 +95,16 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         e.preventDefault();
         try {
             let updatedMessages;
+            let imageUrls = '';
+
+            if (imgUPto) {
+                const photoRef = `/images/${Date.now()}${imgUPto.name}`;
+                const storageRef = ref(storage, photoRef);
+                await uploadBytes(storageRef, imgUPto);
+                const downloadUrl = await getDownloadURL(storageRef);
+                imageUrls = downloadUrl;
+            }
+
             if (arrayMessagesToUpdate.length > 0) {
                 updatedMessages = [...arrayMessagesToUpdate[0].message];
                 updatedMessages.push({
@@ -100,7 +115,14 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                     userNameR: userChangePosition[0].userName,
                     userNameS: userChangePosition[1].userName,
                     photoR: userChangePosition[0].photo,
-                    photoS: userChangePosition[1].photo
+                    photoS: userChangePosition[1].photo,
+                    imgUp:
+                        [imageUrls,
+                            {
+                                emojisDB: ["🌱", "🌿", "🌳", "🌍", "🌻", "🌎", "🌲", "🍃", "🌞", "🌊", "🌸", "🍀", "🌾", "🌵", "🌼", "🐝", "🦋", "🐞", "🐢", "🌴", "😊", "👍", "👎", "🎉", "🙏", "🤣", "❤️", "😍", "😎", "😜", "😇", "😂", "😘", "😁", "🤩", "😋", "😴", "🤗", "🤔", "😕"],
+                                emojisREACT: []
+                            }
+                        ]
                 });
                 const messageId = arrayMessagesToUpdate[0].id;
                 const messageRef = doc(db, 'Messages', messageId);
@@ -117,7 +139,14 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                             userNameR: userChangePosition[0].userName,
                             userNameS: userChangePosition[1].userName,
                             photoR: userChangePosition[0].photo,
-                            photoS: userChangePosition[1].photo
+                            photoS: userChangePosition[1].photo,
+                            imgUp:
+                                [imageUrls,
+                                    {
+                                        emojisDB: ["🌱", "🌿", "🌳", "🌍", "🌻", "🌎", "🌲", "🍃", "🌞", "🌊", "🌸", "🍀", "🌾", "🌵", "🌼", "🐝", "🦋", "🐞", "🐢", "🌴", "😊", "👍", "👎", "🎉", "🙏", "🤣", "❤️", "😍", "😎", "😜", "😇", "😂", "😘", "😁", "🤩", "😋", "😴", "🤗", "🤔", "😕"],
+                                        emojisREACT: []
+                                    }
+                                ]
                         }
                     ]
                 };
@@ -126,6 +155,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                 myTimes(ideSender, idreceiper, userChangePosition[0].userName, userChangePosition[1].userName)
             }
             setNewMessage('');
+            setImgUPto('')
             toast('Message send', { type: 'success' });
         } catch (error) {
             console.log(error);
@@ -140,12 +170,13 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     const testFunction = (IDuserR, IDuserS, userNameR, userNameS) => {
         myTimes(IDuserR, IDuserS, userNameR, userNameS)
     }
-    console.log(arrayMessagesToUpdate)
+
     return (
         <div className='single-card-msg'>
-            {msgNotification === 1 ?
-                <button onClick={() => testFunction(idreceiper, ideSender, '', '')} className='message-read'>Marcar como leido</button>
-                :
+            {msgNotification[0] === 1 &&
+                ((msgNotification[1][0] === idreceiper || msgNotification[1][0] === ideSender) &&
+                    (msgNotification[1][1] === idreceiper || msgNotification[1][1] === ideSender)) ?
+                <button onClick={() => testFunction(idreceiper, ideSender, '', '')} className='message-read'>Marcar como leído</button> :
                 ''
             }
             <button onClick={() => navigateToAllmsg('/messagesinbox')} className='single-card-msg-close'><i className='bx bxs-x-circle'></i></button>
@@ -153,13 +184,25 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                 {arrayMessagesToUpdate.length === 0 &&
                     <div className="new-chat">
                         <form onSubmit={handleSubmit}>
-                            <textarea
-                                placeholder='Escribe tu mensaje...'
-                                value={newMessage}
-                                onChange={(e) => setNewMessage(e.target.value)}
-                                style={{ height: textareaHeight }}
-                                rows={1}
-                            />
+                            <div className="card-msg-one-one-form">
+                                <textarea
+                                    placeholder='Escribe tu mensaje...'
+                                    value={newMessage}
+                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    style={{ height: textareaHeight }}
+                                    rows={1}
+                                />
+                                <label className="file-input-label">
+                                    <input
+                                        type="file"
+                                        name={`image`}
+                                        accept="image/*"
+                                        onChange={(e) => handlePhotoChange(e)}
+                                        style={{ display: 'none' }}
+                                    />
+                                    <i className='bx bxs-image-alt'></i>
+                                </label>
+                            </div>
                             <button onClick={() => { functionReload() }} type='submit'>Enviar</button>
                         </form>
                     </div>
@@ -168,13 +211,25 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                     <>
                         <Displaychat newMessage={newMessage} reloadMsg={reloadMsg} idreceiper={idreceiper} ideSender={ideSender} />
                         <form onSubmit={handleSubmit}>
-                            <textarea
-                                placeholder='Escribe tu mensaje...'
-                                value={newMessage}
-                                onChange={(e) => setNewMessage(e.target.value)}
-                                style={{ height: textareaHeight }}
-                                rows={1}
-                            />
+                            <div className="card-msg-one-one-form">
+                                <textarea
+                                    placeholder='Escribe tu mensaje...'
+                                    value={newMessage}
+                                    onChange={(e) => setNewMessage(e.target.value)}
+                                    style={{ height: textareaHeight }}
+                                    rows={1}
+                                />
+                                <label className="file-input-label">
+                                    <input
+                                        type="file"
+                                        name={`image`}
+                                        accept="image/*"
+                                        onChange={(e) => handlePhotoChange(e)}
+                                        style={{ display: 'none' }}
+                                    />
+                                    <i className='bx bxs-image-alt'></i>
+                                </label>
+                            </div>
                             <button onClick={() => { functionReload() }} type='submit'>Enviar</button>
                         </form>
                     </>

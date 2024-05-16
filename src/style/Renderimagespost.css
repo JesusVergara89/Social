@@ -1,9 +1,18 @@
+.Post-render-img {
+    width: 350px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .Renderimagespost {
     position: relative;
     width: 100%;
     height: 500px;
     display: flex;
-    overflow: hidden;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -50,10 +59,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 500px;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     justify-content: center;
 }
@@ -87,11 +92,5 @@
     font-weight: bold;
 }
 
-@media (width < 350px){
-    .Renderimagespost img {
-        width: 330px;
-        object-fit: cover;
-    }
-}
 
 

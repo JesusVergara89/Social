@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../style/Renderimagespost.css';
 
 const Renderimagespost = ({ id, images }) => {
+    
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const nonNullImages = images.filter(image => image !== null);
@@ -43,7 +44,7 @@ const Renderimagespost = ({ id, images }) => {
     };
 
     return (
-        <>
+        <div className='Post-render-img'>
             <div className="Renderimagespost" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
                 <Link to={`/singlepost/${id}`}>
                     <div className="slides">
@@ -66,7 +67,7 @@ const Renderimagespost = ({ id, images }) => {
                     }
                 })}
             </div>
-        </>
+        </div>
     );
 };
 

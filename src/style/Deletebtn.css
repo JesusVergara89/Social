@@ -9,16 +9,24 @@
 }
 
 .delete-btn {
-   width: auto;
+   width: 100%;
    height: auto;
    display: flex;
-   justify-content: center;
+   justify-content: right;
    align-items: center;
-   position: absolute;
-   top: 500px;
-   right: 30px;
-   z-index: 10;
+   position: relative;
+   left: 0;
 }
+
+.delete-btn.active {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 350px;
+ }
 
 .delete-btn-warning {
     width: 140px;
@@ -66,5 +74,38 @@
     cursor: pointer;
 }
 
+.delete-btn-block {
+    width: 80%;
+    height: 25px;
+}
+
+.delete-btn-no-blok {
+    display: none;
+}
+
+
+@media( 400px <= width < 440px){
+    .delete-btn {
+        width: 85%;
+        height: auto;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        position: relative;
+        left: 0;
+     }
+}
+
+@media( 300px < width < 400px){
+    .delete-btn {
+        width: 90%;
+        height: auto;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        position: relative;
+        left: 0;
+     }
+}
 
 

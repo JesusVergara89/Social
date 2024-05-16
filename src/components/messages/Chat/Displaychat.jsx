@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../../../firebaseConfig';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import './Displaychat.css'
+import Emoji from './Emoji';
+import Emojireactions from './Emojireactions';
+import Emojireactionlarger from './Emojireactionlarger';
 
 const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
+    const [setshowPhoto, setSetshowPhoto] = useState(false)
+    const [value, setValue] = useState('')
+    const [EMoji_Show, setEMoji_Show] = useState(false)
+    const [indexInfo, setIndexInfo] = useState('')
+    const [reaction, setReaction] = useState([])
 
     useEffect(() => {
         const messagesRef = collection(db, 'Messages')
@@ -38,29 +46,66 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
         }
     })
 
+    const ShowPic = () => {
+        setSetshowPhoto(!setshowPhoto)
+        setEMoji_Show(false)
+    }
+
+    const getPhotoRef = (ref, emojiReact) => {
+        setValue(ref)
+        setReaction(emojiReact)
+    }
+
+    const EMojiShow = (index) => {
+        setSetshowPhoto(false)
+        setEMoji_Show(!EMoji_Show)
+        setIndexInfo(index)
+    }
+
     return (
         <div className="display-chat">
             <div className="display-chat-information">
                 {thisChat &&
-                  <div className={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].receptor === user.uid ? "display-chat-information-profiles-reverse" : "display-chat-information-profiles"}>
-                          <div className={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].receptor === user.uid ? "display-chat-information-profiles-1-reverse"  : "display-chat-information-profiles-1"}>
-                                 <img src={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].photoR} alt="" />
-                                 <h5>@{thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].userNameR}</h5>
-                          </div>
-                          <div className={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].receptor === user.uid ? "display-chat-information-profiles-2-reverse"  : "display-chat-information-profiles-2"}>
-                                 <img src={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].photoS} alt="" />
-                                 <h5>@{thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].userNameS}</h5>
-                          </div>
-                  </div>
+                    <div className={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].receptor === user.uid ? "display-chat-information-profiles-reverse" : "display-chat-information-profiles"}>
+                        <div className={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].receptor === user.uid ? "display-chat-information-profiles-1-reverse" : "display-chat-information-profiles-1"}>
+                            <img src={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].photoR} alt="" />
+                            <h5>@{thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].userNameR}</h5>
+                        </div>
+                        <div className={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].receptor === user.uid ? "display-chat-information-profiles-2-reverse" : "display-chat-information-profiles-2"}>
+                            <img src={thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].photoS} alt="" />
+                            <h5>@{thisChat[0].message[Math.trunc(thisChat[0].message.length / 2)].userNameS}</h5>
+                        </div>
+                    </div>
                 }
             </div>
+            {setshowPhoto ? (
+                <div className="display-chat-img-larger">
+                    <div onClick={ShowPic} className="display-chat-img-larger-close">
+                        <i className='bx bxs-x-circle'></i>
+                    </div>
+                    <img src={value} alt="" />
+                    <Emojireactionlarger reaction={reaction} />
+                </div>
+            ) : (
+                ''
+            )}
             {thisChat &&
                 thisChat.map((chat, i) => (
-                    <div key={i} className="display-msg">
+                    <div key={i} className='display-msg '>
                         {chat.message.map((msg, j) => (
-                            <div key={j} className="container-msg">
-                                <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>
-                                <div className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"}>
+                            <div key={j} className={(msg.imgUp && msg.imgUp[0] !== '') ? "container-msg-with-img" : "container-msg"}>
+                                {msg.content === '' ? '' : <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>}
+                                {msg.imgUp && msg.imgUp[0] !== '' ? (
+                                    <div className={msg.sender === user.uid ? "container-msg-with-img-emojis" : "container-msg-with-img-emojis receptor"}>
+                                        <img onClick={() => { getPhotoRef(msg.imgUp[0], msg.imgUp[1].emojisREACT); ShowPic() }} src={msg.imgUp[0]} alt="" />
+                                        <Emojireactions user={user} msg={msg} />
+                                        <i onClick={() => { EMojiShow(j) }} className={msg.sender === user.uid ? 'bx bxs-plus-circle sender' : 'bx bxs-plus-circle receptor'}></i>
+                                        <Emoji id={chat.id} EMoji_Show={EMoji_Show} indexInfo={indexInfo} j={j} msg={msg} user={user} />
+                                    </div>
+                                ) : (
+                                    null
+                                )}
+                                <div className={msg.sender === user.uid ? `display-time-sender ${msg.content === '' ? 'off-time' : ''}` : `display-time-receptor ${msg.content === '' ? 'off-time' : ''}`}>
                                     <h6>{`@${msg.userNameS}`}</h6>
                                     <h6>-</h6>
                                     <h6 key={j + 1}>
@@ -72,6 +117,8 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                     </div>
                 ))
             }
+            <div className={setshowPhoto ? 'ClosePhoto on' : 'ClosePhoto'} onClick={() => setSetshowPhoto(false)} />
+
         </div>
     )
 }

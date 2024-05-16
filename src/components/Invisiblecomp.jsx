@@ -88,17 +88,19 @@ const Invisiblecomp = () => {
     }, [myPending, matchFriends]);
 
     useEffect(() => {
-        let hasMatchingObject = false;
-
         if (user) {
+            let hasMatchingObject = false;
+            let dataUsers = [];
+
             for (const obj of timer) {
                 const filteredData = obj.data.filter(item =>
                     item.creatorID === user.uid || item.receptorID === user.uid
                 );
+
                 if (filteredData.length > 0) {
                     const lastObject = filteredData[filteredData.length - 1];
-                    //console.log(lastObject)
-                    if (lastObject.receptorID === user.uid && lastObject.userNameR !== '' && lastObject.userNameR !== '' ) {
+                    dataUsers.push(lastObject.creatorID, lastObject.receptorID);
+                    if (lastObject.receptorID === user.uid && lastObject.userNameR !== '') {
                         hasMatchingObject = true;
                         break;
                     }
@@ -106,11 +108,9 @@ const Invisiblecomp = () => {
             }
 
             if (hasMatchingObject) {
-                //console.log('yes')
-                setMesgValue(1);
+                setMesgValue([1, dataUsers]);
             } else {
-                //console.log('nop')
-                setMesgValue(0);
+                setMesgValue([0, []]);
             }
         }
     }, [timer, user]);

@@ -22,7 +22,10 @@
   font-size: 0.875rem;
   text-align: center;
 }
-
+.Likepost .bx{
+  font-size: 24px;
+  cursor: pointer;
+}
 .Likepost .bxs-heart.on {
   color: red;
   animation: scale-down-center 0.3s ease-in-out;

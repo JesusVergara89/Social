@@ -39,6 +39,7 @@
   height: 30px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 }
 .comment-content-main {
   display: flex;
@@ -69,10 +70,19 @@
   color: var(--btns);
 }
 .comment-date {
-  all: unset;
   font-size: 0.7rem;
   font-weight: bold;
   color: rgb(96, 96, 96);
+  margin-bottom: 3px;
+  margin-left: 5px;
+}
+.comment-userName {
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: rgb(96, 96, 96);
+  margin-bottom: 3px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 .hide-subcomments {
   width: fit-content;
@@ -109,6 +119,31 @@
   text-align: start;
 }
 
+.display-comments-there-is-not-comments {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.display-comments-there-is-not-comments h5 {
+  all: unset;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: bold;
+  color: var(--btns);
+}
+
+.display-comments-there-is-not-comments h6 {
+  all: unset;
+  font-size: 0.7rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--btns);
+}
 @media (width < 440px) {
   .inform-commet {
     width: 90%;
@@ -118,3 +153,17 @@
     width: 170px;
   }
 }
+
+/*@media (width < 440px){
+    .display-comment-card {
+        width: 95%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 15px;
+        margin-top: 20px;
+        margin-left: 10px;
+        position: relative;
+    }
+}*/

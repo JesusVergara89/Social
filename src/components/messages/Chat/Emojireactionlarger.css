@@ -1,0 +1,32 @@
+.display-chat-img-larger-reactions {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    border-radius: 20px;
+    padding: 10px 15px;
+    background: rgba(244, 161, 53, 0.35);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
+    border: 1px solid rgba(255, 255, 255, 0.449);
+    margin-top: 10px;
+}
+.display-chat-img-larger-reactions div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.display-chat-img-larger-reactions .span1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.display-chat-img-larger-reactions .span2 {
+    font-size: 0.6rem;
+    font-weight: bold;
+}

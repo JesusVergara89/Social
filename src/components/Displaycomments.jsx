@@ -4,8 +4,10 @@ import Displaysubcomment from "./Displaysubcomment";
 import DeleteComment from "./DeleteComment";
 import Likecomment from "./Likescomponents/Likecomment";
 import Comment from "./Comment";
+import { useNavigate } from "react-router-dom";
 
-const Displaycomments = ({ post, reload }) => {
+const Displaycomments = ({ post, reload, IdAndUserName }) => {
+    const navigate = useNavigate()
     const [UserResponse, setUserResponse] = useState()
     const [comments, setComments] = useState([]);
     const [setshowcomments, setSetshowcomments] = useState(false)
@@ -26,6 +28,14 @@ const Displaycomments = ({ post, reload }) => {
     const FunctionUserResponse = (i, user, photo) => {
         setUserResponse({ index: i, userName: user, photo: photo })
     }
+    const takeUserId = (id) => {
+        const matchData = IdAndUserName.filter(data => {
+            if (data.idUser === id) {
+                return data
+            }
+        })
+        navigate(`/singleprofile/${matchData[0].id}`)
+    }
     return (
         <div className="display-comments">
             {setshowcomments ?
@@ -35,9 +45,9 @@ const Displaycomments = ({ post, reload }) => {
                         comment.main && (
                             <div key={i} className="display-comment-card">
                                 <div className="inform-commet">
-                                    <img src={comment.photo} className="PhotoAvatar" />
+                                    <img src={comment.photo} className="PhotoAvatar" onClick={() => takeUserId(comment.idUser)} />
                                     <div className="comment-content-main">
-                                        <p className="comment-date">
+                                        <p className="comment-userName" onClick={() => takeUserId(comment.idUser)}>
                                             {`@${comment.userName}`}
                                         </p>
                                         <p className="comment-content">{comment.main}</p>
@@ -50,13 +60,13 @@ const Displaycomments = ({ post, reload }) => {
                                     </div>
                                     <Likecomment post={post} index={i} likes={comment} />
                                 </div>
-                                <Displaysubcomment comment={comment} post={post} />
+                                <Displaysubcomment comment={comment} post={post} takeUserId={takeUserId} />
                             </div>
                         )
                     ))
                     }
                     {comments.length - 1 === 0 && (
-                        <p className="noneComment">No hay comentarios disponibles. Se el primero en comentar.</p>
+                        <p className="noneComment">Aun no hay comentarios, sé el primero en opinar...</p>
                     )}
                 </>
                 :

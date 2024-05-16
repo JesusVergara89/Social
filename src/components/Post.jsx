@@ -8,10 +8,13 @@ import Deletebtn from './Deletebtn';
 import Countercomments from '../counters/Countercomments';
 import Likepost from './Likescomponents/Likepost';
 import Renderimagespost from './Renderimagespost';
+import Postuserinfo from './Postuserinfo';
 import PostSkeleton from './Loading/PostSkeleton';
 
 const Post = () => {
     const [post, setPost] = useState([]);
+    const [onlyIds, setOnlyIds] = useState([])
+    const [infousers, setInfousers] = useState([]);
     const [returncomments, setReturncomments] = useState(false)
 
     const createPost = useNavigate()
@@ -29,6 +32,23 @@ const Post = () => {
         })
     }, [returncomments]);
 
+    useEffect(() => {
+        const usersCollectionRef = collection(db, 'Users');
+        const q = query(usersCollectionRef, orderBy('userName'))
+        onSnapshot(q, (snapshot) => {
+            const usex = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            const usersWithNames = usex.map(user => ({
+                id: user.id,
+                userName: user.userName,
+                idUser: user.idUser
+            }));
+            setInfousers(usex);
+            setOnlyIds(usersWithNames)
+        })
+    }, [post]);
 
     const toProfile = () => {
         console.log('')
@@ -36,32 +56,24 @@ const Post = () => {
 
     return (
         <article className="post">
-            <button onClick={() => createPost('/createpost')} className="post-create-btn">New post</button>
-            {post?.[0] ? (
-                post.map((p, i) => (
-                    <div key={i} className="post-card">
-                        <div className="post-card-userinfo">
-                            <div className="post-card-userinfo-1">
-                                <img src={p.userPhoto} alt="" />
-                                <h6>{`@${p.userName}`}</h6>
-                            </div>
-                            <div className="post-card-userinfo-2">
-                                <h6>{p.createdAt.toDate().toDateString()}</h6>
-                            </div>
-                        </div>
-                        <div className="post-card-img-container">
+            {post && (
+                post.map((p, i) => {
+                    return (
+                        <div key={i} className="post-card">
+                            <Postuserinfo p={p} IdAndUserName={onlyIds} />
                             <Renderimagespost id={p.id} images={p.images} />
+                            <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
+                            <div className="post-card-msg-likes">
+                                <Likepost postId={p.id} likes={p.likes} />
+                                <Countercomments thispost={p} index={i} />
+                            </div>
+                            <p className='post-card-description'>{p.description}</p>
+                            <Displaycomments post={p} reload={reload} IdAndUserName={onlyIds} />
                         </div>
-                        <div className='post-card-action'>
-                            <Likepost postId={p.id} likes={p.likes} />
-                            <Countercomments thispost={p} />
-                        </div>
-                        <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />
-                        <p className='post-card-description'>{p.description}</p>
-                        <Displaycomments post={p} reload={reload} />
-                    </div>
-                ))
-            ) : <PostSkeleton />}
+                    );
+                })
+            )}
+
         </article>
     )
 }

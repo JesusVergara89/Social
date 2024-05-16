@@ -46,6 +46,10 @@ const Comment = ({ postId, thispost, reload, UserResponse, setUserResponse, hand
 
     const FunctioComment = async (e) => {
         e.preventDefault();
+        if (!mainComment.trim()) {
+            toast.error('Please enter a comment');
+            return;
+        }
         try {
             const postRef = doc(db, 'Post', postId);
             let updatedComments = [];
@@ -165,7 +169,7 @@ const Comment = ({ postId, thispost, reload, UserResponse, setUserResponse, hand
                     style={{ height: textareaHeight }}
                     rows={1}
                 />
-                <button onClick={handleSubmit} className="submit-btn"><i className='bx bx-paper-plane'></i></button>
+                <button type="submit" className="submit-btn"><i className='bx bxs-comment-edit' ></i></button>
             </form>
         </div>
     );

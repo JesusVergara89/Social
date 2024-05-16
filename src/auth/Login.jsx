@@ -6,9 +6,12 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import '../style/form.css'
 import Loader from '../components/Loading/Loader'
+import social from '../images/Social.png'
 
 const Login = () => {
+
     const [show, setShow] = useState(false)
+
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [Ok, setOk] = useState(true)
@@ -27,16 +30,19 @@ const Login = () => {
 
     return (
         <form className='form_main' onSubmit={handleSubmit(submit)} >
+            <img src={social} alt="" />
             <h3>Log in</h3>
             <section className={watch('email') ? 'form_user on' : 'form_user'}>
                 <input autoComplete='off' className={errors.email?.type === 'required' || errors.email?.type === 'pattern' ? 'input_user on' : 'input_user'} type="text" inputMode='email' {...register("email", { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ })} />
                 <label>Email:</label>
                 <i className='bx bx-envelope' ></i>
             </section>
-            {errors.email?.type === 'required' &&
+            {
+                errors.email?.type === 'required' &&
                 <p className='error'>Por favor, ingrese el email.</p>
             }
-            {errors.email?.type === 'pattern' &&
+            {
+                errors.email?.type === 'pattern' &&
                 <p className='error'>Por favor, ingrese un correo electrónico válido.</p>
             }
             <section className={watch('password') ? 'form_password on' : 'form_password'}>
@@ -48,17 +54,19 @@ const Login = () => {
                     {show ? <i className='bx bx-hide'></i> : <i className='bx bx-show'></i>}
                 </div>
             </section>
-            {errors.password?.type === 'required' &&
+            {
+                errors.password?.type === 'required' &&
                 <p className='error'>Por favor, ingrese una contraseña.</p>
             }
-            {Ok ? <button className='protect-route-btn' type='submit'>Login</button>
-                : <Loader />
+            {
+                Ok ? <button className='protect-route-btn' type='submit'>Login</button>
+                    : <Loader />
             }
             <p className='form_enlace'>
                 ¿No tiene cuenta?
                 <p onClick={() => navigateToLogin('/register')}>Regístrate</p>
             </p>
-        </form>
+        </form >
     )
 }
 
