@@ -7,9 +7,10 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(68, 245, 51, 0.35);
+  background: rgba(43, 200, 252, 0.35);
   backdrop-filter: blur(2.5px);
   -webkit-backdrop-filter: blur(2.5px);
+  border: 1px solid rgba(255, 255, 255, 0.34);
 }
 
 footer h5{
