@@ -61,6 +61,7 @@
   max-width: 400px;
   border-radius: 5px;
   height: 65vh;
+  object-fit: contain;
 }
 
 .loading-img {
@@ -258,7 +259,9 @@
 
 .container-msg-with-img img {
   max-height: 250px;
+  max-width: 80%;
   border-radius: 3px;
+  object-fit: cover;
   cursor: pointer;
 }
 
@@ -359,6 +362,11 @@
 @media (310px <=width < 359px) {
   .display-chat-img-larger img {
     max-width: 320px;
+  }
+}
+@media (width<310px) {
+  .display-chat-img-larger img {
+    max-width: 100vw;
   }
 }
 

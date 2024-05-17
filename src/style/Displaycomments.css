@@ -46,9 +46,10 @@
   flex-direction: column;
   justify-content: center;
   gap: 8px;
+  padding: 3px 5px;
 }
 .comment-content {
-  width: 250px;
+  width: 230px;
   height: auto;
   text-wrap: pretty;
   font-size: 0.875rem;
@@ -63,9 +64,8 @@
 }
 .respond button {
   all: unset;
-  padding: 10px;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: bold;
   color: var(--btns);
 }
@@ -73,15 +73,11 @@
   font-size: 0.7rem;
   font-weight: bold;
   color: rgb(96, 96, 96);
-  margin-bottom: 3px;
-  margin-left: 5px;
 }
 .comment-userName {
   font-size: 0.7rem;
   font-weight: bold;
   color: rgb(96, 96, 96);
-  margin-bottom: 3px;
-  margin-left: 5px;
   cursor: pointer;
 }
 .hide-subcomments {
