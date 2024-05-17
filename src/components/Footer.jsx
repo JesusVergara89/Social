@@ -15,7 +15,6 @@ const Footer = () => {
           <Link to={'/createpost'}>
             <div className="footer-menu">
               <i className='bx bxs-plus-square'></i>
-              <h5>New post</h5>
             </div>
           </Link>
         </div>
