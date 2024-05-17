@@ -31,12 +31,14 @@ footer h5{
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 5px;
 }
 
 .footer-container-description-page p {
   width: 90%;
   height: auto;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
+  font-weight: bold;
 }
 
 .footer-container-create-post {
