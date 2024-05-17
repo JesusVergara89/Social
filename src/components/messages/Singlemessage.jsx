@@ -50,11 +50,12 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     useEffect(() => {
         const adjustTextareaHeight = () => {
             const length = newMessage.length;
+            const lenthLine = (newMessage.split('\n').length - 1) * 30
             const minHeight = 30;
-            const maxHeight = 300;
-            const step = 30;
+            const maxHeight = 100;
+            const step = 20;
 
-            let height = minHeight + Math.floor(length / 30) * step;
+            let height = minHeight + Math.floor((length + lenthLine) / 30) * step;
             height = Math.min(height, maxHeight);
             setTextareaHeight(height + 'px');
         };
@@ -207,7 +208,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                     </div>
                 }
                 {arrayMessagesToUpdate.length > 0 &&
-                    <div className="card-msg-one-one">
+                    <>
                         <Displaychat newMessage={newMessage} reloadMsg={reloadMsg} idreceiper={idreceiper} ideSender={ideSender} />
                         <form onSubmit={handleSubmit}>
                             <div className="card-msg-one-one-form">
@@ -231,8 +232,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                             </div>
                             <button onClick={() => { functionReload() }} type='submit'>Enviar</button>
                         </form>
-                    </div>
-
+                    </>
                 }
             </div>
         </div>

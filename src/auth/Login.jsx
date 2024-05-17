@@ -1,20 +1,18 @@
 import React, { useState } from 'react'
-import './Login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebaseConfig'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import social from '../images/Social.png'
-import '../style/form.css'
 import { useForm } from 'react-hook-form'
+import '../style/form.css'
 import Loader from '../components/Loading/Loader'
+import social from '../images/Social.png'
 
 const Login = () => {
-    
+
     const [show, setShow] = useState(false)
 
     const navigate = useNavigate()
-
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [Ok, setOk] = useState(true)
     const navigateToLogin = useNavigate()
@@ -28,7 +26,6 @@ const Login = () => {
                 setOk(true)
             })
     };
-
     const showPassword = () => setShow(!show)
 
     return (
@@ -40,30 +37,36 @@ const Login = () => {
                 <label>Email:</label>
                 <i className='bx bx-envelope' ></i>
             </section>
-            {errors.email?.type === 'required' &&
+            {
+                errors.email?.type === 'required' &&
                 <p className='error'>Por favor, ingrese el email.</p>
             }
-            {errors.email?.type === 'pattern' &&
+            {
+                errors.email?.type === 'pattern' &&
                 <p className='error'>Por favor, ingrese un correo electrónico válido.</p>
             }
             <section className={watch('password') ? 'form_password on' : 'form_password'}>
                 <input autoComplete='off' className={errors.password?.type === 'required' ? 'input_password on' : 'input_password'} type={show ? "text" : "password"}{...register("password", { required: true })} />
                 <label>Password</label>
                 <i className='bx bx-lock'></i>
-                <div onClick={showPassword} className="login-hiden">{show ? <i className='bx bx-hide'></i> : <i className='bx bx-show'></i>}
+
+                <div onClick={showPassword} className="login-hiden">
+                    {show ? <i className='bx bx-hide'></i> : <i className='bx bx-show'></i>}
                 </div>
             </section>
-            {errors.password?.type === 'required' &&
+            {
+                errors.password?.type === 'required' &&
                 <p className='error'>Por favor, ingrese una contraseña.</p>
             }
-            {Ok ? <button className='protect-route-btn' type='submit'>Login</button>
-                : <Loader />
+            {
+                Ok ? <button className='protect-route-btn' type='submit'>Login</button>
+                    : <Loader />
             }
             <p className='form_enlace'>
                 ¿No tiene cuenta?
                 <p onClick={() => navigateToLogin('/register')}>Regístrate</p>
             </p>
-        </form>
+        </form >
     )
 }
 

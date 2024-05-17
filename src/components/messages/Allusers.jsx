@@ -24,7 +24,8 @@ const Allusers = () => {
             setAllusers(allUsers);
         })
     }, []);
-
+    console.log(thiIsTheCurrentUser.uid)
+    console.log(Allusers)
     const handleInputChange = (event) => {
         const valor = event.target.value.toLowerCase();
         setFiltro(valor);

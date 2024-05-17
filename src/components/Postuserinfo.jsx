@@ -14,7 +14,7 @@ const Postuserinfo = ({ p, IdAndUserName }) => {
         <div className="post-card-userinfo">
             <div onClick={() => {navigate(`/singleprofile/${returnCorrectID[0].id}`)}} className="post-card-userinfo-1">
                 <img src={p.userPhoto} alt="" />
-                <h6>{`${p.userName}`}</h6>
+                <h6>{`@${p.userName}`}</h6>
             </div>
             <div className="post-card-userinfo-2">
                 <h6>{p.createdAt.toDate().toDateString()}</h6>

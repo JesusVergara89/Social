@@ -15,8 +15,9 @@
    justify-content: center;
    align-items: center;
    position: absolute;
-   top: 5px;
-   right: 5px;
+   top: 0;
+   right: 0;
+   z-index: 10;
 }
 
 .delete-btn-1 button {

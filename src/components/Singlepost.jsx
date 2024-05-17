@@ -43,7 +43,7 @@ const Singlepost = () => {
             setInfousers(usex);
             setOnlyIds(usersWithNames)
         })
-        
+
     }, [])
 
     const toProfile = () => {
@@ -55,7 +55,7 @@ const Singlepost = () => {
         <div className='post'>
             {singlepost.id && singlepost.likes &&
                 <div className="post-card">
-                    <Postuserinfo p={singlepost} IdAndUserName={onlyIds}/>
+                    <Postuserinfo p={singlepost} IdAndUserName={onlyIds} />
                     <Renderimagespost id={singlepost.id} images={singlepost.images} />
                     <Deletebtn images={singlepost.images} deleteId={singlepost.id} postId={singlepost.idOnlineUser} toProfile={toProfile} />
                     <div className="post-card-msg-likes">
@@ -63,12 +63,7 @@ const Singlepost = () => {
                         <Countercomments thispost={singlepost} />
                     </div>
                     <p className='post-card-description'>{singlepost.description}</p>
-                    <Comment
-                        thispost={singlepost}
-                        postId={singlepost.id}
-                        reload={reload}
-                    />
-                    <Displaycomments infousers={infousers} post={singlepost} IdAndUserName={onlyIds} />
+                    <Displaycomments reload={reload} post={singlepost} IdAndUserName={onlyIds} />
                 </div>
             }
         </div>

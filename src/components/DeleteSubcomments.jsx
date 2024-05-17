@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../firebaseConfig'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 
-const DeleteSubcomments = ({ post, subcommentsFormatted, indexSub }) => {
+const DeleteSubcomments = ({ post, subcommentsFormatted}) => {
 
     const [currentoLogUser] = useAuthState(auth)
 
@@ -50,9 +50,9 @@ const DeleteSubcomments = ({ post, subcommentsFormatted, indexSub }) => {
 
     return (
         <>
-            {currentoLogUser?.uid === subcommentsFormatted[indexSub].userID ?
+            {currentoLogUser?.uid === subcommentsFormatted.userID ?
                 <div className="delete-btn-2">
-                    <button onClick={() => handleDeletePost(subcommentsFormatted[indexSub])}><i className='bx bxs-x-circle'></i></button>
+                    <button onClick={() => handleDeletePost(subcommentsFormatted)}><i className='bx bxs-x-circle'></i></button>
                 </div>
                 :
                 ''

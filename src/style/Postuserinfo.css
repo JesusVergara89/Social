@@ -1,77 +1,70 @@
 .post-card-userinfo {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 5px;
-    margin-top: 40px;
-    position: relative;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 10px;
+  position: relative;
+}
+.post-card-userinfo h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 
 .post-card-userinfo-1 {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
 }
 
 .post-card-userinfo-2 {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 15px;
-    padding-right: 12px;
-}
-
-.post-card-userinfo h6 {
-    all: unset;
-    font-size: 0.75rem;
-    text-align: center;
-    font-weight: 700;
-    cursor: pointer;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .post-card-userinfo img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 3px solid var(--btns);
-    object-fit: cover;
-    cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--btns);
+  object-fit: cover;
 }
 
-@media (width <= 440px){
-    .post-card-userinfo {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 5px;
-        margin-top: 50px;
-        position: relative;
-    }
-    .post-card-userinfo-1 {
-        width: 50%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        margin-left: 7px;
-    }
-
-    .post-card-userinfo h6 {
-        all: unset;
-        font-size: 0.75rem;
-        text-align: center;
-        font-weight: 700;
-        margin-right: 10px;
-    }
-    
+@media (330px<=width <= 440px) {
+  .post-card-userinfo {
+    padding: 5px 0;
+  }
+  .post-card-userinfo h6 {
+    font-size: 0.75rem;
+  }
+  .post-card-userinfo-2 {
+    padding-right: 12px;
+  }
+}
+@media (width < 330px) {
+  .post-card-userinfo {
+    justify-content: space-between;
+  }
+  .post-card-userinfo h6 {
+    font-size: 0.75rem;
+  }
+  .post-card-userinfo-1,
+  .post-card-userinfo-2 {
+    width: auto;
+    justify-content: center;
+  }
+  .post-card-userinfo-1 {
+    padding-left: 10px;
+  }
+  .post-card-userinfo-2 {
+    padding-right: 8px;
+  }
 }

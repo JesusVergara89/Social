@@ -1,328 +1,326 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #add8e6;
-    --Verde-menta: #98fb98;
-    --Gris-perla: #d3d3d3;
-    --Blanco-hueso: #f5f5dc;
-    --Rosa-suave: #ffb6c1;
-    --btns: #0095f6;
-    --error: #8b0000;
-    --colorP: #333333;
+  --border: #dbdbdb;
+  --Azul-claro: #add8e6;
+  --Verde-menta: #98fb98;
+  --Gris-perla: #d3d3d3;
+  --Blanco-hueso: #f5f5dc;
+  --Rosa-suave: #ffb6c1;
+  --btns: #0095f6;
+  --error: #8b0000;
+  --colorP: #333333;
+}
+
+.form_main {
+  height: auto;
+  width: 80%;
+  max-width: 265px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  border-radius: 5px;
+  row-gap: 5px;
+  margin: 120px 0;
+  border: 1px solid var(--border);
+}
+.form_main h3 {
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: black;
+}
+
+.form_user,
+.form_password,
+.form_Biography {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.form_enlace {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  color: var(--colorP);
+  margin-bottom: 8px;
+}
+.form_enlace p {
+  margin: 0;
+  color: var(--btns);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form_user label,
+.form_password label {
+  color: var(--colorP);
+  opacity: 0.8;
+  height: 35.5px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  transform: translate(35px);
+  pointer-events: none;
+  transition: transform 0.3s ease-in-out;
+}
+.form_Biography label {
+  color: var(--colorP);
+  opacity: 0.8;
+  height: 35.5px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  transform: translate(10px);
+  pointer-events: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.form_user .input_user:focus ~ label,
+.form_password .input_password:focus ~ label,
+.form_Biography .input_Biography:focus ~ label,
+.form_user.on label,
+.form_password.on label,
+.form_Biography.on label {
+  transform: translate(0, -100%);
+  font-size: 14px;
+}
+
+.form_user .bx {
+  width: auto;
+  height: 39px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 18px;
+  color: var(--colorP);
+}
+.form_user p {
+  opacity: 0.5;
+}
+.input_user {
+  width: auto;
+  height: 35px;
+  padding-left: 35px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  outline: none;
+  text-align: start;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+  &:focus {
+    border-color: black;
   }
-  
+}
+
+.input_Biography {
+  width: auto;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  text-align: start;
+  font-size: 16px;
+  resize: none;
+  transition: border-color 0.3s ease-in-out, height 0.3s ease-in-out;
+  &:focus {
+    border-color: black;
+  }
+}
+
+.input_password {
+  width: auto;
+  height: 35px;
+  padding: 0 35px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  outline: none;
+  text-align: start;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+  &:focus {
+    border-color: black;
+  }
+}
+
+.form_password .bx {
+  width: auto;
+  height: 39px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  font-size: 18px;
+  color: var(--colorP);
+}
+
+.form_main img {
+  width: 100%;
+}
+
+.form_password .bx.bx-lock {
+  left: 20px;
+}
+
+.login-hiden .bx {
+  right: 20px;
+  cursor: pointer;
+}
+
+.error {
+  width: 95%;
+  text-align: start;
+  letter-spacing: 0.5px;
+  color: var(--error);
+  margin: 0;
+}
+
+.input_user.on,
+.input_password.on {
+  border-color: var(--error) !important;
+  ~ label {
+    color: var(--error) !important;
+  }
+}
+
+.protect-route-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #0094f6c7;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin: 15px 0;
+}
+
+.form_file {
+  width: 100%;
+  height: auto;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  color: black;
+  margin-top: 20px;
+  gap: 15px;
+}
+.form_file p {
+  margin: 0;
+  padding: 10px 0;
+}
+
+.form_file label {
+  width: 100%;
+  color: var(--color_6);
+  opacity: 0.8;
+  text-align: start;
+}
+
+.form_file.on label {
+  color: var(--color_4) !important;
+}
+
+.file_imagen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 2px dashed #ccc;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.file_imagen.on {
+  border-color: var(--color_4);
+}
+
+.file_imagen img {
+  width: 95%;
+  height: 180px;
+  object-fit: contain;
+}
+
+.file_imagen .bx {
+  padding: 10px 0;
+  font-size: 70px;
+}
+
+.input_file {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.information_imagen {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--colorP);
+}
+
+.information_imagen p:first-child {
+  text-align: start;
+}
+
+.data_imagen {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.data_imagen .bx {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  padding-left: 10px;
+}
+
+.data_imagen .bx:last-child {
+  font-size: 23px;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .protect-route-btn:hover {
+    background-color: var(--btns);
+  }
+}
+@media (width<=370px) {
   .form_main {
-    height: auto;
-    width: 80%;
-    max-width: 265px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    border-radius: 5px;
-    row-gap: 5px;
-    margin-top: 130px;
-    margin-bottom: 100px;
-    border: 1px solid var(--border);
+    transform: scale(0.95);
   }
-
-  .form_main img{
-    width: 100%;
-  }
-
   .form_main h3 {
-    font-size: 1.35rem;
-    font-weight: bold;
-    color: black;
+    font-size: 1.2rem;
   }
-  
-  .form_user,
-  .form_password,
-  .form_Biography {
-    width: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
-    margin-top: 20px;
-    gap: 5px;
-  }
-  
-  .form_enlace {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 7px;
-    text-align: center;
-    letter-spacing: 0.5px;
-    color: var(--colorP);
-    margin-bottom: 8px;
-  }
-  .form_enlace p {
-    margin: 0;
-    color: var(--btns);
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .form_user label,
-  .form_password label {
-    color: var(--colorP);
-    opacity: 0.8;
-    height: 35.5px;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 10px;
-    transform: translate(35px);
-    pointer-events: none;
-    transition: transform 0.3s ease-in-out;
-  }
-  .form_Biography label {
-    color: var(--colorP);
-    opacity: 0.8;
-    height: 35.5px;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 10px;
-    transform: translate(10px);
-    pointer-events: none;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .form_user .input_user:focus ~ label,
-  .form_password .input_password:focus ~ label,
-  .form_Biography .input_Biography:focus ~ label,
-  .form_user.on label,
-  .form_password.on label,
-  .form_Biography.on label {
-    transform: translate(0, -100%);
-    font-size: 14px;
-  }
-  
-  .form_user .bx {
-    width: auto;
-    height: 39px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    font-size: 18px;
-    color: var(--colorP);
-  }
-  .form_user p {
-    opacity: 0.5;
-  }
-  .input_user {
-    width: auto;
-    height: 35px;
-    padding-left: 35px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    outline: none;
-    text-align: start;
-    font-size: 16px;
-    transition: border-color 0.3s ease-in-out;
-    &:focus {
-      border-color: black;
-    }
-  }
-  
-  .input_Biography {
-    width: auto;
-    padding: 5px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    text-align: start;
-    font-size: 16px;
-    resize: none;
-    transition: border-color 0.3s ease-in-out, height 0.3s ease-in-out;
-    &:focus {
-      border-color: black;
-    }
-  }
-  
-  .input_password {
-    width: auto;
-    height: 35px;
-    padding: 0 35px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    outline: none;
-    text-align: start;
-    font-size: 16px;
-    transition: border-color 0.3s ease-in-out;
-    &:focus {
-      border-color: black;
-    }
-  }
-  
-  .form_password .bx {
-    width: auto;
-    height: 39px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 10px;
-    font-size: 18px;
-    color: var(--colorP);
-  }
-  
-  .form_password .bx.bx-lock {
-    left: 20px;
-  }
-  
-  .login-hiden .bx {
-    right: 20px;
-    cursor: pointer;
-  }
-  
-  .error {
-    width: 95%;
-    text-align: start;
-    letter-spacing: 0.5px;
-    color: var(--error);
-    margin: 0;
-  }
-  
-  .input_user.on,
-  .input_password.on {
-    border-color: var(--error) !important;
-    ~ label {
-      color: var(--error) !important;
-    }
-  }
-  
   .protect-route-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #0094f6c7;
-    border: none;
-    border-radius: 2px;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-    margin: 15px 0;
+    padding: 8px;
   }
-  
-  .form_file {
-    width: 100%;
-    height: auto;
-    min-height: 180px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    color: black;
-    margin-top: 20px;
-    gap: 15px;
-  }
-  .form_file p {
-    margin: 0;
-    padding: 10px 0;
-  }
-  
-  .form_file label {
-    width: 100%;
-    color: var(--color_6);
-    opacity: 0.8;
-    text-align: start;
-  }
-  
-  .form_file.on label {
-    color: var(--color_4) !important;
-  }
-  
-  .file_imagen {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    border: 2px dashed #ccc;
-    transition: border-color 0.3s ease-in-out;
-  }
-  
-  .file_imagen.on {
-    border-color: var(--color_4);
-  }
-  
-  .file_imagen img {
-    width: 95%;
-    height: 180px;
-    object-fit: contain;
-  }
-  
-  .file_imagen .bx {
-    padding: 10px 0;
-    font-size: 70px;
-  }
-  
-  .input_file {
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    cursor: pointer;
-  }
-  .information_imagen {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    color: var(--colorP);
-  }
-  
-  .information_imagen p:first-child {
-    text-align: start;
-  }
-  
-  .data_imagen {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .data_imagen .bx {
-    width: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 28px;
-    padding-left: 10px;
-  }
-  
-  .data_imagen .bx:last-child {
-    font-size: 23px;
-    cursor: pointer;
-  }
-  
-  @media (hover: hover) {
-    .protect-route-btn:hover {
-      background-color: var(--btns);
-    }
-  }
-  @media (width<=370px) {
-    .form_main {
-      transform: scale(0.95);
-    }
-    .form_main h3 {
-      font-size: 1.2rem;
-    }
-    .protect-route-btn {
-      padding: 8px;
-    }
-  }
+}

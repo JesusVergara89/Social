@@ -7,7 +7,7 @@
     align-items: center;
     position: absolute;
     top: 18px;
-    left: calc(50% - 100px);
+    left: calc(50% - 80px);
     overflow-y: visible; 
     padding: 5px; 
     z-index: 51;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Register from './auth/Register'
 import Login from './auth/Login';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Profile from './components/Profile';
 import Protectedroutes from './components/Protectedroutes';
 import Header from './components/Header';
@@ -25,98 +25,103 @@ import Footer from './components/Footer';
 function Social() {
     const [onlineuser] = useAuthState(auth)
     const [newuser, setNewuser] = useState({})
+    const { pathname } = useLocation()
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [pathname])
     return (
-        <div className='SOCIAL'>
 
-            <Header />
+            <div className='SOCIAL'>
 
-            <Invisiblecomp /> {/** In this component i rendered all the counter values for notifications */}
+                <Header />
 
-            <Routes>
+                <Invisiblecomp /> {/** In this component i rendered all the counter values for notifications */}
 
-                <Route path='/'
-                    element={
-                        <Post />
-                    }
-                />
+                <Routes>
 
-                <Route path='/register'
-                    element={
-                        <Register setNewuser={setNewuser} />
-                    }
-                />
+                    <Route path='/'
+                        element={
+                            <Post />
+                        }
+                    />
 
-                <Route path='/login'
-                    element={onlineuser ? <Navigate to="/" /> : <Login />}
-                />
+                    <Route path='/register'
+                        element={
+                            <Register setNewuser={setNewuser} />
+                        }
+                    />
 
-                <Route path='/allusers'
-                    element={
-                        <Allusers
-                        />}
-                />
+                    <Route path='/login'
+                        element={onlineuser ? <Navigate to="/" /> : <Login />}
+                    />
 
-                <Route element={<Protectedroutes />}>
-                    <Route path='/profile'
+                    <Route path='/allusers'
                         element={
-                            <Profile setNewuser={setNewuser} newuser={newuser} />
-                        }
+                            <Allusers
+                            />}
                     />
-                    <Route path='/singlesuser/:iduser'
-                        element={
-                            <Singleuser />
-                        }
-                    />
-                    <Route path='/singleprofile/:userProfile'
-                        element={
-                            <Singleprofile />
-                        }
-                    />
-                    <Route path='/conections'
-                        element={
-                            <Conections />
-                        }
-                    />
-                    <Route path='/messagesinbox'
-                        element={
-                            <Allmessageswithuser />
-                        }
-                    />
-                    <Route path='/Sendmessage/:x1/:x2'
-                        element={
-                            <Messageinbox />
-                        }
-                    />
-                    <Route path='/pendingrequest'
-                        element={
-                            <Pendingfriendrequests />
-                        }
-                    />
-                    <Route path='/singlepost/:post'
-                        element={
-                            <Singlepost />
-                        }
-                    />
-                    <Route path='/friendrequest/:id'
-                        element={
-                            <Friendrequest />
-                        }
-                    />
-                    <Route path='/createpost'
-                        element={
-                            <Createpost />
-                        }
-                    />
-                    <Route path='/configprofile/:toConfig'
-                        element={
-                            <Configprofile />
-                        }
-                    />
-                </Route>
-            </Routes>
+
+                    <Route element={<Protectedroutes />}>
+                        <Route path='/profile'
+                            element={
+                                <Profile />
+                            }
+                        />
+                        <Route path='/singlesuser/:iduser'
+                            element={
+                                <Singleuser />
+                            }
+                        />
+                        <Route path='/singleprofile/:userProfile'
+                            element={
+                                <Singleprofile />
+                            }
+                        />
+                        <Route path='/conections'
+                            element={
+                                <Conections />
+                            }
+                        />
+                        <Route path='/messagesinbox'
+                            element={
+                                <Allmessageswithuser />
+                            }
+                        />
+                        <Route path='/Sendmessage/:x1/:x2'
+                            element={
+                                <Messageinbox />
+                            }
+                        />
+                        <Route path='/pendingrequest'
+                            element={
+                                <Pendingfriendrequests />
+                            }
+                        />
+                        <Route path='/singlepost/:post'
+                            element={
+                                <Singlepost />
+                            }
+                        />
+                        <Route path='/friendrequest/:id'
+                            element={
+                                <Friendrequest />
+                            }
+                        />
+                        <Route path='/createpost'
+                            element={
+                                <Createpost />
+                            }
+                        />
+                        <Route path='/configprofile/:toConfig'
+                            element={
+                                <Configprofile />
+                            }
+                        />
+                    </Route>
+                </Routes>
 
             <Footer/>
-        </div>
+            </div>
     )
 }
 

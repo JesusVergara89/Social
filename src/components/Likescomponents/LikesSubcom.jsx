@@ -4,7 +4,7 @@ import { auth, db } from '../../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './LikesSubcom.css'
 
-const LikesSubcom = ({post, sub, indexSub}) => {
+const LikesSubcom = ({post, sub}) => {
 
     const [userOnline] = useAuthState(auth)
 

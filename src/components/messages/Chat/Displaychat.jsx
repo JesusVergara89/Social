@@ -91,14 +91,14 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
             )}
             {thisChat &&
                 thisChat.map((chat, i) => (
-                    <div key={i} className={`display-msg ${setshowPhoto === true ? 'bluer-bg' : ''}`}>
+                    <div key={i} className='display-msg '>
                         {chat.message.map((msg, j) => (
                             <div key={j} className={(msg.imgUp && msg.imgUp[0] !== '') ? "container-msg-with-img" : "container-msg"}>
                                 {msg.content === '' ? '' : <p className={msg.sender === user.uid ? "display-msg-sender" : "display-msg-receptor"}>{msg.content}</p>}
                                 {msg.imgUp && msg.imgUp[0] !== '' ? (
-                                    <div className="container-msg-with-img-emojis">
-                                        <img onClick={() => { getPhotoRef(msg.imgUp[0], msg.imgUp[1].emojisREACT); ShowPic() }} className={msg.sender === user.uid ? "display-time-sender" : "display-time-receptor"} src={msg.imgUp[0]} alt="" />
-                                        <Emojireactions user={user} msg={msg}/>
+                                    <div className={msg.sender === user.uid ? "container-msg-with-img-emojis" : "container-msg-with-img-emojis receptor"}>
+                                        <img onClick={() => { getPhotoRef(msg.imgUp[0], msg.imgUp[1].emojisREACT); ShowPic() }} src={msg.imgUp[0]} alt="" />
+                                        <Emojireactions user={user} msg={msg} />
                                         <i onClick={() => { EMojiShow(j) }} className={msg.sender === user.uid ? 'bx bxs-plus-circle sender' : 'bx bxs-plus-circle receptor'}></i>
                                         <Emoji id={chat.id} EMoji_Show={EMoji_Show} indexInfo={indexInfo} j={j} msg={msg} user={user} />
                                     </div>
@@ -117,6 +117,7 @@ const Displaychat = ({ newMessage, reloadMsg, idreceiper, ideSender }) => {
                     </div>
                 ))
             }
+            <div className={setshowPhoto ? 'ClosePhoto on' : 'ClosePhoto'} onClick={() => setSetshowPhoto(false)} />
 
         </div>
     )

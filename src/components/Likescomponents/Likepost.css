@@ -1,40 +1,53 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #ADD8E6;
-    --Verde-menta: #98FB98;
-    --Gris-perla: #D3D3D3;
-    --Blanco-hueso: #F5F5DC;
-    --Rosa-suave: #FFB6C1;
-    --btns: #0095f6;
+  --border: #dbdbdb;
+  --Azul-claro: #add8e6;
+  --Verde-menta: #98fb98;
+  --Gris-perla: #d3d3d3;
+  --Blanco-hueso: #f5f5dc;
+  --Rosa-suave: #ffb6c1;
+  --btns: #0095f6;
 }
 
 .Likepost {
-    width: auto;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.3rem;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
-.Likepost h6{
-    all: unset;
-    font-size: 1.1rem;
-    font-weight: bold;
-    text-align: center;
+.Likepost h6 {
+  all: unset;
+  font-size: 0.875rem;
+  text-align: center;
+}
+.Likepost .bx{
+  font-size: 24px;
+  cursor: pointer;
+}
+.Likepost .bxs-heart.on {
+  color: red;
+  animation: scale-down-center 0.3s ease-in-out;
+}
+.Likepost .bx-heart{
+  animation: scale-up-center 0.3s ease-in-out;
 }
 
-.Likepost i {
-    font-size: 1.1rem;
-    font-weight: bold;
+@keyframes scale-up-center {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
-@media(width < 440px){
-    .Likepost {
-        width: auto;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    } 
+@keyframes scale-down-center {
+  from {
+    transform: scale(1.5);
+  }
+  to {
+    transform: scale(1);
+  }
 }

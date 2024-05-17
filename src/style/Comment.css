@@ -1,65 +1,82 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #ADD8E6;
-    --Verde-menta: #98FB98;
-    --Gris-perla: #D3D3D3;
-    --Blanco-hueso: #F5F5DC;
-    --Rosa-suave: #FFB6C1;
-    --btns: #0095f6;
+  --border: #dbdbdb;
+  --Azul-claro: #add8e6;
+  --Verde-menta: #98fb98;
+  --Gris-perla: #d3d3d3;
+  --Blanco-hueso: #f5f5dc;
+  --Rosa-suave: #ffb6c1;
+  --btns: #0095f6;
 }
 
 .comments {
-    width: 90%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 95%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  padding-left: 10px;
+}
+
+.Information-response {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
+  font-size: 0.875rem;
+  padding-bottom: 15px;
+}
+
+.Information-response .bx{
+  font-size: 20px;
+  cursor: pointer;
+  color: red;
 }
 
 .form-container {
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 10%;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 7px;
 }
-
-.main-comment {
-    width: 90%;
-    padding: 5px;
-    border-radius: 5px;
-    border: 0.01rem solid var(--Gris-perla);
-    border-bottom: 1px solid var(--border);
-    font-size: 0.8rem;
-    resize: vertical;
+.form-container textarea {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  text-align: start;
+  font-size: 0.875rem;
+  resize: none;
+  transition: height 0.3s ease-in-out;
 }
 
 .main-comment::placeholder {
-    color: #111;
+  color: #111;
 }
 
 .main-comment:focus {
-    border-color: #333;
+  border-color: #333;
 }
 
 .submit-btn {
-    width: 10%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    outline: none;
-    border: none;
-    background: none;
-    font-size: 2.3rem;
-    cursor: pointer;
-    color: var(--btns);
+  width: 10%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  background: none;
+  font-size: 1.7rem;
+  cursor: pointer;
+  color: var(--btns);
 }
 
 .submit-btn:hover {
-    color: #2680d4;
+  color: #2680d4;
 }
-
-

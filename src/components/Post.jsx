@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import '../style/Post.css'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import Comment from './Comment';
 import Displaycomments from './Displaycomments';
 import { useNavigate } from 'react-router-dom';
 import Deletebtn from './Deletebtn';
@@ -10,16 +9,15 @@ import Countercomments from '../counters/Countercomments';
 import Likepost from './Likescomponents/Likepost';
 import Renderimagespost from './Renderimagespost';
 import Postuserinfo from './Postuserinfo';
+import PostSkeleton from './Loading/PostSkeleton';
 
 const Post = () => {
-
-    const [post, setPost] = useState([]);
-    const [infousers, setInfousers] = useState([]);
+    const [post, setPost] = useState();
     const [onlyIds, setOnlyIds] = useState([])
+    const [infousers, setInfousers] = useState([]);
     const [returncomments, setReturncomments] = useState(false)
 
     const createPost = useNavigate()
-
     const reload = () => setReturncomments(!returncomments)
 
     useEffect(() => {
@@ -58,7 +56,7 @@ const Post = () => {
 
     return (
         <article className="post">
-            {post && (
+            {post ? (
                 post.map((p, i) => {
                     return (
                         <div key={i} className="post-card">
@@ -70,16 +68,11 @@ const Post = () => {
                                 <Countercomments thispost={p} index={i} />
                             </div>
                             <p className='post-card-description'>{p.description}</p>
-                            <Comment
-                                thispost={p}
-                                postId={p.id}
-                                reload={reload}
-                            />
-                            <Displaycomments infousers={infousers} post={p} IdAndUserName={onlyIds} />
+                            <Displaycomments post={p} reload={reload} IdAndUserName={onlyIds} />
                         </div>
                     );
                 })
-            )}
+            ):<PostSkeleton/>}
 
         </article>
     )

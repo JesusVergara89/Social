@@ -1,64 +1,58 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #ADD8E6;
-    --Verde-menta: #98FB98;
-    --Gris-perla: #D3D3D3;
-    --Blanco-hueso: #F5F5DC;
-    --Rosa-suave: #FFB6C1;
-    --btns: #0095f6;
+  --border: #dbdbdb;
+  --Azul-claro: #add8e6;
+  --Verde-menta: #98fb98;
+  --Gris-perla: #d3d3d3;
+  --Blanco-hueso: #f5f5dc;
+  --Rosa-suave: #ffb6c1;
+  --btns: #0095f6;
 }
-
 
 .form-others {
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    margin-top: 5px;
-    gap: 5px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-left: 20px;
+  padding-top: 20px;
 }
 
-.others-comment {
-    width: auto;
-    flex: 1;
-    padding: 5px;
-    border: none;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.8rem;
-    outline: none;
-    background-color: var(--border);
-    border-radius: 4px;
-    text-align: center;
-    margin-top: 10px;
-    margin-left: 3px;
+.form-others .others-comment {
+  width: 80%;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  text-align: start;
+  font-size: 0.875rem;
+  resize: none;
+  transition: height 0.3s ease-in-out;
 }
 
 .others-comment::placeholder {
-    color: #111;
+  color: #111;
 }
 
 .others-comment:focus {
-    border-color: #333;
+  border-color: #333;
 }
 
 .comment-btn {
-    width: auto;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    outline: none;
-    border: none;
-    background: none;
-    font-size: 1.7rem;
-    cursor: pointer;
-    color: var(--btns);
-    font-weight: bold;
-    margin-top: 5px;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  background: none;
+  font-size: 1.7rem;
+  cursor: pointer;
+  color: var(--btns);
+  font-weight: bold;
+  margin-top: 5px;
 }
 
 .comment-btn:hover {
-    color: #2680d4;
+  color: #2680d4;
 }
-

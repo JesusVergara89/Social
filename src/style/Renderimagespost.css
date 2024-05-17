@@ -9,8 +9,9 @@
 }
 
 .Renderimagespost {
+    position: relative;
     width: 100%;
-    height: auto;
+    height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,15 +22,16 @@
 
 .Renderimagespost a {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .Renderimagespost img {
+    height: 500px;
     width: 100%;
-    height: auto;
+    object-fit: cover;
 }
 
 .slides {
