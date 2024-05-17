@@ -35,12 +35,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 0.01rem solid var(--Gris-perla);
     align-items: center;
     padding: 18px 0px 18px 0px;
     border-radius: 5px;
     gap: 10px;
-    background-color: var(--Azul-claro);
 }
 
 .card-msg-info {
@@ -49,7 +47,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 0.01rem solid var(--Gris-perla);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -70,7 +67,10 @@
     justify-content: center;
     align-items: center;
     gap: 7px;
+    padding: 15px 0px 15px 0px;
     margin-bottom: 18px;
+    border-radius: 10px;
+    background-color: var(--Azul-claro);
 }
 
 .card-msg-newsms-sms h4{
@@ -118,7 +118,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 0.01rem solid var(--Gris-perla);
         border-radius: 0px;
     }
 
@@ -128,11 +127,14 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        border: 0.01rem solid var(--Gris-perla);
         align-items: center;
         padding: 18px 0px 18px 0px;
         border-radius: 5px;
         gap: 10px;
-        background-color: var(--Azul-claro);
+    }
+
+    .card-msg-newsms-sms {
+        padding: 15px 0px 15px 0px;
+        border-radius: 0;
     }
 }

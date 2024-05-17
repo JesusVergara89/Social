@@ -6,7 +6,6 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { toast } from 'react-toastify';
 import Displaychat from './Chat/Displaychat';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import useSetMsgTimer from '../../hooks/useSetMsgTimer';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
@@ -21,7 +20,6 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     const [textareaHeight, setTextareaHeight] = useState('30px');
     const [userChangePosition, setUserChangePosition] = useState(null)
     const { timer, myTimes } = useSetMsgTimer(userOnline)
-    const msgNotification = useSelector(state => state.countermsg);
 
     const navigateToAllmsg = useNavigate()
 
@@ -167,18 +165,8 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         return null;
     }
 
-    const testFunction = (IDuserR, IDuserS, userNameR, userNameS) => {
-        myTimes(IDuserR, IDuserS, userNameR, userNameS)
-    }
-
     return (
         <div className='single-card-msg'>
-            {msgNotification[0] === 1 &&
-                ((msgNotification[1][0] === idreceiper || msgNotification[1][0] === ideSender) &&
-                    (msgNotification[1][1] === idreceiper || msgNotification[1][1] === ideSender)) ?
-                <button onClick={() => testFunction(idreceiper, ideSender, '', '')} className='message-read'>Marcar como leído</button> :
-                ''
-            }
             <button onClick={() => navigateToAllmsg('/messagesinbox')} className='single-card-msg-close'><i className='bx bxs-x-circle'></i></button>
             <div className="card-msg-one-one">
                 {arrayMessagesToUpdate.length === 0 &&

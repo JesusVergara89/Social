@@ -4,6 +4,7 @@ import { auth, db } from '../../../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './Cardmsg.css'
 import { Link } from 'react-router-dom';
+import useSetMsgTimer from '../../../hooks/useSetMsgTimer';
 
 const Cardmsg = () => {
 
@@ -11,6 +12,7 @@ const Cardmsg = () => {
     const [allmsg, setAllmsg] = useState();
     const [timer, setTimer] = useState([])
     const [msjNotification, setMsjNotification] = useState([])
+    const { times, myTimes } = useSetMsgTimer(user)
 
     useEffect(() => {
         const querySnapshot = collection(db, 'Messages');
@@ -62,7 +64,9 @@ const Cardmsg = () => {
         }
     }, [timer, user, setMsjNotification]);
 
-    //console.log(msjNotification);
+    const testFunction = (IDuserR, IDuserS, userNameR, userNameS) => {
+        myTimes(IDuserR, IDuserS, userNameR, userNameS)
+    }
 
     return (
         <div className="card-msg">
@@ -82,7 +86,7 @@ const Cardmsg = () => {
             <h3 className='card-msg-title'>tus mensajes con otros usuarios:</h3>
             {userMsgs && userMsgs.map((msg, i) => (
                 <Link key={i + 1} to={msg.message[0].receptor === user.uid ? `/Sendmessage/${msg.message[0].sender}/${user.uid}` : `/Sendmessage/${msg.message[0].receptor}/${user.uid}`}>
-                    <div key={i} className='card-msg-info'>
+                    <div onClick={() => testFunction(msg.message[0].receptor, msg.message[0].sender, '', '')} key={i} className='card-msg-info'>
                         <div className="card-user1">
                             <img src={msg.message[0].photoR} alt="" />
                             <h4>{`@${msg.message[0].userNameR}`}</h4>
