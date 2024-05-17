@@ -47,6 +47,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 0.01rem solid rgb(193, 193, 193);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -73,7 +74,7 @@
     background-color: var(--Azul-claro);
 }
 
-.card-msg-newsms-sms h4{
+.card-msg-newsms-sms h4 {
     all: unset;
     font-size: 0.8rem;
     text-align: center;
@@ -119,6 +120,7 @@
         justify-content: center;
         align-items: center;
         border-radius: 0px;
+        border: 0.01rem solid rgb(193, 193, 193);
     }
 
     .card-msg-newsms {
