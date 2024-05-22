@@ -24,8 +24,7 @@ const Allusers = () => {
             setAllusers(allUsers);
         })
     }, []);
-    console.log(thiIsTheCurrentUser.uid)
-    console.log(Allusers)
+
     const handleInputChange = (event) => {
         const valor = event.target.value.toLowerCase();
         setFiltro(valor);
@@ -34,7 +33,9 @@ const Allusers = () => {
         );
         setUsuariosFiltrados(resultados);
     };
-    //console.log(Allusers)
+
+    //console.log(thiIsTheCurrentUser)
+
     return (
         <div className='all-users'>
             {thiIsTheCurrentUser !== null ? <p className='all-users-explanations'>Encuentra conexiones por nombre o usuario</p> : ''}

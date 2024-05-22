@@ -55,6 +55,18 @@
   transition: height 0.3s ease-in-out;
 }
 
+/*
+textarea {
+  --padding: 10px;
+  min-height: calc(2lh + 2 * var(--padding));
+  max-height: calc(3lh + 2 * var(--padding));
+  field-sizing: content;
+   line-height: 1.5;
+   padding: var(--padding);
+   padding-inline: calc(var(--padding) + cal(1lh - 1ex) / 2);
+}
+*/
+
 .main-comment::placeholder {
   color: #111;
 }
