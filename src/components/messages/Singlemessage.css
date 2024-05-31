@@ -10,7 +10,7 @@
 }
 
 .single-card-msg {
-  width: auto;
+  width: 450px;
   height: auto;
   display: flex;
   flex-direction: column;
