@@ -1,0 +1,38 @@
+.Individualstory {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    margin-left: 8px;
+    position: relative;
+}
+
+.Individualstory img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--btns);
+    object-fit: cover;
+}
+
+.Individualstory h6 {
+    all: unset;
+    font-size: 0.45rem;
+    font-weight: bold;
+}
+
+.Individualstory button{
+    position: absolute;
+    bottom: -10px;
+}
+
+
+/* img-img-this*/
+
+.img-img-this {
+    width: 100px;
+    height: 100px;
+}

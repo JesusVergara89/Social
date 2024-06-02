@@ -2,14 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { addDoc, collection, onSnapshot, orderBy, query, Timestamp } from 'firebase/firestore';
 import { auth, db, storage } from '../firebaseConfig';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import '../style/Createpost.css';
 import social from '../images/Social.png'
 
 const Createpost = () => {
+
+    /* Create a story    */
+    const [formData, setFormData] = useState({
+        idCreator: '',
+        createdAt: Timestamp.now().toDate(),
+        image: ''
+    });
+    const [post_or_story, setPost_or_story] = useState(false)
+    const [progress, setProgress] = useState(0);
+    /* Create a story    */
+
+
     const [description, setDescription] = useState('');
-    const [photos, setPhotos] = useState([null, null, null, null]); 
+    const [photos, setPhotos] = useState([null, null, null, null]);
     const [currentlyLoggedinUser] = useAuthState(auth);
     const [allUsers, setAllUsers] = useState();
     const [textareaHeight, setTextareaHeight] = useState('20px');
@@ -114,38 +126,133 @@ const Createpost = () => {
         }
     };
 
+
+    /* Create a story    */
+
+    const handleChangeImage = (e) => {
+        setFormData({ ...formData, image: e.target.files[0] });
+    };
+
+    const handlePublish = () => {
+        if (!formData.image) {
+            alert('Por favor completar los campos requeridos');
+            return;
+        }
+        const storageRef = ref(storage, `/images/${Date.now()}${formData.image.name}`);
+        const uploadImage = uploadBytesResumable(storageRef, formData.image);
+
+        uploadImage.on("state_changed",
+            (snapshot) => {
+                const progressPercent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                setProgress(progressPercent);
+            },
+            (err) => {
+                console.log(err);
+                toast("Error al subir la imagen", { type: "error" });
+            },
+            () => {
+                setFormData({
+                    idCreator: '',
+                    createdAt: '',
+                    image: ''
+                });
+
+                getDownloadURL(uploadImage.snapshot.ref)
+                    .then((url) => {
+                        const productref = collection(db, 'stories');
+                        addDoc(productref, {
+                            idCreator: currentlyLoggedinUser.uid,
+                            createdAt: Timestamp.now().toDate(),
+                            image: url,
+                            userName: currentlyLoggedinUser.displayName
+                        })
+                            .then(() => {
+                                toast("Story agregada correctamente", { type: "success" });
+                                setProgress(0);
+                                setFormData({
+                                    idCreator: '',
+                                    createdAt: '',
+                                    image: ''
+                                });
+
+                            })
+                            .catch(e => {
+                                console.error(e);
+                                toast("Error agregando la story", { type: "error" });
+                            });
+                    });
+            }
+        );
+    };
+
+
+    const PostOrStory = () => {
+        setPost_or_story(!post_or_story)
+    }
+
+    /* Create a story    */
+
+
     return (
-        <article className="create-post">
-            <div className="create-post-card">
-                <img src={social} alt="" />
-                <div className="brand-announcement">
-                    <h2>Crea una publicación</h2>
-                    <h2>¡Compártela!</h2>
-                    <h2>Observa cómo se vuelve viral...</h2>
-                </div>
-                <form onSubmit={handleSubmit}>
-                    {photos.map((_, index) => (
+        <div className='create-post-or-story'>
+            <button className='create-post-or-story-btn' onClick={PostOrStory}>{`${post_or_story === false ? 'Create post' : 'Create Story'}`}</button>
+            {post_or_story === false ?
+                (
+                    <article className='create-story'>
                         <input
-                            key={index}
                             type="file"
-                            name={`image${index}`}
-                            accept="image/*"
-                            onChange={(e) => handlePhotoChange(e, index)}
+                            className='image'
+                            accept='/*'
+                            onChange={handleChangeImage}
                         />
-                    ))}
-                    <textarea
-                        placeholder="Description"
-                        name="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        style={{ height: textareaHeight }}
-                        rows={1}
-                    />
-                    <button type="submit">Publish</button>
-                </form>
-            </div>
-        </article>
+                        {progress === 0 ? null : (
+                            <div className="progress">
+                                <div className="progress-bar progress-bar-striped" style={{ width: `${progress}%` }}>
+                                    <h5>{`Subiendo imagen ${progress}%`}</h5>
+                                </div>
+                            </div>
+                        )}
+                        <button onClick={handlePublish} className="create">Create story</button>
+                    </article>
+                )
+                :
+                (
+                    <article className="create-post">
+                        <div className="create-post-card">
+                            <img src={social} alt="" />
+                            <div className="brand-announcement">
+                                <h2>Crea una publicación</h2>
+                                <h2>¡Compártela!</h2>
+                                <h2>Observa cómo se vuelve viral...</h2>
+                            </div>
+                            <form onSubmit={handleSubmit}>
+                                {photos.map((_, index) => (
+                                    <input
+                                        key={index}
+                                        type="file"
+                                        name={`image${index}`}
+                                        accept="image/*"
+                                        onChange={(e) => handlePhotoChange(e, index)}
+                                    />
+                                ))}
+                                <textarea
+                                    placeholder="Description"
+                                    name="description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    style={{ height: textareaHeight }}
+                                    rows={1}
+                                />
+                                <button type="submit">Publish</button>
+                            </form>
+                        </div>
+                    </article>
+                )
+            }
+        </div>
     );
+
+
 }
 
 export default Createpost;

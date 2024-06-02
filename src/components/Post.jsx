@@ -10,12 +10,19 @@ import Likepost from './Likescomponents/Likepost';
 import Renderimagespost from './Renderimagespost';
 import Postuserinfo from './Postuserinfo';
 import PostSkeleton from './Loading/PostSkeleton';
+import Story from './stories/Story';
+import { useDispatch, useSelector } from 'react-redux';
+import Groupofstories from './stories/Groupofstories';
+import { setIsActive } from '../store/slices/stories.slice';
 
 const Post = () => {
     const [post, setPost] = useState();
     const [onlyIds, setOnlyIds] = useState([])
     const [infousers, setInfousers] = useState([]);
     const [returncomments, setReturncomments] = useState(false)
+
+    const items = useSelector((state) => state.story.items);
+    const isActive = useSelector((state) => state.story.isActive);
 
     const createPost = useNavigate()
     const reload = () => setReturncomments(!returncomments)
@@ -54,8 +61,21 @@ const Post = () => {
         console.log('')
     }
 
+    const dispatch = useDispatch();
+    
+    const handleSetActivate = (value) => dispatch(setIsActive(value));
+
     return (
         <article className="post">
+            <h3 className='under-constructions'>Stories is under constructions</h3>
+            <Story />
+            {isActive &&
+                <i onClick={() => { handleSetActivate(false) }} className='bx bxs-x-circle'></i>
+            }
+            {isActive &&
+                <Groupofstories images={items} />
+            }
+
             {post ? (
                 post.map((p, i) => {
                     return (
@@ -72,7 +92,7 @@ const Post = () => {
                         </div>
                     );
                 })
-            ):<PostSkeleton/>}
+            ) : <PostSkeleton />}
 
         </article>
     )

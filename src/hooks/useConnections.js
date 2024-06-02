@@ -4,7 +4,7 @@ import { auth, db } from '../firebaseConfig';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 
 const useConnections = () => {
-    
+
     const [allrequest, setAllrequest] = useState([]);
     const [usersall, setUsersall] = useState([]);
     const [userlog] = useAuthState(auth);
@@ -22,7 +22,7 @@ const useConnections = () => {
             setUsersall(reqData);
         });
         {/**End Request to Users */ }
-    
+
         {/**Request to Requests */ }
         const userRef = collection(db, 'Request');
         const q1 = query(userRef, orderBy('friendRequests'));
@@ -34,7 +34,7 @@ const useConnections = () => {
             setAllrequest(userData);
         });
         {/**End Request to Request */ }
-    
+
         {/**Request to Posts */ }
         const postRef = collection(db, 'Post');
         const q2 = query(postRef, orderBy('userName'));
@@ -47,21 +47,24 @@ const useConnections = () => {
         });
         {/**End Request to Post */ }
     }, []);
-    
+
     const myRequests = allrequest.filter((data, i) => {
-        if ((data.friendRequests[0].id1 === userlog.uid || data.friendRequests[1].id2 === userlog.uid)
-            && (data.friendRequests[0].status === true && data.friendRequests[1].status)) {
-            return data.friendRequests
+        if (userlog && userlog.uid) {
+            if ((data.friendRequests[0].id1 === userlog.uid || data.friendRequests[1].id2 === userlog.uid)
+                && (data.friendRequests[0].status === true && data.friendRequests[1].status)) {
+                return data.friendRequests
+            }
         }
+        return false;
     })
-    
+
     const onlyFriendRequests = myRequests.map(data => data.friendRequests)
-    
+
     {/*onlyFriendRequests[0][0].id1
     onlyFriendRequests[0][1].id2
     onlyFriendRequests[1][0].id1
     onlyFriendRequests[1][1].id2*/}
-    
+
     const obtenerIds = (array) => {
         const ids = [];
         for (let i = 0; i < array.length; i++) {
@@ -71,14 +74,14 @@ const useConnections = () => {
         }
         return ids;
     }
-    
+
     const ids = obtenerIds(onlyFriendRequests);
     const idsMatchFriends = ids.filter(data => {
         if (data !== userlog.uid) {
             return data
         }
     })
-     
+
     const findFriends = usersall.filter((data) => {
         for (let i = 0; i < idsMatchFriends.length; i++) {
             if (data.idUser === idsMatchFriends[i]) {
@@ -87,7 +90,7 @@ const useConnections = () => {
         }
         return false;
     });
-    
+
     const counterConnectios = (array, id) => {
         let aux = []
         aux = array.filter((data) => {
@@ -98,7 +101,7 @@ const useConnections = () => {
         })
         return aux.length
     }
-    
+
     const counterPost = (array, id) => {
         let aux = []
         aux = array.filter((data) => {
@@ -108,8 +111,8 @@ const useConnections = () => {
         })
         return aux.length
     }
-    
-  return {counterPost,counterConnectios,findFriends,userlog,allpost,allrequest,usersall}
+
+    return { counterPost, counterConnectios, findFriends, userlog, allpost, allrequest, usersall }
 }
 
- export default useConnections
+export default useConnections
