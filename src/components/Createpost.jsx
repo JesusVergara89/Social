@@ -11,7 +11,7 @@ const Createpost = () => {
 
     /* Create a story    */
     const [formData, setFormData] = useState({
-        idCreator: '',
+        idOnlineUser: '',
         createdAt: Timestamp.now().toDate(),
         image: ''
     });
@@ -152,7 +152,7 @@ const Createpost = () => {
             },
             () => {
                 setFormData({
-                    idCreator: '',
+                    idOnlineUser: '',
                     createdAt: '',
                     image: ''
                 });
@@ -161,7 +161,7 @@ const Createpost = () => {
                     .then((url) => {
                         const productref = collection(db, 'stories');
                         addDoc(productref, {
-                            idCreator: currentlyLoggedinUser.uid,
+                            idOnlineUser: currentlyLoggedinUser.uid,
                             createdAt: Timestamp.now().toDate(),
                             image: url,
                             userName: currentlyLoggedinUser.displayName
@@ -170,7 +170,7 @@ const Createpost = () => {
                                 toast("Story agregada correctamente", { type: "success" });
                                 setProgress(0);
                                 setFormData({
-                                    idCreator: '',
+                                    idOnlineUser: '',
                                     createdAt: '',
                                     image: ''
                                 });

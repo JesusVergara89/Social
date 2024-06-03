@@ -28,13 +28,13 @@ const Story = () => {
 
     const groupedStories = stories.reduce((acc, story) => {
         if (user && user.uid) {
-            const showStory = findFriends.some(friend => friend.idUser === story.idCreator) || story.idCreator === user.uid;
+            const showStory = findFriends.some(friend => friend.idUser === story.idOnlineUser) || story.idOnlineUser === user.uid;
 
             if (showStory) {
-                if (!acc[story.idCreator]) {
-                    acc[story.idCreator] = [];
+                if (!acc[story.idOnlineUser]) {
+                    acc[story.idOnlineUser] = [];
                 }
-                acc[story.idCreator].push(story);
+                acc[story.idOnlineUser].push(story);
             }
         }
         return acc;

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import './Groupofstories.css'
+import Deletestories from './Deletestories';
 
-const Groupofstories = ({ images }) => {
+const Groupofstories = ({ story }) => {
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    const nonNullImages = images.filter(image => image !== null);
+    const nonNullImages = story.filter(image => image !== null);
 
     let touchStartX = 0;
 
@@ -40,17 +41,18 @@ const Groupofstories = ({ images }) => {
 
     return (
         <div className='group'>
-           <div className='Post-render-img'>
-            <div className="Renderimagespost" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+            <div className='Post-render-img'>
+                <div className="Renderimagespost" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
                     <div className="slides">
-                        {nonNullImages.map((image, index) => (
+                        {nonNullImages.map((stor, index) => (
                             <div key={index} className={index === currentImageIndex ? "slide active" : "slide"}>
-                                <img src={image.image} alt={`Slide ${index}`} />
+                                <img src={stor.image} alt={`Slide ${index}`} />
+                                <Deletestories stor={stor} />
                             </div>
                         ))}
                     </div>
+                </div>
             </div>
-        </div>
         </div>
     )
 }
