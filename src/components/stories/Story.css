@@ -11,6 +11,15 @@
     border-radius: 15px;
 }
 
+.Stories h4{
+    all: unset;
+    width: 80%;
+    text-align: justify;
+    font-size: 0.8rem;
+    margin-left: 10px;
+    padding: 10px;
+}
+
 @media(width < 400px){
     .Stories {
         width: 90%;

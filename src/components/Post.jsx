@@ -79,7 +79,7 @@ const Post = () => {
             {post ? (
                 post.map((p, i) => {
                     return (
-                        <div key={i} className="post-card">
+                        <div key={i} className={`post-card ${isActive === true ? 'blur' : ''}`}>
                             <Postuserinfo p={p} IdAndUserName={onlyIds} />
                             <Renderimagespost id={p.id} images={p.images} />
                             <Deletebtn images={p.images} deleteId={p.id} postId={p.idOnlineUser} toProfile={toProfile} />

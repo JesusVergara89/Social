@@ -35,6 +35,21 @@
   gap: 20px;
 }
 
+.post-card.blur {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10px 20px 10px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 2px solid #ccc;
+  gap: 20px;filter: blur(8px);
+  opacity: 0.8;
+}
 .post-card-description {
   all: unset;
   width: 95%;
@@ -137,7 +152,9 @@
 }
 
 .post .bx.bxs-x-circle{
+  font-size: 1.3rem;
   position: absolute;
-  top: 130px;
+  top: 120px;
   right: 50%;
+  cursor: pointer;
 }

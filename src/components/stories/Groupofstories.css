@@ -1,14 +1,15 @@
 .group {
-    width: 200px;
+    width: 330px;
     height: auto;
     display: flex;
     position: absolute;
     top: 140px;
-    z-index: 2;
+    z-index: 1;
     overflow-y: auto;
 }
 
 .group img {
-    width: 100%;
+    width: 85%;
     height: auto;
+    border-radius: 10px;
 }

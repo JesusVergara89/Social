@@ -1,17 +1,16 @@
 import { deleteDoc, doc } from 'firebase/firestore';
 import React, { useEffect } from 'react';
-import { auth, db, storage } from '../../firebaseConfig';
+import { db, storage } from '../../firebaseConfig';
 import { toast } from 'react-toastify';
 import { deleteObject, ref } from 'firebase/storage';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Deletestories = ({ stor }) => {
 
-    const [user] = useAuthState(auth);
+    const navigate = useNavigate()
     const hours24InMillis = 24 * 60 * 60 * 1000;
 
     const deleteDocAsync = async () => {
-        if (user && user.uid === stor.idOnlineUser) {
             try {
                 const docRef = doc(db, 'stories', stor.id);
                 await deleteDoc(docRef);
@@ -19,11 +18,11 @@ const Deletestories = ({ stor }) => {
                 
                 const storageRef = ref(storage, stor.image);
                 await deleteObject(storageRef);
+                navigate('/')
             } catch (error) {
                 console.log(error);
                 toast('Error al borrar story', { type: 'error' });
             }
-        }
     };
 
     useEffect(() => {
