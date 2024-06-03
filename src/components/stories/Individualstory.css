@@ -8,6 +8,7 @@
     gap: 3px;
     margin-left: 8px;
     position: relative;
+    cursor: pointer;
 }
 
 .Individualstory img {
@@ -15,6 +16,14 @@
     height: 60px;
     border-radius: 50%;
     border: 3px solid var(--btns);
+    object-fit: cover;
+}
+
+.Individualstory img:hover {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid orangered;
     object-fit: cover;
 }
 
