@@ -33,6 +33,7 @@
 }
 
 .delete-btn-1 .bx {
-    font-size: 17px;
-    color: rgb(253, 81, 81);
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
 }

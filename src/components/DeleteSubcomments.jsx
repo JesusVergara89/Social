@@ -52,7 +52,7 @@ const DeleteSubcomments = ({ post, subcommentsFormatted}) => {
         <>
             {currentoLogUser?.uid === subcommentsFormatted.userID ?
                 <div className="delete-btn-2">
-                    <button onClick={() => handleDeletePost(subcommentsFormatted)}><i className='bx bxs-x-circle'></i></button>
+                    <button onClick={() => handleDeletePost(subcommentsFormatted)}><i class='bx bxs-trash-alt' ></i></button>
                 </div>
                 :
                 ''

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import './Groupofstories.css'
+import React, { useEffect, useState, useRef } from 'react';
+import './Groupofstories.css';
 import Deletestories from './Deletestories';
 
 const Groupofstories = ({ story }) => {
-
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+    const changeStoryCount = useRef(0);
     const nonNullImages = story.filter(image => image !== null);
+    const totalSlides = nonNullImages.length;
 
     let touchStartX = 0;
 
@@ -27,14 +27,14 @@ const Groupofstories = ({ story }) => {
 
     const goToNextSlide = () => {
         setCurrentImageIndex((prevIndex) => {
-            const nextIndex = (prevIndex + 1) % nonNullImages.length;
+            const nextIndex = (prevIndex + 1) % totalSlides;
             return nextIndex;
         });
     };
 
     const goToPreviousSlide = () => {
         setCurrentImageIndex((prevIndex) => {
-            const nextIndex = (prevIndex - 1 + nonNullImages.length) % nonNullImages.length;
+            const nextIndex = (prevIndex - 1 + totalSlides) % totalSlides;
             return nextIndex;
         });
     };
@@ -43,16 +43,23 @@ const Groupofstories = ({ story }) => {
         setCurrentImageIndex(index);
     };
 
-    const changeStory = () => {
-        setTimeout(() => {
-            goToNextSlide()
-        }, 8000);
-    }
+    useEffect(() => {
+        if (totalSlides > 1) {
+            const intervalId = setInterval(() => {
+                setCurrentImageIndex((prevIndex) => {
+                    const nextIndex = (prevIndex + 1) % totalSlides;
+                    changeStoryCount.current += 1;
+                    return nextIndex;
+                });
 
-    useEffect(()=>{
-        changeStory()
-    },[])
-   
+                if (changeStoryCount.current >= totalSlides - 1) {
+                    clearInterval(intervalId);
+                }
+            }, 8000);
+
+            return () => clearInterval(intervalId);
+        }
+    }, [totalSlides]);
 
     return (
         <div className='group'>
@@ -69,7 +76,7 @@ const Groupofstories = ({ story }) => {
                 </div>
             </div>
             <div className="buttons-container-group">
-                {story.map((data, index, array) => {
+                {story.map((data, index) => {
                     if (data !== null) {
                         return (
                             <button style={{ width: `calc(100% / ${story.length})` }} key={index} onClick={() => goToSlide(index)} className={index === currentImageIndex ? "active" : ""}>
@@ -80,7 +87,7 @@ const Groupofstories = ({ story }) => {
                 })}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Groupofstories
+export default Groupofstories;

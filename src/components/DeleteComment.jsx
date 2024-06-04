@@ -34,7 +34,7 @@ const DeleteComment = ({ post , commentPosition }) => {
         <>
             {currentoLogUser?.uid === post.comments[commentPosition].idUser ?
                 <div className="delete-btn-1">
-                    <button onClick={handleDeletePost}><i className='bx bxs-x-circle'></i></button>
+                    <button onClick={handleDeletePost}><i className='bx bxs-trash-alt' ></i></button>
                 </div>
                 :
                 ''
