@@ -3,7 +3,6 @@ import '../style/Post.css'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import Displaycomments from './Displaycomments';
-import { useNavigate } from 'react-router-dom';
 import Deletebtn from './Deletebtn';
 import Countercomments from '../counters/Countercomments';
 import Likepost from './Likescomponents/Likepost';
@@ -24,7 +23,6 @@ const Post = () => {
     const items = useSelector((state) => state.story.items);
     const isActive = useSelector((state) => state.story.isActive);
 
-    const createPost = useNavigate()
     const reload = () => setReturncomments(!returncomments)
 
     useEffect(() => {

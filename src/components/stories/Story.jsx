@@ -5,12 +5,15 @@ import { auth, db } from '../../firebaseConfig';
 import useConnections from '../../hooks/useConnections';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Individualstory from './Individualstory';
+import { useSelector } from 'react-redux';
 
 const Story = () => {
 
     const [user] = useAuthState(auth);
     const [stories, setStories] = useState([]);
     const { findFriends } = useConnections();
+
+    const isActive = useSelector((state) => state.story.isActive);
 
     useEffect(() => {
         const productREF = collection(db, 'stories');
@@ -45,7 +48,7 @@ const Story = () => {
     const storiesToShow = [...userStories, ...otherStories];
 
     return (
-        <div className='Stories'>
+        <div className={`Stories ${isActive ? 'blur' : ''}`}>
             {storiesToShow.length > 0 ? (
                 storiesToShow.map((group, groupIndex) => (
                     <Individualstory key={groupIndex} group={group} story={group[0]} />
