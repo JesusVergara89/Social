@@ -67,7 +67,10 @@ const Post = () => {
 
     return (
         <article className="post">
-            <h3 className='under-constructions'>Stories are under constructions</h3>
+            {/**
+              <h3 className='under-constructions'>Stories are under constructions</h3>
+             */}
+           
             <Story />
             {isActive &&
                 <i onClick={() => { handleSetActivate(false) }} className='bx bxs-x-circle'></i>

@@ -43,7 +43,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px 10px 20px 10px;
   overflow: hidden;
   position: relative;
   border-bottom: 2px solid #ccc;
@@ -154,7 +153,7 @@
 .post .bx.bxs-x-circle{
   font-size: 1.3rem;
   position: absolute;
-  top: 120px;
+  top: 78px;
   right: 50%;
   cursor: pointer;
 }

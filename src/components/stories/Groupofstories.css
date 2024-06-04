@@ -2,14 +2,114 @@
     width: 330px;
     height: auto;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    top: 140px;
+    top: 100px;
     z-index: 1;
-    overflow-y: auto;
 }
 
-.group img {
-    width: 85%;
+/* this is for render*/
+
+.Post-render-img-group {
+    width: 330px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.Renderimagespost-group {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.Renderimagespost-group a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Renderimagespost-group img {
+    width: 90%;
     height: auto;
     border-radius: 10px;
+}
+
+.slides-group {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.slide-group {
+    display: none;
+}
+
+.slide-group.active {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons-container-group {
+    width: 90%;
+    height: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 40px;
+}
+
+.circulo-group {
+    width: 100%;
+    height: 8px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border: 0.01rem solid black;
+}
+
+.circulo-group.active {
+    width: 100%;
+    height: 8px;
+    background-color: rgb(0, 255, 179);
+    border-radius: 15px;
+    border: 0.01rem solid black;
+}
+
+.buttons-container-group button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.buttons-container-group button.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
 }

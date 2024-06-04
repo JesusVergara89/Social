@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Groupofstories.css'
 import Deletestories from './Deletestories';
 
@@ -39,11 +39,26 @@ const Groupofstories = ({ story }) => {
         });
     };
 
+    const goToSlide = (index) => {
+        setCurrentImageIndex(index);
+    };
+
+    const changeStory = () => {
+        setTimeout(() => {
+            goToNextSlide()
+        }, 8000);
+    }
+
+    useEffect(()=>{
+        changeStory()
+    },[])
+   
+
     return (
         <div className='group'>
-            <div className='Post-render-img'>
-                <div className="Renderimagespost" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-                    <div className="slides">
+            <div className='Post-render-img-group'>
+                <div className="Renderimagespost-group" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+                    <div className="slides-group">
                         {nonNullImages.map((stor, index) => (
                             <div key={index} className={index === currentImageIndex ? "slide active" : "slide"}>
                                 <img src={stor.image} alt={`Slide ${index}`} />
@@ -52,6 +67,17 @@ const Groupofstories = ({ story }) => {
                         ))}
                     </div>
                 </div>
+            </div>
+            <div className="buttons-container-group">
+                {story.map((data, index, array) => {
+                    if (data !== null) {
+                        return (
+                            <button style={{ width: `calc(100% / ${story.length})` }} key={index} onClick={() => goToSlide(index)} className={index === currentImageIndex ? "active" : ""}>
+                                <div className={index === currentImageIndex ? "circulo-group active" : "circulo-group"}></div>
+                            </button>
+                        );
+                    }
+                })}
             </div>
         </div>
     )
