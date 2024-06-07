@@ -4,11 +4,13 @@ import { db, storage } from '../../firebaseConfig';
 import { toast } from 'react-toastify';
 import { deleteObject, ref } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Deletestories = ({ stor }) => {
 
     const navigate = useNavigate()
     const hours24InMillis = 24 * 60 * 60 * 1000;
+    const isActive = useSelector((state) => state.story.isActive);
 
     const deleteDocAsync = async () => {
             try {
@@ -18,6 +20,7 @@ const Deletestories = ({ stor }) => {
                 
                 const storageRef = ref(storage, stor.image);
                 await deleteObject(storageRef);
+                isActive(false)
                 navigate('/')
             } catch (error) {
                 console.log(error);
