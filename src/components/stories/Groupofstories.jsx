@@ -10,6 +10,8 @@ const Groupofstories = ({ story }) => {
 
     let touchStartX = 0;
 
+    
+
     const handleTouchStart = (e) => {
         touchStartX = e.touches[0].clientX;
     };
