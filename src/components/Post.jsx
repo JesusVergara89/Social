@@ -74,7 +74,7 @@ const Post = () => {
                 <i onClick={() => { handleSetActivate(false) }} className='bx bxs-x-circle'></i>
             }
             {isActive &&
-                <Groupofstories story={items} />
+                <Groupofstories handleSetActivate={handleSetActivate} story={items} />
             }
 
             {post ? (

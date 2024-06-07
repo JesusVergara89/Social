@@ -4,28 +4,25 @@ import { db, storage } from '../../firebaseConfig';
 import { toast } from 'react-toastify';
 import { deleteObject, ref } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
-const Deletestories = ({ stor }) => {
+const Deletestories = ({ stor, handleSetActivate }) => {
 
     const navigate = useNavigate()
     const hours24InMillis = 24 * 60 * 60 * 1000;
-    const isActive = useSelector((state) => state.story.isActive);
 
     const deleteDocAsync = async () => {
-            try {
-                const docRef = doc(db, 'stories', stor.id);
-                await deleteDoc(docRef);
-                toast('Story borrada con éxito', { type: 'success' });
-                
-                const storageRef = ref(storage, stor.image);
-                await deleteObject(storageRef);
-                isActive(false)
-                navigate('/')
-            } catch (error) {
-                console.log(error);
-                toast('Error al borrar story', { type: 'error' });
-            }
+        try {
+            const docRef = doc(db, 'stories', stor.id);
+            await deleteDoc(docRef);
+            toast('Story borrada con éxito', { type: 'success' });
+            const storageRef = ref(storage, stor.image);
+            await deleteObject(storageRef);
+            handleSetActivate(false)
+            navigate('/')
+        } catch (error) {
+            console.log(error);
+            toast('Error al borrar story', { type: 'error' });
+        }
     };
 
     useEffect(() => {
