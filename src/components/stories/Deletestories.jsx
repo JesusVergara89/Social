@@ -3,11 +3,9 @@ import React, { useEffect } from 'react';
 import { db, storage } from '../../firebaseConfig';
 import { toast } from 'react-toastify';
 import { deleteObject, ref } from 'firebase/storage';
-import { useNavigate } from 'react-router-dom';
 
 const Deletestories = ({ stor, handleSetActivate }) => {
 
-    const navigate = useNavigate()
     const hours24InMillis = 24 * 60 * 60 * 1000;
 
     const deleteDocAsync = async () => {
@@ -18,7 +16,6 @@ const Deletestories = ({ stor, handleSetActivate }) => {
             const storageRef = ref(storage, stor.image);
             await deleteObject(storageRef);
             handleSetActivate(false)
-            navigate('/')
         } catch (error) {
             console.log(error);
             toast('Error al borrar story', { type: 'error' });
