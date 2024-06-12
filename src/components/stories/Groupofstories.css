@@ -75,7 +75,7 @@
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 40px;
+    top: 5px;
 }
 
 .circulo-group {
@@ -101,7 +101,7 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    margin: 0 5px;
+    margin: 0px 5px;
 }
 
 .buttons-container-group button.active {
@@ -111,5 +111,5 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    margin: 0 5px;
+    margin: 0px 5px;
 }
