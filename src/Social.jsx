@@ -31,97 +31,97 @@ function Social() {
     }, [pathname])
     return (
 
-            <div className='SOCIAL'>
+        <div className='SOCIAL'>
 
-                <Header />
+            <Header />
 
-                <Invisiblecomp /> {/** In this component i rendered all the counter values for notifications */}
+            <Invisiblecomp /> {/** In this component i rendered all the counter values for notifications */}
 
-                <Routes>
+            <Routes>
 
-                    <Route path='/'
+                <Route path='/'
+                    element={
+                        <Post />
+                    }
+                />
+
+                <Route path='/register'
+                    element={
+                        <Register setNewuser={setNewuser} />
+                    }
+                />
+
+                <Route path='/login'
+                    element={onlineuser ? <Navigate to="/" /> : <Login />}
+                />
+
+                <Route path='/allusers'
+                    element={
+                        <Allusers
+                        />}
+                />
+
+                <Route element={<Protectedroutes />}>
+                    <Route path='/profile'
                         element={
-                            <Post />
+                            <Profile />
                         }
                     />
-
-                    <Route path='/register'
+                    <Route path='/singlesuser/:iduser'
                         element={
-                            <Register setNewuser={setNewuser} />
+                            <Singleuser />
                         }
                     />
-
-                    <Route path='/login'
-                        element={onlineuser ? <Navigate to="/" /> : <Login />}
-                    />
-
-                    <Route path='/allusers'
+                    <Route path='/singleprofile/:userProfile'
                         element={
-                            <Allusers
-                            />}
+                            <Singleprofile />
+                        }
                     />
+                    <Route path='/conections'
+                        element={
+                            <Conections />
+                        }
+                    />
+                    <Route path='/messagesinbox'
+                        element={
+                            <Allmessageswithuser />
+                        }
+                    />
+                    <Route path='/Sendmessage/:x1/:x2'
+                        element={
+                            <Messageinbox />
+                        }
+                    />
+                    <Route path='/pendingrequest'
+                        element={
+                            <Pendingfriendrequests />
+                        }
+                    />
+                    <Route path='/singlepost/:post'
+                        element={
+                            <Singlepost />
+                        }
+                    />
+                    <Route path='/friendrequest/:id'
+                        element={
+                            <Friendrequest />
+                        }
+                    />
+                    <Route path='/createpost'
+                        element={
+                            <Createpost />
+                        }
+                    />
+                    <Route path='/configprofile/:toConfig'
+                        element={
+                            <Configprofile />
+                        }
+                    />
+                </Route>
+            </Routes>
 
-                    <Route element={<Protectedroutes />}>
-                        <Route path='/profile'
-                            element={
-                                <Profile />
-                            }
-                        />
-                        <Route path='/singlesuser/:iduser'
-                            element={
-                                <Singleuser />
-                            }
-                        />
-                        <Route path='/singleprofile/:userProfile'
-                            element={
-                                <Singleprofile />
-                            }
-                        />
-                        <Route path='/conections'
-                            element={
-                                <Conections />
-                            }
-                        />
-                        <Route path='/messagesinbox'
-                            element={
-                                <Allmessageswithuser />
-                            }
-                        />
-                        <Route path='/Sendmessage/:x1/:x2'
-                            element={
-                                <Messageinbox />
-                            }
-                        />
-                        <Route path='/pendingrequest'
-                            element={
-                                <Pendingfriendrequests />
-                            }
-                        />
-                        <Route path='/singlepost/:post'
-                            element={
-                                <Singlepost />
-                            }
-                        />
-                        <Route path='/friendrequest/:id'
-                            element={
-                                <Friendrequest />
-                            }
-                        />
-                        <Route path='/createpost'
-                            element={
-                                <Createpost />
-                            }
-                        />
-                        <Route path='/configprofile/:toConfig'
-                            element={
-                                <Configprofile />
-                            }
-                        />
-                    </Route>
-                </Routes>
-
-            <Footer/>
-            </div>
+           {/* <Footer />*/}
+        </div>
     )
 }
 

@@ -1,20 +1,50 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #ADD8E6;
-    --Verde-menta: #98FB98;
-    --Gris-perla: #D3D3D3;
-    --Blanco-hueso: #F5F5DC;
-    --Rosa-suave: #FFB6C1;
-    --btns: #0095f6;
+  --border: #dbdbdb;
+  --Azul-claro: #add8e6;
+  --Verde-menta: #98fb98;
+  --Gris-perla: #d3d3d3;
+  --Blanco-hueso: #f5f5dc;
+  --Rosa-suave: #ffb6c1;
+  --btns: #0095f6;
 }
 
 .Allmessageswithuser {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+.InboxMessage {
+  width: 65%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--Gris-perla);
+}
+.InboxMessage .bx {
+  font-size: 35px;
+  color: var(--btns);
+  border: 2px solid var(--btns);
+  border-radius: 50%;
+  padding: 15px;
+}
+@media (500px<=width<=715px) {
+  .InboxMessage {
+    width: 85%;
+  }
+}
+@media (width<500px) {
+  .InboxMessage {
+    display: none;
+  }
+  .Allmessageswithuser .card-msg {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 100px;
-    margin-bottom: 250px;
+    width: 100%;
+  }
+  .Allmessageswithuser .card-msg-title {
+    display: flex;
+  }
 }

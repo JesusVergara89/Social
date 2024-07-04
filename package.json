@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
     "compressorjs": "^1.2.1",
+    "emoji-picker-react": "^4.10.0",
     "firebase": "^10.9.0",
     "font-awesome": "^4.7.0",
     "ldrs": "^1.0.1",

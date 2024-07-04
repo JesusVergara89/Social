@@ -5,7 +5,11 @@ import './Allmessageswithuser.css'
 const Allmessageswithuser = () => {
   return (
     <div className="Allmessageswithuser">
-        <Cardmsg/>
+      <Cardmsg />
+      <div className='InboxMessage'>
+        <i className='bx bxs-paper-plane' />
+        <p>Envía fotos y mensajes privados a un amigo.</p>
+      </div>
     </div>
   )
 }

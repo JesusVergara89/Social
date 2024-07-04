@@ -30,6 +30,7 @@
 .Renderimagespost img {
     width: 100%;
     height: auto;
+    min-height: 230px;
 }
 
 .slides {

@@ -1,12 +1,14 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { auth, db } from '../../../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './Cardmsg.css'
 import { Link } from 'react-router-dom';
 import useSetMsgTimer from '../../../hooks/useSetMsgTimer';
+import { CurrentUsercontext } from '../../Context/CurrentUsercontext';
+import CardmsgSkeleton from '../../Loading/CardmsgSkeleton';
 
-const Cardmsg = () => {
+const Cardmsg = ({ idreceiper }) => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
@@ -15,6 +17,7 @@ const Cardmsg = () => {
     const { times, myTimes } = useSetMsgTimer(user)
 
     useEffect(() => {
+        setAllmsg(undefined)
         const querySnapshot = collection(db, 'Messages');
         const q = query(querySnapshot, orderBy('message'))
         onSnapshot(q, (snapshot) => {
@@ -34,7 +37,6 @@ const Cardmsg = () => {
             setTimer(timers)
         })
     }, []);
-
     const userMsgs = allmsg?.filter(data => {
         if (Array.isArray(data.message) && data.message.length > 0) {
             for (let i = 0; i < data.message.length; i++) {
@@ -67,7 +69,13 @@ const Cardmsg = () => {
     const testFunction = (IDuserR, IDuserS, userNameR, userNameS) => {
         myTimes(IDuserR, IDuserS, userNameR, userNameS)
     }
-
+    const { CurrentUser } = useContext(CurrentUsercontext)
+    const InformationMessage = (Message) => {
+        return (
+            <p>
+                {Message.userNameS === CurrentUser.userName ? 'Tú: ' : ''}{Message.imgUp ? <i className='bx bxs-image-alt' /> : ''}{Message.content != '' ? Message.content : 'Foto'}
+            </p>)
+    }
     return (
         <div className="card-msg">
             <h3 className={msjNotification.length > 0 ? 'card-msg-title' : 'card-msg-title-none'}>Mensajes recientes:</h3>
@@ -83,22 +91,23 @@ const Cardmsg = () => {
                     ''
                 }
             </div>
-            <h3 className='card-msg-title'>tus mensajes con otros usuarios:</h3>
-            {userMsgs && userMsgs.map((msg, i) => (
-                <Link key={i + 1} to={msg.message[0].receptor === user.uid ? `/Sendmessage/${msg.message[0].sender}/${user.uid}` : `/Sendmessage/${msg.message[0].receptor}/${user.uid}`}>
-                    <div onClick={() => testFunction(msg.message[0].receptor, msg.message[0].sender, '', '')} key={i} className='card-msg-info'>
-                        <div className="card-user1">
-                            <img src={msg.message[0].photoR} alt="" />
-                            <h4>{`@${msg.message[0].userNameR}`}</h4>
-                        </div>
-                        <div className="card-user1">
-                            <img src={msg.message[0].photoS} alt="" />
-                            <h4>{`@${msg.message[0].userNameS}`}</h4>
-                        </div>
-                    </div>
-                </Link>
-            ))}
-        </div>
+            <div className='List-friends'>
+                <h3 className='card-msg-title'>Mensajes con otros Usuarios</h3>
+                {allmsg ? userMsgs.map((msg, i) => (
+                    <Link key={i + 1} to={msg.message[0].receptor === user.uid ? `/Sendmessage/${msg.message[0].sender}/${user.uid}` : `/Sendmessage/${msg.message[0].receptor}/${user.uid}`}>
+                        <div onClick={() => testFunction(msg.message[0].receptor, msg.message[0].sender, '', '')} key={i} className={msg.message[0].receptor === idreceiper || msg.message[0].sender === idreceiper ? 'card-msg-info on' : 'card-msg-info'}>
+                            <div className="card-user1">
+                                <img src={msg.message[0].userNameR === CurrentUser.userName ? msg.message[0].photoS : msg.message[0].photoR} alt="Foto de perfil Amigo" />
+                                <div className='card-user-information'>
+                                    <h4>{`@${msg.message[0].userNameR === CurrentUser.userName ? msg.message[0].userNameS : msg.message[0].userNameR}`}</h4>
+                                    {InformationMessage(msg.message[msg.message.length - 1])}
+                                </div>
+                            </div>
+                        </div >
+                    </Link >
+                )) : <CardmsgSkeleton />}
+            </div>
+        </div >
     );
 };
 

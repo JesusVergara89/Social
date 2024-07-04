@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react'
 import './Messageinbox.css'
 import { Link, useParams } from 'react-router-dom'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
-import { db } from '../../firebaseConfig'
+import { auth, db } from '../../firebaseConfig'
 import Messagescontainer from './Messagescontainer'
+import Cardmsg from './Chat/Cardmsg'
+//import './Allmessageswithuser.css'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import Singlemessage from './Singlemessage'
 
 const Messageinbox = () => {
 
+    const [thisUser] = useAuthState(auth) 
     const { x1, x2 } = useParams()
 
     const [allrequest, setAllrequest] = useState([])
@@ -22,7 +27,6 @@ const Messageinbox = () => {
             setAllrequest(req)
         })
     }, [x1, x2]);
-
     let ExtractedObjs = [];
 
     for (let i = 0; i < allrequest.length; i++) {
@@ -75,18 +79,12 @@ const Messageinbox = () => {
     else {
         allowMessages = false
     }
-
-    //console.log(x1, x2)
-
     return (
         <div className='Messageinbox'>
+            <Cardmsg idreceiper={x1} />
             <div className="Messageinbox-container">
                 {allowMessages ?
-                    <div className="allow-messages-container">
-
-                        <Messagescontainer idreceiper={x1} />
-
-                    </div>
+                    <Singlemessage idreceiper={x1} ideSender={thisUser.uid} />
                     :
                     <div className='Messageinbox-request-friend' >
                         <h5>Aun no puedes enviarle mensajes a esta persona</h5>

@@ -1,142 +1,160 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #ADD8E6;
-    --Verde-menta: #98FB98;
-    --Gris-perla: #D3D3D3;
-    --Blanco-hueso: #F5F5DC;
-    --Rosa-suave: #FFB6C1;
-    --btns: #0095f6;
+  --border: #dbdbdb;
+  --Azul-claro: #add8e6;
+  --Verde-menta: #98fb98;
+  --Gris-perla: #d3d3d3;
+  --Blanco-hueso: #f5f5dc;
+  --Rosa-suave: #ffb6c1;
+  --btns: #0095f6;
 }
 
 .card-msg {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+  width: 35%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  align-items: center;
+  gap: 8px;
 }
 
 .card-msg a {
-    all: unset;
-    width: 350px;
+  all: unset;
+  width: 100%;
 }
 
 .card-msg-title {
-    text-align: center;
-    font-size: 1rem;
+  text-align: start;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
-
 .card-msg-newsms {
-    width: 350px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 18px 0px 18px 0px;
-    border-radius: 5px;
-    gap: 10px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 0px 18px 0px;
+  border-radius: 5px;
+  gap: 10px;
 }
 
 .card-msg-info {
-    width: 350px;
-    height: 130px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0.01rem solid rgb(193, 193, 193);
-    border-radius: 5px;
-    cursor: pointer;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  padding-left: 15px;
+  transition: 0.2s ease-in;
+}
+.card-msg-info.on {
+  background-color: var(--border);
+}
+.List-friends {
+  width: 100%;
+  height: 67vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 100px;
+  overflow-y: visible;
+  overflow-x: hidden;
 }
 
+@media (hover: hover) {
+  .card-msg-info:hover {
+    background-color: var(--border);
+  }
+}
 .card-msg-title-none {
-    display: none;
+  display: none;
 }
 
 .card-msg-newsms-none {
-    display: none;
+  display: none;
 }
 
 .card-msg-newsms-sms {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 7px;
-    padding: 15px 0px 15px 0px;
-    margin-bottom: 18px;
-    border-radius: 10px;
-    background-color: var(--Azul-claro);
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  padding: 15px 0px 15px 0px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  background-color: var(--Azul-claro);
 }
 
 .card-msg-newsms-sms h4 {
-    all: unset;
-    font-size: 0.8rem;
-    text-align: center;
+  all: unset;
+  font-size: 0.8rem;
+  text-align: center;
 }
 
 .card-msg-newsms-sms span {
-    font-weight: bolder;
+  font-weight: bolder;
 }
 
 .card-user1 {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .card-user1 img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.card-user1 h4 {
-    all: unset;
-    font-size: 0.9rem;
-    font-weight: bold;
+.card-user-information {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
 }
 
-@media (width < 440px) {
-    .card-msg a {
-        all: unset;
-        width: 100%;
-    }
+.card-user-information h4,
+.card-user-information p {
+  all: unset;
+  font-size: 0.9rem;
+}
+.card-user-information p {
+  width: 85%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-    .card-msg-info {
-        width: 100%;
-        height: 130px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 0px;
-        border: 0.01rem solid rgb(193, 193, 193);
-    }
+.card-user-information .bx {
+  font-size: 20px;
+}
 
-    .card-msg-newsms {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 18px 0px 18px 0px;
-        border-radius: 5px;
-        gap: 10px;
-    }
-
-    .card-msg-newsms-sms {
-        padding: 15px 0px 15px 0px;
-        border-radius: 0;
-    }
+@media (500px<=width <= 715px) {
+  .card-user-information {
+    display: none;
+  }
+  .card-msg {
+    width: 15%;
+  }
+  .card-msg-info {
+    padding-left: 0;
+  }
+  .card-user1 {
+    justify-content: center;
+  }
 }
