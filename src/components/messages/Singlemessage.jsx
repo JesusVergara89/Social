@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import './Singlemessage.css';
 import { addDoc, collection, updateDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth, db, storage } from '../../firebaseConfig';
@@ -6,25 +6,25 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { toast } from 'react-toastify';
 import Displaychat from './Chat/Displaychat';
 import Compressor from 'compressorjs';
-import useSetMsgTimer from '../../hooks/useSetMsgTimer';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import EmojiPicker from 'emoji-picker-react';
-const Singlemessage = ({ idreceiper, ideSender }) => {
-
+import { CurrentUsercontext } from '../Context/CurrentUsercontext';
+import useSound from 'use-sound';
+import send from '../../Sound/send.mp3';
+const Singlemessage = ({ idreceiper }) => {
+    const [play] = useSound(send);
     const [userOnline] = useAuthState(auth)
     const [messages, setMessage] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const [enableShipping, setenable_Shipping] = useState(false)
     const [Allusers, setAllusers] = useState([])
     const [reloadMsg, setReloadMsg] = useState(false)
-    const [imgUPto, setImgUPto] = useState('');
     const [textareaHeight, setTextareaHeight] = useState('30px');
-    const [userChangePosition, setUserChangePosition] = useState(null)
-    const { timer, myTimes } = useSetMsgTimer(userOnline)
     const [VisibleEmo, setVisibleEmo] = useState(false)
     const [filesImage, setfilesImage] = useState([])
     const [CommentFile, setCommentFile] = useState()
     const inputRef = useRef(null);
+    const { CurrentUser } = useContext(CurrentUsercontext)
     useEffect(() => {
         const querySnapshot = collection(db, 'Messages');
         const q = query(querySnapshot, orderBy('message'))
@@ -44,7 +44,7 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
             }))
             setAllusers(userx);
         })
-    }, [idreceiper, ideSender, reloadMsg, newMessage]);
+    }, []);
 
     useEffect(() => {
         const adjustTextareaHeight = () => {
@@ -69,13 +69,31 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
         adjustTextareaHeight();
         containsLetterOrEmoji()
     }, [newMessage, filesImage]);
+    const UpdateShowMessage = async () => {
+        if (arrayMessagesToUpdate.length > 0) {
+            const messageId = arrayMessagesToUpdate[0].id;
+            const messageRef = doc(db, 'Messages', messageId);
+            let NewMessagePush = []
+            let check = false
+            arrayMessagesToUpdate?.[0].message.map(data => {
+                let dataT
+                data.receptor === userOnline.uid && data.showMessage === false ?
+                    (dataT = { ...data, showMessage: true }, check = true) : dataT = { ...data }
+                NewMessagePush.push(dataT)
+            })
 
-    const arrayMessagesToUpdate = messages.filter(data => {
-        return (data.message[0].receptor === idreceiper && data.message[0].sender === ideSender) || (data.message[0].receptor === ideSender && data.message[0].sender === idreceiper);
-    });
+            if (check) {
+                await updateDoc(messageRef, { message: NewMessagePush });
+            }
+        }
+    }
+    useEffect(() => {
+        UpdateShowMessage()
+    }, [messages])
 
+    const arrayMessagesToUpdate = messages.filter(data => (data.message[0].receptor === idreceiper && data.message[0].sender === userOnline.uid) || (data.message[0].receptor === userOnline.uid && data.message[0].sender === idreceiper))
     const myMessages = Allusers.filter((match) => {
-        if (match.idUser === idreceiper || match.idUser === ideSender) {
+        if (match.idUser === idreceiper) {
             return match
         }
     });
@@ -104,29 +122,20 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
             }
         })
     };
-    const changePosition = (array, uid) => {
-        const index = array.findIndex(objeto => objeto.idUser === uid);
-        const objeto = array.splice(index, 1)[0];
-        array.unshift(objeto);
 
-        return array;
-    }
-
-    useEffect(() => {
-        setUserChangePosition(changePosition(myMessages, idreceiper))
-    }, [newMessage, imgUPto])
-    const functionReload = () => setReloadMsg(!reloadMsg)
     const handleSubmit = async () => {
         if (!enableShipping) return;
         try {
             const Newpost = {
                 createdAt: new Date(),
                 receptor: idreceiper,
-                sender: ideSender,
-                userNameR: userChangePosition[0].userName,
-                userNameS: userChangePosition[1].userName,
-                photoR: userChangePosition[0].photo,
-                photoS: userChangePosition[1].photo
+                sender: userOnline.uid,
+                userNameR: myMessages[0].userName,
+                userNameS: CurrentUser.userName,
+                photoR: myMessages[0].photo,
+                photoS: CurrentUser.photo,
+                showMessage: false,
+                showNotice: false
             };
 
             let updatedMessages = arrayMessagesToUpdate.length > 0 ? [...arrayMessagesToUpdate[0].message] : [];
@@ -159,13 +168,10 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
                 const postRef = collection(db, 'Messages');
                 await addDoc(postRef, { message: updatedMessages });
             }
-
-            myTimes(ideSender, idreceiper, userChangePosition[0].userName, userChangePosition[1].userName);
             setNewMessage('');
-            setImgUPto('');
             setfilesImage([]);
             toast('Message send', { type: 'success' });
-            functionReload();
+            play()
         } catch (error) {
             console.error(error);
             toast('Error request', { type: 'error' });
@@ -224,8 +230,8 @@ const Singlemessage = ({ idreceiper, ideSender }) => {
     return (
         <div className='single-card-msg'>
             <div className="card-msg-one-one">
-                {arrayMessagesToUpdate.length > 0 &&
-                    <Displaychat newMessage={newMessage} reloadMsg={reloadMsg} idreceiper={idreceiper} ideSender={ideSender} />
+                {arrayMessagesToUpdate &&
+                    <Displaychat Message={arrayMessagesToUpdate[0]} recieve={myMessages?.[0]} filesImage={filesImage} />
                 }
                 <form>
                     {filesImage?.[0] && <div className='FileImg'>

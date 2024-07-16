@@ -13,48 +13,60 @@ const Singleprofile = () => {
   const { counterPost, counterConnectios, allpost, allrequest } = useConnections()
 
   const [user, setUser] = useState([])
+  const [mostText, setmostText] = useState(false)
 
   useEffect(() => {
     const postRef = doc(db, 'Users', userProfile)
     onSnapshot(postRef, (snapshot) => {
       setUser({ ...snapshot.data(), id: snapshot.id })
     })
+    setmostText(false)
   }, [userProfile])
-
-  //console.log(userProfile)
-
+  const TruncaText = (text, maxlength) => {
+    if (text?.length > maxlength) {
+      return !mostText ?
+        <p>
+          {text.substring(0, maxlength) + "..."}
+          <button onClick={() => setmostText(prev => !prev)}>Ver mas</button>
+        </p> :
+        <p>
+          {text}
+        </p>
+    } else {
+      return text;
+    }
+  }
   return (
     <div className="Singleprofile">
-      <div className="Singleprofile-container">
+      <div className='Single-ifnformation-main'>
         <div className='Singleprofile-information'>
-          <div className="Singleprofile-information-image">
-            <img src={user.photo} alt="" className="Singleprofile-image" />
-          </div>
+          <img src={user.photo} alt="" className="Singleprofile-image" />
           <div className="Singleprofile-information-data">
             <h2 className="Singleprofile-userid">{`@${user.userName}`}</h2>
             <h3 className="Singleprofile-name">{user.name}</h3>
-            <p className="Singleprofile-bio">{user.bio}</p>
           </div>
         </div>
-        <div className="single-profile-counters">
-          <div className='Friendcounter'>
-            <div className="Friendcounter-number">
-              <h4><span>{counterConnectios(allrequest, user.idUser)}</span></h4>
-            </div>
-            <div className="Friendcounter-connections">
-              <h4>{counterConnectios(allrequest, user.idUser) > 1 ? `Conexiones` : `Conexión`}</h4>
-            </div>
+        <div className="Singleprofile-bio">{TruncaText(user.bio, 230)}</div>
+      </div>
+      <div className="single-profile-counters">
+        <div className='Friendcounter'>
+          <div className="Friendcounter-number">
+            <h4><span>{counterConnectios(allrequest, user.idUser)}</span></h4>
           </div>
-          <div className='Friendcounter'>
-            <div className="Friendcounter-number">
-              <h4><span>{counterPost(allpost, user.idUser)}</span></h4>
-            </div>
-            <div className="Friendcounter-connections">
-              <h4>{counterPost(allpost, user.idUser) > 1 ? `Publicaciones` : `Publicación`}</h4>
-            </div>
+          <div className="Friendcounter-connections">
+            <h4>{counterConnectios(allrequest, user.idUser) > 1 ? `Conexiones` : `Conexión`}</h4>
+          </div>
+        </div>
+        <div className='Friendcounter'>
+          <div className="Friendcounter-number">
+            <h4><span>{counterPost(allpost, user.idUser)}</span></h4>
+          </div>
+          <div className="Friendcounter-connections">
+            <h4>{counterPost(allpost, user.idUser) > 1 ? `Publicaciones` : `Publicación`}</h4>
           </div>
         </div>
       </div>
+
       <div className="Singleprofile-posts">
         <Postofusers id={user.idUser} />
       </div>

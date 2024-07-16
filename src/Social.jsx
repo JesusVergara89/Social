@@ -34,9 +34,7 @@ function Social() {
         <div className='SOCIAL'>
 
             <Header />
-
-            <Invisiblecomp /> {/** In this component i rendered all the counter values for notifications */}
-
+            
             <Routes>
 
                 <Route path='/'
@@ -87,7 +85,7 @@ function Social() {
                             <Allmessageswithuser />
                         }
                     />
-                    <Route path='/Sendmessage/:x1/:x2'
+                    <Route path='/Sendmessage/:friend'
                         element={
                             <Messageinbox />
                         }
@@ -120,7 +118,7 @@ function Social() {
                 </Route>
             </Routes>
 
-           {/* <Footer />*/}
+            {/* <Footer />*/}
         </div>
     )
 }

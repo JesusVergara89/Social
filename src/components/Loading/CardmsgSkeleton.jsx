@@ -5,7 +5,7 @@ const CardmsgSkeleton = () => {
     return (
         <>
             {Array(5).fill(0).map((x, index) =>
-                <div key={index} className='card-msg-info'>
+                <div key={index} className='card-user1'>
                     <Skeleton circle width={56} height={56} />
                     <div className='card-user-information'>
                         <Skeleton width={100} height={20} />

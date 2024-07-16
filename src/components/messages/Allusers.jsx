@@ -29,13 +29,10 @@ const Allusers = () => {
         const valor = event.target.value.toLowerCase();
         setFiltro(valor);
         const resultados = Allusers.filter(usuario =>
-            usuario.userName.toLowerCase().includes(valor) || usuario.name.toLowerCase().includes(valor)
+            (usuario.userName.toLowerCase().includes(valor) || usuario.name.toLowerCase().includes(valor)) && (usuario.idUser != thiIsTheCurrentUser?.uid)
         );
         setUsuariosFiltrados(resultados);
     };
-
-    //console.log(thiIsTheCurrentUser)
-
     return (
         <div className='all-users'>
             {thiIsTheCurrentUser !== null ? <p className='all-users-explanations'>Encuentra conexiones por nombre o usuario</p> : ''}
@@ -54,11 +51,22 @@ const Allusers = () => {
                         </div>
                     </div>
 
-                    {filtro && usuariosFiltrados.length > 0 && (
+                    {filtro ? (
                         <div className='all-user-find-card'>
-                            {usuariosFiltrados.map(usuario => (
+                            {usuariosFiltrados?.[0] ?
+                                usuariosFiltrados.map(usuario => (
+                                    <div key={usuario.id}>
+                                        <Filtereduser thiIsTheCurrentUser={thiIsTheCurrentUser} usuario={usuario} filtro={filtro} />
+                                    </div>
+                                )) :
+                                <p className='noneUser'>No se encontró ninguna cuenta con ese nombre.</p>
+                            }
+                        </div>
+                    ) : (
+                        <div className='all-user-find-card'>
+                            {Allusers.map(usuario => (
                                 <div key={usuario.id}>
-                                    <Filtereduser thiIsTheCurrentUser={thiIsTheCurrentUser} usuario={usuario} />
+                                    <Filtereduser thiIsTheCurrentUser={thiIsTheCurrentUser} usuario={usuario} filtro={filtro} />
                                 </div>
                             ))}
                         </div>

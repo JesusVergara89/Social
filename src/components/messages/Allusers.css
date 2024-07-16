@@ -67,12 +67,15 @@
     font-size: 1.5rem;
     font-weight: bold;
 }
+.noneUser{
+    padding: 30px;
+}
 
 #inputfind{
     width: 80%;
     border: none;
     font-size: 14px;
-    text-align: center;
+    text-align: start;
 }
 
 #inputfind:focus{

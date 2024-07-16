@@ -5,16 +5,12 @@ import { Link } from 'react-router-dom'
 const Contactutility = ({ idUSER, idCurrentUser }) => {
     return (
         <div className="profile-utilyties">
-            <div className="profile-message">
-                <Link to={`/Sendmessage/${idUSER}/${idCurrentUser}`}>
+                <Link to={`/Sendmessage/${idUSER}/${idCurrentUser}`} className="profile-message">
                     <i className='bx bx-message-detail'></i>
                 </Link>
-            </div>
-            <div className="profile-message">
-                <Link to={`/friendrequest/${idUSER}`}>
+                <Link to={`/friendrequest/${idUSER}`} className="profile-message">
                     <i className='bx bxs-user-plus'></i>
                 </Link>
-            </div>
         </div>
     )
 }

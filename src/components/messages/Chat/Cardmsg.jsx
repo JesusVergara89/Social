@@ -4,17 +4,16 @@ import { auth, db } from '../../../firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import './Cardmsg.css'
 import { Link } from 'react-router-dom';
-import useSetMsgTimer from '../../../hooks/useSetMsgTimer';
 import { CurrentUsercontext } from '../../Context/CurrentUsercontext';
 import CardmsgSkeleton from '../../Loading/CardmsgSkeleton';
+import useConnections from '../../../hooks/useConnections';
 
 const Cardmsg = ({ idreceiper }) => {
 
     const [user] = useAuthState(auth);
     const [allmsg, setAllmsg] = useState();
     const [timer, setTimer] = useState([])
-    const [msjNotification, setMsjNotification] = useState([])
-    const { times, myTimes } = useSetMsgTimer(user)
+    const { findFriends } = useConnections()
 
     useEffect(() => {
         setAllmsg(undefined)
@@ -48,62 +47,58 @@ const Cardmsg = ({ idreceiper }) => {
         return false;
     });
 
-    useEffect(() => {
-        if (user) {
-            const newMsjNotification = [];
-            for (const obj of timer) {
-                const filteredData = obj?.data?.filter(item =>
-                    item.creatorID === user.uid || item.receptorID === user.uid
-                );
-                if (filteredData.length > 0) {
-                    const lastObject = filteredData[filteredData.length - 1];
-                    if (lastObject.receptorID === user.uid && lastObject.userNameR !== '' && lastObject.userNameS !== '') {
-                        newMsjNotification.push(lastObject);
-                    }
-                }
+    let FindChat = []
+    findFriends?.map(dataFriend => {
+        let idUser = dataFriend.idUser
+        let AddData
+        let dataChat = userMsgs?.find((e) => e.message[0].receptor === idUser || e.message[0].sender === idUser)
+        dataChat ?
+            AddData = {
+                idUser: dataFriend.idUser,
+                userName: dataFriend.userName,
+                photo: dataFriend.photo,
+                message: dataChat.message
             }
-            setMsjNotification(newMsjNotification);
-        }
-    }, [timer, user, setMsjNotification]);
+            : AddData = {
+                idUser: dataFriend.idUser,
+                userName: dataFriend.userName,
+                photo: dataFriend.photo
+            }
+        FindChat.push(AddData)
+    })
 
-    const testFunction = (IDuserR, IDuserS, userNameR, userNameS) => {
-        myTimes(IDuserR, IDuserS, userNameR, userNameS)
-    }
     const { CurrentUser } = useContext(CurrentUsercontext)
-    const InformationMessage = (Message) => {
+    const CountMessage = (msg) => {
+        let count = msg.message?.filter(item => item.receptor === user.uid && item.showMessage === false).length
+        return count
+    }
+    const InformationMessage = (Message, msg) => {
         return (
-            <p>
-                {Message.userNameS === CurrentUser.userName ? 'Tú: ' : ''}{Message.imgUp ? <i className='bx bxs-image-alt' /> : ''}{Message.content != '' ? Message.content : 'Foto'}
-            </p>)
+            <div className={Message.receptor === user.uid && Message.showMessage === false ? 'view on' : 'view'}>
+                <p>
+                    {Message.userNameS === CurrentUser?.userName ?
+                        Message.showNotice === true ? <i className='bx bx-check-double' style={Message.showMessage === true ? { color: '#0095f6' } : { color: 'black' }} /> : Message.showMessage === false ? <i class='bx bx-check' /> : ''
+                        : ''}{Message.imgUp ? <i className='bx bxs-image-alt' /> : ''}{Message.content != '' ? Message.content : 'Foto'}
+                </p>
+                <div className='counter'>
+                    <h6>{CountMessage(msg)}</h6>
+                </div>
+            </div>
+        )
     }
     return (
         <div className="card-msg">
-            <h3 className={msjNotification.length > 0 ? 'card-msg-title' : 'card-msg-title-none'}>Mensajes recientes:</h3>
-            <div className={msjNotification.length > 0 ? 'card-msg-newsms' : 'card-msg-newsms-none'}>
-                {msjNotification.length > 0 ?
-                    msjNotification.map((data, i) => (
-                        <div key={i} className="card-msg-newsms-sms">
-                            <h4>Tienes mensajes nuevos de:</h4>
-                            <h4><span>@{data.userNameS}</span></h4>
-                        </div>
-                    ))
-                    :
-                    ''
-                }
-            </div>
             <div className='List-friends'>
                 <h3 className='card-msg-title'>Mensajes con otros Usuarios</h3>
-                {allmsg ? userMsgs.map((msg, i) => (
-                    <Link key={i + 1} to={msg.message[0].receptor === user.uid ? `/Sendmessage/${msg.message[0].sender}/${user.uid}` : `/Sendmessage/${msg.message[0].receptor}/${user.uid}`}>
-                        <div onClick={() => testFunction(msg.message[0].receptor, msg.message[0].sender, '', '')} key={i} className={msg.message[0].receptor === idreceiper || msg.message[0].sender === idreceiper ? 'card-msg-info on' : 'card-msg-info'}>
-                            <div className="card-user1">
-                                <img src={msg.message[0].userNameR === CurrentUser.userName ? msg.message[0].photoS : msg.message[0].photoR} alt="Foto de perfil Amigo" />
-                                <div className='card-user-information'>
-                                    <h4>{`@${msg.message[0].userNameR === CurrentUser.userName ? msg.message[0].userNameS : msg.message[0].userNameR}`}</h4>
-                                    {InformationMessage(msg.message[msg.message.length - 1])}
-                                </div>
+                {allmsg ? FindChat.map((msg, i) => (
+                    <Link key={i} to={`/Sendmessage/${msg.idUser}`}>
+                        <div className={msg.idUser === idreceiper ? 'card-user1 on' : 'card-user1'}>
+                            <img src={msg.photo} alt="Foto de perfil Amigo" />
+                            <div className='card-user-information'>
+                                <h4>{`@${msg.userName}`}</h4>
+                                {msg.message && InformationMessage(msg.message[msg.message.length - 1], msg)}
                             </div>
-                        </div >
+                        </div>
                     </Link >
                 )) : <CardmsgSkeleton />}
             </div>

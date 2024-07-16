@@ -6,17 +6,22 @@ import { Link } from 'react-router-dom';
 const Mypost = () => {
 
     const { myPost } = useMypost()
-    //console.log(myPost.length)
     return (
-        <div className="Mypost">
-            {myPost &&
-                myPost.map((post, i) => (
-                    <Link to={`/singlepost/${post.id}`} key={i / 2}>
-                        <Renderpost key={i} post={post} />
-                    </Link>
-                ))
-            }
-        </div>
+        <>
+            {myPost?.[0] ?
+                <div className="Mypost">
+                    {myPost.map((post, i) => (
+                        <Link to={`/singlepost/${post.id}`} key={i / 2}>
+                            <Renderpost key={i} post={post} />
+                        </Link>
+                    ))}
+                </div>
+                :
+                <div className='NonePublication'>
+                    <i className='bx bx-camera' />
+                    <h4>Aun no hay publicaciones</h4>
+                </div>}
+        </>
     )
 }
 

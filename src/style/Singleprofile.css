@@ -1,143 +1,97 @@
 :root {
-    --border: #dbdbdb;
-    --Azul-claro: #ADD8E6;
-    --Verde-menta: #98FB98;
-    --Gris-perla: #D3D3D3;
-    --Blanco-hueso: #F5F5DC;
-    --Rosa-suave: #FFB6C1;
-    --btns: #0095f6;
+  --border: #dbdbdb;
+  --Azul-claro: #add8e6;
+  --Verde-menta: #98fb98;
+  --Gris-perla: #d3d3d3;
+  --Blanco-hueso: #f5f5dc;
+  --Rosa-suave: #ffb6c1;
+  --btns: #0095f6;
 }
 
 .Singleprofile {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
-
-.Singleprofile-container {
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.Single-ifnformation-main {
+  width: 360px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--border);
+  gap: 20px;
+  padding: 25px 0;
 }
-
 .Singleprofile-information {
-    width: 400px;
-    min-height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid var(--border);
-    margin-top: 50px;
-    position: relative;
-}
-
-.Singleprofile-information-image {
-    width: 40%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
 }
 
 .Singleprofile-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .Singleprofile-information-data {
-    width: 60%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 15px;
-    padding-left: 15px;
-    padding-bottom: 15px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.Singleprofile-userid {
-    all: unset;
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.Singleprofile-name {
-    all: unset;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
+.Singleprofile-userid,
+.Singleprofile-name,
 .Singleprofile-bio {
-    all: unset;
-    text-align: left;
-    font-size: 0.75rem;
-    padding-right: 10px;
+  font-size: 0.875rem;
+  text-align: start;
+}
+.Singleprofile-userid {
+  font-weight: bold;
+}
+.Singleprofile-bio {
+  width: 90%;
+  height: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+.Singleprofile-bio button {
+  all: unset;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .single-profile-counters {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: 8px;
-    border-bottom: 0.01rem solid var(--Gris-perla);
-    border-left: 0.01rem solid var(--Gris-perla);
-    border-right: 0.01rem solid var(--Gris-perla);
+  width: 360px;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 8px;
+  border: 0.01rem solid var(--Gris-perla);
+  border-top: none;
 }
 
 .Singleprofile-posts {
-    width: 80%;
-    height: auto;
-    margin-top: 20px;
+  width: 80%;
+  height: auto;
+  margin-top: 20px;
 }
 
-@media (width < 515px) {
-    .Singleprofile-container {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .Singleprofile-information {
-        width: 100%;
-        min-height: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 50px;
-        position: relative;
-    }
-
-    .Singleprofile-information-image {
-        width: 40%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-    }
-
-    .Singleprofile-posts {
-        width: 100%;
-        height: auto;
-        margin-top: 20px;
-    }
-
+@media (width <= 394px) {
+  .Single-ifnformation-main,
+  .single-profile-counters,
+  .Singleprofile-posts {
+    width: 90%;
+  }
 }

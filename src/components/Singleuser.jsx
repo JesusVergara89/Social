@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../style/Singleuser.css'
+import '../style/Conections.css'
 import Contactutility from './messages/Contactutility'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, db } from '../firebaseConfig'
@@ -28,9 +29,6 @@ const Singleuser = () => {
     }, []);
 
     const thisUser = getUser?.find(user => user.idUser === iduser);
-
-    ///console.log(thisUser)
-
     return (
         <article className="single-user">
             {thisUser ?

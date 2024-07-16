@@ -13,6 +13,7 @@ import { setConectionValue } from '../store/slices/conections.slice';
 import { setMsgValue } from '../store/slices/countermsg.slice';
 const Profile = () => {
     const [currentlyLoggedinUser] = useAuthState(auth);
+    const [mostText, setmostText] = useState(false)
     const [users, setUsers] = useState([]);
     const [currentUserData, setCurrentUserData] = useState(null);
     const [numberOf, setNumberOf] = useState(0);
@@ -43,7 +44,20 @@ const Profile = () => {
     }, [currentlyLoggedinUser, users]);
 
     const setSpecific = () => dispatch(setRequestValue(numberOf));
-    
+    const TruncaText = (text, maxlength) => {
+        if (text?.length > maxlength) {
+            return !mostText ?
+                <p>
+                    {text.substring(0, maxlength) + "..."}
+                    <button onClick={() => setmostText(prev => !prev)}>Ver mas</button>
+                </p> :
+                <p>
+                    {text}
+                </p>
+        } else {
+            return text;
+        }
+    }
     return (
         <div className='profile'>
             {currentUserData && currentlyLoggedinUser && (
@@ -53,15 +67,15 @@ const Profile = () => {
                             <i className='bx bx-cog'></i>
                         </Link>
                     </div>
-                    <div className="profile-information-image">
-                        <img src={currentlyLoggedinUser.photoURL} alt="" />
+                    <div className='Singleprofile-information'>
+                        <img src={currentlyLoggedinUser.photoURL} className='Singleprofile-image' alt="Foto de perfil" />
+                        <div className="Singleprofile-information-data">
+                            <h2 className="Singleprofile-userid">{`@${currentUserData.userName}`}</h2>
+                            <h3 className="Singleprofile-name">{currentlyLoggedinUser.displayName}</h3>
+                        </div>
                     </div>
-                    <div className="profile-information-data">
-                        <h2 className="profile-information-userid">{`@${currentUserData.userName}`}</h2>
-                        <h3 className="profile-information-name">{currentlyLoggedinUser.displayName}</h3>
-                        <p className="profile-information-bio">{currentUserData.bio}</p>
-                    </div>
-                    <button onClick={() => { signOut(auth); navigate('/'); setSpecific(setNumberOf(0)); setFriendValue(0); setMesgValue(0) }}>Salir</button>
+                    <div className="Singleprofile-bio">{TruncaText(currentUserData.bio, 230)}</div>
+                    <button className='exit' onClick={() => { signOut(auth); navigate('/'); setSpecific(setNumberOf(0)); setFriendValue(0); setMesgValue(0) }}>Salir</button>
                     <Link className='pending-request-btn' to={'/pendingrequest'}>
                         <h3>Solicitudes</h3>
                         <div className='CounterNotifyRequests' ><h5>{CounterNotifyRequests}</h5></div>

@@ -6,17 +6,23 @@ import Renderpost from './Renderpost'
 
 const Postofusers = ({ id }) => {
     const { postProfile } = usePostofuser(id)
-    
+
     return (
-        <div className="Mypost">
-            {postProfile &&
-                postProfile.map((post, i) => (
-                    <Link to={`/singlepost/${post.id}`} key={i / 2}>
-                        <Renderpost key={i} post={post} />
-                    </Link>
-                ))
+        <>
+            {postProfile?.[0] ?
+                <div className="Mypost">
+                    {postProfile.map((post, i) => (
+                        <Link to={`/singlepost/${post.id}`} key={i / 2}>
+                            <Renderpost key={i} post={post} />
+                        </Link>
+                    ))}
+                </div>
+                : <div className='NonePublication'>
+                    <i className='bx bx-camera' />
+                    <h4>Aun no hay publicaciones</h4>
+                </div>
             }
-        </div>
+        </>
     )
 }
 
