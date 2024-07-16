@@ -24,9 +24,9 @@ const Filtereduser = ({ thiIsTheCurrentUser, usuario, filtro }) => {
     }, [usuario, filtro])
 
     return (
-        <>
+        <div className="all-users-mapeo-1">
             {!(thiIsTheCurrentUser?.uid === usuario.idUser) &&
-                <div className="all-users-mapeo-1">
+                <>
                     <div className='all-users-profile-information-1'>
                         <Link className='all-users-other-profile-find-1' to={`/singleprofile/${usuario.id}`} >
                             Ver perfil
@@ -41,9 +41,9 @@ const Filtereduser = ({ thiIsTheCurrentUser, usuario, filtro }) => {
                         </div>
                     </div>
                     <Contactutility idCurrentUser={thiIsTheCurrentUser?.uid} idUSER={usuario.idUser} />
-                </div>
+                </>
             }
-        </>
+        </div>
     )
 }
 

@@ -55,9 +55,7 @@ const Allusers = () => {
                         <div className='all-user-find-card'>
                             {usuariosFiltrados?.[0] ?
                                 usuariosFiltrados.map(usuario => (
-                                    <div key={usuario.id}>
-                                        <Filtereduser thiIsTheCurrentUser={thiIsTheCurrentUser} usuario={usuario} filtro={filtro} />
-                                    </div>
+                                    <Filtereduser key={usuario.id} thiIsTheCurrentUser={thiIsTheCurrentUser} usuario={usuario} filtro={filtro} />
                                 )) :
                                 <p className='noneUser'>No se encontró ninguna cuenta con ese nombre.</p>
                             }
@@ -65,9 +63,7 @@ const Allusers = () => {
                     ) : (
                         <div className='all-user-find-card'>
                             {Allusers.map(usuario => (
-                                <div key={usuario.id}>
-                                    <Filtereduser thiIsTheCurrentUser={thiIsTheCurrentUser} usuario={usuario} filtro={filtro} />
-                                </div>
+                                <Filtereduser key={usuario.id} thiIsTheCurrentUser={thiIsTheCurrentUser} usuario={usuario} filtro={filtro} />
                             ))}
                         </div>
                     )}

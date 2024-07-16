@@ -15,6 +15,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 0.01rem solid var(--border);
 }
 
 .all-users-profile-information-1 {
@@ -24,8 +25,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 0.01rem solid var(--border);
-  margin-top: 50px;
   position: relative;
 }
 
@@ -101,22 +100,9 @@
 
 @media (width < 440px) {
   .all-users-mapeo-1 {
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    padding: 0px 0px 0px 0px;
-    justify-content: center;
-    align-items: center;
+    width: 90%;
   }
   .all-users-profile-information-1 {
     width: 100%;
-    min-height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid var(--border);
-    margin-top: 50px;
-    position: relative;
   }
 }
