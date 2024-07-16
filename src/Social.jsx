@@ -20,7 +20,6 @@ import Singleprofile from './components/Singleprofile';
 import Configprofile from './components/configurationprofile/Configprofile';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebaseConfig';
-import Footer from './components/Footer';
 
 function Social() {
     const [onlineuser] = useAuthState(auth)
@@ -34,7 +33,7 @@ function Social() {
         <div className='SOCIAL'>
 
             <Header />
-
+            <Invisiblecomp /> {/** In this component i rendered all the counter values for notifications */}
             <Routes>
 
                 <Route path='/'

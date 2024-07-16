@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const Conections = () => {
     const [mostText, setmostText] = useState(false)
-    const { counterPost, counterConnectios, findFriends, userlog, allpost, allrequest } = useConnections()
+    const { counterPost, counterConnectios, findFriends, allpost, allrequest } = useConnections()
 
     const TruncaText = (text, maxlength) => {
         if (text?.length > maxlength) {
@@ -52,7 +52,7 @@ const Conections = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Contactutility idCurrentUser={userlog?.uid} idUSER={user.idUser} />
+                            <Contactutility idUSER={user.idUser} />
                         </div>
                     ))
                 )

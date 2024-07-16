@@ -2,10 +2,10 @@ import React from 'react'
 import './Contactutility.css'
 import { Link } from 'react-router-dom'
 
-const Contactutility = ({ idUSER, idCurrentUser }) => {
+const Contactutility = ({ idUSER }) => {
     return (
         <div className="profile-utilyties">
-                <Link to={`/Sendmessage/${idUSER}/${idCurrentUser}`} className="profile-message">
+                <Link to={`/Sendmessage/${idUSER}`} className="profile-message">
                     <i className='bx bx-message-detail'></i>
                 </Link>
                 <Link to={`/friendrequest/${idUSER}`} className="profile-message">

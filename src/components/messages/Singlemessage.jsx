@@ -18,7 +18,6 @@ const Singlemessage = ({ idreceiper }) => {
     const [newMessage, setNewMessage] = useState('');
     const [enableShipping, setenable_Shipping] = useState(false)
     const [Allusers, setAllusers] = useState([])
-    const [reloadMsg, setReloadMsg] = useState(false)
     const [textareaHeight, setTextareaHeight] = useState('30px');
     const [VisibleEmo, setVisibleEmo] = useState(false)
     const [filesImage, setfilesImage] = useState([])
