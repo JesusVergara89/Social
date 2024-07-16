@@ -26,6 +26,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  border: 1px solid var(--border);
 }
 .all-users-profile-information-connection-main {
   width: 360px;
@@ -34,7 +35,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--border);
   gap: 15px;
 }
 .all-users-profile-information-connection {
@@ -126,9 +126,9 @@
 
 @media (width < 400px) {
   .all-users-mapeo{
-    width: 100%;
+    width: 95%;
   }
   .all-users-profile-information-connection-main{
-    width: 90%;
+    width: 100%;
   }
 }

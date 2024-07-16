@@ -15,8 +15,6 @@
   justify-content: space-evenly;
   align-items: center;
   padding: 10px 0;
-  border: 0.01rem solid var(--border);
-  border-top: none;
 }
 
 .profile-message {
@@ -42,8 +40,3 @@
   }
 }
 
-@media (width < 440px) {
-  .profile-utilyties {
-    width: 90%;
-  }
-}
