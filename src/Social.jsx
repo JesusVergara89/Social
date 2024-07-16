@@ -34,7 +34,7 @@ function Social() {
         <div className='SOCIAL'>
 
             <Header />
-            
+
             <Routes>
 
                 <Route path='/'
@@ -53,13 +53,12 @@ function Social() {
                     element={onlineuser ? <Navigate to="/" /> : <Login />}
                 />
 
-                <Route path='/allusers'
-                    element={
-                        <Allusers
-                        />}
-                />
-
                 <Route element={<Protectedroutes />}>
+                    <Route path='/allusers'
+                        element={
+                            <Allusers
+                            />}
+                    />
                     <Route path='/profile'
                         element={
                             <Profile />

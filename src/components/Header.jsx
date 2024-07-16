@@ -87,9 +87,9 @@ const Header = () => {
                 <Link to={'/conections'} >
                     <div className="menu-menu">
                         <i className='bx bx-group'></i>
-                        <div className={conexionNumber <= 10 ? "conection-counter" : "conection-counter-grosse"}>
+                        {conexionNumber > 0 && currentlyLoggedinUser ? <div className={conexionNumber <= 10 ? "conection-counter" : "conection-counter-grosse"}>
                             <h6>{conexionNumber}</h6>
-                        </div>
+                        </div> : ''}
                     </div>
                 </Link>
                 <Link to={'/profile'}>
