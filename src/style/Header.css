@@ -212,7 +212,7 @@ header .menu {
 
 
 @media (width <= 454px) {
-    .menu h5 {
+    .menu-menu.create h5 {
         display: none;
     }
 }

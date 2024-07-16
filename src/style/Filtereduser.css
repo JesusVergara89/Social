@@ -26,6 +26,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  gap: 20px;
 }
 
 .all-users-other-profile-find-1 {
@@ -48,16 +49,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 45px;
 }
 
 .all-users-profile-image-1 {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  margin-top: 70px;
 }
 
 .all-users-profile-information-data-1 {
@@ -66,31 +65,27 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  gap: 15px;
+  padding-bottom: 20px;
 }
 
 .all-users-userid-1 {
-  all: unset;
-  font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 15px;
   text-align: center;
+  font-size: 0.875rem
 }
 
 .all-users-name-1 {
-  all: unset;
-  font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
-  margin-bottom: 15px;
+  font-size: 0.875rem
 }
 
 .all-users-bio-1 {
   text-align: start;
-  font-size: 1rem;
   white-space: pre-wrap;
   overflow-wrap: break-word;
+  font-size: 0.875rem
 }
 .all-users-bio-1 button {
   all: unset;
