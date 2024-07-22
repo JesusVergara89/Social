@@ -60,7 +60,7 @@ const Singlemessage = ({ idreceiper }) => {
         const containsLetterOrEmoji = () => {
             const text = newMessage
             // Expresión regular para letras y emojis
-            const regex = /([a-zA-Z]|[\u231A-\uD83E\uDDFF])/g;
+            const regex = /[^\s\n]+/g;
             // Retornar true si se encuentra al menos una coincidencia
             const Test = regex.test(text) || filesImage?.[0];
             setenable_Shipping(Test)
